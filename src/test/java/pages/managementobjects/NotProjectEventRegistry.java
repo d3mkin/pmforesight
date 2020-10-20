@@ -1,0 +1,76 @@
+package pages.managementobjects;
+
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
+import pages.Registry;
+import pages.auth.LogoutPage;
+import pages.elements.Header;
+import pages.elements.MainMenu;
+
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+/**
+ * Непроектные мероприятия
+ */
+public class NotProjectEventRegistry implements Registry {
+    private Header header;
+    private MainMenu mainMenu;
+
+    private String url = Configuration.baseUrl + "/page/register?view=event";
+    private SelenideElement mainContainer = $("#mainBodyContainer");
+    private SelenideElement registryName = $("#f-grid-title span");
+    private SelenideElement table = mainContainer.$("div.f-grid__grid");
+
+    public NotProjectEventRegistry() {
+        this.header = new Header();
+        this.mainMenu = new MainMenu();
+    }
+
+    @Override
+    @Step("Открыть реестр 'Непроектные мероприятия' по прямой ссылке")
+    public void open() {
+        Selenide.open(url);
+    }
+
+    @Override
+    @Step("Открыть реестр 'Непроектные мероприятия' через меню")
+    public void openFromMenu() {
+        mainMenu.managementObjects().openNotProjectEvent();
+    }
+
+    @Override
+    public LogoutPage logout() {
+        return header.logout();
+    }
+
+    @Override
+    @Step("Проверка открытия реестра 'Непроектные мероприятия'")
+    public void shouldBeRegistry() {
+        shouldHaveCorrectLink();
+        shouldHaveName();
+        shouldHaveContent();
+    }
+
+    @Step("Проверка корректности ссылки {this.url}")
+    public NotProjectEventRegistry shouldHaveCorrectLink() {
+        assertTrue(WebDriverRunner.url().startsWith(url), "Урл не соответствет " + url);
+        return this;
+    }
+
+    @Step("Проверка наличия имени реестра")
+    public NotProjectEventRegistry shouldHaveName() {
+        registryName.shouldBe(visible);
+        return this;
+    }
+
+    @Step("Проверка отображения табличной части")
+    public NotProjectEventRegistry shouldHaveContent() {
+        table.shouldBe(visible);
+        return this;
+    }
+}
