@@ -36,26 +36,35 @@ public class CustomWebDriver implements WebDriverProvider {
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", false);
 
-        switch (browserName) {
-            case WebDriverRunner.FIREFOX:
-                capabilities = DesiredCapabilities.firefox();
-                FirefoxProfile firefoxProfile = new FirefoxProfile();
-                firefoxProfile.setPreference("browser.fullscreen.autohide", true);
-                firefoxProfile.setPreference("browser.fullscreen.animateUp", 0);
-                capabilities.setCapability("marionette", true);
-                capabilities.setCapability(PROFILE, firefoxProfile);
-                break;
-            case WebDriverRunner.CHROME:
-                capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
-                WebDriverManager.chromedriver().setup();
-                break;
+        capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
+        WebDriverManager.chromedriver().setup();
+
+//        switch (browserName) {
+//            case WebDriverRunner.FIREFOX:
+//                capabilities = DesiredCapabilities.firefox();
+//                FirefoxProfile firefoxProfile = new FirefoxProfile();
+//                firefoxProfile.setPreference("browser.fullscreen.autohide", true);
+//                firefoxProfile.setPreference("browser.fullscreen.animateUp", 0);
+//                capabilities.setCapability("marionette", true);
+//                capabilities.setCapability(PROFILE, firefoxProfile);
+//                break;
+//            case WebDriverRunner.CHROME:
+//                capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
+//                WebDriverManager.chromedriver().setup();
+//                break;
+//        }
+
+        if(System.getProperty("selenoid_url") != null) {
+            return new RemoteWebDriver(getRemoteWebDriverUrl(), capabilities);
+        } else {
+            return new ChromeDriver(capabilities);
         }
 
-        if(selenoid != null) {
-            return getRemoteWebDriver(capabilities);
-        } else {
-            return getLocalChromeDriver(capabilities);
-        }
+//        if(selenoid != null) {
+//            return getRemoteWebDriver(capabilities);
+//        } else {
+//            return getLocalChromeDriver(capabilities);
+//        }
     }
 
     private WebDriver getLocalChromeDriver(DesiredCapabilities capabilities) {
