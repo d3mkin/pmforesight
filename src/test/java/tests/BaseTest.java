@@ -2,26 +2,32 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import helpers.ConfigManager;
-import helpers.CredentialsManager;
-import webdriver.MyGridProvider;
+import webdriver.CustomWebDriver;
+
+import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
+import static helpers.AttachmentsHelper.*;
 
 public class BaseTest {
 
     static protected ConfigManager configManager = new ConfigManager();
-    protected CredentialsManager credentialsManager = new CredentialsManager();
 
     @BeforeAll
-    public static void setUp() {
+    @Step("Tests setup")
+    public static void setup() {
+        addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
         //Configuration.headless = true;
-        String grid = System.getProperty("grid");
+        String selenoid = System.getProperty("selenoid_url");
         String browser = System.getProperty("browser", "chrome");
-        if (grid == null) {
+        if (selenoid == null) {
             Configuration.browser = browser;
         } else {
-            Configuration.browser = MyGridProvider.class.getName();
+            Configuration.browser = CustomWebDriver.class.getName();
         }
         if (Configuration.baseUrl.equals("http://localhost:8080")) {
             Configuration.baseUrl = configManager.getDefaultBaseUrl();
@@ -31,11 +37,19 @@ public class BaseTest {
         Configuration.startMaximized = configManager.getStartMaximized();
     }
 
+    @AfterEach
+    @Step("Attachments")
+    void afterEach() {
+        attachScreenshot("Last screenshot");
+        attachPageSource();
+        attachBrowserConsoleLogs();
+    }
+
     @AfterAll
+    @Step("Tests teardown")
     public static void closeBrowser() {
         WebDriverRunner.clearBrowserCache();
         WebDriverRunner.getWebDriver().manage().deleteAllCookies();
         WebDriverRunner.getWebDriver().close();
-
     }
 }
