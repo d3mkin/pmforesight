@@ -678,7 +678,7 @@ public class ProjectPage extends BasePage {
         newGanttActivityNameInput.shouldBe(visible).sendKeys(pointName);
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityApproveDocTD.click();
-        newGanttActivityApproveDocSelect.$(By.xpath("//option[text() = '"+approvingDoc+"']")).click();
+        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).click();
         saveGanttButton.click();
         newGanttActivityStatus.shouldHave(attribute("title", "В работе по плану"));
         newGanttActivityStatus.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
@@ -694,7 +694,7 @@ public class ProjectPage extends BasePage {
         newGanttActivityNameInput.shouldBe(visible).sendKeys(workName);
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityApproveDocTD.click();
-        newGanttActivityApproveDocSelect.$(By.xpath("//option[text() = '"+approvingDoc+"']")).click();
+        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).click();
         saveGanttButton.click();
         newGanttActivityStatus.shouldHave(attribute("title", "В работе по плану"));
         newGanttActivityStatus.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
@@ -710,14 +710,14 @@ public class ProjectPage extends BasePage {
         newGanttActivityNameInput.shouldBe(visible).sendKeys(stageName);
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityApproveDocTD.click();
-        newGanttActivityApproveDocSelect.$(By.xpath("//option[text() = '"+approvingDoc+"']")).click();
+        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).click();
         newPointAddButton.shouldBe(visible).click();
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityNameTD.shouldBe(visible).click();
         newGanttActivityNameInput.shouldBe(visible).sendKeys("КТ для этапа");
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityApproveDocTD.click();
-        newGanttActivityApproveDocSelect.$(By.xpath("//option[text() = '"+approvingDoc+"']")).click();
+        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).click();
         clickToDownEntityLevel();
         saveGanttButton.click();
         newGanttActivityStatus.shouldHave(attribute("title", "В работе по плану"));

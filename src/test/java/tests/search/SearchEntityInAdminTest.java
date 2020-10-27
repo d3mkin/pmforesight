@@ -38,8 +38,7 @@ public class SearchEntityInAdminTest extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Работоспособность системы поиска для раздела 'Сущности' меню Администрирования")
+    @ParameterizedTest (name = "Работоспособность системы поиска для раздела 'Сущности' меню Администрирования")
     @MethodSource("helpers.UserProvider#UsersFA")
     //TODO: Завести задачу в JIRA
     @TmsLink("178")

@@ -24,19 +24,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class ProgramRegistry implements Registry {
 
-    private MainMenu mainMenu;
-    private Header header;
-    private ControlPanel controlPanel;
+    private final MainMenu mainMenu;
+    private final Header header;
+    private final ControlPanel controlPanel;
 
-    private String url = Configuration.baseUrl + "/page/register?view=lprogram";
-    private SelenideElement mainContainer = $("#mainBodyContainer");
-    private SelenideElement registryName = $("#f-grid-title span");
-    private SelenideElement table = mainContainer.$("div.f-grid__grid");
-    private SelenideElement firstFoundRow = table.$(".slick-row.odd");
-    private SelenideElement allRows = table.$(".grid-canvas .slick-row");
-    private SelenideElement foundCheckBox = $(By.cssSelector("div[class=\"slick-cell l0 r0 slick-cell-checkboxsel\"]"));
-    private SelenideElement firstProjectRow = table.$(By.xpath("//div[@class = 'ui-widget-content slick-row even']"));
-    private SelenideElement firstProgramRow = table.$(By.xpath("//div[contains(@class,\"ui-widget-content slick-row odd\")]"));
+    private final String url = Configuration.baseUrl + "/page/register?view=lprogram";
+    private final SelenideElement mainContainer = $("#mainBodyContainer");
+    private final SelenideElement registryName = $("#f-grid-title span");
+    private final SelenideElement table = mainContainer.$("div.f-grid__grid");
+    private final SelenideElement firstFoundRow = table.$(".slick-row.odd");
+    private final SelenideElement allRows = table.$(".grid-canvas .slick-row");
+    private final SelenideElement foundCheckBox = $(By.cssSelector("div[class=\"slick-cell l0 r0 slick-cell-checkboxsel\"]"));
+    private final SelenideElement firstProjectRow = table.$(By.xpath(".//div[@class = 'ui-widget-content slick-row even']"));
+    private final SelenideElement firstProgramRow = table.$(By.xpath(".//div[contains(@class,\"ui-widget-content slick-row odd\")]"));
 
     public ProgramRegistry() {
         this.mainMenu = new MainMenu();

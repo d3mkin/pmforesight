@@ -52,7 +52,7 @@ public class EntityPage extends AbstractAdminPage {
     @Step("Выбрать значение в выпадающем списке")
     public void selectItemByName(String name) {
         $("div[aria-hidden=\"false\"].k-animation-container")
-                .$(By.xpath("//li[text()='" + name + "']"))
+                .$(By.xpath(".//li[text()='" + name + "']"))
                 .click();
     }
 

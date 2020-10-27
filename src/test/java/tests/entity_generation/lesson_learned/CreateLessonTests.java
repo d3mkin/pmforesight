@@ -59,12 +59,12 @@ public class CreateLessonTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Извлеченный урок из карточки Программы")
+    @ParameterizedTest (name = "Создание сущности Извлеченный урок из карточки Программы")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-140")
     @TmsLink("552")
     public void CreateLessonLearnedFromProgramWithSaveAndClose(User user) {
+        parameter("Пользователь", user.getName());
         long currentTime = System.currentTimeMillis();
         program
                 .setName("Тест_C552" + currentTime)
@@ -113,12 +113,12 @@ public class CreateLessonTests extends BaseTest {
         programRegistry.shouldNotHaveResults();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Извлеченного урока из реестра. Кнопка 'Сохранить и закрыть'")
+    @ParameterizedTest(name = "Создание сущности Извлеченного урока из реестра. Кнопка 'Сохранить и закрыть'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-181")
     @TmsLink("546")
     public void CreateLessonLearnedWithSaveAndClose(User user) {
+        parameter("Пользователь", user.getName());
         long currentTime = System.currentTimeMillis();
         lessonLearned
                 .setActivity("400-004. Реформа контрольной и надзорной деятельности")
@@ -139,12 +139,12 @@ public class CreateLessonTests extends BaseTest {
         lessonRegistry.shouldNotHaveResults();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Извлеченный урок из карточки Проекта")
+    @ParameterizedTest (name = "Создание сущности Извлеченный урок из карточки Проекта")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-182")
     @TmsLink("553")
     public void CreateLessonLearnedFromProjectWithSaveAndClose(User user) {
+        parameter("Пользователь", user.getName());
         long currentTime = System.currentTimeMillis();
         project
                 .setName("Тест_C553_" + currentTime)
@@ -194,7 +194,4 @@ public class CreateLessonTests extends BaseTest {
         projectRegistry.shouldNotHaveResults();
 
     }
-
-
-
 }

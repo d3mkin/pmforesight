@@ -16,7 +16,7 @@ public class SearchForm {
     private final SelenideElement searchIcon = $(By.cssSelector(".f-search__view .f-search__header-row .f-button .m-i-search"));
     private final SelenideElement clearButton = $(By.xpath("//button/span[contains(text(),'Очистить')]"));
     private final SelenideElement closeButton = $(By.xpath("//button/span[contains(text(),'Закрыть')]"));
-    private final SelenideElement notFoundEntityText = $(By.xpath("//td[@class='f-table-td_static']"));
+    private final SelenideElement notFoundEntityText = $(".f-search__header-info");
     private final SelenideElement searchButton = $(By.xpath("//button[@data-toggle = 'f-search']"));
 
 

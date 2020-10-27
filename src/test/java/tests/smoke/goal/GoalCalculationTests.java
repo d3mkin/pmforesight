@@ -21,7 +21,7 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.SMOKE)
+@Story(TestSuiteName.GOALS)
 public class    GoalCalculationTests extends BaseTest {
     private SingInPage singIn;
     private IndicatorPage indicatorPage;

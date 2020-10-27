@@ -20,7 +20,7 @@ public class BaseTest {
     @BeforeAll
     @Step("Tests setup")
     public static void setup() {
-        addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+        //addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
         //Configuration.headless = true;
         String selenoid = System.getProperty("selenoid_url");
         String browser = System.getProperty("browser", "chrome");

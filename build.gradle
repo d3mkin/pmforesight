@@ -18,7 +18,7 @@ ext {
     aspectjweaver = '1.9.5'
     logbackVersion = '1.2.3'
     ownerVersion = '1.0.12'
-    restassuredVersion = '4.3.1'
+    restassuredVersion = '4.2.0'
     dataproviderVersion = '1.13.1'
 }
 
@@ -31,8 +31,6 @@ allure {
     version = "${allureVersion}"
     autoconfigure = true
     aspectjweaver = true
-
-    clean = true;
 
     useJUnit5 {
         version = "${allureVersion}"
@@ -54,6 +52,8 @@ dependencies {
     )
 }
 
+compileJava.options.encoding = 'UTF-8'
+
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
@@ -70,5 +70,11 @@ task run_tests(type: Test) {
 task authorization (type: Test) {
     useJUnitPlatform {
         includeTags 'Authorization'
+    }
+
+    task atest(type: Test) {
+        useJUnitPlatform {
+            includeTags 'ATEST-61'
+        }
     }
 }

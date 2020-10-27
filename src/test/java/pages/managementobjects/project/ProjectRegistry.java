@@ -33,7 +33,7 @@ public class ProjectRegistry implements Registry {
     private final SelenideElement registryName = $("#f-grid-title span");
     private final SelenideElement table = mainContainer.$("div.f-grid__grid");
     private final SelenideElement firstFoundRow = table.$(".slick-row.odd");
-    private final SelenideElement firstProjectRow = table.$(By.xpath("//div[@class = 'ui-widget-content slick-row even']"));
+    private final SelenideElement firstProjectRow = table.$(By.xpath(".//div[@class = 'ui-widget-content slick-row even']"));
     private final SelenideElement allRows = table.$(".grid-canvas .slick-row");
     private final SelenideElement foundCheckBox = $(By.cssSelector("div[class='slick-cell l0 r0 slick-cell-checkboxsel']"));
 

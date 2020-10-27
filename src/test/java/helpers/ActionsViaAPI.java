@@ -48,7 +48,7 @@ public class ActionsViaAPI {
                     .param("name", "admin")
                     .param("password", "123456")
                 .when()
-                    .post("/Login?ReturnUrl=%2F")
+                    .post("Login?ReturnUrl=%2FPage%2FIndex")
                 .then()
                     .statusCode(302)
                     .assertThat()
@@ -84,7 +84,7 @@ public class ActionsViaAPI {
                 "  OwnerId: 120819,\n" +
                 "  LeaderId: 120819,\n" +
                 "  ProjectLevelId: "+projectLevel+",\n" +
-                "  Name: 'CreatedFromAPI "+ currentTime + "',\n" +
+                "  Name: 'CreatedFromAPI "+ System.currentTimeMillis() + "',\n" +
                 "  EntityId: '46caa4ad-02b8-4d70-a1db-196bab860742',\n" +
                 "  ParentId: 93114,\n" +
                 "  ActivityPhaseId: "+projectStage+",\n" +
@@ -185,7 +185,7 @@ public class ActionsViaAPI {
                 "  EditorsId: 120819,\n" +
                 "  IsComplete: false,\n" +
                 "  IsNationalProjectTask: false,\n" +
-                "  Name: 'CreatedFromAPI "+ currentTime +"',\n" +
+                "  Name: 'CreatedFromAPI "+ System.currentTimeMillis() +"',\n" +
                 "  UserAccount: 'admin',\n" +
                 "  UserAccountId: '120613',\n" +
                 "  classid: 'a7db6e46-462a-4087-a7e3-d5623648cca0',\n" +
@@ -220,7 +220,7 @@ public class ActionsViaAPI {
                 "  Account: '',\n" +
                 "  Enabled: true,\n" +
                 "  EntityId: '66d6d76c-067c-4aa7-b334-4e2748be4fb9',\n" +
-                "  FirstName: 'UserFromAPI "+ currentTime +"',\n" +
+                "  FirstName: 'UserFromAPI "+ System.currentTimeMillis() +"',\n" +
                 "  IsAggregateMail: false,\n" +
                 "  IsAssignment: true,\n" +
                 "  IsBoss: false,\n" +
@@ -229,8 +229,8 @@ public class ActionsViaAPI {
                 "  IsReceiveMail: false,\n" +
                 "  IsShowSendMessage: false,\n" +
                 "  IsSoftDeleted: false,\n" +
-                "  Name: 'UserFromAPI "+ currentTime +"',\n" +
-                "  SurName: 'UserFromAPI "+ currentTime +"',\n" +
+                "  Name: 'UserFromAPI "+ System.currentTimeMillis() +"',\n" +
+                "  SurName: 'UserFromAPI "+ System.currentTimeMillis() +"',\n" +
                 "  UserAccount: 'admin',\n" +
                 "  UserAccountId: '120613',\n" +
                 "  classid: '66d6d76c-067c-4aa7-b334-4e2748be4fb9',\n" +

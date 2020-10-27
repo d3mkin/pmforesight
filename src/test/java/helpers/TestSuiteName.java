@@ -20,5 +20,6 @@ public class TestSuiteName {
     public static final String INDICATORS = "Показатели";
     public static final String PERMISSION = "Права доступа";
     public static final String CASCADE_DELETION = "Каскадное удаление";
+    public static final String GOALS = "Цели";
 
 }

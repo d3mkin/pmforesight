@@ -44,6 +44,7 @@ import static io.qameta.allure.Allure.parameter;
 @Story(TestSuiteName.CASCADE_DELETION)
 @Tag("cascadeDeletion")
 @Tag("Regression")
+
 public class ProjectCascadeDeletionTests extends BaseTest {
     private SingInPage singIn;
     private ProjectPage projectPage;
