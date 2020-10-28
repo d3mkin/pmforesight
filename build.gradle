@@ -71,6 +71,7 @@ tasks.withType(Test) {
                 'junit.jupiter.execution.parallel.config.fixed.parallelism': project.getProperty("web_threads").toInteger()
         ]
     }
+    systemProperty 'junit.jupiter.extensions.autodetection.enabled', 'true'
 }
 
 task run_tests(type: Test) {
