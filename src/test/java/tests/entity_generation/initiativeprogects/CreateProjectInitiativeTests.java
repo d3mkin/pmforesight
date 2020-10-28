@@ -18,7 +18,7 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.DATA_GENERATION)
+@Story(TestSuiteName.ENTITY_CREATION)
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreateProjectInitiativeTests extends BaseTest {
@@ -41,8 +41,7 @@ public class CreateProjectInitiativeTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Предложение по проекту из реестра. Кнопка 'Сохранить и закрыть'")
+    @ParameterizedTest(name = "Создание сущности Предложение по проекту из реестра. Кнопка 'Сохранить и закрыть'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-138")
     @TmsLink("372")
@@ -70,8 +69,7 @@ public class CreateProjectInitiativeTests extends BaseTest {
         registry.shouldNotHaveResults();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Предложение по проекту из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
+    @ParameterizedTest(name = "Создание сущности Предложение по проекту из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-139")
     @TmsLink("376")

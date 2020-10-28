@@ -56,8 +56,7 @@ public class ResultTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Отображение таблиц результатов Ведомственного проекта после его создания")
+    @ParameterizedTest(name = "Отображение таблиц результатов Ведомственного проекта после его создания")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-10")
     @TmsLink("1039")
@@ -70,8 +69,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveDefaultResultsTable();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание Результата Ведомственного проекта в Ведомственном проекте")
+    @ParameterizedTest(name = "Создание Результата Ведомственного проекта в Ведомственном проекте")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-4")
     @TmsLink("411")
@@ -93,8 +91,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveDepartmentalResult(result.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Отображение таблиц результатов Федерального проекта после его создания")
+    @ParameterizedTest(name = "Отображение таблиц результатов Федерального проекта после его создания")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-1")
     @TmsLink("1039")
@@ -107,8 +104,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveFederalResultsTable();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание Федерального результата в Федеральном проекте")
+    @ParameterizedTest(name = "Создание Федерального результата в Федеральном проекте")
     @MethodSource("helpers.UserProvider#UsersFA")
     @TmsLink("411")
     public void createAndCheckFedResultInFedProject(User user) {
@@ -129,8 +125,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveFederalResult(result.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание Федерального результата в Региональном проекте")
+    @ParameterizedTest(name = "Создание Федерального результата в Региональном проекте")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-6")
     @TmsLink("964")
@@ -152,8 +147,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveFederalResult(result.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Отображение таблиц результатов Регионального проекта после его создания")
+    @ParameterizedTest(name = "Отображение таблиц результатов Регионального проекта после его создания")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-3")
     @TmsLink("1039")
@@ -166,8 +160,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveRegionalResultsTable();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание Регионального результата в Региональном проекте")
+    @ParameterizedTest(name = "Создание Регионального результата в Региональном проекте")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-8")
     @TmsLink("963")
@@ -189,8 +182,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveRegionalResult(result.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание Результата Регионального проекта, связанного с Результатом Федерального проекта")
+    @ParameterizedTest(name = "Создание Результата Регионального проекта, связанного с Результатом Федерального проекта")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-7")
     @TmsLink("962")
@@ -224,8 +216,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveRegionalResult(regionalResult.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Редактирование Результата Регионального проекта: связывание с Результатом Федерального проекта")
+    @ParameterizedTest(name = "Редактирование Результата Регионального проекта: связывание с Результатом Федерального проекта")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-21")
     @TmsLink("1040")
@@ -261,8 +252,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveRegionalResult(regionalResult.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Отображение Результата в таблице 'Связь результатов и КП проекта' после создания Результата из проекта")
+    @ParameterizedTest(name = "Отображение Результата в таблице 'Связь результатов и КП проекта' после создания Результата из проекта")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-22")
     @TmsLink("1044")
@@ -317,8 +307,7 @@ public class ResultTests extends BaseTest {
         projectPage.checkLinkedResultsInTable(regionalResult.getName(),regionalResult.getType());
     }
 
-    @ParameterizedTest
-    @DisplayName("Валидация поля 'Тип КТ/Мероприятия' таблицы 'Связь Результатов и КП проекта' (все варианты)")
+    @ParameterizedTest(name = "Валидация поля 'Тип КТ/Мероприятия' таблицы 'Связь Результатов и КП проекта' (все варианты)")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-25")
     @TmsLink("1046")
@@ -368,8 +357,7 @@ public class ResultTests extends BaseTest {
         projectPage.checkValidationInKPAndResultsLinkedTable(resultPage,"Региональный");
     }
 
-    @ParameterizedTest
-    @DisplayName("Выбор родительского Результата в карточке создания Результата (Фед., Вед.)")
+    @ParameterizedTest(name = "Выбор родительского Результата в карточке создания Результата (Фед., Вед.)")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-19")
     @TmsLink("1050")
@@ -421,8 +409,7 @@ public class ResultTests extends BaseTest {
         projectPage.checkIsTheResultChild("Федеральный", federalChildResult.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Выбор родительского Результата в карточке редактирования Результата (для Рез-тов Фед. и Вед. проектов)")
+    @ParameterizedTest(name = "Выбор родительского Результата в карточке редактирования Результата (для Рез-тов Фед. и Вед. проектов)")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-17")
     @TmsLink("1041")
@@ -483,8 +470,7 @@ public class ResultTests extends BaseTest {
 
     }
 
-    @ParameterizedTest
-    @DisplayName("Недоступность выбора родительского результата для рез-та Регионального проекта при создании/редактировании")
+    @ParameterizedTest(name = "Недоступность выбора родительского результата для рез-та Регионального проекта при создании/редактировании")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-18")
     @TmsLink("1052")

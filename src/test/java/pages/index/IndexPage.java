@@ -6,7 +6,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
 import pages.elements.Header;
-import pages.elements.InfoPanel;
+import pages.elements.WidgetPanel;
 import pages.elements.MainMenu;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IndexPage {
-    private InfoPanel infoPanel;
+    private WidgetPanel widgetPanel;
     private MainMenu mainMenu;
     private Header header;
     private String url = Configuration.baseUrl + "/Page/Index";
@@ -22,7 +22,7 @@ public class IndexPage {
     public IndexPage() {
         this.header = new Header();
         this.mainMenu = new MainMenu();
-        this.infoPanel = new InfoPanel();
+        this.widgetPanel = new WidgetPanel();
     }
 
     public void open() {
@@ -39,8 +39,8 @@ public class IndexPage {
         return header;
     }
 
-    public InfoPanel infoPanel() {
-        return infoPanel;
+    public WidgetPanel widgetPanel() {
+        return widgetPanel;
     }
 
     public MainMenu mainMenu() {
@@ -49,7 +49,7 @@ public class IndexPage {
 
     public void shouldUpdateAfterClickToHeaderLink() {
         sleep(3000);
-        infoPanel.shouldHaveHeaderText("Информационная панель");
+        widgetPanel.shouldHaveHeaderText("Информационная панель");
     }
 
     @Step("Проверка коррекности урл страницы")

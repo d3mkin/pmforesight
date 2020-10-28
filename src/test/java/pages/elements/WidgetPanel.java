@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
-public class InfoPanel {
+public class WidgetPanel {
     private List<SelenideElement> allWidgetsHideIcon = $$(By.cssSelector(".f-widget__header-name button .f-icon"));
     private SelenideElement allWidgetsContent = $(By.cssSelector(".f-widget__content"));
     private SelenideElement allWidgetsNotExpand = $(By.cssSelector(".f-widget__header-name button .f-icon:not(.f-icon_rotate_90deg)"));
@@ -23,8 +23,8 @@ public class InfoPanel {
     private SelenideElement editButton = $("#edit");
     private SelenideElement updateButton = $("#edit");
     private SelenideElement reloadButton = $("#reload");
-    private SelenideElement endEditButton = $("#preview");
-    private SelenideElement addWidgetButton = $("#add_widget");
+    private SelenideElement cancelEditButton = $("#preview");
+    private SelenideElement addWidgetButton = $("#addWidget");
     private SelenideElement saveButton = $("#save");
     private SelenideElement infoHeader = $(".f-page__name");
 
@@ -63,11 +63,11 @@ public class InfoPanel {
         editButton.click();
     }
 
-    @Step("Проверка отображения кнопок \"Закончить редактирование\", \"Добавить\" и \"Сохранить\"")
+    @Step("Проверка отображения кнопок 'Отмена', 'Cохранить' и 'Добавить'")
     public void shouldHaveControlButtonsWhenEdit() {
-        endEditButton.shouldBe(visible);
-        addWidgetButton.shouldBe(visible);
+        cancelEditButton.shouldBe(visible);
         saveButton.shouldBe(visible);
+        addWidgetButton.shouldBe(visible);
     }
 
     @Step("Блоки \"Мои проекты\" и \"Мои контракты\" раскрыты без возможности свернуть")
@@ -84,7 +84,7 @@ public class InfoPanel {
         myProject.$(".f-widget__content").shouldBe(visible);
     }
 
-    @Step("На всех виджетах должны быть кнопки \"Обновить\", \"Настройки\" и \"Удалить\"")
+    @Step("На всех виджетах должны быть кнопки 'Обновить', 'Настройки' и 'Удалить'")
     public void shouldHaveButtonOnAllWidgets() {
         for (SelenideElement widget : allWidgets) {
             widget.scrollTo();
@@ -98,11 +98,11 @@ public class InfoPanel {
     }
 
     @Step("Нажать кнопку добавить виджет")
-    public void clickAdd() {
+    public void clickAddWidget() {
         addWidgetButton.click();
     }
 
-    @Step("Проверка открытия нового виджета с кнопками \"Обновить\", \"Настройки\" и \"Удалить\"")
+    @Step("Проверка открытия нового виджета с кнопками 'Обновить', 'Настройки' и 'Удалить'")
     public void shouldHaveNewWidgetWithRightButton() {
         SelenideElement newWidget = allWidgets.get(0);
         newWidget.shouldBe(visible);
@@ -118,7 +118,7 @@ public class InfoPanel {
 
     @Step("Проверка скрытия кнопок \"Закончить редактирование\", \"Добавить\" и \"Сохранить\"")
     public void shouldNotHaveButtonForEdit() {
-        endEditButton.shouldNot(visible);
+        cancelEditButton.shouldNot(visible);
         addWidgetButton.shouldNot(visible);
         saveButton.shouldNot(visible);
     }

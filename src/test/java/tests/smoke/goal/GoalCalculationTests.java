@@ -55,8 +55,7 @@ public class    GoalCalculationTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Расчет индикатора цели по показателям")
+    @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Нет показателей', 'Нет данных', 'Достигнута', 'Частично достигнута', 'Не достигнута' ")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-78")
     @TmsLink("1233")
@@ -85,6 +84,7 @@ public class    GoalCalculationTests extends BaseTest {
         ActionsViaAPI.openGoalCreatedFromAPI();
         goalPage.searchAndOpenIndicator(achievedIndicator);
         goalPage.getBrowserTabs();
+        //TODO переделать метод переключения между вкладками
         goalPage.switchToBrowserTab(1);
         indicatorPage.clickAddValueButton();
         indicatorPage.fillIndicatorsValues(achievedIndicator);
@@ -94,6 +94,7 @@ public class    GoalCalculationTests extends BaseTest {
         indicatorPage.closeCurrentBrowserTab();
         indicatorPage.getBrowserTabs();
         indicatorPage.switchToBrowserTab(0);
+
         ActionsViaAPI.openGoalCreatedFromAPI();
         almostAchievedIndicator
                 .setName("Частично достигнута" + currentTime)
@@ -121,6 +122,7 @@ public class    GoalCalculationTests extends BaseTest {
         indicatorPage.closeCurrentBrowserTab();
         indicatorPage.getBrowserTabs();
         indicatorPage.switchToBrowserTab(0);
+
         ActionsViaAPI.openGoalCreatedFromAPI();
         notAchievedIndicator
                 .setName("Не достигнута" + currentTime)
@@ -148,6 +150,7 @@ public class    GoalCalculationTests extends BaseTest {
         indicatorPage.closeCurrentBrowserTab();
         indicatorPage.getBrowserTabs();
         indicatorPage.switchToBrowserTab(0);
+
         ActionsViaAPI.openGoalCreatedFromAPI();
         noDataIndicator
                 .setName("Нет данных" + currentTime)

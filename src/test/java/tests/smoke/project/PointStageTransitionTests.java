@@ -51,8 +51,7 @@ public class PointStageTransitionTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Перевод КТ из состояния 'В работе' в состояние 'Выполнено'")
+    @ParameterizedTest(name = "Перевод КТ из состояния 'В работе' в состояние 'Выполнено'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-88")
     @TmsLink("1220")
@@ -78,8 +77,7 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.checkPointStatus("Выполнено");
     }
 
-    @ParameterizedTest
-    @DisplayName("Перевод КТ из состояния 'Выполнено' в состояние 'В работе'")
+    @ParameterizedTest(name = "Перевод КТ из состояния 'Выполнено' в состояние 'В работе'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-89")
     @TmsLink("1221")
@@ -105,8 +103,7 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.checkPointStatus("Прогноз срыва сроков");
     }
 
-    @ParameterizedTest
-    @DisplayName("Перевод КТ из состояния 'В работе' в состояние 'Отменена'")
+    @ParameterizedTest(name = "Перевод КТ из состояния 'В работе' в состояние 'Отменена'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-90")
     @TmsLink("1223")
@@ -131,8 +128,7 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.checkPointStatus("Отменена");
     }
 
-    @ParameterizedTest
-    @DisplayName("Перевод КТ из состояния 'Отменена' в состояние 'В работе'")
+    @ParameterizedTest(name = "Перевод КТ из состояния 'Отменена' в состояние 'В работе'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-91")
     @TmsLink("1224")
@@ -158,8 +154,7 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.checkPointStatus("Прогноз срыва сроков");
     }
 
-    @ParameterizedTest
-    @DisplayName("Перевод КТ из состояния 'Выполнено' в состояние 'Подтверждена'")
+    @ParameterizedTest(name = "Перевод КТ из состояния 'Выполнено' в состояние 'Подтверждена'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-92")
     @TmsLink("1225")

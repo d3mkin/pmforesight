@@ -35,8 +35,7 @@ public class CheckAllMenuRegistryTest extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Проверка работоспособности главного выдвижного меню и реестров")
+    @ParameterizedTest(name = "Проверка работоспособности главного выдвижного меню и реестров")
     @MethodSource("helpers.UserProvider#UsersFA")
     //TODO: Завести задачу в JIRA и проверку на коды ошибок + сделать переключение представлений
     @TmsLink("303")

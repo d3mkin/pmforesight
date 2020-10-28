@@ -18,7 +18,7 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.DATA_GENERATION)
+@Story(TestSuiteName.ENTITY_CREATION)
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreateRiskEntityTests extends BaseTest {
@@ -44,8 +44,7 @@ public class CreateRiskEntityTests extends BaseTest {
     }
 
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Риски и возможности из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
+    @ParameterizedTest(name = "Создание сущности Риски и возможности из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-172")
     @TmsLink("467")
@@ -72,8 +71,7 @@ public class CreateRiskEntityTests extends BaseTest {
         riskRegistry.shouldBeRegistry();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Риски и возможности из реестра. Кнопка 'Сохранить и закрыть'")
+    @ParameterizedTest(name = "Создание сущности Риски и возможности из реестра. Кнопка 'Сохранить и закрыть'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-171")
     @TmsLink("463")

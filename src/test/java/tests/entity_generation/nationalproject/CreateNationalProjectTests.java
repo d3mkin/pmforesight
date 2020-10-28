@@ -16,8 +16,10 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.DATA_GENERATION)
+
+@Story(TestSuiteName.ENTITY_CREATION)
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreateNationalProjectTests extends BaseTest {
@@ -37,13 +39,13 @@ public class CreateNationalProjectTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Национальный проект из реестра. Кнопка 'Сохранить и закрыть'")
+    @ParameterizedTest(name = "Создание сущности Национальный проект из реестра. Кнопка 'Сохранить и закрыть'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-177")
     @TmsLink("358")
     public void createNProjectButtonSaveTest(User user) {
         long currentTime = System.currentTimeMillis();
+        parameter("Пользователь", user.getName());
         nationalProject.setNameValue("Тест_C358_" + currentTime)
                 .setCurator(user.getName())
                 .setSupervisor(user.getName());
@@ -63,12 +65,12 @@ public class CreateNationalProjectTests extends BaseTest {
         nProjectRegistry.shouldNotHaveResults();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Национальный проект из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
+    @ParameterizedTest(name = "Создание сущности Национальный проект из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-178")
     @TmsLink("362")
     public void checkRequiredMessage(User user) {
+        parameter("Пользователь", user.getName());
         nProjectRegistry.open();
         new SingInPage().asUser(user);
         nProjectRegistry.controlPanel().clickAddButton();

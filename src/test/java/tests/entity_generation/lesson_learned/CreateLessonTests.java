@@ -24,7 +24,7 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.DATA_GENERATION)
+@Story(TestSuiteName.ENTITY_CREATION)
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreateLessonTests extends BaseTest {

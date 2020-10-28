@@ -19,7 +19,7 @@ import helpers.ActionsViaAPI;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.DATA_GENERATION)
+@Story(TestSuiteName.ENTITY_CREATION)
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreateGoalTests extends BaseTest {
@@ -52,17 +52,16 @@ public class CreateGoalTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Цель (из реестра)")
+    @ParameterizedTest (name = "Создание сущности Цель с разными уровнями управления: Муниципальный, Федеральный, Региональный, Национальный")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-115")
     @TmsLink("1235")
     public void createAllTypesGoalTest(User user){
+        parameter("Пользователь", user.getName());
         //Ведомственная цель
         departmentalGoal
                 .setName("Тест_C1235_" + currentTime)
                 .setEditors(user.getName());
-        parameter("Пользователь", user.getName());
         singIn.asUser(user);
         registry.addGoal();
         createModal.fillFields(departmentalGoal);
@@ -110,8 +109,7 @@ public class CreateGoalTests extends BaseTest {
         registry.findAndDeleteGoal(nationalGoal);
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Цель (API)")
+    @ParameterizedTest (name = "Создание сущности Цель (API)")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-114")
     public void createGoalFromAPITest(User user) {

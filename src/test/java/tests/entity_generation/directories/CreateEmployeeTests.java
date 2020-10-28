@@ -1,7 +1,6 @@
 package tests.entity_generation.directories;
 
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
@@ -11,7 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import helpers.TestSuiteName;
-import helpers.UserProvider;
 import model.Employee;
 import model.User;
 import pages.auth.LogoutPage;
@@ -22,7 +20,7 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.DATA_GENERATION)
+@Story(TestSuiteName.ENTITY_CREATION)
 @Tag("entityGeneration")
 @Tag("Regression")
 @RunWith(DataProviderRunner.class)
@@ -44,12 +42,12 @@ public class CreateEmployeeTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Сотрудника из реестра. Кнопка 'Сохранить'")
+    @ParameterizedTest(name = "Создание сущности Сотрудника из реестра. Кнопка 'Сохранить'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-135")
     @TmsLink("562")
     public void createEmployeeWithSaveAndCloseTest(User user) {
+        parameter("Пользователь", user.getName());
         long currentTime = System.currentTimeMillis();
         Employee employee = new Employee();
         employee

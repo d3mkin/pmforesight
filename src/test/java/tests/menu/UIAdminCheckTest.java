@@ -37,8 +37,7 @@ public class UIAdminCheckTest extends BaseTest {
     }
 
     @Ignore
-    @ParameterizedTest
-    @DisplayName("Отображение и работоспособность функций страницы Администрирование")
+    @ParameterizedTest(name = "Отображение и работоспособность функций страницы Администрирование")
     @MethodSource("helpers.UserProvider#UsersFA")
     //TODO: Завести задачу в JIRA
     @TmsLink("342")

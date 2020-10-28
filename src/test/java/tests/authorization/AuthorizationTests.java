@@ -43,8 +43,8 @@ public class AuthorizationTests extends BaseTest {
         parameter("Пользователь", user.getName());
         singIn.asUser(user);
         index.shouldBeIndexPage();
-        index.infoPanel().shouldHaveHeaderText("Информационная панель");
-        index.infoPanel().shouldBeVisibleAndHaveAnyWidgets();
+        index.widgetPanel().shouldHaveHeaderText("Информационная панель");
+        index.widgetPanel().shouldBeVisibleAndHaveAnyWidgets();
     }
 
     @ParameterizedTest (name = "Выход из системы")

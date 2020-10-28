@@ -5,7 +5,6 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import helpers.TestSuiteName;
@@ -19,7 +18,7 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.DATA_GENERATION)
+@Story(TestSuiteName.ENTITY_CREATION)
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreateProgramTests extends BaseTest {
@@ -42,8 +41,7 @@ public class CreateProgramTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Программа из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
+    @ParameterizedTest(name = "Создание сущности Программа из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-174")
     @TmsLink("369")
@@ -69,8 +67,7 @@ public class CreateProgramTests extends BaseTest {
         programRegistry.shouldBeRegistry();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Программа из реестра. Кнопка 'Сохранить и закрыть'")
+    @ParameterizedTest(name = "Создание сущности Программа из реестра. Кнопка 'Сохранить и закрыть'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-173")
     @TmsLink("365")

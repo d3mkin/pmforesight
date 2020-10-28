@@ -49,8 +49,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("C1177 Перевод проекта на с стадию 'Отменено' (positive)")
+    @ParameterizedTest(name = "Перевод проекта на с стадию 'Отменено' (positive)")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-67")
     @TmsLink("1177")
@@ -70,8 +69,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkCurrentProjectStage("Отменено");
     }
 
-    @ParameterizedTest
-    @DisplayName("C1178 Перевод проекта на с стадию 'Отменено' (negative)")
+    @ParameterizedTest(name = "Перевод проекта на стадию 'Отменено' (негативный сценарий)")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-68")
     @TmsLink("1178")
@@ -92,8 +90,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         modalDialog.clickClose();
     }
 
-    @ParameterizedTest
-    @DisplayName("Попытка перехода на стадию 'до' первой и 'после' крайней")
+    @ParameterizedTest(name = "Проверка перехода на стадию 'до' первой и 'после' крайней стадии")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-73")
     @TmsLink("1213")
@@ -126,8 +123,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         modalDialog.closeDialog();
     }
 
-    @ParameterizedTest
-    @DisplayName("Переходы Проекта по стадиям, не требующие условий")
+    @ParameterizedTest(name = "Переходы Проекта по стадиям, не требующие условий")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-74")
     @TmsLink("1214")
@@ -154,8 +150,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkCurrentProjectStage("Инициирование");
     }
 
-    @ParameterizedTest
-    @DisplayName("Проверка условий перехода Проекта по стадиям")
+    @ParameterizedTest(name = "Переходы Проекта по стадиям, не требующие условий")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-75")
     @TmsLink("1215")

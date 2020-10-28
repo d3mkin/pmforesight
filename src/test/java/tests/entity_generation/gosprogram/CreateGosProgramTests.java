@@ -19,7 +19,7 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.DATA_GENERATION)
+@Story(TestSuiteName.ENTITY_CREATION)
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreateGosProgramTests extends BaseTest {
@@ -44,8 +44,7 @@ public class CreateGosProgramTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Госпрограмма из реестра. Кнопка 'Сохранить и закрыть'")
+    @ParameterizedTest(name = "Создание сущности Госпрограмма из реестра. Кнопка 'Сохранить и закрыть'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-136")
     @TmsLink("344")
@@ -77,8 +76,7 @@ public class CreateGosProgramTests extends BaseTest {
         gProgramRegistry.shouldNotHaveResults();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Госпрограмма из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
+    @ParameterizedTest(name = "Создание сущности Госпрограмма из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-137")
     @TmsLink("348")
@@ -103,5 +101,4 @@ public class CreateGosProgramTests extends BaseTest {
         gProgramPage.shouldBeClosed();
         gProgramRegistry.shouldBeRegistry();
     }
-
 }

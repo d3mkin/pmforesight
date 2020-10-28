@@ -125,8 +125,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Каскадное удаление: КТ в проекте")
+    @ParameterizedTest(name = "Каскадное удаление: КТ в проекте")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-119")
     @TmsLink("1237")
@@ -163,8 +162,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         searchForm.checkEntityNotFoundInGlobalSearch(newStageName);
     }
 
-    @ParameterizedTest
-    @DisplayName("Каскадное удаление: Результаты в проекте")
+    @ParameterizedTest(name = "Каскадное удаление: Результаты в проекте")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-120")
     @TmsLink("1238")
@@ -196,8 +194,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         searchForm.checkEntityNotFoundInGlobalSearch(result.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Каскадное удаление: Контракт в проекте")
+    @ParameterizedTest(name = "Каскадное удаление: Контракт в проекте")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-121")
     @TmsLink("1239")
@@ -226,8 +223,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         searchForm.checkEntityNotFoundInGlobalSearch(contact.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Каскадное удаление: Показатель в проекте")
+    @ParameterizedTest(name = "Каскадное удаление: Показатель в проекте")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-122")
     @TmsLink("1240")
@@ -260,8 +256,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         searchForm.checkEntityNotFoundInGlobalSearch(indicator.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Каскадное удаление: Риски/Возможности проекта")
+    @ParameterizedTest(name = "Каскадное удаление: Риски/Возможности проекта")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-123")
     //TODO: Линк на ТМС
@@ -299,8 +294,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         searchForm.checkEntityNotFoundInGlobalSearch(opportunity.getRisksAndOpportunitiesName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Каскадное удаление: Поручение в проекте")
+    @ParameterizedTest(name = "Каскадное удаление: Поручение в проекте")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-124")
     //TODO: Линк на ТМС
@@ -331,8 +325,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         searchForm.checkEntityNotFoundInGlobalSearch(order.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Каскадное удаление: Совещание в проекте")
+    @ParameterizedTest(name = "Каскадное удаление: Совещание в проекте")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-125")
     //TODO: Линк на ТМС
@@ -362,8 +355,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         searchForm.checkEntityNotFoundInGlobalSearch(meeting.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Каскадное удаление: Открытые вопросы в проекте")
+    @ParameterizedTest(name = "Каскадное удаление: Открытые вопросы в проекте")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-126")
     //TODO: Линк на ТМС
@@ -393,8 +385,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         searchForm.checkEntityNotFoundInGlobalSearch(openQuestion.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Каскадное удаление: Извлеченные уроки в проекте")
+    @ParameterizedTest(name = "Каскадное удаление: Извлеченные уроки в проекте")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-127")
     //TODO: Линк на ТМС

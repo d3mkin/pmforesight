@@ -44,8 +44,7 @@ public class UserCascadeDeletionTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Удаление из системы пользователя, не назначенного на роль")
+    @ParameterizedTest(name = "Удаление из системы пользователя, не назначенного на роль")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-144")
     @TmsLink("1243")

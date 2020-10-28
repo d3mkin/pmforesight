@@ -11,7 +11,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import helpers.ActionsViaAPI;
 import helpers.TestSuiteName;
-import helpers.UserProvider;
 import model.Indicator;
 import model.User;
 import pages.auth.LogoutPage;
@@ -49,8 +48,7 @@ public class IndicatorTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Показатель из карточки Проекта")
+    @ParameterizedTest(name = "Создание сущности Показатель из карточки Проекта")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-61")
     @TmsLink("1047")
@@ -72,8 +70,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.shouldHaveIndicator(testIndicator.getName());
     }
 
-    @ParameterizedTest
-    @DisplayName("Добавление данных за период в Показателе Ведомственного проекта")
+    @ParameterizedTest(name = "Добавление данных за период в Показателе Ведомственного проекта")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-63")
     @TmsLink("1155")
@@ -110,8 +107,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.switchToBrowserTab(0);
     }
 
-    @ParameterizedTest
-    @DisplayName("Общий процент достижения плана %: Возрастающего показателя")
+    @ParameterizedTest(name = "Общий процент достижения плана %: Возрастающего показателя")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-80")
     @TmsLink("1228")
@@ -152,8 +148,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.switchToBrowserTab(0);
     }
 
-    @ParameterizedTest
-    @DisplayName("Общий процент достижения плана %: Убывающего показателя")
+    @ParameterizedTest(name =  "Общий процент достижения плана %: Убывающего показателя")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-81")
     @TmsLink("1228")
@@ -194,8 +189,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.switchToBrowserTab(0);
     }
 
-    @ParameterizedTest
-    @DisplayName("Общий процент достижения плана %: Фиксированного показателя")
+    @ParameterizedTest(name = "Общий процент достижения плана %: Фиксированного показателя")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-82")
     @TmsLink("1228")
@@ -236,8 +230,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.switchToBrowserTab(0);
     }
 
-    @ParameterizedTest
-    @DisplayName("Расчет индикатора периода: Возрастающий показатель")
+    @ParameterizedTest(name = "Расчет индикатора периода: Возрастающий показатель")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-42")
     @Tag("ATEST-43")
@@ -311,8 +304,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.switchToBrowserTab(0);
     }
 
-    @ParameterizedTest
-    @DisplayName("Расчет индикатора периода: Убывающий показатель")
+    @ParameterizedTest(name = "Расчет индикатора периода: Убывающий показатель")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-46")
     @Tag("ATEST-47")
@@ -386,8 +378,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.switchToBrowserTab(0);
     }
 
-    @ParameterizedTest
-    @DisplayName("Расчет индикатора периода: Фиксированный показатель")
+    @ParameterizedTest(name = "Расчет индикатора периода: Фиксированный показатель")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-50")
     @Tag("ATEST-51")
@@ -455,8 +446,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.switchToBrowserTab(0);
     }
 
-    @ParameterizedTest
-    @DisplayName("Расчёт общего индикатора Показателя: Год, ВКЛЮЧАЯ текущий")
+    @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Год, ВКЛЮЧАЯ текущий")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-54")
     @TmsLink("1226")
@@ -504,8 +494,7 @@ public class IndicatorTests extends BaseTest {
                 cssValue("color", "rgba(255, 89, 64, 1)"));
     }
 
-    @ParameterizedTest
-    @DisplayName("Расчёт общего индикатора Показателя: Полугодие, ВКЛЮЧАЯ текущее")
+    @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Полугодие, ВКЛЮЧАЯ текущее")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-55")
     @TmsLink("1226")
@@ -564,8 +553,7 @@ public class IndicatorTests extends BaseTest {
                 cssValue("color", "rgba(102, 102, 102, 1)"));
     }
 
-    @ParameterizedTest
-    @DisplayName("Расчёт общего индикатора Показателя: Квартал, ВКЛЮЧАЯ текущий")
+    @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Квартал, ВКЛЮЧАЯ текущий")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-56")
     @TmsLink("1226")
@@ -624,8 +612,7 @@ public class IndicatorTests extends BaseTest {
                 cssValue("color", "rgba(255, 210, 70, 1)"));
     }
 
-    @ParameterizedTest
-    @DisplayName("Расчёт общего индикатора Показателя: Месяц, ВКЛЮЧАЯ текущий")
+    @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Месяц, ВКЛЮЧАЯ текущий")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-57")
     @TmsLink("1226")

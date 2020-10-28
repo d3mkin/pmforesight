@@ -14,13 +14,12 @@ import pages.elements.ControlPanel;
 import pages.managementobjects.portfolio.PortfolioRegistry;
 import pages.managementobjects.portfolio.CreatePortfolioPage;
 import tests.BaseTest;
-import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.DATA_GENERATION)
+@Story(TestSuiteName.ENTITY_CREATION)
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreatePortfolioTests extends BaseTest {
@@ -45,8 +44,7 @@ public class CreatePortfolioTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Портфеля из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
+    @ParameterizedTest(name = "Создание сущности Портфеля из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-176")
     @TmsLink("355")
@@ -68,8 +66,7 @@ public class CreatePortfolioTests extends BaseTest {
         portfolioRegistry.shouldBeRegistry();
     }
 
-    @ParameterizedTest
-    @DisplayName("Создание сущности Портфель из реестра. Кнопка 'Сохранить и закрыть'")
+    @ParameterizedTest(name = "Создание сущности Портфель из реестра. Кнопка 'Сохранить и закрыть'")
     @MethodSource("helpers.UserProvider#UsersFA")
     @Tag("ATEST-175")
     @TmsLink("355")
