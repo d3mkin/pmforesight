@@ -79,4 +79,11 @@ task authorization (type: Test) {
             includeTags 'ATEST-61'
         }
     }
+
+    task project_test(type: Test) {
+        useJUnitPlatform {
+            includeTags 'ATEST-105'
+        }
+    }
+
 }
