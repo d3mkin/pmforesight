@@ -7,9 +7,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import helpers.ConfigManager;
+import org.junit.jupiter.api.TestInstance;
 import webdriver.CustomWebDriver;
 import static helpers.AttachmentsHelper.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_METHOD)
 public class BaseTest {
 
     static protected ConfigManager configManager = new ConfigManager();
