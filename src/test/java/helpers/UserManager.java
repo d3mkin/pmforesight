@@ -7,7 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 public class UserManager {
-    private static final String PROPERTIES_FILE = "users.properties";
+    private static final String PROPERTIES_FILE = "usersUTF8.properties";
     private final PropertiesResourceManager prm;
 
     //Пользователи
