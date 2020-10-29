@@ -36,19 +36,19 @@ public class BaseTest {
         Configuration.startMaximized = configManager.getStartMaximized();
     }
 
-    @AfterEach
-    @Step("Attachments")
-    void afterEach() {
-        attachScreenshot("Last screenshot");
-        attachPageSource();
-        attachBrowserConsoleLogs();
-    }
+//    @AfterEach
+//    @Step("Attachments")
+//    void afterEach() {
+//        attachScreenshot("Last screenshot");
+//        attachPageSource();
+//        attachBrowserConsoleLogs();
+//    }
 
-    @AfterAll
-    @Step("Tests teardown")
-    public static void closeBrowser() {
-        WebDriverRunner.clearBrowserCache();
-        WebDriverRunner.getWebDriver().manage().deleteAllCookies();
-        WebDriverRunner.getWebDriver().close();
-    }
+//    @AfterAll
+//    @Step("Tests teardown")
+//    public static void closeBrowser() {
+//        WebDriverRunner.clearBrowserCache();
+//        WebDriverRunner.getWebDriver().manage().deleteAllCookies();
+//        WebDriverRunner.getWebDriver().close();
+//    }
 }
