@@ -7,6 +7,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookies;
 import io.restassured.response.Response;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -45,8 +46,8 @@ public class ActionsViaAPI {
         cookies = RestAssured
                 .given()
                     .urlEncodingEnabled(true)
-                    .param("name", "admin")
-                    .param("password", "123456")
+                    .param("name", "fa")
+                    .param("password", "1qaz@WSX")
                 .when()
                     .post("Login?ReturnUrl=%2FPage%2FIndex")
                 .then()
@@ -72,30 +73,61 @@ public class ActionsViaAPI {
         if (projectLevel.equals("Федеральный")) projectLevel = "1";
         if (projectLevel.equals("Региональный")) projectLevel = "2";
 
-        String body = "{\n" +
+        String testProjectBody = "{\n" +
                 "  classid: '46caa4ad-02b8-4d70-a1db-196bab860742', \n" +
                 "  classname: 'Project',\n" +
                 "  classtitle: 'Проект',\n" +
                 "  entityname: 'Project',\n" +
                 "  keyfield: 'ProjectId',\n" +
                 "  namefield: 'Name',\n" +
-                "  UserAccountId: 120613,\n" +
-                "  UserAccount: 'admin',\n" +
-                "  OwnerId: 120819,\n" +
-                "  LeaderId: 120819,\n" +
+                "  UserAccountId: 100070,\n" +
+                "  UserAccount: 'FA',\n" +
+                "  OwnerId: 100070,\n" +
+                "  LeaderId: 100070,\n" +
                 "  ProjectLevelId: "+projectLevel+",\n" +
-                "  Name: 'CreatedFromAPI "+ System.currentTimeMillis() + "',\n" +
+                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() + "',\n" +
                 "  EntityId: '46caa4ad-02b8-4d70-a1db-196bab860742',\n" +
-                "  ParentId: 93114,\n" +
+                "  ParentId: 93092,\n" +
                 "  ActivityPhaseId: "+projectStage+",\n" +
                 "  ProjectTypeId: 2,\n" +
                 "  PriorityId: 2,\n" +
-                "  ControlSubjectId: 234,\n" +
+                "  ControlSubjectId: 223,\n" +
                 "  IsEBSynced: false,\n" +
                 "  id: 'new'\n" +
                 "}";
 
+        String stageProjectBody = "{\n" +
+                "  classid: '46caa4ad-02b8-4d70-a1db-196bab860742', \n" +
+                "  classname: 'Project',\n" +
+                "  classtitle: 'Проект',\n" +
+                "  entityname: 'Project',\n" +
+                "  keyfield: 'ProjectId',\n" +
+                "  namefield: 'Name',\n" +
+                "  UserAccountId: 100070,\n" +
+                "  UserAccount: 'FA',\n" +
+                "  OwnerId: 100070,\n" +
+                "  LeaderId: 100070,\n" +
+                "  ProjectLevelId: "+projectLevel+",\n" +
+                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() + "',\n" +
+                "  EntityId: '46caa4ad-02b8-4d70-a1db-196bab860742',\n" +
+                "  ParentId: 4,\n" +
+                "  ActivityPhaseId: "+projectStage+",\n" +
+                "  ProjectTypeId: 3,\n" +
+                "  PriorityId: 2,\n" +
+                "  ControlSubjectId: 238,\n" +
+                "  IsEBSynced: false,\n" +
+                "  id: 'new'\n" +
+                "}";
+
+        String body;
         getCookiesFromLogIn();
+
+        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
+            body = testProjectBody;
+        } else {
+            body = stageProjectBody;
+        }
+
         Response response =
                 given()
                         .cookies(cookies)
@@ -180,14 +212,14 @@ public class ActionsViaAPI {
         if (goalLevel.equals("Региональный")) goalLevel = "2";
         if (goalLevel.equals("Национальный")) goalLevel = "4";
 
-        String body = "{\n" +
+        String testGoalBody = "{\n" +
                 "  ControlLevelId: "+goalLevel+",\n" +
-                "  EditorsId: 120819,\n" +
+                "  EditorsId: 100070,\n" +
                 "  IsComplete: false,\n" +
                 "  IsNationalProjectTask: false,\n" +
-                "  Name: 'CreatedFromAPI "+ System.currentTimeMillis() +"',\n" +
-                "  UserAccount: 'admin',\n" +
-                "  UserAccountId: '120613',\n" +
+                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  UserAccount: 'FA',\n" +
+                "  UserAccountId: '100070',\n" +
                 "  classid: 'a7db6e46-462a-4087-a7e3-d5623648cca0',\n" +
                 "  classname: 'Goal',\n" +
                 "  classtitle: 'Цель',\n" +
@@ -197,7 +229,32 @@ public class ActionsViaAPI {
                 "  namefield: 'Name',\n" +
                 "}";
 
+        String stageGoalBody = "{\n" +
+                "  ControlLevelId: "+goalLevel+",\n" +
+                "  EditorsId: 100070,\n" +
+                "  IsComplete: false,\n" +
+                "  IsNationalProjectTask: false,\n" +
+                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  UserAccount: 'FA',\n" +
+                "  UserAccountId: '100070',\n" +
+                "  classid: 'a7db6e46-462a-4087-a7e3-d5623648cca0',\n" +
+                "  classname: 'Goal',\n" +
+                "  classtitle: 'Цель',\n" +
+                "  entityname: 'Goal',\n" +
+                "  id: 'new',\n" +
+                "  keyfield: 'GoalId',\n" +
+                "  namefield: 'Name',\n" +
+                "}";
+
+        String body;
         getCookiesFromLogIn();
+
+        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
+            body = testGoalBody;
+        } else {
+            body = stageGoalBody;
+        }
+
         Response response =
                 given()
                         .cookies(cookies)
@@ -216,11 +273,11 @@ public class ActionsViaAPI {
 
     @Step ("Создать пользователя через API")
     public static void createUserViaAPI() {
-        String body = "{\n" +
+        String testUserBody = "{\n" +
                 "  Account: '',\n" +
                 "  Enabled: true,\n" +
                 "  EntityId: '66d6d76c-067c-4aa7-b334-4e2748be4fb9',\n" +
-                "  FirstName: 'UserFromAPI "+ System.currentTimeMillis() +"',\n" +
+                "  FirstName: 'UserFromAPI_"+ System.currentTimeMillis() +"',\n" +
                 "  IsAggregateMail: false,\n" +
                 "  IsAssignment: true,\n" +
                 "  IsBoss: false,\n" +
@@ -229,10 +286,10 @@ public class ActionsViaAPI {
                 "  IsReceiveMail: false,\n" +
                 "  IsShowSendMessage: false,\n" +
                 "  IsSoftDeleted: false,\n" +
-                "  Name: 'UserFromAPI "+ System.currentTimeMillis() +"',\n" +
-                "  SurName: 'UserFromAPI "+ System.currentTimeMillis() +"',\n" +
-                "  UserAccount: 'admin',\n" +
-                "  UserAccountId: '120613',\n" +
+                "  Name: 'UserFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  SurName: 'UserFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  UserAccount: 'FA',\n" +
+                "  UserAccountId: '100070',\n" +
                 "  classid: '66d6d76c-067c-4aa7-b334-4e2748be4fb9',\n" +
                 "  classname: 'User',\n" +
                 "  classtitle: 'Пользователь',\n" +
@@ -241,7 +298,42 @@ public class ActionsViaAPI {
                 "  keyfield: 'UserId',\n" +
                 "  namefield: 'FullName',\n" +
                 "}";
+
+        String stageUserBody = "{\n" +
+                "  Account: '',\n" +
+                "  Enabled: true,\n" +
+                "  EntityId: '66d6d76c-067c-4aa7-b334-4e2748be4fb9',\n" +
+                "  FirstName: 'UserFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  IsAggregateMail: false,\n" +
+                "  IsAssignment: true,\n" +
+                "  IsBoss: false,\n" +
+                "  IsFunctionalAdministrator: false,\n" +
+                "  IsGroup: false,\n" +
+                "  IsReceiveMail: false,\n" +
+                "  IsShowSendMessage: false,\n" +
+                "  IsSoftDeleted: false,\n" +
+                "  Name: 'UserFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  SurName: 'UserFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  UserAccount: 'FA',\n" +
+                "  UserAccountId: '100070',\n" +
+                "  classid: '66d6d76c-067c-4aa7-b334-4e2748be4fb9',\n" +
+                "  classname: 'User',\n" +
+                "  classtitle: 'Пользователь',\n" +
+                "  entityname: 'User',\n" +
+                "  id: 'new',\n" +
+                "  keyfield: 'UserId',\n" +
+                "  namefield: 'FullName',\n" +
+                "}";
+
+        String body;
         getCookiesFromLogIn();
+
+        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
+            body = testUserBody;
+        } else {
+            body = stageUserBody;
+        }
+
         Response response =
                 given()
                         .cookies(cookies)
