@@ -40,7 +40,7 @@ public class CreateNationalProjectTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Национальный проект из реестра. Кнопка 'Сохранить и закрыть'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-177")
     @TmsLink("358")
     public void createNProjectButtonSaveTest(User user) {
@@ -66,7 +66,7 @@ public class CreateNationalProjectTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Национальный проект из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-178")
     @TmsLink("362")
     public void checkRequiredMessage(User user) {

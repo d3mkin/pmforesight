@@ -3,7 +3,6 @@ package helpers;
 
 import model.User;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 public class UserManager {
@@ -26,8 +25,8 @@ public class UserManager {
     private final User externalObserverFA;
     private final User VPO_MPO_FA;
     private final User projectCommitteeFA;
-    //Пользователь для написания тестов
-    private final User bumaginFA;
+    //Основной Функциональный администратор
+    private final User mainFA;
 
 
     public UserManager() {
@@ -47,7 +46,7 @@ public class UserManager {
         this.externalObserverFA = initUser("externalObserverFA");
         this.VPO_MPO_FA = initUser("VPO_MPO_FA");
         this.projectCommitteeFA = initUser("projectCommitteeFA");
-        this.bumaginFA = initUser("bumaginFA");
+        this.mainFA = initUser("mainFA");
     }
 
     private User initUser(String prefix) {
@@ -117,7 +116,7 @@ public class UserManager {
         return projectCommitteeFA;
     }
 
-    public Object getBumaginFA() {
-        return bumaginFA;
+    public Object getMainFA() {
+        return mainFA;
     }
 }

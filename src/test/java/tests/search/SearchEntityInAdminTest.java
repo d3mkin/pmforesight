@@ -39,7 +39,7 @@ public class SearchEntityInAdminTest extends BaseTest {
     }
 
     @ParameterizedTest (name = "Работоспособность системы поиска для раздела 'Сущности' меню Администрирования")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     //TODO: Завести задачу в JIRA
     @TmsLink("178")
     public void searchEntityInAdminTest(User user) {

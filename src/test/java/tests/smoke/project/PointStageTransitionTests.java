@@ -52,7 +52,7 @@ public class PointStageTransitionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Перевод КТ из состояния 'В работе' в состояние 'Выполнено'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-88")
     @TmsLink("1220")
     public void checkStageTransitionInProgressToComplete(User user){
@@ -78,7 +78,7 @@ public class PointStageTransitionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Перевод КТ из состояния 'Выполнено' в состояние 'В работе'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-89")
     @TmsLink("1221")
     public void checkStageTransitionFromCompleteToInProgress(User user){
@@ -104,7 +104,7 @@ public class PointStageTransitionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Перевод КТ из состояния 'В работе' в состояние 'Отменена'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-90")
     @TmsLink("1223")
     public void checkStageTransitionFromInProgressToCanceled (User user){
@@ -129,7 +129,7 @@ public class PointStageTransitionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Перевод КТ из состояния 'Отменена' в состояние 'В работе'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-91")
     @TmsLink("1224")
     public void checkStageTransitionFromCanceledToInProgress(User user){
@@ -155,7 +155,7 @@ public class PointStageTransitionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Перевод КТ из состояния 'Выполнено' в состояние 'Подтверждена'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-92")
     @TmsLink("1225")
     public void checkStageTransitionFromCompletedToApproved(User user){

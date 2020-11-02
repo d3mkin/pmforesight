@@ -53,7 +53,7 @@ public class CreateGoalTests extends BaseTest {
     }
 
     @ParameterizedTest (name = "Создание сущности Цель с разными уровнями управления: Муниципальный, Федеральный, Региональный, Национальный")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-115")
     @TmsLink("1235")
     public void createAllTypesGoalTest(User user){
@@ -110,7 +110,7 @@ public class CreateGoalTests extends BaseTest {
     }
 
     @ParameterizedTest (name = "Создание сущности Цель (API)")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-114")
     public void createGoalFromAPITest(User user) {
         parameter("Пользователь", user.getName());

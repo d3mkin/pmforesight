@@ -49,7 +49,7 @@ public class IndicatorTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Показатель из карточки Проекта")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-61")
     @TmsLink("1047")
     public void createIndicatorFromProject(User user) {
@@ -71,7 +71,7 @@ public class IndicatorTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Добавление данных за период в Показателе Ведомственного проекта")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-63")
     @TmsLink("1155")
     public void checkPercentageOfAchievement(User user) {
@@ -108,7 +108,7 @@ public class IndicatorTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Общий процент достижения плана %: Возрастающего показателя")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-80")
     @TmsLink("1228")
     public void checkIncreasedIndicatorPercentageOfAchievement(User user) {
@@ -149,7 +149,7 @@ public class IndicatorTests extends BaseTest {
     }
 
     @ParameterizedTest(name =  "Общий процент достижения плана %: Убывающего показателя")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-81")
     @TmsLink("1228")
     public void checkDecreasedIndicatorPercentageOfAchievement(User user) {
@@ -190,7 +190,7 @@ public class IndicatorTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Общий процент достижения плана %: Фиксированного показателя")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-82")
     @TmsLink("1228")
     public void checkFixedIndicatorPercentageOfAchievement(User user) {
@@ -231,7 +231,7 @@ public class IndicatorTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Расчет индикатора периода: Возрастающий показатель")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-42")
     @Tag("ATEST-43")
     @Tag("ATEST-44")
@@ -305,7 +305,7 @@ public class IndicatorTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Расчет индикатора периода: Убывающий показатель")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-46")
     @Tag("ATEST-47")
     @Tag("ATEST-48")
@@ -379,7 +379,7 @@ public class IndicatorTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Расчет индикатора периода: Фиксированный показатель")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-50")
     @Tag("ATEST-51")
     @Tag("ATEST-52")
@@ -447,7 +447,7 @@ public class IndicatorTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Год, ВКЛЮЧАЯ текущий")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-54")
     @TmsLink("1226")
     public void checkCurrentYearGeneralIndicator(User user) {
@@ -495,7 +495,7 @@ public class IndicatorTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Полугодие, ВКЛЮЧАЯ текущее")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-55")
     @TmsLink("1226")
     public void checkCurrentHalfYearGeneralIndicator(User user) {
@@ -554,7 +554,7 @@ public class IndicatorTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Квартал, ВКЛЮЧАЯ текущий")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-56")
     @TmsLink("1226")
     public void checkCurrentQuarterGeneralIndicator(User user) {
@@ -613,7 +613,7 @@ public class IndicatorTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Месяц, ВКЛЮЧАЯ текущий")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-57")
     @TmsLink("1226")
     public void checkCurrentMonthGeneralIndicator(User user) {

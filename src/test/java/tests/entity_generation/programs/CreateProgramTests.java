@@ -42,7 +42,7 @@ public class CreateProgramTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Программа из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-174")
     @TmsLink("369")
     public void programSaveShouldHaveMessageAboutRequiredFieldsTest(User user) {
@@ -68,7 +68,7 @@ public class CreateProgramTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Программа из реестра. Кнопка 'Сохранить и закрыть'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-173")
     @TmsLink("365")
     public void programSaveAndClose(User user) {

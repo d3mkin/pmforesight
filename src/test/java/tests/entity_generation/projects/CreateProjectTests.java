@@ -43,7 +43,7 @@ public class CreateProjectTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Проект из реестра. Кнопка 'Сохранить и закрыть'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("C379")
     @Tag("ATEST-105")
     @TmsLink("379")
@@ -63,7 +63,7 @@ public class CreateProjectTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Проект из реестра. Сообщение о несохранённых изменениях для кнопки закрыть")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-106")
     @Tag("C384")
     @TmsLink("384")
@@ -88,7 +88,7 @@ public class CreateProjectTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Проект из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки Сохранить")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("C383")
     @Tag("ATEST-107")
     @TmsLink("383")

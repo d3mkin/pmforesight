@@ -57,7 +57,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Отображение таблиц результатов Ведомственного проекта после его создания")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-10")
     @TmsLink("1039")
     public void checkDepResultsTable(User user) {
@@ -70,7 +70,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание Результата Ведомственного проекта в Ведомственном проекте")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-4")
     @TmsLink("411")
     public void createAndCheckDepResult(User user) {
@@ -92,7 +92,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Отображение таблиц результатов Федерального проекта после его создания")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-1")
     @TmsLink("1039")
     public void checkFederalResultsTable(User user) {
@@ -105,7 +105,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание Федерального результата в Федеральном проекте")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @TmsLink("411")
     public void createAndCheckFedResultInFedProject(User user) {
         parameter("Пользователь", user.getName());
@@ -126,7 +126,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание Федерального результата в Региональном проекте")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-6")
     @TmsLink("964")
     public void createAndCheckFedResultInRegProject(User user) {
@@ -148,7 +148,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Отображение таблиц результатов Регионального проекта после его создания")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-3")
     @TmsLink("1039")
     public void checkRegResultsTableInRegProject(User user) {
@@ -161,7 +161,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание Регионального результата в Региональном проекте")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-8")
     @TmsLink("963")
     public void createAndCheckRegResultInRegProject(User user) {
@@ -183,7 +183,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание Результата Регионального проекта, связанного с Результатом Федерального проекта")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-7")
     @TmsLink("962")
     public void createAndCheckRegResultWithLinkedFedResultInRegProject(User user) {
@@ -217,7 +217,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Редактирование Результата Регионального проекта: связывание с Результатом Федерального проекта")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-21")
     @TmsLink("1040")
     public void editAndCheckRegionalResultWithLinkedFederalResult(User user) {
@@ -253,7 +253,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Отображение Результата в таблице 'Связь результатов и КП проекта' после создания Результата из проекта")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-22")
     @TmsLink("1044")
     public void displayResultInLinkedTable(User user) {
@@ -308,7 +308,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Валидация поля 'Тип КТ/Мероприятия' таблицы 'Связь Результатов и КП проекта' (все варианты)")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-25")
     @TmsLink("1046")
     public void verifyValidationInLinkedTable(User user) {
@@ -358,7 +358,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Выбор родительского Результата в карточке создания Результата (Фед., Вед.)")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-19")
     @TmsLink("1050")
     public void selectParentResultDuringCreation(User user) {
@@ -410,7 +410,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Выбор родительского Результата в карточке редактирования Результата (для Рез-тов Фед. и Вед. проектов)")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-17")
     @TmsLink("1041")
     public void selectParentResultDuringEditing(User user) {
@@ -471,7 +471,7 @@ public class ResultTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Недоступность выбора родительского результата для рез-та Регионального проекта при создании/редактировании")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-18")
     @TmsLink("1052")
     public void checkParentResultDuringCreationAndEditing(User user) {

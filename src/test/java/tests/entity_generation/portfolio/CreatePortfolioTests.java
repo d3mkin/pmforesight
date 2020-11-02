@@ -45,7 +45,7 @@ public class CreatePortfolioTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Портфеля из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-176")
     @TmsLink("355")
     public void PortfolioSaveShouldHaveMessageAboutRequiredFieldsTest(User user) {
@@ -67,7 +67,7 @@ public class CreatePortfolioTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Портфель из реестра. Кнопка 'Сохранить и закрыть'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-175")
     @TmsLink("355")
     public void createPortfolioButtonSave(User user) {

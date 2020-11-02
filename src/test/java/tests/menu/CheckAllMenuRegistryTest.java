@@ -36,7 +36,7 @@ public class CheckAllMenuRegistryTest extends BaseTest {
     }
 
     @ParameterizedTest(name = "Проверка работоспособности главного выдвижного меню и реестров")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     //TODO: Завести задачу в JIRA и проверку на коды ошибок + сделать переключение представлений
     @TmsLink("303")
     public void userFACanSeeMenuAndOpenRegistry(User user) {

@@ -36,7 +36,7 @@ public class AuthorizationTests extends BaseTest {
 
 
     @ParameterizedTest (name = "Авторизация пользователя с валидным логином и паролем")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @TmsLink("161")
     //TODO: Добавить тэг с тикетом JIRA
     public void LoginWithRightCredentialsTest(User user) {
@@ -48,7 +48,7 @@ public class AuthorizationTests extends BaseTest {
     }
 
     @ParameterizedTest (name = "Выход из системы")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @TmsLink("163")
     //TODO: Добавить тэг с тикетом JIRA
     public void logOutTest(User user) {
@@ -60,7 +60,7 @@ public class AuthorizationTests extends BaseTest {
     }
 
     @ParameterizedTest (name = "Авторизация пользователя с НЕ валидным логином и паролем")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @TmsLink("647")
     //TODO: Добавить тэг с тикетом JIRA
     public void LoginWithWrongCredentialsTest(User user) {

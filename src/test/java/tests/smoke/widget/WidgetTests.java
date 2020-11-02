@@ -38,7 +38,7 @@ public class WidgetTests  extends BaseTest {
     }
 
     @ParameterizedTest (name = "Создание и удаление виджета")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     public void createAndDeleteWidgetTest(User user) {
         parameter("Пользователь", user.getName());
         singIn.asUser(user);

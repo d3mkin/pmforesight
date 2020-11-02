@@ -42,7 +42,7 @@ public class CreateMeetingTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Совещания из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-180")
     @TmsLink("431")
     public void meetingsSaveShouldHaveMessageAboutRequiredFieldsTest(User user) {
@@ -69,7 +69,7 @@ public class CreateMeetingTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Совещания из реестра. Кнопка 'Сохранить и закрыть'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-180")
     @TmsLink("427")
     public void meetingSaveAndCloseTest(User user) {

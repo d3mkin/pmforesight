@@ -41,7 +41,7 @@ public class ActionsViaAPI {
 
     @Step ("Получить cookie для авторизации")
     public static void getCookiesFromLogIn() {
-        RestAssured.baseURI = "http://tgr.hera.test.local";
+        RestAssured.baseURI = Configuration.baseUrl;
         cookies = RestAssured
                 .given()
                     .urlEncodingEnabled(true)

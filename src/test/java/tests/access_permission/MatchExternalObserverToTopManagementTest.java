@@ -49,7 +49,7 @@ public class MatchExternalObserverToTopManagementTest extends BaseTest {
     }
 
     @ParameterizedTest (name = "Соответствие группы 'Внешний наблюдатель' признаку 'Топ-руководство' при добавлении группы в карточку пользователя")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-79")
     @TmsLink("1229")
     public void checkTopManagementMatchingExternalObserverInUserCard(User user) {
@@ -87,7 +87,7 @@ public class MatchExternalObserverToTopManagementTest extends BaseTest {
     }
 
     @ParameterizedTest (name = "Соответствие группы 'Внешний наблюдатель' признаку 'Топ-руководство' при добавлении пользователя в группу" )
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-111")
     @TmsLink("1230")
     public void checkTopManagementMatchingExternalObserverInGroupCard(User user) {

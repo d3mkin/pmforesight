@@ -126,7 +126,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Каскадное удаление: КТ в проекте")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-119")
     @TmsLink("1237")
     public void cascadeDeletionPointInProject (User user) {
@@ -163,7 +163,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Каскадное удаление: Результаты в проекте")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-120")
     @TmsLink("1238")
     public void cascadeDeletionResultInProject (User user) {
@@ -195,7 +195,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Каскадное удаление: Контракт в проекте")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-121")
     @TmsLink("1239")
     public void cascadeDeletionContractInProject (User user) {
@@ -224,7 +224,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Каскадное удаление: Показатель в проекте")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-122")
     @TmsLink("1240")
     public void cascadeDeletionIndicatorInProject (User user) {
@@ -257,7 +257,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Каскадное удаление: Риски/Возможности проекта")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-123")
     //TODO: Линк на ТМС
     public void cascadeDeletionRiskAndOpportunitiesInProject(User user) {
@@ -295,7 +295,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Каскадное удаление: Поручение в проекте")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-124")
     //TODO: Линк на ТМС
     public void cascadeDeletionOrderInProject(User user) {
@@ -326,7 +326,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Каскадное удаление: Совещание в проекте")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-125")
     //TODO: Линк на ТМС
     public void cascadeDeletionMeetingInProject(User user) {
@@ -356,7 +356,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Каскадное удаление: Открытые вопросы в проекте")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-126")
     //TODO: Линк на ТМС
     public void cascadeDeletionOpenQuestionsInProject(User user) {
@@ -386,7 +386,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Каскадное удаление: Извлеченные уроки в проекте")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-127")
     //TODO: Линк на ТМС
     public void cascadeDeletionLessonsInProject(User user) {

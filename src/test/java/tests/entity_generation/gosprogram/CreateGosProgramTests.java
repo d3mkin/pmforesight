@@ -45,7 +45,7 @@ public class CreateGosProgramTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Госпрограмма из реестра. Кнопка 'Сохранить и закрыть'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-136")
     @TmsLink("344")
     public void CreateGosProgramWithSaveAndCloseTest(User user) {
@@ -77,7 +77,7 @@ public class CreateGosProgramTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Госпрограмма из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-137")
     @TmsLink("348")
     public void checkRequiredMessageTest(User user) {

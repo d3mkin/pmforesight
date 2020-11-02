@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import model.Project;
+import org.openqa.selenium.WebElement;
 import pages.elements.BasePage;
 import pages.managementobjects.result.ResultPage;
 import helpers.ResultDataStorage;
@@ -858,4 +859,11 @@ public class ProjectPage extends BasePage {
         addOpenQuestionButton.shouldBe(visible).click();
     }
 
+    @Step("Закрыть всплывающее уведомление 'Внимание, создан слепок!'")
+    public void closeCreatedSnapshotNotification() {
+        $(".k-notification-success").waitUntil(visible, 15000);
+        $(".f-notify__title").shouldHave(text("Внимание, создан слепок!"));
+        $(".f-notify__close").click();
+        $(".k-notification-success").shouldNotBe(visible);
+    }
 }

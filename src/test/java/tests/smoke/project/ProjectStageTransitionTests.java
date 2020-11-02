@@ -8,7 +8,6 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import helpers.TestSuiteName;
-import helpers.UserProvider;
 import model.User;
 import pages.auth.LogoutPage;
 import pages.auth.SingInPage;
@@ -50,7 +49,7 @@ public class ProjectStageTransitionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Перевод проекта на с стадию 'Отменено' (positive)")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-67")
     @TmsLink("1177")
     public void checkCanceledStagePositive(User user){
@@ -70,7 +69,7 @@ public class ProjectStageTransitionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Перевод проекта на стадию 'Отменено' (негативный сценарий)")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-68")
     @TmsLink("1178")
     public void checkCanceledStageNegative(User user){
@@ -91,7 +90,7 @@ public class ProjectStageTransitionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Проверка перехода на стадию 'до' первой и 'после' крайней стадии")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-73")
     @TmsLink("1213")
     public void checkTransitionBeforeFirstAndAfterLastStage(User user){
@@ -124,7 +123,7 @@ public class ProjectStageTransitionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Переходы Проекта по стадиям, не требующие условий")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-74")
     @TmsLink("1214")
     public void checkNonRequireTransitions (User user) {
@@ -150,8 +149,8 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkCurrentProjectStage("Инициирование");
     }
 
-    @ParameterizedTest(name = "Переходы Проекта по стадиям, не требующие условий")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @ParameterizedTest(name = "Проверка условий перехода Проекта по стадиям, требующие условия")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-75")
     @TmsLink("1215")
     public void checkFullStageTransitions(User user){
@@ -182,6 +181,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.moveStageTo("На следующую стадию");
         modalDialog.clickAcceptNextStageTransition();
         projectPage.checkCurrentProjectStage("Подготовка");
+        projectPage.closeCreatedSnapshotNotification();
 
         //Переводим на стадию Реализация в случае, когда условия НЕ выполены
         projectPage.moveStageTo("На следующую стадию");
@@ -209,6 +209,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.moveStageTo("На следующую стадию");
         modalDialog.clickAcceptNextStageTransition();
         projectPage.checkCurrentProjectStage("Реализация");
+        projectPage.closeCreatedSnapshotNotification();
 
         //Переводим на стадию Завершение в случае, когда условия НЕ выполены
         projectPage.moveStageTo("На следующую стадию");
@@ -231,6 +232,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.moveStageTo("На следующую стадию");
         modalDialog.clickAcceptNextStageTransition();
         projectPage.checkCurrentProjectStage("Завершение");
+
 
         //Переводим на стадию Постпроектный мониторинг в случае, когда условия НЕ выполены
         projectPage.moveStageTo("На следующую стадию");
@@ -255,6 +257,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.moveStageTo("На следующую стадию");
         modalDialog.clickAcceptNextStageTransition();
         projectPage.checkCurrentProjectStage("Постпроектный мониторинг");
+        projectPage.closeCreatedSnapshotNotification();
 
         //Переводим на стадию Архив в случае, когда условия НЕ выполены
         projectPage.moveStageTo("На следующую стадию");

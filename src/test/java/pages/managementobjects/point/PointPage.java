@@ -10,6 +10,7 @@ import java.io.File;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class PointPage extends BasePage {
 
@@ -65,11 +66,13 @@ public class PointPage extends BasePage {
 
     @Step ("Заполнить Фактическую дату окончания выполнения")
     public void fillActualCompletionDate (String completionDate){
+        sleep(1000);
         typeDate(actualCompletionDateInput_EditForm, completionDate);
     }
 
     @Step ("Заполнить Прогнозную дату окончания выполнения")
     public void fillForecastCompletionDate(String forecastDate){
+        sleep(1000);
         typeDate(forecastCompletionDateInput_EditForm, forecastDate);
     }
 

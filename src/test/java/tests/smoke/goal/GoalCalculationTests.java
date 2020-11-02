@@ -56,7 +56,7 @@ public class    GoalCalculationTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Нет показателей', 'Нет данных', 'Достигнута', 'Частично достигнута', 'Не достигнута' ")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-78")
     @TmsLink("1233")
     public void calculationByIndicators(User user) {

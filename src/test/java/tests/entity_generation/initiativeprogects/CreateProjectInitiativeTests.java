@@ -42,7 +42,7 @@ public class CreateProjectInitiativeTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Предложение по проекту из реестра. Кнопка 'Сохранить и закрыть'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-138")
     @TmsLink("372")
     public void CreateProjectInitiativeSaveAndCloseTest(User user) {
@@ -70,7 +70,7 @@ public class CreateProjectInitiativeTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Предложение по проекту из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-139")
     @TmsLink("376")
     public void checkRequiredMessageTest(User user) {

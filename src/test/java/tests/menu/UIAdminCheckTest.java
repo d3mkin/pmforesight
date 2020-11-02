@@ -36,9 +36,9 @@ public class UIAdminCheckTest extends BaseTest {
         new LogoutPage().open();
     }
 
-    @Ignore
+    @Disabled
     @ParameterizedTest(name = "Отображение и работоспособность функций страницы Администрирование")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     //TODO: Завести задачу в JIRA
     @TmsLink("342")
     public void checkAdminUI(User user) {

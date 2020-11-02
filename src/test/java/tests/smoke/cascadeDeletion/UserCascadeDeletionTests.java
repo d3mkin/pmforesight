@@ -45,7 +45,7 @@ public class UserCascadeDeletionTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Удаление из системы пользователя, не назначенного на роль")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-144")
     @TmsLink("1243")
     public void cascadeDeletionUser(User user) {

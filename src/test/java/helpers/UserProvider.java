@@ -71,9 +71,9 @@ public class UserProvider {
         };
     }
 
-    public static Object[][] bumagin() {
+    public static Object[][] mainFA() {
         return new Object[][]{
-                {userManager.getBumaginFA()}
+                {userManager.getMainFA()}
         };
     }
 

@@ -45,7 +45,7 @@ public class CreateRiskEntityTests extends BaseTest {
 
 
     @ParameterizedTest(name = "Создание сущности Риски и возможности из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-172")
     @TmsLink("467")
     public void riskEntitySaveHaveMessageAboutRequiredFieldsTest(User user) {
@@ -72,7 +72,7 @@ public class CreateRiskEntityTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Риски и возможности из реестра. Кнопка 'Сохранить и закрыть'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-171")
     @TmsLink("463")
     public void createRiskWithSaveButton(User user) {

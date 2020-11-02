@@ -40,7 +40,7 @@ public class CreateContractTests extends BaseTest {
     }
 
     @ParameterizedTest (name = "Создание сущности Контракт из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-132")
     @TmsLink("399")
     public void CreateContractShouldHaveMessageAboutRequiredFieldsTest(User user) {
@@ -64,7 +64,7 @@ public class CreateContractTests extends BaseTest {
     }
 
     @ParameterizedTest (name = "Создание сущности Контракт из реестра. Кнопка 'Сохранить и закрыть'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-133")
     @TmsLink("395")
     public void createContractWithSaveAndCloseTest(User user) {

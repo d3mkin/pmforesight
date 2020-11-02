@@ -43,7 +43,7 @@ public class CreateEmployeeTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Сотрудника из реестра. Кнопка 'Сохранить'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-135")
     @TmsLink("562")
     public void createEmployeeWithSaveAndCloseTest(User user) {

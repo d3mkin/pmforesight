@@ -1,26 +1,27 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import helpers.ConfigManager;
 import org.junit.jupiter.api.TestInstance;
 import webdriver.CustomWebDriver;
-import static helpers.AttachmentsHelper.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_METHOD)
 public class BaseTest {
 
-    static protected ConfigManager configManager = new ConfigManager();
+  //  static protected ConfigManager configManager = new ConfigManager();
 
     @BeforeAll
     @Step("Tests setup")
     public static void setup() {
         //addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
         //Configuration.headless = true;
+        Configuration.timeout = 15000;
+        Configuration.browserSize = "1920x1080";
+        //Configuration.startMaximized = configManager.getStartMaximized();
+        Configuration.startMaximized = true;
+        Configuration.baseUrl = System.getProperty("baseUrl","http://tgr.hera.test.local");
         String selenoid = System.getProperty("selenoid_url");
         String browser = System.getProperty("browser", "chrome");
         if (selenoid == null) {
@@ -28,12 +29,9 @@ public class BaseTest {
         } else {
             Configuration.browser = CustomWebDriver.class.getName();
         }
-        if (Configuration.baseUrl.equals("http://localhost:8080")) {
-            Configuration.baseUrl = configManager.getDefaultBaseUrl();
-        }
-        Configuration.timeout = 15000;
-        Configuration.browserSize = "1920x1080";
-        Configuration.startMaximized = configManager.getStartMaximized();
+//        if (Configuration.baseUrl.equals("http://localhost:8080")) {
+//            Configuration.baseUrl = configManager.getBaseUrl();
+//        }
     }
 
 //    @AfterEach

@@ -60,7 +60,7 @@ public class CreateLessonTests extends BaseTest {
     }
 
     @ParameterizedTest (name = "Создание сущности Извлеченный урок из карточки Программы")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-140")
     @TmsLink("552")
     public void CreateLessonLearnedFromProgramWithSaveAndClose(User user) {
@@ -114,7 +114,7 @@ public class CreateLessonTests extends BaseTest {
     }
 
     @ParameterizedTest(name = "Создание сущности Извлеченного урока из реестра. Кнопка 'Сохранить и закрыть'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-181")
     @TmsLink("546")
     public void CreateLessonLearnedWithSaveAndClose(User user) {
@@ -140,7 +140,7 @@ public class CreateLessonTests extends BaseTest {
     }
 
     @ParameterizedTest (name = "Создание сущности Извлеченный урок из карточки Проекта")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-182")
     @TmsLink("553")
     public void CreateLessonLearnedFromProjectWithSaveAndClose(User user) {

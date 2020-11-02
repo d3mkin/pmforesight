@@ -41,7 +41,7 @@ public class CreateContractorTests extends BaseTest {
     }
 
     @ParameterizedTest (name = "Создание сущности Подрядчика из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
-    @MethodSource("helpers.UserProvider#UsersFA")
+    @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-134")
     @TmsLink("580")
     public void CreateContractorsShouldHaveMessageAboutRequiredFieldsTest(User user) {
