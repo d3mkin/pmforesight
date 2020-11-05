@@ -1,4 +1,4 @@
-package tests.smoke.cascadeDeletion;
+package tests.smoke.cascadeDeletion.project;
 
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
