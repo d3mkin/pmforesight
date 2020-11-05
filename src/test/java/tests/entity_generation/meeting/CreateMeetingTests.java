@@ -77,7 +77,7 @@ public class CreateMeetingTests extends BaseTest {
         meeting
                 .setName("Тест_С427_" + currentTime)
                 .setLocation("Переговорная")
-                .setControlObject("900-001. Госуслуги социальные")
+                .setControlObject("Портфель национальных проектов")
                 .setSecretary(user.getName())
                 .setChairman(user.getName());
         parameter("Пользователь", user.getName());

@@ -68,7 +68,7 @@ public class CreateLessonTests extends BaseTest {
         long currentTime = System.currentTimeMillis();
         program
                 .setName("Тест_C552" + currentTime)
-                .setPortfolio("900-162. test seq")
+                .setPortfolio("Портфель национальных проектов")
                 .setCustomer(user.getName())
                 .setCurator(user.getName())
                 .setSupervisor(user.getName());
@@ -121,7 +121,7 @@ public class CreateLessonTests extends BaseTest {
         parameter("Пользователь", user.getName());
         long currentTime = System.currentTimeMillis();
         lessonLearned
-                .setActivity("400-004. Реформа контрольной и надзорной деятельности")
+                .setActivity("Популяризация предпринимательства")
                 .setName("Тест_C546_" + currentTime);
         parameter("Пользователь", user.getName());
         singIn.asUser(user);
@@ -149,7 +149,7 @@ public class CreateLessonTests extends BaseTest {
         project
                 .setName("Тест_C553_" + currentTime)
                 .setType("Информационные технологии")
-                .setProgram("900-004. Общегородские реестры, регистры, справочники и классификаторы")
+                .setProgram("Портфель национальных проектов")
                 .setCurator(user.getName())
                 .setSupervisor(user.getName());
         lessonLearned

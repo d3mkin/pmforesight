@@ -75,7 +75,7 @@ public class CreateProgramTests extends BaseTest {
         long currentTime = System.currentTimeMillis();
         program
                 .setName("Тест_C365_" + currentTime)
-                .setPortfolio("900-162. test seq")
+                .setPortfolio("Портфель национальных проектов")
                 .setCustomer(user.getName())
                 .setCurator(user.getName())
                 .setSupervisor(user.getName());

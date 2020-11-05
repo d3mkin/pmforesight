@@ -51,7 +51,7 @@ public class CreateProjectTests extends BaseTest {
         project
                 .setName("Тест_C379_" + currentTime)
                 .setType("Информационные технологии")
-                .setProgram("900-001. Госуслуги социальные")
+                .setProgram("Портфель национальных проектов")
                 .setCurator(user.getName())
                 .setSupervisor(user.getName());
         parameter("Пользователь", user.getName());
@@ -71,7 +71,7 @@ public class CreateProjectTests extends BaseTest {
         project
                 .setName("Тест_C384_" + currentTime)
                 .setType("Информационные технологии")
-                .setProgram("900-001. Госуслуги социальные")
+                .setProgram("Портфель национальных проектов")
                 .setCurator(user.getName())
                 .setSupervisor(user.getName());
         parameter("Пользователь", user.getName());
