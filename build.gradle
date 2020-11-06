@@ -62,7 +62,7 @@ tasks.withType(JavaCompile) {
 tasks.withType(Test) {
     systemProperties = System.properties
     systemProperty "file.encoding", "UTF-8"
-    /*systemProperties += [
+/*    systemProperties += [
                 'junit.jupiter.execution.parallel.enabled'                 : true,
                 'junit.jupiter.execution.parallel.mode.default'            : 'same_thread',
                 'junit.jupiter.execution.parallel.mode.classes.default'    : 'concurrent',
@@ -75,6 +75,7 @@ tasks.withType(Test) {
 task run_tests(type: Test) {
     useJUnitPlatform {
     }
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 }
 
 task authorization (type: Test) {
