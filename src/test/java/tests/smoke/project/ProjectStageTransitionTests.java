@@ -48,7 +48,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest(name = "Перевод проекта на с стадию 'Отменено' (positive)")
+    @ParameterizedTest(name = "Перевод Проекта на стадию 'Отменено' (positive)")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-67")
     @TmsLink("1177")
@@ -68,7 +68,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkCurrentProjectStage("Отменено");
     }
 
-    @ParameterizedTest(name = "Перевод проекта на стадию 'Отменено' (негативный сценарий)")
+    @ParameterizedTest(name = "Перевод Проекта на стадию 'Отменено' (негативный сценарий)")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-68")
     @TmsLink("1178")
@@ -89,7 +89,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         modalDialog.clickClose();
     }
 
-    @ParameterizedTest(name = "Проверка перехода на стадию 'до' первой и 'после' крайней стадии")
+    @ParameterizedTest(name = "Перевод Проекта на стадию 'до' первой и 'после' крайней стадии")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-73")
     @TmsLink("1213")
@@ -122,7 +122,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         modalDialog.closeDialog();
     }
 
-    @ParameterizedTest(name = "Переходы Проекта по стадиям, не требующие условий")
+    @ParameterizedTest(name = "Перевод Проекта по стадиям, не требующим обязательных условий")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-74")
     @TmsLink("1214")
@@ -149,7 +149,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkCurrentProjectStage("Инициирование");
     }
 
-    @ParameterizedTest(name = "Проверка условий перехода Проекта по стадиям, требующие условия")
+    @ParameterizedTest(name = "Перевод Проекта по стадиям, требующим обязательных условий")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-75")
     @TmsLink("1215")

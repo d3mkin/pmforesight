@@ -75,7 +75,7 @@ tasks.withType(Test) {
 task run_tests(type: Test) {
     useJUnitPlatform {
     }
-    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+    //maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 }
 
 task authorization (type: Test) {
