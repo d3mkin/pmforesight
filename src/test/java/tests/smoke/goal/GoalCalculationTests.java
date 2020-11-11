@@ -1,5 +1,6 @@
 package tests.smoke.goal;
 
+import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
@@ -83,17 +84,14 @@ public class    GoalCalculationTests extends BaseTest {
         registry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Нет данных");
         ActionsViaAPI.openGoalCreatedFromAPI();
         goalPage.searchAndOpenIndicator(achievedIndicator);
-        goalPage.getBrowserTabs();
-        //TODO переделать метод переключения между вкладками
-        goalPage.switchToBrowserTab(1);
+        Selenide.switchTo().window(1);
         indicatorPage.clickAddValueButton();
         indicatorPage.fillIndicatorsValues(achievedIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkValuesAreDisplayed(achievedIndicator);
         registry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Достигнута");
         indicatorPage.closeCurrentBrowserTab();
-        indicatorPage.getBrowserTabs();
-        indicatorPage.switchToBrowserTab(0);
+        Selenide.switchTo().window(0);
 
         ActionsViaAPI.openGoalCreatedFromAPI();
         almostAchievedIndicator
@@ -112,16 +110,14 @@ public class    GoalCalculationTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         goalPage.checkIndicatorIsDisplayed(almostAchievedIndicator);
         goalPage.searchAndOpenIndicator(almostAchievedIndicator);
-        goalPage.getBrowserTabs();
-        goalPage.switchToBrowserTab(1);
+        Selenide.switchTo().window(1);
         indicatorPage.clickAddValueButton();
         indicatorPage.fillIndicatorsValues(almostAchievedIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkValuesAreDisplayed(almostAchievedIndicator);
         registry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Частично достигнута");
         indicatorPage.closeCurrentBrowserTab();
-        indicatorPage.getBrowserTabs();
-        indicatorPage.switchToBrowserTab(0);
+        Selenide.switchTo().window(0);
 
         ActionsViaAPI.openGoalCreatedFromAPI();
         notAchievedIndicator
@@ -140,16 +136,14 @@ public class    GoalCalculationTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         goalPage.checkIndicatorIsDisplayed(notAchievedIndicator);
         goalPage.searchAndOpenIndicator(notAchievedIndicator);
-        goalPage.getBrowserTabs();
-        goalPage.switchToBrowserTab(1);
+        Selenide.switchTo().window(1);
         indicatorPage.clickAddValueButton();
         indicatorPage.fillIndicatorsValues(notAchievedIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkValuesAreDisplayed(notAchievedIndicator);
         registry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Не достигнута");
         indicatorPage.closeCurrentBrowserTab();
-        indicatorPage.getBrowserTabs();
-        indicatorPage.switchToBrowserTab(0);
+        Selenide.switchTo().window(0);
 
         ActionsViaAPI.openGoalCreatedFromAPI();
         noDataIndicator

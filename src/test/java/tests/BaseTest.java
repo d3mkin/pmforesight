@@ -1,11 +1,15 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import io.qameta.allure.Step;
+import io.qameta.allure.selenide.AllureSelenide;
+import io.qameta.allure.selenide.LogType;
 import org.junit.jupiter.api.BeforeAll;
-import helpers.ConfigManager;
 import org.junit.jupiter.api.TestInstance;
 import webdriver.CustomWebDriver;
+
+import java.util.logging.Level;
+
+import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 
 @TestInstance(TestInstance.Lifecycle.PER_METHOD)
 public class BaseTest {
@@ -13,9 +17,12 @@ public class BaseTest {
   //  static protected ConfigManager configManager = new ConfigManager();
 
     @BeforeAll
-    @Step("Tests setup")
     public static void setup() {
-        //addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+        addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false)
+                .includeSelenideSteps(false)
+                .enableLogs(LogType.BROWSER, Level.SEVERE));
         //Configuration.headless = true;
         Configuration.timeout = 15000;
         Configuration.browserSize = "1920x1080";

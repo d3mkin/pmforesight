@@ -1,6 +1,7 @@
 package pages.elements;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
@@ -30,7 +31,7 @@ public abstract class BasePage {
     protected SelenideElement saveButton = $("a[aria-label='Save']");
     protected SelenideElement saveAndCloseButton = $("a[aria-label='kendo-save-and-close']");
     protected SelenideElement closeButton = $("a[aria-label='Close']");
-    protected SelenideElement anyDropDown = $(By.xpath("//div[contains(@class,'k-list-container k-popup k-group k-reset k-state-border-up')]"));
+    protected SelenideElement anyDropDown = $x("//div[contains(@class,'k-list-container k-popup k-group k-reset k-state-border-up')]");
 
     //Виджет календаря
     private final SelenideElement resultCalendarSelect = $(By.xpath ("//span[@class='k-widget k-datepicker']//span[@class='k-select']"));
@@ -70,8 +71,10 @@ public abstract class BasePage {
         WebDriverRunner.getWebDriver().switchTo().window(tabs.get(numberTab));
     }
 
+    @Step("Закрыть текущую вкладку в браузере")
     public void closeCurrentBrowserTab() {
-        WebDriverRunner.getWebDriver().close();
+        //WebDriverRunner.getWebDriver().close();
+        Selenide.closeWindow();
     }
 
     @Step("Проверка открытия модального окна")
@@ -282,7 +285,7 @@ public abstract class BasePage {
 
     @Step ("Закрыть форму загрузки документа")
     public void closeUploadWindow() {
-        $(By.xpath("//a[@class='f-tab f-tab__link f_active']")).click();
-        $(By.xpath("//div[@class='k-widget k-window']//a[@role='button']")).click();
+        $x("//a[@class='f-tab f-tab__link f_active']").click();
+        $x("//div[@class='k-widget k-window']//a[@role='button']").click();
     }
 }
