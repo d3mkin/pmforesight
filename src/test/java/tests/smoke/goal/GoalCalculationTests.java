@@ -5,7 +5,6 @@ import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -23,7 +22,7 @@ import tests.BaseTest;
 import static io.qameta.allure.Allure.parameter;
 
 @Story(TestSuiteName.GOALS)
-public class    GoalCalculationTests extends BaseTest {
+public class GoalCalculationTests extends BaseTest {
     private SingInPage singIn;
     private IndicatorPage indicatorPage;
     private Indicator achievedIndicator;
@@ -31,7 +30,7 @@ public class    GoalCalculationTests extends BaseTest {
     private Indicator notAchievedIndicator;
     private Indicator noDataIndicator;
     private GoalPage goalPage;
-    private GoalRegistry registry;
+    private GoalRegistry goalRegistry;
     private long currentTime;
 
 
@@ -45,7 +44,7 @@ public class    GoalCalculationTests extends BaseTest {
         notAchievedIndicator = new Indicator();
         noDataIndicator = new Indicator();
         goalPage = new GoalPage();
-        registry = new GoalRegistry();
+        goalRegistry = new GoalRegistry();
         currentTime = System.currentTimeMillis();
         ActionsViaAPI.createGoalViaAPI("Ведомственный");
     }
@@ -56,15 +55,24 @@ public class    GoalCalculationTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Нет показателей', 'Нет данных', 'Достигнута', 'Частично достигнута', 'Не достигнута' ")
+    @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Нет показателей'")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-78")
     @TmsLink("1233")
-    public void calculationByIndicators(User user) {
+    public void noIndicatorsTest(User user) {
         parameter("Пользователь", user.getName());
         singIn.asUser(user);
         ActionsViaAPI.openGoalCreatedFromAPI();
-        registry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Нет показателей");
+        goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Нет показателей");
+    }
+
+    @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Достигнута'")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-78")
+    @TmsLink("1233")
+    public void achievedIndicatorTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
         ActionsViaAPI.openGoalCreatedFromAPI();
         achievedIndicator
                 .setName("Достигнута" + currentTime)
@@ -81,7 +89,7 @@ public class    GoalCalculationTests extends BaseTest {
         indicatorPage.fillRequiredFields(achievedIndicator);
         indicatorPage.clickSaveAndClose();
         goalPage.checkIndicatorIsDisplayed(achievedIndicator);
-        registry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Нет данных");
+        goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Нет данных");
         ActionsViaAPI.openGoalCreatedFromAPI();
         goalPage.searchAndOpenIndicator(achievedIndicator);
         Selenide.switchTo().window(1);
@@ -89,10 +97,18 @@ public class    GoalCalculationTests extends BaseTest {
         indicatorPage.fillIndicatorsValues(achievedIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkValuesAreDisplayed(achievedIndicator);
-        registry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Достигнута");
+        goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Достигнута");
         indicatorPage.closeCurrentBrowserTab();
         Selenide.switchTo().window(0);
+    }
 
+    @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Достигнута'")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-78")
+    @TmsLink("1233")
+    public void almostAchievedIndicatorTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
         ActionsViaAPI.openGoalCreatedFromAPI();
         almostAchievedIndicator
                 .setName("Частично достигнута" + currentTime)
@@ -115,10 +131,18 @@ public class    GoalCalculationTests extends BaseTest {
         indicatorPage.fillIndicatorsValues(almostAchievedIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkValuesAreDisplayed(almostAchievedIndicator);
-        registry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Частично достигнута");
+        goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Частично достигнута");
         indicatorPage.closeCurrentBrowserTab();
         Selenide.switchTo().window(0);
+    }
 
+    @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Не достигнута'")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-78")
+    @TmsLink("1233")
+    public void notAchievedIndicatorTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
         ActionsViaAPI.openGoalCreatedFromAPI();
         notAchievedIndicator
                 .setName("Не достигнута" + currentTime)
@@ -141,10 +165,18 @@ public class    GoalCalculationTests extends BaseTest {
         indicatorPage.fillIndicatorsValues(notAchievedIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkValuesAreDisplayed(notAchievedIndicator);
-        registry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Не достигнута");
+        goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Не достигнута");
         indicatorPage.closeCurrentBrowserTab();
         Selenide.switchTo().window(0);
+    }
 
+    @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Нет данных'")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-78")
+    @TmsLink("1233")
+    public void noDataIndicatorTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
         ActionsViaAPI.openGoalCreatedFromAPI();
         noDataIndicator
                 .setName("Нет данных" + currentTime)
@@ -157,6 +189,6 @@ public class    GoalCalculationTests extends BaseTest {
         indicatorPage.fillRequiredFields(noDataIndicator);
         indicatorPage.clickSaveAndClose();
         goalPage.checkIndicatorIsDisplayed(noDataIndicator);
-        registry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Нет данных");
+        goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Нет данных");
     }
 }
