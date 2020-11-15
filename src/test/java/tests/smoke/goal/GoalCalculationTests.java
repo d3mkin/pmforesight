@@ -63,6 +63,8 @@ public class GoalCalculationTests extends BaseTest {
         parameter("Пользователь", user.getName());
         singIn.asUser(user);
         ActionsViaAPI.openGoalCreatedFromAPI();
+        goalRegistry.open();
+        goalRegistry.shouldBeRegistry();
         goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Нет показателей");
     }
 
@@ -89,6 +91,8 @@ public class GoalCalculationTests extends BaseTest {
         indicatorPage.fillRequiredFields(achievedIndicator);
         indicatorPage.clickSaveAndClose();
         goalPage.checkIndicatorIsDisplayed(achievedIndicator);
+        goalRegistry.open();
+        goalRegistry.shouldBeRegistry();
         goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Нет данных");
         ActionsViaAPI.openGoalCreatedFromAPI();
         goalPage.searchAndOpenIndicator(achievedIndicator);
@@ -97,12 +101,14 @@ public class GoalCalculationTests extends BaseTest {
         indicatorPage.fillIndicatorsValues(achievedIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkValuesAreDisplayed(achievedIndicator);
+        goalRegistry.open();
+        goalRegistry.shouldBeRegistry();
         goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Достигнута");
         indicatorPage.closeCurrentBrowserTab();
         Selenide.switchTo().window(0);
     }
 
-    @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Достигнута'")
+    @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Частично достигнута'")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-78")
     @TmsLink("1233")
@@ -131,6 +137,8 @@ public class GoalCalculationTests extends BaseTest {
         indicatorPage.fillIndicatorsValues(almostAchievedIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkValuesAreDisplayed(almostAchievedIndicator);
+        goalRegistry.open();
+        goalRegistry.shouldBeRegistry();
         goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Частично достигнута");
         indicatorPage.closeCurrentBrowserTab();
         Selenide.switchTo().window(0);
@@ -165,6 +173,8 @@ public class GoalCalculationTests extends BaseTest {
         indicatorPage.fillIndicatorsValues(notAchievedIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkValuesAreDisplayed(notAchievedIndicator);
+        goalRegistry.open();
+        goalRegistry.shouldBeRegistry();
         goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Не достигнута");
         indicatorPage.closeCurrentBrowserTab();
         Selenide.switchTo().window(0);
@@ -189,6 +199,8 @@ public class GoalCalculationTests extends BaseTest {
         indicatorPage.fillRequiredFields(noDataIndicator);
         indicatorPage.clickSaveAndClose();
         goalPage.checkIndicatorIsDisplayed(noDataIndicator);
+        goalRegistry.open();
+        goalRegistry.shouldBeRegistry();
         goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Нет данных");
     }
 }

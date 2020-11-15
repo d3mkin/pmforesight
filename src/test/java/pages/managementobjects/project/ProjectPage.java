@@ -1,5 +1,7 @@
 package pages.managementobjects.project;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -19,17 +21,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProjectPage extends BasePage {
     //Создание проекта
-    private final SelenideElement projectName = $(By.cssSelector("#Name"));
-    private final SelenideElement projectLevel = $(By.cssSelector("#control-group-ProjectLevelId span.k-widget.k-dropdown"));
-    private final SelenideElement projectType = $(By.cssSelector("#control-group-ProjectTypeId span.k-widget.k-dropdown"));
-    private final SelenideElement parentPortfolioOrProgram = $(By.cssSelector("#control-group-ParentId span.k-widget.k-dropdown"));
-    private final SelenideElement tabRoles = $(By.cssSelector("#tab-roles > a"));
-    private final SelenideElement curatorRole = $(By.cssSelector("#control-group-Owner span.k-widget.k-dropdown"));
-    private final SelenideElement managerRole = $(By.cssSelector("#control-group-Leader span.k-widget.k-dropdown"));
-    private final SelenideElement editForm = $(By.xpath("//div[@id='editForm']"));
+    private final SelenideElement projectName = $("#Name");
+    private final SelenideElement projectLevel = $("#control-group-ProjectLevelId span.k-widget.k-dropdown");
+    private final SelenideElement projectType = $("#control-group-ProjectTypeId span.k-widget.k-dropdown");
+    private final SelenideElement parentPortfolioOrProgram = $("#control-group-ParentId span.k-widget.k-dropdown");
+    private final SelenideElement tabRoles = $("#tab-roles > a");
+    private final SelenideElement curatorRole = $("#control-group-Owner span.k-widget.k-dropdown");
+    private final SelenideElement managerRole = $("#control-group-Leader span.k-widget.k-dropdown");
+    private final SelenideElement editForm = $x("//div[@id='editForm']");
 
     //Общая информация
-    private final SelenideElement currentProjectStageField = $(By.xpath("//li[@class='info']"));
+    private final SelenideElement currentProjectStageField = $(".f-card__info");
     private final SelenideElement changeProjectStageButton = $(By.xpath("//li[@id='MoveToNextPhase']"));
     private final SelenideElement nextStageButton = $(By.xpath("//div[@class='f-popup__container']//li[@name='NextPhaseButton']"));
     private final SelenideElement prevStageButton = $(By.xpath("//div[@class='f-popup__container']//li[@name='PrevPhaseButton']"));
@@ -58,7 +60,7 @@ public class ProjectPage extends BasePage {
     private final SelenideElement realizationDateInput = $(By.xpath("//div[@class='stage stage3']//input"));
     private final SelenideElement completionDateInput = $(By.xpath("//div[@class='stage stage4']//input"));
     private final SelenideElement postProjectDateInput = $(By.xpath("//div[@class='stage stage5']//input"));
-    private final SelenideElement pointSaveButton = $(By.xpath("//a[@id='requiredPointsSave']"));
+    private final SelenideElement pointSaveButton = $(".f-widget__header-button[data-tooltip='Сохранить']");
     private final SelenideElement searchInGanttTableInput = $(By.xpath("//input[@id='nameField']"));
     private final SelenideElement hideOrShowChartGanttButton = $(By.xpath("//input[@id='tbBtnShowChart']"));
     private final SelenideElement editGanttButton = $(By.xpath("//a[@id='startEditing']"));
@@ -84,7 +86,7 @@ public class ProjectPage extends BasePage {
     private final SelenideElement projectFinalReportUploadButton = $(By.xpath("//tr[18]//div[@data-tooltip='Загрузить документ']"));
 
     //Совещания
-    private final SelenideElement addMeetingButton = $(By.xpath("//div[@name='tab-meeting']//a[@data-tooltip='Добавить']"));
+    private final SelenideElement addMeetingButton = $("#Meeting a[data-tooltip='Добавить']");
 
     //Показатели
     private final SelenideElement indicatorAddButton = $(By.xpath("//div[@name='KPIs']//a[@class='itv-add-button k-primary k-button k-button-icontext']"));
@@ -100,42 +102,42 @@ public class ProjectPage extends BasePage {
     private final SelenideElement nameLesson = $(By.xpath("//div[contains(@id,'LessonInlineTable')]/..//div[contains(@class,'k-grid-content k-auto-scrollable')]/..//a[contains(@target,\"_blank\")]"));
 
     //Таблицы показателей
-    private final SelenideElement personalIndicatorsTable = $(By.xpath("//div[@id='KPIDiv']"));
-    private final SelenideElement getPersonalIndicatorsHeader = $(By.xpath("//div[@id='KPIDivHead']"));
+    private final SelenideElement personalIndicatorsTable = $("div[name='KPIs'] .k-grid-content");
+    private final SelenideElement getPersonalIndicatorsHeader = $("div[name='KPIs'] .f-widget__header-text");
     private final SelenideElement indicatorTableSearchInput = $(By.xpath("//div[@name='KPIs']//input[@placeholder='Поиск...']"));
-    private final SelenideElement firstFoundIndicator = $(By.xpath("//div[@id='KPIDiv']//td[2]//a"));
+    private final SelenideElement firstFoundIndicator = $x("//div[@name='KPIs']//tbody/tr[1]/td[2]");
 
     //Таблицы результатов
     private final SelenideElement projectResultsTab =$(By.xpath("//a[contains(text(),'Ведение результатов проекта')]"));
     private final SelenideElement linkedKPAndResultsTableTab = $(By.xpath("//a[contains(text(),'Связь результатов и КП проекта')]"));
-    private final SelenideElement departmentalResultsTable = $(By.xpath("//div[@id='Result']"));
+    private final SelenideElement departmentalResultsTable = $(By.xpath("//div[@name='Result']"));
     private final SelenideElement departmentalResultsHeader = $(By.xpath("//*[text() = 'Результаты проекта']"));
-    private final SelenideElement departmentalResultsSearch = $(By.xpath("//div[@id='Results']//div//input[@placeholder='Поиск...']"));
-    private final SelenideElement departmentalFirstFoundResult = $(By.xpath("//div[@id='Result']//div[@class='inlineTableView-grid k-grid k-widget k-display-block']//a[@href]"));
-    private final SelenideElement departmentalResultDelete = $(By.xpath("//div[@id='Results']//a[@class='itv-remove-button k-grid-trash']"));
-    private final SelenideElement departmentalResultEdit = $(By.xpath("//div[@id='Results']//a[@class='itv-edit-button k-grid-edit']"));
-    private final SelenideElement departmentalResultChild = $(By.xpath("//div[@id='Results']//span[@style='padding-left: 30px']"));
-    private final SelenideElement federalResultsTable = $(By.xpath("//div[@id='FederalResult']"));
+    private final SelenideElement departmentalResultsSearch = $(By.xpath("//div[@name='Results']//div//input[@placeholder='Поиск...']"));
+    private final SelenideElement departmentalFirstFoundResult = $(By.xpath("//div[@name='Result']//div[@class='inlineTableView-grid k-grid k-widget k-display-block']//a[@href]"));
+    private final SelenideElement departmentalResultDelete = $(By.xpath("//div[@name='Results']//a[@class='itv-remove-button k-grid-trash']"));
+    private final SelenideElement departmentalResultEdit = $(By.xpath("//div[@name='Results']//a[@class='itv-edit-button k-grid-edit']"));
+    private final SelenideElement departmentalResultChild = $(By.xpath("//div[@name='Results']//span[@style='padding-left: 30px']"));
+    private final SelenideElement federalResultsTable = $(By.xpath("//div[@name='FederalResult']"));
     private final SelenideElement federalResultsHeader = $(By.xpath("//*[text() = 'Результаты федерального проекта']"));
-    private final SelenideElement federalResultsSearch = $(By.xpath("//div[@id='FederalResults']//input[@class='itv-inlineSearch k-textbox']"));
-    private final SelenideElement federalFirstFoundResult = $(By.xpath("//div[@id='FederalResults']//div[@class='inlineTableView-grid k-grid k-widget k-display-block']//a[@href]"));
-    private final SelenideElement federalResultDelete = $(By.xpath("//div[@id='FederalResults']//a[@class='itv-remove-button k-grid-trash']"));
-    private final SelenideElement federalResultEdit = $(By.xpath("//div[@id='FederalResults']//a[@class='itv-edit-button k-grid-edit']"));
-    private final SelenideElement federalResultChild = $(By.xpath("//div[@id='FederalResults']//span[@style='padding-left: 30px']"));
-    private final SelenideElement regionalResultsTable = $(By.xpath("//div[@id='FederalResult']"));
+    private final SelenideElement federalResultsSearch = $(By.xpath("//div[@name='FederalResults']//input[@class='itv-inlineSearch k-textbox']"));
+    private final SelenideElement federalFirstFoundResult = $(By.xpath("//div[@name='FederalResults']//div[@class='inlineTableView-grid k-grid k-widget k-display-block']//a[@href]"));
+    private final SelenideElement federalResultDelete = $(By.xpath("//div[@name='FederalResults']//a[@class='itv-remove-button k-grid-trash']"));
+    private final SelenideElement federalResultEdit = $(By.xpath("//div[@name='FederalResults']//a[@class='itv-edit-button k-grid-edit']"));
+    private final SelenideElement federalResultChild = $(By.xpath("//div[@name='FederalResults']//span[@style='padding-left: 30px']"));
+    private final SelenideElement regionalResultsTable = $(By.xpath("//div[@name='FederalResult']"));
     private final SelenideElement regionalResultsHeader = $(By.xpath("//*[text() = 'Результаты регионального проекта']"));
-    private final SelenideElement regionalResultsSearch = $(By.xpath("//div[@id='RegionalResults']//input[@class='itv-inlineSearch k-textbox']"));
-    private final SelenideElement regionalFirstFoundResult = $(By.xpath("//div[@id='RegionalResults']//div[@class='inlineTableView-grid k-grid k-widget k-display-block']//a[@href]"));
+    private final SelenideElement regionalResultsSearch = $(By.xpath("//div[@name='RegionalResults']//input[@class='itv-inlineSearch k-textbox']"));
+    private final SelenideElement regionalFirstFoundResult = $(By.xpath("//div[@name='RegionalResults']//div[@class='inlineTableView-grid k-grid k-widget k-display-block']//a[@href]"));
     private final SelenideElement regionalResultDelete = $(By.xpath("//div[@id='RegionalResults']//a[@class='itv-remove-button k-grid-trash']"));
-    private final SelenideElement regionalResultEdit = $(By.xpath("//div[@id='RegionalResults']//a[@class='itv-edit-button k-grid-edit']"));
-    private final SelenideElement regionalResultChild = $(By.xpath("//div[@id='RegionalResults']//span[@style='padding-left: 30px']"));
-    private final SelenideElement noneLinkedResultsTable = $(By.xpath("//div[@id='RegionalFederalLink']"));
+    private final SelenideElement regionalResultEdit = $(By.xpath("//div[@name='RegionalResults']//a[@class='itv-edit-button k-grid-edit']"));
+    private final SelenideElement regionalResultChild = $(By.xpath("//div[@name='RegionalResults']//span[@style='padding-left: 30px']"));
+    private final SelenideElement noneLinkedResultsTable = $(By.xpath("//div[@name='RegionalFederalLink']"));
     private final SelenideElement noneLinkedResultsHeader = $(By.xpath("//*[text() = 'Результаты регионального проекта, не привязанные к результатам федерального']"));
     private final SelenideElement noneLinkedResultsSearch = $(By.xpath("//div[@id='RegionalFederalLink']//input[@class='itv-inlineSearch k-textbox']"));
-    private final SelenideElement regionalResultAddButton = $(By.xpath("//div[@id='RegionalResults']//a[@data-tooltip='Добавить']"));
-    private final SelenideElement federalResultAddButton = $(By.xpath("//div[@id='FederalResults']//a[@data-tooltip='Добавить']"));
-    private final SelenideElement departmentalResultAddButton = $(By.xpath("//div[@id='Results']//a[@data-tooltip='Добавить']"));
-    private final SelenideElement linkedFederalResultsTD = $(By.xpath("//div[@id='FederalResult']//td[5]"));
+    private final SelenideElement regionalResultAddButton = $(By.xpath("//div[@name='RegionalResults']//a[@data-tooltip='Добавить']"));
+    private final SelenideElement federalResultAddButton = $(By.xpath("//div[@name='FederalResults']//a[@data-tooltip='Добавить']"));
+    private final SelenideElement departmentalResultAddButton = $(By.xpath("//div[@name='Results']//a[@data-tooltip='Добавить']"));
+    private final SelenideElement linkedFederalResultsTD = $(By.xpath("//div[@name='FederalResult']//td[5]"));
 
     //Таблица Связь результатов и КП проекта
     private final SelenideElement editInKPAndResultsLinkedTableButton = $(By.xpath("//div[@id='PointResultEditBtn']"));
@@ -146,14 +148,14 @@ public class ProjectPage extends BasePage {
     private  final SelenideElement addOpportunityButton = $(By.xpath("//div[@name='Chances']//a[@data-tooltip='Добавить']"));
 
     //Поручения
-    private final SelenideElement addOrderButton = $(By.xpath("//div[@id='Order']//a[@data-tooltip='Добавить']"));
+    private final SelenideElement addOrderButton = $("#OrderInlineTable a[data-tooltip='Добавить']");
 
     //Открытые вопросы
     private final SelenideElement addOpenQuestionButton = $(By.xpath("//div[@name='LOVs']//a[@data-tooltip='Добавить']"));
 
     //Извчлеченные уроки
-    private final SelenideElement addNegativeLessonButton = $x("//div[@name='tab-gleaning']//a[@data-tooltip='Отрицательный урок']");
-    private final SelenideElement addPositiveLessonButton = $x("//div[@name='tab-gleaning']//a[@data-tooltip='Положительный урок']");
+    private final SelenideElement addNegativeLessonButton = $("#LessonInlineTable [data-tooltip='Отрицательный урок']");
+    private final SelenideElement addPositiveLessonButton = $("#LessonInlineTable [data-tooltip='Положительный урок']");
 
 
     //TODO: сделать отдельный класс для верхней панели карточек
@@ -567,7 +569,7 @@ public class ProjectPage extends BasePage {
 
     @Step ("Проверить текущую стадию проекта")
     public void checkCurrentProjectStage(String stage) {
-        currentProjectStageField.shouldHave(text(stage));
+        currentProjectStageField.waitUntil(text(stage), 30000);
     }
 
     @Step ("Проверить возможность перевода проекта по стадиям")
@@ -606,6 +608,12 @@ public class ProjectPage extends BasePage {
     @Step ("Заполнить поле 'Причина отмена проекта'")
     public void fillReasonField(String reason) {
         reasonOfCancelingField.setValue(reason);
+    }
+
+
+    @Step ("Развернуть виджет 'Создание обязательных контрольных точек проекта'")
+    public void expandRequiredPointsWidget(){
+        $x("//span[contains(text(),'Создание обязательных контрольных точек проекта')]").waitUntil(visible, 10000).click();
     }
 
     @Step("Заполнить плановую дату обязательной КТ на стадии {stage}")
@@ -800,7 +808,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Проверить наличие Риска в таблице Рисков")
     public void checkRiskPresentInTable(String riskName){
-        $(By.xpath("//div[@name='Risk']//td//a[contains(text(),'"+ riskName +"')]")).shouldBe(visible);
+        $(By.xpath("//div[@name='Risks']//td//a[contains(text(),'"+ riskName +"')]")).shouldBe(visible);
     }
 
     @Step("Проверить наличие Урока в таблице Извлеченных уроков")
@@ -810,12 +818,12 @@ public class ProjectPage extends BasePage {
 
     @Step("Проверить наличие Возможности в таблице Возможностей")
     public void checkOpportunityPresentInTable(String opportunityName){
-        $(By.xpath("//div[@name='Chance']//td//a[contains(text(),'"+ opportunityName +"')]")).shouldBe(visible);
+        $(By.xpath("//div[@name='Chances']//td//a[contains(text(),'"+ opportunityName +"')]")).shouldBe(visible);
     }
 
     @Step("Проверить наличие Поручения в таблице Поручений")
     public void checkOrderPresentInTable(String orderName){
-        $(By.xpath("//div[@name='Order']//td//a[contains(text(),'"+ orderName +"')]")).shouldBe(visible);
+        $(By.xpath("//div[@name='OrderInlineTable']//td//a[contains(text(),'"+ orderName +"')]")).shouldBe(visible);
     }
 
     @Step("Проверить наличие Совещания в таблице Совещаний")

@@ -16,8 +16,7 @@ import pages.elements.MainMenu;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -48,16 +47,18 @@ public class ProjectRegistry implements Registry {
         Selenide.open(url);
     }
 
-    @Step("Осуществить поиск проекта")
+    @Step("Поиск проекта {projectName} в реестре")
     public void searchProject(String projectName) {
         sleep(1000);
         controlPanel.typeSearchValue(projectName);
         //controlPanel.clickSearch();
     }
 
-    @Step("Проверка отображения совещания после создания записи")
-    public void shouldHaveCreatedRecord() {
-        firstFoundRow.shouldBe(visible);
+    //TODO: Перенести метод в BaseRegistry
+    @Step("Проверка отображения {projectName} в реестре")
+    public void shouldHaveCreatedRecord(String projectName) {
+        $x("//div[contains(text(),'"+projectName+"')]");
+        //firstFoundRow.shouldBe(visible);
         sleep(1000);
     }
 
@@ -128,7 +129,7 @@ public class ProjectRegistry implements Registry {
     public void deleteProject(Project project){
         shouldBeRegistry();
         searchProject(project.getName());
-        shouldHaveCreatedRecord();
+        shouldHaveCreatedRecord(project.getName());
         selectRow();
         clickDelete();
         acceptDelete();
@@ -140,7 +141,7 @@ public class ProjectRegistry implements Registry {
     public void deleteProject(String projectName){
         shouldBeRegistry();
         searchProject(projectName);
-        shouldHaveCreatedRecord();
+        shouldHaveCreatedRecord(projectName);
         selectRow();
         clickDelete();
         acceptDelete();
@@ -160,8 +161,11 @@ public class ProjectRegistry implements Registry {
         controlPanel().clickAddButton();
     }
 
+    //TODO: Перенести метод в BaseRegistry
     @Step ("Сменить представление на {viewName}")
     public void changeView(String viewName){
         controlPanel.changeView(viewName);
+        $x("//span[contains(text(),'"+viewName+"')]").shouldBe(visible);
+        $("#f-grid-viewlist .k-input").shouldHave(text(""+viewName+""));
     }
 }

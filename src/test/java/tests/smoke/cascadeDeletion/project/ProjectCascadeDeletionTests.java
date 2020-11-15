@@ -147,7 +147,6 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         projectPage.addNewStageInGantt(newStageName, "Рабочий план");
         projectPage.clickToMaximizeOrMinimizeGantt();
         projectRegistry.open();
-        projectRegistry.shouldBeRegistry();
         String projectName = ActionsViaAPI.getProjectNameFromAPI();
         projectRegistry.changeView("Все проекты");
         projectRegistry.deleteProject(projectName);
@@ -183,7 +182,6 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         projectPage.shouldHaveDefaultResultsTable();
         projectPage.shouldHaveDepartmentalResult(result.getName());
         projectRegistry.open();
-        projectRegistry.shouldBeRegistry();
         String projectName = ActionsViaAPI.getProjectNameFromAPI();
         projectRegistry.changeView("Все проекты");
         projectRegistry.deleteProject(projectName);
@@ -212,7 +210,6 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         contractPage.clickSaveAndClose();
         projectPage.checkContractPresentInTable(contact.getName());
         projectRegistry.open();
-        projectRegistry.shouldBeRegistry();
         String projectName = ActionsViaAPI.getProjectNameFromAPI();
         projectRegistry.changeView("Все проекты");
         projectRegistry.deleteProject(projectName);
@@ -245,7 +242,6 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         projectPage.shouldHaveIndicatorsTable();
         projectPage.shouldHaveIndicator(indicator.getName());
         projectRegistry.open();
-        projectRegistry.shouldBeRegistry();
         String projectName = ActionsViaAPI.getProjectNameFromAPI();
         projectRegistry.changeView("Все проекты");
         projectRegistry.deleteProject(projectName);
@@ -281,7 +277,6 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         risksAndOpportunitiesPage.clickSaveAndClose();
         projectPage.checkOpportunityPresentInTable(opportunity.getRisksAndOpportunitiesName());
         projectRegistry.open();
-        projectRegistry.shouldBeRegistry();
         String projectName = ActionsViaAPI.getProjectNameFromAPI();
         projectRegistry.changeView("Все проекты");
         projectRegistry.deleteProject(projectName);
@@ -314,7 +309,6 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         orderPage.clickSaveAndClose();
         projectPage.checkOrderPresentInTable(order.getName());
         projectRegistry.open();
-        projectRegistry.shouldBeRegistry();
         String projectName = ActionsViaAPI.getProjectNameFromAPI();
         projectRegistry.changeView("Все проекты");
         projectRegistry.deleteProject(projectName);
@@ -344,7 +338,6 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         meetingPage.clickSaveAndClose();
         projectPage.checkMeetingPresentInTable(meeting.getName());
         projectRegistry.open();
-        projectRegistry.shouldBeRegistry();
         String projectName = ActionsViaAPI.getProjectNameFromAPI();
         projectRegistry.changeView("Все проекты");
         projectRegistry.deleteProject(projectName);
@@ -408,7 +401,6 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         lessonPage.clickSaveAndClose();
         projectPage.checkLessonPresentInTable(positiveLesson.getName());
         projectRegistry.open();
-        projectRegistry.shouldBeRegistry();
         String projectName = ActionsViaAPI.getProjectNameFromAPI();
         projectRegistry.changeView("Все проекты");
         projectRegistry.deleteProject(projectName);

@@ -149,7 +149,6 @@ public class GoalRegistry implements Registry {
 
     @Step ("Проверить корректность отображение индикатора в реестре по показателям")
     public void checkGoalIndicatorByIndex(String goalName, String indicatorStatus) {
-        open();
         firstFoundRow.shouldBe(visible);
         searchGoal(goalName);
         switch (indicatorStatus) {

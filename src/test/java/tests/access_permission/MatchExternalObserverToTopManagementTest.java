@@ -86,6 +86,7 @@ public class MatchExternalObserverToTopManagementTest extends BaseTest {
         employeeRegistry.shouldNotHaveResults();
     }
 
+    @Disabled
     @ParameterizedTest (name = "Соответствие группы 'Внешний наблюдатель' признаку 'Топ-руководство' при добавлении пользователя в группу" )
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-111")

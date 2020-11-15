@@ -1,6 +1,5 @@
 package tests.entity_generation.directories;
 
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
@@ -23,7 +22,7 @@ import static io.qameta.allure.Allure.parameter;
 @Story(TestSuiteName.ENTITY_CREATION)
 @Tag("entityGeneration")
 @Tag("Regression")
-@RunWith(DataProviderRunner.class)
+
 public class CreateEmployeeTests extends BaseTest {
 
     SingInPage singIn;

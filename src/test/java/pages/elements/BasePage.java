@@ -1,9 +1,6 @@
 package pages.elements;
 
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.*;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -285,7 +282,7 @@ public abstract class BasePage {
 
     @Step ("Закрыть форму загрузки документа")
     public void closeUploadWindow() {
-        $x("//a[@class='f-tab f-tab__link f_active']").click();
+        $x("//span[contains(text(),'Файлы')]").click();
         $x("//div[@class='k-widget k-window']//a[@role='button']").click();
     }
 }

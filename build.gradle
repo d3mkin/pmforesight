@@ -47,8 +47,7 @@ dependencies {
             "io.rest-assured:rest-assured:${restassuredVersion}",
             "ch.qos.logback:logback-classic:${logbackVersion}",
             "org.aeonbits.owner:owner:${ownerVersion}",
-            "org.aspectj:aspectjweaver:${aspectjweaver}",
-            "com.tngtech.java:junit-dataprovider:${dataproviderVersion}"
+            "org.aspectj:aspectjweaver:${aspectjweaver}"
     )
 }
 

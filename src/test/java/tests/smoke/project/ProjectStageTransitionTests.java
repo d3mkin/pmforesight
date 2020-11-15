@@ -168,6 +168,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         modalDialog.closeDialog();
         //Выплняем условия для перевода на стадию Подготовка
         projectPage.openActivityTab();
+        projectPage.expandRequiredPointsWidget();
         projectPage.createRequiredStagePoint("Инициирование", currentDate);
         projectPage.checkEntityIsDisplayedInGantt("Проект запущен");
         projectPage.findInGanttAndOpenEntityPage("Проект запущен");
@@ -192,7 +193,7 @@ public class ProjectStageTransitionTests extends BaseTest {
                 "Необходимо прикрепить документ 'Сводный план проекта'",
                 "Должна быть создана и завершена типовая контрольная точка 'Выполнение работ разрешено'");
         modalDialog.closeDialog();
-        //Выплняем условия для перевода на стадию Реализация
+        //Выполняем условия для перевода на стадию Реализация
         projectPage.createRequiredStagePoint("Подготовка",currentDate);
         projectPage.checkEntityIsDisplayedInGantt("Выполнение работ разрешено");
         projectPage.findInGanttAndOpenEntityPage("Выполнение работ разрешено");
@@ -232,6 +233,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.moveStageTo("На следующую стадию");
         modalDialog.clickAcceptNextStageTransition();
         projectPage.checkCurrentProjectStage("Завершение");
+        projectPage.closeCreatedSnapshotNotification();
 
 
         //Переводим на стадию Постпроектный мониторинг в случае, когда условия НЕ выполены

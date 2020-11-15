@@ -165,7 +165,7 @@ public class CreateLessonTests extends BaseTest {
         projectPage.clickSaveAndClose();
         projectRegistry.shouldBeRegistry();
         projectRegistry.searchProject(project.getName());
-        projectRegistry.shouldHaveCreatedRecord();
+        projectRegistry.shouldHaveCreatedRecord(project.getName());
         projectRegistry.clickFirstRow();
         projectPage.openProject(project.getName());
         projectPage.positiveLessonsLearned();
@@ -186,7 +186,7 @@ public class CreateLessonTests extends BaseTest {
         projectRegistry.open();
         projectRegistry.shouldBeRegistry();
         projectRegistry.searchProject(project.getName());
-        projectRegistry.shouldHaveCreatedRecord();
+        projectRegistry.shouldHaveCreatedRecord(project.getName());
         projectRegistry.selectRow();
         projectRegistry.clickDelete();
         projectRegistry.acceptDelete();
