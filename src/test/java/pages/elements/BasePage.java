@@ -2,6 +2,7 @@ package pages.elements;
 
 import com.codeborne.selenide.*;
 import io.qameta.allure.Step;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -128,7 +129,7 @@ public abstract class BasePage {
         if (value == null) {
             return;
         }
-        el.setValue(value);
+        el.waitUntil(visible, 10000).setValue(value);
     }
 
     //Диалоговое окно про обязательные поля\несохраненные изменения
@@ -257,6 +258,9 @@ public abstract class BasePage {
         sleep(1000);
         selectAllItems.shouldHaveSize(1);
         selectFirstItem.click();
+        //Assertions.assertTrue(selectFilterInput.getText() == value );
+        //el.shouldHave();
+        el.waitUntil(text(value), 10000);
     }
     public void chooseValueFromDropDown(SelenideElement el, String value) {
         el.click();

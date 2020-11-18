@@ -1,12 +1,9 @@
 package pages.managementobjects.project;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import model.Project;
-import org.openqa.selenium.WebElement;
 import pages.elements.BasePage;
 import pages.managementobjects.result.ResultPage;
 import helpers.ResultDataStorage;
@@ -28,7 +25,7 @@ public class ProjectPage extends BasePage {
     private final SelenideElement tabRoles = $("#tab-roles > a");
     private final SelenideElement curatorRole = $("#control-group-Owner span.k-widget.k-dropdown");
     private final SelenideElement managerRole = $("#control-group-Leader span.k-widget.k-dropdown");
-    private final SelenideElement editForm = $x("//div[@id='editForm']");
+    private final SelenideElement editForm = $(".f-card__header .m-i-pencil2");
 
     //Общая информация
     private final SelenideElement currentProjectStageField = $(".f-card__info");
@@ -95,7 +92,7 @@ public class ProjectPage extends BasePage {
     private final SelenideElement checkMeeting = $(By.cssSelector("div.k-grid-content.k-auto-scrollable > table > tbody > tr:first-child"));
 
     //Создание "извлеченного урока" в карточке проекта
-    private final SelenideElement nameProjectAfterOpen = $(By.xpath("//li[contains(@class,'name')]"));
+    private final SelenideElement nameProjectAfterOpen = $(".f-card__name");
     private final SelenideElement learnedLessons = $(By.xpath("//span[text()='Извлeчённые уроки']"));
     private final SelenideElement positiveLesson = $(By.xpath("//a[contains(@class,'itv-custom-buttons btn btn-small btn-success k-button')]"));
     private final SelenideElement searchCreateLesson = $(By.xpath("//div[contains(@id,'LessonInlineTable')]/..//input[contains(@placeholder,'Поиск...')]"));
@@ -109,7 +106,7 @@ public class ProjectPage extends BasePage {
 
     //Таблицы результатов
     private final SelenideElement projectResultsTab =$(By.xpath("//a[contains(text(),'Ведение результатов проекта')]"));
-    private final SelenideElement linkedKPAndResultsTableTab = $(By.xpath("//a[contains(text(),'Связь результатов и КП проекта')]"));
+    private final SelenideElement linkedKPAndResultsTableTab = $(By.xpath("//span[contains(text(),'Связь результатов и КП проекта')]"));
     private final SelenideElement departmentalResultsTable = $(By.xpath("//div[@name='Result']"));
     private final SelenideElement departmentalResultsHeader = $(By.xpath("//*[text() = 'Результаты проекта']"));
     private final SelenideElement departmentalResultsSearch = $(By.xpath("//div[@name='Results']//div//input[@placeholder='Поиск...']"));
@@ -197,8 +194,8 @@ public class ProjectPage extends BasePage {
     }
 
     @Step("Проверка открытия проекта")
-    public void openProject(String project) {
-        assertTrue(nameProjectAfterOpen.getText().contains(project));
+    public void openProject(String projectName) {
+        assertTrue(nameProjectAfterOpen.getText().contains(projectName));
     }
 
     @Step("Открытие положительного урока")

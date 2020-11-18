@@ -40,6 +40,7 @@ public class CreateContractorTests extends BaseTest {
         new LogoutPage().open();
     }
 
+    @Disabled
     @ParameterizedTest (name = "Создание сущности Подрядчика из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-134")

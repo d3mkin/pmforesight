@@ -167,7 +167,6 @@ public class CreateLessonTests extends BaseTest {
         projectRegistry.searchProject(project.getName());
         projectRegistry.shouldHaveCreatedRecord(project.getName());
         projectRegistry.clickFirstRow();
-        projectPage.openProject(project.getName());
         projectPage.positiveLessonsLearned();
         projectPage.shouldBeOpened();
 

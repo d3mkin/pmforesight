@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class RisksAndOpportunitiesPage extends BasePage {
     //Вкладка общая информация
     private final SelenideElement riskAndOpportunitiesNameInput = $(By.xpath("//input[@id='Name']"));
-    private final SelenideElement controlObjectSelect = $(By.cssSelector("#control-group-ActivityId"));
+    private final SelenideElement controlObjectSelect = $(By.cssSelector("#control-group-ActivityId .k-dropdown"));
     private final SelenideElement typeRisksOpportunitiesSelect = $(By.cssSelector("#control-group-RiskTypeId"));
     private final SelenideElement categoryRSelect = $(By.cssSelector("#control-group-RiskCategoryId"));
     private final SelenideElement stateSelect = $(By.id("control-group-ActivityPhaseId"));

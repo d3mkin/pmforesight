@@ -17,7 +17,8 @@ public class IndicatorPage extends BasePage {
     private final SelenideElement kpiTypeInput_EditForm = $(By.xpath("//div[@id='control-group-KPIPeriodId']//span[@class='k-input']"));
     private final SelenideElement unitInput_EditForm = $(By.xpath("//input[@id='Unit']"));
     private final SelenideElement basicValueInput_EditForm = $(By.xpath("//div[@id='control-group-CurrentFact']//input[@class='k-formatted-value k-input']"));
-    private final SelenideElement approvingDocInput_EditForm = $(By.xpath("//div[@id='control-group-ApprovingDocumentId']//span[@class='k-dropdown-wrap k-state-default']"));
+    //private final SelenideElement approvingDocInput_EditForm = $(By.xpath("//div[@id='control-group-ApprovingDocumentId']//span[@class='k-dropdown-wrap k-state-default']"));
+    private final SelenideElement approvingDocInput_EditForm = $("#control-group-ApprovingDocumentId .k-input");
     private final SelenideElement rolesTab_EditForm = $(By.xpath("//li[@id='tab2']//a"));
     private final SelenideElement responsibleInput_EditForm = $(By.xpath("//div[@id='control-group-Responsible']//span[@class='k-widget k-dropdown']"));
     private final SelenideElement linkTab = $(By.xpath("//li[@id='tab3']"));

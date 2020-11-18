@@ -10,19 +10,20 @@ import pages.elements.BasePage;
 import pages.elements.DeleteEntityDialog;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class ResultPage extends BasePage {
-    private final SelenideElement resultName = $(By.xpath ("//input[@name='Name']"));
-    private final SelenideElement resultType = $(By.xpath("//div[@id='control-group-ActivityResultsTypeId']//span[@class='k-input']"));
-    private final SelenideElement resultUnit = $(By.xpath ("//input[@name='Unit']"));
-    private final SelenideElement federalResultLink = $(By.xpath("//div[@id='control-group-FederalLevelActivityResultId']//span[@class='k-dropdown-wrap k-state-default']"));
-    private final SelenideElement resultValue = $(By.xpath ("//input[@class='k-formatted-value k-input']"));
-    private final SelenideElement tabRoles = $(By.cssSelector("#tab-roles > a"));
-    private final SelenideElement responsibleRole = $(By.xpath("//div[@class='k-widget k-multiselect k-multiselect-clearable']"));
-    private final SelenideElement valueTableTrashButton = $(By.xpath("//tbody//tr//a[@class='itv-remove-button k-grid-trash']"));
-    private final SelenideElement closeResultButton = $(By.xpath("//span[@class='f-icon m-i-cross']"));
-    private final SelenideElement parentEntityResult = $ (By.xpath("//div[@id='control-group-Parent']//span[@class='k-input']"));
-    private final SelenideElement resultCalendarDate = $ (By.xpath("//input[@name='ResultDate']"));
+    private final SelenideElement resultName = $x("//input[@name='Name']");
+    private final SelenideElement resultType = $x("//div[@id='control-group-ActivityResultsTypeId']//span[@class='k-input']");
+    private final SelenideElement resultUnit = $x("//input[@name='Unit']");
+    private final SelenideElement federalResultLink = $("#control-group-FederalLevelActivityResultId .k-input");
+    private final SelenideElement resultValue = $x("//input[@class='k-formatted-value k-input']");
+    private final SelenideElement tabRoles = $("#tab-roles > a");
+    private final SelenideElement responsibleRole = $x("//div[@class='k-widget k-multiselect k-multiselect-clearable']");
+    private final SelenideElement valueTableTrashButton = $x("//tbody//tr//a[@class='itv-remove-button k-grid-trash']");
+    private final SelenideElement closeResultButton = $x("//span[@class='f-icon m-i-cross']");
+    private final SelenideElement parentEntityResult = $x("//div[@id='control-group-Parent']//span[@class='k-input']");
+    private final SelenideElement resultCalendarDate = $x("//input[@name='ResultDate']");
 
     @Step("Заполнить поля в карточке Результата")
     public void fillFields(Result result) {

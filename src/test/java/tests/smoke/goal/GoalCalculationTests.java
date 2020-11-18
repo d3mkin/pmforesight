@@ -101,11 +101,12 @@ public class GoalCalculationTests extends BaseTest {
         indicatorPage.fillIndicatorsValues(achievedIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkValuesAreDisplayed(achievedIndicator);
+        indicatorPage.closeCurrentBrowserTab();
+        Selenide.switchTo().window(0);
         goalRegistry.open();
         goalRegistry.shouldBeRegistry();
         goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Достигнута");
-        indicatorPage.closeCurrentBrowserTab();
-        Selenide.switchTo().window(0);
+
     }
 
     @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Частично достигнута'")
@@ -137,11 +138,12 @@ public class GoalCalculationTests extends BaseTest {
         indicatorPage.fillIndicatorsValues(almostAchievedIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkValuesAreDisplayed(almostAchievedIndicator);
+        indicatorPage.closeCurrentBrowserTab();
+        Selenide.switchTo().window(0);
         goalRegistry.open();
         goalRegistry.shouldBeRegistry();
         goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Частично достигнута");
-        indicatorPage.closeCurrentBrowserTab();
-        Selenide.switchTo().window(0);
+
     }
 
     @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Не достигнута'")
@@ -173,11 +175,11 @@ public class GoalCalculationTests extends BaseTest {
         indicatorPage.fillIndicatorsValues(notAchievedIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkValuesAreDisplayed(notAchievedIndicator);
+        indicatorPage.closeCurrentBrowserTab();
+        Selenide.switchTo().window(0);
         goalRegistry.open();
         goalRegistry.shouldBeRegistry();
         goalRegistry.checkGoalIndicatorByIndex(ActionsViaAPI.getGoalNameFromAPI(), "Не достигнута");
-        indicatorPage.closeCurrentBrowserTab();
-        Selenide.switchTo().window(0);
     }
 
     @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Нет данных'")

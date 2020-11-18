@@ -14,7 +14,7 @@ import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 @TestInstance(TestInstance.Lifecycle.PER_METHOD)
 public class BaseTest {
 
-  //  static protected ConfigManager configManager = new ConfigManager();
+//    static protected ConfigManager configManager = new ConfigManager();
 
     @BeforeAll
     public static void setup() {
@@ -23,7 +23,7 @@ public class BaseTest {
                 .savePageSource(false)
                 .includeSelenideSteps(false)
                 .enableLogs(LogType.BROWSER, Level.SEVERE));
-        //Configuration.headless = true;
+//        Configuration.headless = true;
         Configuration.timeout = 15000;
         Configuration.browserSize = "1920x1080";
         //Configuration.startMaximized = configManager.getStartMaximized();
