@@ -15,7 +15,7 @@ public class ImpersonateRolePage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.IMPERSONATE_ROLE,
                 "Олицетворение подразделения",
-                $(By.xpath("//a[text()=\"Олицетворение подразделения\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

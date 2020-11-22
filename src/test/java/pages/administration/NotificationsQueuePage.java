@@ -12,7 +12,7 @@ public class NotificationsQueuePage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.NOTIFICATIONS_QUEUE,
                 "Письмо",
-                $(By.xpath("//a[text()=\"Последние 200 писем\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

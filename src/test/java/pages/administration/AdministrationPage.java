@@ -174,9 +174,9 @@ public class AdministrationPage {
                 "Доступ по группам"
         );
         clickItemInExpandedMenu("Группы");
-        /*groups.shouldBePage();
+        groups.shouldBePage();
         clickExpandedItem(parentItem);
-        clickItemInExpandedMenu("Сотрудники");*/
+        clickItemInExpandedMenu("Сотрудники");
         employees.shouldBePage();
         clickExpandedItem(parentItem);
         clickItemInExpandedMenu("Роли карточек");
@@ -268,7 +268,8 @@ public class AdministrationPage {
                 "Запланированные задачи. История выполнения",
                 "Логи системы",
                 "Установка обновлений",
-                "Информация о системе"
+                "Информация о системе",
+                "Маршрутизация"
         );
         clickItemInExpandedMenu("Сущности");
         entitySettingPage.shouldBePage();

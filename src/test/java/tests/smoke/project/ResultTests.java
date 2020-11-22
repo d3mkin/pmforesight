@@ -204,8 +204,8 @@ public class ResultTests extends BaseTest {
         projectPage.clickAddResult("Региональный");
         regionalResult
                 .setName("Региональный_C962" + currentTime)
-                .setFederalResultLink(federalResult.getName())
                 .setUnit("Единица")
+                .setFederalResultLink(federalResult.getName())
                 .setValue("1")
                 .setResponsible(user.getName());
         resultPage.fillFields(regionalResult);

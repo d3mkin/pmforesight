@@ -9,8 +9,7 @@ import model.Result;
 import pages.elements.BasePage;
 import pages.elements.DeleteEntityDialog;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
 
 public class ResultPage extends BasePage {
     private final SelenideElement resultName = $x("//input[@name='Name']");
@@ -30,6 +29,7 @@ public class ResultPage extends BasePage {
         typeOrSkip(resultName, result.getName());
         searchInAutocompleteAndClickToFirst(resultUnit, result.getUnit());
         searchInSelectAndClickToFirstWithCheckDropDown(resultType, result.getType());
+//        sleep(2000);
         searchInSelectAndClickToFirstWithCheckDropDown(federalResultLink, result.getFederalResultLink());
         searchInSelectAndClickToFirstWithCheckDropDown(parentEntityResult, result.getParentEntity());
         //typeDate(resultCalendarDate,result.getDate());

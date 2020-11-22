@@ -264,9 +264,9 @@ public abstract class BasePage {
            return;
       }
         el.click();
-        sleep(1000);
-        selectFilterInput.shouldBe(visible).setValue(value);
-        sleep(1000);
+        selectFilterInput.waitUntil(visible, 5000);
+        selectFilterInput.setValue(value);
+        sleep(2000);
         selectAllItems.shouldHaveSize(1);
         selectFirstItem.click();
         //Assertions.assertTrue(selectFilterInput.getText() == value );

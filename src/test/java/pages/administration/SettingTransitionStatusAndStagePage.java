@@ -12,11 +12,11 @@ public class SettingTransitionStatusAndStagePage extends AbstractAdminPage {
     public SettingTransitionStatusAndStagePage() {
         super(Configuration.baseUrl + URLS.SETTING_TRANSITION_STATUS_AND_STAGES,
                 "Переход между статусами. Настройка",
-                $(By.xpath("//a[text()=\"Переход между статусами. Настройка\"]")),
+                $(".f-page__grid-name"),
                 $(".f-grid"));
     }
 
-    @Step("Проверка открытия реестра 'Переход между статусами. Настройка' по прямой ссылке")
+    @Step("Проверка открытия реестра 'Настройка переходов по статусам/стадиям' по прямой ссылке")
     public void shouldBePage() {
         shouldHavePageName();
         shouldHaveContent();

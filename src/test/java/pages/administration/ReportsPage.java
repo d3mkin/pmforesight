@@ -12,7 +12,7 @@ public class ReportsPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.REPORTS,
                 "Reporting",
-                $(By.xpath("//a[text()=\"Reporting\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

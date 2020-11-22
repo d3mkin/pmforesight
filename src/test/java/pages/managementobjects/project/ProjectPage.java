@@ -67,11 +67,12 @@ public class ProjectPage extends BasePage {
     private final SelenideElement newPointAddButton = $(By.xpath("//a[@id='tbBtnCreatePoint']"));
     private final SelenideElement newWorkOrStageAddButton = $(By.xpath("//a[@id='tbBtnCreateTask']"));
     private final SelenideElement newGanttActivityNameTR = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]"));
-    private final SelenideElement newGanttActivityNameTD = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[5]"));
-    private final SelenideElement newGanttActivityNameInput = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[5]//input"));
-    private final SelenideElement newGanttActivityApproveDocTD = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[15]"));
+    private final SelenideElement newGanttActivityNameTD = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[6]"));
+    private final SelenideElement newGanttActivityNameInput = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[6]//input"));
+    private final SelenideElement newGanttActivityApproveDocTD = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[16]"));
     private final SelenideElement newGanttActivityApproveDocSelect = $(By.xpath("//select[contains(@class,'gantt-select')]"));
-    private final SelenideElement newGanttActivityStatus = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]//span"));
+    private final SelenideElement newGanttActivityStatusTitle = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]//td[2]//div"));
+    private final SelenideElement newGanttActivityStatusIndicator = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]//td[2]//span"));
 
     //Контракты
     private final SelenideElement addContractButton = $(By.xpath("//div//a[@data-tooltip = 'Контракт']"));
@@ -105,7 +106,7 @@ public class ProjectPage extends BasePage {
     private final SelenideElement firstFoundIndicator = $x("//div[@name='KPIs']//tbody/tr[1]/td[2]");
 
     //Таблицы результатов
-    private final SelenideElement projectResultsTab =$(By.xpath("//a[contains(text(),'Ведение результатов проекта')]"));
+    private final SelenideElement projectResultsTab =$(By.xpath("//span[contains(text(),'Ведение результатов проекта')]"));
     private final SelenideElement linkedKPAndResultsTableTab = $(By.xpath("//span[contains(text(),'Связь результатов и КП проекта')]"));
     private final SelenideElement departmentalResultsTable = $(By.xpath("//div[@name='Result']"));
     private final SelenideElement departmentalResultsHeader = $(By.xpath("//*[text() = 'Результаты проекта']"));
@@ -137,8 +138,8 @@ public class ProjectPage extends BasePage {
     private final SelenideElement linkedFederalResultsTD = $(By.xpath("//div[@name='FederalResult']//td[5]"));
 
     //Таблица Связь результатов и КП проекта
-    private final SelenideElement editInKPAndResultsLinkedTableButton = $(By.xpath("//div[@id='PointResultEditBtn']"));
-    private final SelenideElement cancelInKPAndResultsLinkedTableChangesButton = $(By.xpath("//div[@id='PointResultCancelBtn']"));
+    private final SelenideElement editInKPAndResultsLinkedTableButton = $("#PointResultEditBtn");
+    private final SelenideElement cancelInKPAndResultsLinkedTableChangesButton = $("#PointResultCancelBtn");
 
     //Таблица Риски и возможности
     private  final SelenideElement addRiskButton = $(By.xpath("//div[@name='Risks']//a[@data-tooltip='Добавить']"));
@@ -474,7 +475,7 @@ public class ProjectPage extends BasePage {
             sleep(2000);
             editInKPAndResultsLinkedTableButton.click();
             //Нажатие по полю Тип КТ/Меропрития*
-            $(By.xpath("//div[@id='ProjectViewFormtab-resultlink']//td[3]")).doubleClick();
+            $(By.xpath("//div[@id='PointResultContainer']//td[3]")).doubleClick();
             sleep(1000);
             //Извлекаем все значения из выпадающего меню в список
             List dropDownValues = $$(By.xpath("//div[@class='k-animation-container']//li/span")).texts();
@@ -686,8 +687,8 @@ public class ProjectPage extends BasePage {
         newGanttActivityApproveDocTD.click();
         $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).click();
         saveGanttButton.click();
-        newGanttActivityStatus.shouldHave(attribute("title", "В работе по плану"));
-        newGanttActivityStatus.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
+        newGanttActivityStatusTitle.shouldHave(attribute("title", "В работе по плану"));
+        newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
         switchTo().defaultContent();
     }
 
@@ -702,8 +703,8 @@ public class ProjectPage extends BasePage {
         newGanttActivityApproveDocTD.click();
         $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).click();
         saveGanttButton.click();
-        newGanttActivityStatus.shouldHave(attribute("title", "В работе по плану"));
-        newGanttActivityStatus.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
+        newGanttActivityStatusTitle.shouldHave(attribute("title", "В работе по плану"));
+        newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
         switchTo().defaultContent();
     }
 
@@ -726,8 +727,8 @@ public class ProjectPage extends BasePage {
         $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).click();
         clickToDownEntityLevel();
         saveGanttButton.click();
-        newGanttActivityStatus.shouldHave(attribute("title", "В работе по плану"));
-        newGanttActivityStatus.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
+        newGanttActivityStatusTitle.shouldHave(attribute("title", "В работе по плану"));
+        newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
         switchTo().defaultContent();
     }
 
@@ -735,28 +736,28 @@ public class ProjectPage extends BasePage {
     public void checkPointStatus (String status) {
         switchTo().frame("ganttframe");
         if (status.equals("В работе")) {
-            newGanttActivityStatus.shouldHave(attribute("title", "В работе по плану"),
-                    cssValue("color", "rgba(102, 102, 102, 1)"));
+            newGanttActivityStatusTitle.shouldHave(attribute("title", "В работе по плану"));
+            newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
         }
         if (status.equals("Выполнено")) {
-            newGanttActivityStatus.shouldHave(attribute("title", "Выполнено"));
-            newGanttActivityStatus.shouldHave(cssValue("color", "rgba(95, 175, 97, 1)"));
+            newGanttActivityStatusTitle.shouldHave(attribute("title", "Выполнено"));
+            newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(95, 175, 97, 1)"));
         }
         if (status.equals("Подтверждена")) {
-            newGanttActivityStatus.shouldHave(attribute("title", "Подтверждена"));
-            newGanttActivityStatus.shouldHave(cssValue("color", "rgba(95, 175, 97, 1)"));
+            newGanttActivityStatusTitle.shouldHave(attribute("title", "Подтверждено"));
+            newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(95, 175, 97, 1)"));
         }
         if (status.equals("Просрочено")) {
-            newGanttActivityStatus.shouldHave(attribute("title", "Просрочено (дата планового окончания уже прошла)"));
-            newGanttActivityStatus.shouldHave(cssValue("color", "rgba(255, 89, 64, 1)"));
+            newGanttActivityStatusTitle.shouldHave(attribute("title", "Просрочено (дата планового окончания уже прошла)"));
+            newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(255, 89, 64, 1)"));
         }
         if (status.equals("Отменена")) {
-            newGanttActivityStatus.shouldHave(attribute("title", "Отменена"));
-            newGanttActivityStatus.shouldHave(cssValue("color", "rgba(68, 68, 68, 1)"));
+            newGanttActivityStatusTitle.shouldHave(attribute("title", "Отменено"));
+            newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(68, 68, 68, 1)"));
         }
         if (status.equals("Прогноз срыва сроков")) {
-            newGanttActivityStatus.shouldHave(attribute("title", "Прогноз срыва сроков (прогноз окончания позже плана)"));
-            newGanttActivityStatus.shouldHave(cssValue("color", "rgba(255, 210, 70, 1)"));
+            newGanttActivityStatusTitle.shouldHave(attribute("title", "Прогноз срыва сроков"));
+            newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(255, 210, 70, 1)"));
         }
         switchTo().defaultContent();
     }

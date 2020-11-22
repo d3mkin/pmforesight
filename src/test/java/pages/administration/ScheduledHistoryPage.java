@@ -12,7 +12,7 @@ public class ScheduledHistoryPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.SCHEDULED_HISTORY,
                 "Запланированные задачи",
-                $(By.xpath("//a[text()=\"Запланированные задачи. История выполнения\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

@@ -12,7 +12,7 @@ public class SystemTourPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.SYSTEM_TOUR,
                 "Тур по странице",
-                $(By.xpath("//a[text()=\"Тур по странице\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

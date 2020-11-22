@@ -15,7 +15,7 @@ import static com.codeborne.selenide.Selenide.sleep;
 
 public class GoalPage extends BasePage {
     private final SelenideElement nameInput_EditForm = $(By.xpath("//input[@id='Name']"));
-    private final SelenideElement managementLevelInput_EditForm = $(By.xpath("//div[@class='controls']//span[@class='k-dropdown-wrap k-state-default']"));
+    private final SelenideElement managementLevelInput_EditForm = $("#control-group-ControlLevelId .k-input");
     private final SelenideElement editorsInput_EditForm = $(By.xpath("//div[@class='k-multiselect-wrap k-floatwrap']"));
     private final SelenideElement addIndicatorButton = $(By.xpath("//inlinetableview[@data-view-name='GoalKPIView']//a[@data-tooltip = 'Добавить']"));
     private final SelenideElement searchIndicatorInput = $(By.xpath("//inlinetableview[@data-view-name='GoalKPIView']//input[@placeholder='Поиск...']"));

@@ -12,7 +12,7 @@ public class HistoryTransitionStatusAndStagePage extends AbstractAdminPage {
     public HistoryTransitionStatusAndStagePage() {
         super(Configuration.baseUrl + URLS.HISTORY_TRANSITION_STATUS_AND_STAGES,
                 "Переход между статусами. Комментарий",
-                $(By.xpath("//a[text()=\"Переход между статусами. Комментарий\"]")),
+                $(".f-page__grid-name"),
                 $(".f-grid")
         );
     }

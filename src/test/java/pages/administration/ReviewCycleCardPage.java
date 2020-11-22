@@ -12,7 +12,7 @@ public class ReviewCycleCardPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.REVIEW_CYCLE_CARD,
                 "Карточки ЗИ",
-                $(By.xpath("//a[text()=\"Карточки ЗИ\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

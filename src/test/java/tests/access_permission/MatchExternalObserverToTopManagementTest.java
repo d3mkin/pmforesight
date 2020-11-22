@@ -9,7 +9,7 @@ import model.User;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import pages.administration.AdministrationPage;
-import pages.administration.GroupsPage;
+import pages.administration.GroupPage;
 import pages.auth.LogoutPage;
 import pages.auth.SingInPage;
 import pages.directories.EmployeesRegistry;
@@ -29,7 +29,7 @@ public class MatchExternalObserverToTopManagementTest extends BaseTest {
     private long currentTime;
     private Employee employee;
     private AdministrationPage adminPage;
-    private GroupsPage groups;
+    private GroupPage groups;
 
     @BeforeEach
     public void setupPages() {
@@ -40,7 +40,7 @@ public class MatchExternalObserverToTopManagementTest extends BaseTest {
         currentTime = System.currentTimeMillis();
         employee = new Employee();
         adminPage = new AdministrationPage();
-        groups = new GroupsPage();
+        groups = new GroupPage();
     }
 
     @AfterEach

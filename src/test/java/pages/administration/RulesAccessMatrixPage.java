@@ -12,7 +12,7 @@ public class RulesAccessMatrixPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.RULES_ACCESS_MATRIX,
                 "Правило матрицы доступа",
-                $(By.xpath("//a[text()=\"Правило матрицы доступа\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

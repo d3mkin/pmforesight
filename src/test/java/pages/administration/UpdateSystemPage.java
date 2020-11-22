@@ -12,16 +12,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class UpdateSystemPage extends AbstractAdminPage {
     public UpdateSystemPage() {
         super(
-                Configuration.baseUrl + URLS.SCHEDULED_HISTORY,
-                "Установка обновлений",
-                $(By.xpath("//a[text()=\"Установка обновлений\"]")),
+                Configuration.baseUrl + URLS.UPDATE_SYSTEM,
+                "Обновление",
+                $(".f-page__name"),
                 $("#mainBodyContainer")
         );
     }
 
     @Override
-    @Step("Проверка отображения страницы 403 при открытии страницы 'Установка обновлений'")
+    @Step("Проверка отображения страницы 'Установка обновлений'")
     public void shouldBePage() {
-        assertTrue(WebDriverRunner.url().contains("Error/403"));
+        shouldHavePageName();
+        shouldHaveContent();
+        shouldHaveRightUrlAndTitle();
     }
 }

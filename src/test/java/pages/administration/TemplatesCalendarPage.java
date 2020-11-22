@@ -11,7 +11,7 @@ public class TemplatesCalendarPage extends AbstractAdminPage {
     public TemplatesCalendarPage() {
         super(Configuration.baseUrl + URLS.TEMPLATE_CALENDAR_PLAN,
                 "Шаблон плана",
-                $(By.xpath("//a[text()=\"Шаблон плана\"]")),
+                $(".f-page__grid-name"),
                 $(".f-grid")
         );
     }

@@ -2,7 +2,6 @@ package tests.menu;
 
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
-import org.junit.Ignore;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import helpers.TestSuiteName;
@@ -36,7 +35,6 @@ public class UIAdminCheckTest extends BaseTest {
         new LogoutPage().open();
     }
 
-    @Disabled
     @ParameterizedTest(name = "Отображение и работоспособность функций страницы Администрирование")
     @MethodSource("helpers.UserProvider#mainFA")
     //TODO: Завести задачу в JIRA

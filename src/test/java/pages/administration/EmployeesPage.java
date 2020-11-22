@@ -13,7 +13,7 @@ public class EmployeesPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.EMPLOYEES,
                 "Пользователь",
-                $(By.xpath("//a[text()=\"Сотрудники\"]")),
+                $(".f-page__grid-name"),
                 $(".f-grid")
         );
     }

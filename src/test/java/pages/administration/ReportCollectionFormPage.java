@@ -12,7 +12,7 @@ public class ReportCollectionFormPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.REPORT_COLLECTION_FORM,
                 "Отчетные формы",
-                $(By.xpath("//a[text()=\"Отчетные формы\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

@@ -13,7 +13,7 @@ public class UnitsPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.UNITS,
                 "Подразделения",
-                $(By.xpath("//a[text()=\"Подразделения\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

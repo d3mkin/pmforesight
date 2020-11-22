@@ -12,7 +12,7 @@ public class PageElementsPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.PAGE_ELEMENTS,
                 "MetaPageElement",
-                $(By.xpath("//a[text()=\"MetaPageElement\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

@@ -12,7 +12,7 @@ public class ScheduledTaskPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.SCHEDULED_TASK,
                 "Запланированные задачи",
-                $(By.xpath("//a[text()=\"Запланированные задачи\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

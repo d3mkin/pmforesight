@@ -12,7 +12,7 @@ public class ReviewersPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.REVIEWERS,
                 "Согласующий",
-                $(By.xpath("//a[text()=\"Согласующие\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

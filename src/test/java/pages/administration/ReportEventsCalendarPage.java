@@ -12,7 +12,7 @@ public class ReportEventsCalendarPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.REPORT_EVENTS_CALENDAR,
                 "Календарь отчетных мероприятий",
-                $(By.xpath("//a[text()=\"Календарь отчетных мероприятий\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

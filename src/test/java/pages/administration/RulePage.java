@@ -12,7 +12,7 @@ public class RulePage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.RULES,
                 "Правило",
-                $(By.xpath("//a[text()=\"Правило\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

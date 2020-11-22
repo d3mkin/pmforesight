@@ -12,7 +12,7 @@ public class ReportEventsPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.REPORT_EVENTS,
                 "Отчетные мероприятия",
-                $(By.xpath("//a[text()=\"Отчетные мероприятия\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

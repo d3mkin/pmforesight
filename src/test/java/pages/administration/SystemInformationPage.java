@@ -11,7 +11,7 @@ public class SystemInformationPage extends AbstractAdminPage {
     public SystemInformationPage() {
         super(
                 Configuration.baseUrl + URLS.SYSTEM_INFORMATION,
-                "Система",
+                "Настройки системы",
                 $(".f-page__name"),
                 $("#mainBodyContainer")
         );

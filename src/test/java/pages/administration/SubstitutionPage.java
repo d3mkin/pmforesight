@@ -15,7 +15,7 @@ public class SubstitutionPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.SUBSTITUTION,
                 "Замещение",
-                $(By.xpath("//a[text()=\"Замещение\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

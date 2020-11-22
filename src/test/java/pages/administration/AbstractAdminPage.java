@@ -31,10 +31,10 @@ public abstract class AbstractAdminPage {
 
     @Step("Проверка отображения корректности урла и заголовка страницы")
     public void shouldHaveRightUrlAndTitle() {
-        Selenide.sleep(1000);
-        assertEquals(WebDriverRunner.getWebDriver().getTitle(), pageTitle,
+        Selenide.sleep(5000);
+        assertEquals(pageTitle,WebDriverRunner.getWebDriver().getTitle() ,
                 "Название страницы не соответствует " + pageTitle);
-        assertEquals(WebDriverRunner.url(), url,
+        assertEquals(url, WebDriverRunner.url(),
                 "Урл страницы не соответствует " + url);
     }
 
@@ -43,7 +43,7 @@ public abstract class AbstractAdminPage {
         content.shouldBe(visible);
     }
 
-    @Step("Проверка корректности отображения названия реестра")
+    @Step("Проверка отображения названия реестра")
     public void shouldHavePageName() {
         name.shouldBe(visible);
     }

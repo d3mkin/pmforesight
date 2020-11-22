@@ -12,7 +12,7 @@ public class NotificationsPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.NOTIFICATIONS,
                 "Почта. Настройки",
-                $(By.xpath("//a[text()=\"Рассылки\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

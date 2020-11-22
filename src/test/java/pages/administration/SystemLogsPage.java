@@ -12,7 +12,7 @@ public class SystemLogsPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.SYSTEM_LOGS,
                 "Логи",
-                $(By.xpath("//a[text()=\"Логи\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

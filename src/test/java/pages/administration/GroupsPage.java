@@ -1,30 +1,27 @@
 package pages.administration;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.Configuration;
+import helpers.URLS;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import model.User;
-import pages.elements.BasePage;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 
-public class GroupsPage extends BasePage {
-    private final SelenideElement searchInput = $(By.xpath("//input[@placeholder='Поиск']"));
-    private final SelenideElement firstRaw = $(By.xpath("//div[@class='grid-canvas']/div"));
-    private final SelenideElement groupMemberInput = $(By.xpath("//div[@id='control-group-GroupMember']//input[@class='k-input']"));
+public class GroupsPage extends AbstractAdminPage {
 
-    @Step ("Добавить в группу {groupName} пользователя {userName}")
-    public void addEmployeeToGroup(String groupName, User user) {
+    public GroupsPage() {
+        super(
+                Configuration.baseUrl + URLS.GROUPS,
+                "Группа",
+                $(".f-page__grid-name"),
+                $(".f-grid")
+        );
+    }
 
-        searchInput.clear();
-        searchInput.sendKeys(groupName);
-        firstRaw.shouldBe(Condition.visible).click();
-        sleep(2000);
-        searchAndSelectFirstFromMultiSelect(groupMemberInput, user.getName());
-        clickClose();
-        closeDialog();
-        sleep(2000);
+    @Override
+    @Step("Проверка отображения страницы 'Группы'")
+    public void shouldBePage() {
+        shouldHavePageName();
+        shouldHaveContent();
+        shouldHaveRightUrlAndTitle();
     }
 }

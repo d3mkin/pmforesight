@@ -12,7 +12,7 @@ public class PagesPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.PAGES,
                 "MetaPage",
-                $(By.xpath("//a[text()=\"MetaPage\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

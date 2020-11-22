@@ -12,7 +12,7 @@ public class IndicatorsPage extends AbstractAdminPage {
     public IndicatorsPage() {
         super(Configuration.baseUrl + URLS.INDICATORS,
                 "Индикаторы сущностей",
-                $(By.xpath("//a[text()=\"Индикаторы сущностей\"]")),
+                $(".f-page__grid-name"),
                 $(".f-grid")
         );
     }

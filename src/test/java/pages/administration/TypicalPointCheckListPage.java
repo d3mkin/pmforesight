@@ -13,7 +13,7 @@ public class TypicalPointCheckListPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.TYPICAL_POINT_CHECK_LIST,
                 "Типовой чек-лист",
-                $(By.xpath("//a[text()=\"Типовой чек-лист\"]")),
+                $(".f-page__grid-name"),
                 $(".f-grid")
         );
     }

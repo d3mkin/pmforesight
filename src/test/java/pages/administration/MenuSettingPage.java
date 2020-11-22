@@ -12,7 +12,7 @@ public class MenuSettingPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.MENU_SETTING,
                 "Меню. Список",
-                $(By.xpath("//a[text()=\"Меню. Список\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

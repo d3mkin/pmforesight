@@ -25,9 +25,12 @@ public class CreateContractorTests extends BaseTest {
     private ContractorsRegistry contractRegistry;
     private CreateContractorsPage createModal;
     private Contractor contractor;
+    private SingInPage singIn;
 
     @BeforeEach
     public void setupPages() {
+        singIn = new SingInPage();
+        singIn.open();
         contractRegistry = new ContractorsRegistry();
         createModal = new CreateContractorsPage();
         long currentTime = System.currentTimeMillis();
@@ -40,15 +43,14 @@ public class CreateContractorTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @Disabled
     @ParameterizedTest (name = "Создание сущности Подрядчика из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки 'Сохранить'")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-134")
     @TmsLink("580")
     public void CreateContractorsShouldHaveMessageAboutRequiredFieldsTest(User user) {
         parameter("Пользователь", user.getName());
+        singIn.asUser(user);
         contractRegistry.open();
-        new SingInPage().asUser(user);
         contractRegistry.controlPanel().clickAddButton();
         createModal.shouldBeOpened();
         createModal.shouldHaveTitle("Подрядчики");

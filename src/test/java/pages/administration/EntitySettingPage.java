@@ -14,15 +14,17 @@ public class EntitySettingPage extends AbstractAdminPage {
     public EntitySettingPage() {
         super(
                 Configuration.baseUrl + URLS.ENTITY_SETTING,
-                "Сущности",
-                $(By.xpath("//a[text()=\"Сущности\"]")),
+                "Настройка сущностей",
+                $(".f-page__name"),
                 $("#mainBodyContainer")
         );
     }
 
     @Override
-    @Step("Проверка отображения страницы 403 при открытии страницы 'Сущности'")
+    @Step("Проверка отображения страницы 'Сущности'")
     public void shouldBePage() {
-        assertTrue(WebDriverRunner.url().contains("Error/403"));
+        shouldHavePageName();
+        shouldHaveContent();
+        shouldHaveRightUrlAndTitle();
     }
 }

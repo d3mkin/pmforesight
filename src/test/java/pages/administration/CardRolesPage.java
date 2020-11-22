@@ -13,7 +13,7 @@ public class CardRolesPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.CARD_ROLES,
                 "Роль",
-                $(By.xpath("//a[text()=\"Реестр ролей карточек\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

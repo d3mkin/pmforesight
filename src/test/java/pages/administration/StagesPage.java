@@ -14,7 +14,7 @@ public class StagesPage extends AbstractAdminPage {
     public StagesPage() {
         super(
                 Configuration.baseUrl + URLS.STAGES,
-                "Стадии",
+                "Стадия жизненного цикла",
                 $(".f-page__grid-name"),
                 $(".f-grid")
         );

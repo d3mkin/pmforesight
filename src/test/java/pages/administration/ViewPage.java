@@ -12,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ViewPage extends AbstractAdminPage {
     public ViewPage() {
         super(
-                Configuration.baseUrl + URLS.ENTITY_SETTING,
-                "Представления",
-                $(By.xpath("//a[text()=\"Представления\"]")),
+                Configuration.baseUrl + URLS.VIEW,
+                "Настройка представлений",
+                $(".f-page__name"),
                 $("#mainBodyContainer")
         );
     }
@@ -22,6 +22,8 @@ public class ViewPage extends AbstractAdminPage {
     @Override
     @Step("Проверка отображения страницы 403 при открытии страницы 'Представления'")
     public void shouldBePage() {
-        assertTrue(WebDriverRunner.url().contains("Error/403"));
+        shouldHavePageName();
+        shouldHaveContent();
+        shouldHaveRightUrlAndTitle();
     }
 }

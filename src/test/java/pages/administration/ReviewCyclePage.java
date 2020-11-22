@@ -12,7 +12,7 @@ public class ReviewCyclePage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.REVIEW_CYCLE,
                 "Цикл согласования",
-                $(By.xpath("//a[text()=\"Циклы согласования\"]")),
+                $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );
     }

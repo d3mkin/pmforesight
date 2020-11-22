@@ -11,7 +11,7 @@ public class TypicalKTPage extends AbstractAdminPage {
     public TypicalKTPage() {
         super(Configuration.baseUrl + URLS.TYPICAL_KT,
                 "Типовая контрольная точка",
-                $(By.xpath("//a[text()=\"Типовые КТ\"]")),
+                $(".f-page__grid-name"),
                 $(".f-grid"));
     }
 

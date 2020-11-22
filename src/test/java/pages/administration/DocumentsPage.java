@@ -19,7 +19,7 @@ public class DocumentsPage extends AbstractAdminPage {
         super(
                 Configuration.baseUrl + URLS.DOCUMENTS,
                 "Документ",
-                $(By.xpath("//a[text()=\"Документы\"]")),
+                $(".f-page__grid-name"),
                 $(".f-grid__grid"));
         controlPanel = new ControlPanel();
     }
@@ -54,7 +54,7 @@ public class DocumentsPage extends AbstractAdminPage {
         controlPanel.shouldHaveEditByClick();
         controlPanel.shouldHaveExpandAll();
         controlPanel.shouldHaveHideAll();
-        controlPanel.shouldHaveExport();
+        //controlPanel.shouldHaveExport();
         controlPanel.shouldHaveUpdate();
         controlPanel.shouldHaveExtendFilter();
         controlPanel.shouldHaveReset();
