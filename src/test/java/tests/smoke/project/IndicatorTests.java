@@ -23,6 +23,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static io.qameta.allure.Allure.parameter;
 
+//TODO: сделать параметризованные тесты
 @Story(TestSuiteName.INDICATORS)
 public class IndicatorTests extends BaseTest {
     private SingInPage singIn;
@@ -97,14 +98,13 @@ public class IndicatorTests extends BaseTest {
         projectPage.openIndicatorCard();
         projectPage.getBrowserTabs();
         //Переключение на другую вкладку
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
         indicatorPage.fillIndicatorsValues(testIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkValuesAreDisplayed(testIndicator);
-        indicatorPage.getBrowserTabs();
         indicatorPage.closeCurrentBrowserTab();
-        indicatorPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
     }
 
     @ParameterizedTest(name = "Общий процент достижения плана %: Возрастающего показателя")
@@ -134,7 +134,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.openIndicatorCard();
         projectPage.getBrowserTabs();
         //Переключение на другую вкладку
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
         indicatorPage.fillIndicatorsValues(testIndicator);
         indicatorPage.clickSaveAndClose();
@@ -143,9 +143,8 @@ public class IndicatorTests extends BaseTest {
         //Проверяем для Возрастающего и Плановое значение <= Базового
         indicatorPage.changeBasicValue(testIndicator, "11");
         indicatorPage.checkPercentageOfAchievement(testIndicator);
-        indicatorPage.getBrowserTabs();
         indicatorPage.closeCurrentBrowserTab();
-        indicatorPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
     }
 
     @ParameterizedTest(name =  "Общий процент достижения плана %: Убывающего показателя")
@@ -175,7 +174,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.openIndicatorCard();
         projectPage.getBrowserTabs();
         //Переключение на другую вкладку
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
         indicatorPage.fillIndicatorsValues(testIndicator);
         indicatorPage.clickSaveAndClose();
@@ -184,9 +183,8 @@ public class IndicatorTests extends BaseTest {
         //Проверяем для Убывающего и Плановое значение >= Базового
         indicatorPage.changeBasicValue(testIndicator, "7");
         indicatorPage.checkPercentageOfAchievement(testIndicator);
-        indicatorPage.getBrowserTabs();
         indicatorPage.closeCurrentBrowserTab();
-        indicatorPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
     }
 
     @ParameterizedTest(name = "Общий процент достижения плана %: Фиксированного показателя")
@@ -216,7 +214,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.openIndicatorCard();
         projectPage.getBrowserTabs();
         //Переключение на другую вкладку
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
         indicatorPage.fillIndicatorsValues(testIndicator);
         indicatorPage.clickSaveAndClose();
@@ -225,9 +223,8 @@ public class IndicatorTests extends BaseTest {
         //Проверяем для Фиксированного и Плановое значение == Базового
         indicatorPage.changeBasicValue(testIndicator, "10");
         indicatorPage.checkPercentageOfAchievement(testIndicator);
-        indicatorPage.getBrowserTabs();
         indicatorPage.closeCurrentBrowserTab();
-        indicatorPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
     }
 
     @ParameterizedTest(name = "Расчет индикатора периода: Возрастающий показатель")
@@ -257,7 +254,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.shouldHaveIndicator(testIndicator.getName());
         projectPage.openIndicatorCard();
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
         //Проверка кейса 'Нет данных'
         indicatorPage.fillIndicatorsValues(testIndicator);
@@ -301,7 +298,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.checkPeriodIndicatorStatus(testIndicator);
         indicatorPage.getBrowserTabs();
         indicatorPage.closeCurrentBrowserTab();
-        indicatorPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
     }
 
     @ParameterizedTest(name = "Расчет индикатора периода: Убывающий показатель")
@@ -331,7 +328,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.shouldHaveIndicator(testIndicator.getName());
         projectPage.openIndicatorCard();
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
         //Проверка кейса 'Нет данных'
         indicatorPage.fillIndicatorsValues(testIndicator);
@@ -375,7 +372,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.checkPeriodIndicatorStatus(testIndicator);
         indicatorPage.getBrowserTabs();
         indicatorPage.closeCurrentBrowserTab();
-        indicatorPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
     }
 
     @ParameterizedTest(name = "Расчет индикатора периода: Фиксированный показатель")
@@ -405,7 +402,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.shouldHaveIndicator(testIndicator.getName());
         projectPage.openIndicatorCard();
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
         //Проверка кейса 'Нет данных'
         indicatorPage.fillIndicatorsValues(testIndicator);
@@ -441,9 +438,8 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.fillIndicatorsValues(testIndicator);
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkPeriodIndicatorStatus(testIndicator);
-        indicatorPage.getBrowserTabs();
         indicatorPage.closeCurrentBrowserTab();
-        indicatorPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
     }
 
     @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Год, ВКЛЮЧАЯ текущий")
@@ -470,7 +466,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.shouldHaveIndicator(testIndicator.getName());
         projectPage.openIndicatorCard();
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
         //'Срыв срока'
         indicatorPage.fillIndicatorsValues(testIndicator);
@@ -487,7 +483,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkPeriodIndicatorStatus(testIndicator);
         projectPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
         projectPage.openIndicatorsTab();
         $(By.xpath("//div[@name='KPIs']//td/span")).shouldBe(visible).shouldHave(attribute("data-tooltip", "Не достигнут на 2020 г."),
@@ -519,7 +515,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.shouldHaveIndicator(testIndicator.getName());
         projectPage.openIndicatorCard();
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
         //'Достигнут' 1ое полугодие
         indicatorPage.fillIndicatorsValues(testIndicator);
@@ -546,7 +542,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkPeriodIndicatorStatus(testIndicator);
         projectPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
         projectPage.openIndicatorsTab();
         $(By.xpath("//div[@name='KPIs']//td/span")).shouldBe(visible).shouldHave(attribute("data-tooltip", "Нет данных на П 1 2020 г."),
@@ -578,7 +574,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.shouldHaveIndicator(testIndicator.getName());
         projectPage.openIndicatorCard();
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
         //'Достигнут' 1ый квартал 2020
         indicatorPage.fillIndicatorsValues(testIndicator);
@@ -605,7 +601,8 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkPeriodIndicatorStatus(testIndicator);
         projectPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
+
         Selenide.refresh();
         projectPage.openIndicatorsTab();
         $(By.xpath("//div[@name='KPIs']//td/span")).shouldBe(visible).shouldHave(attribute("data-tooltip", "Срыв достижения на Кв 2 2020 г."),
@@ -637,7 +634,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.shouldHaveIndicator(testIndicator.getName());
         projectPage.openIndicatorCard();
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
         //'Срыв срока' Март 2020
         indicatorPage.fillIndicatorsValues(testIndicator);
@@ -664,7 +661,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         indicatorPage.checkPeriodIndicatorStatus(testIndicator);
         projectPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
         projectPage.openIndicatorsTab();
         $(By.xpath("//div[@name='KPIs']//td/span")).shouldBe(visible).shouldHave(attribute("data-tooltip", "Достигнут на Май 2020 г."),

@@ -16,6 +16,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public abstract class BasePage {
     private ArrayList<String> tabs;
+     private String currentTab;
     protected SelenideElement window = $(".k-window");
     protected SelenideElement header = window.$(".k-window-titlebar");
     protected SelenideElement windowName = header.$(".k-window-title");
@@ -60,13 +61,23 @@ public abstract class BasePage {
 
     //Методы по работе с вкладками браузера
     //Получаем и записываем id вкладок браузера в список
+    @Step ("Получить список открытых вкладок браузера")
     public void getBrowserTabs () {
         tabs = new ArrayList<String>(WebDriverRunner.getWebDriver().getWindowHandles());
+        currentTab = WebDriverRunner.getWebDriver().getWindowHandle();
     }
 
     //Нумерация начинается с 0 - поэтому первоначальная вкладка будет '0', а новая будет '1'
     public void switchToBrowserTab(int numberTab){
         WebDriverRunner.getWebDriver().switchTo().window(tabs.get(numberTab));
+    }
+
+    public void switchToNextBrowserTab(){
+        WebDriverRunner.getWebDriver().switchTo().window(tabs.get(tabs.size()-1));
+    }
+
+    public void switchToPreviousBrowserTab(){
+        WebDriverRunner.getWebDriver().switchTo().window(currentTab);
     }
 
     @Step("Закрыть текущую вкладку в браузере")
