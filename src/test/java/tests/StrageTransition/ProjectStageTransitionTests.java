@@ -1,4 +1,4 @@
-package tests.smoke.project;
+package tests.StrageTransition;
 
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
@@ -173,11 +173,11 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkEntityIsDisplayedInGantt("Проект запущен");
         projectPage.findInGanttAndOpenEntityPage("Проект запущен");
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         //Закрываем вкладку браузера и переключаем фокус WebDriver на предыдущую вкладку
         pointPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
         //Переводим на стадию Подготовка, когда все условия выполнены
         projectPage.moveStageTo("На следующую стадию");
         modalDialog.clickAcceptNextStageTransition();
@@ -198,10 +198,10 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkEntityIsDisplayedInGantt("Выполнение работ разрешено");
         projectPage.findInGanttAndOpenEntityPage("Выполнение работ разрешено");
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         pointPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
         projectPage.openDocumentsTab();
         projectPage.expandDocuments();
         projectPage.clickToUploadProjectPassport(fileToUpload);
@@ -225,10 +225,10 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkEntityIsDisplayedInGantt("Результаты работ приняты");
         projectPage.findInGanttAndOpenEntityPage("Результаты работ приняты");
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         pointPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
         //Переводим на стадию Завершение, когда все условия выполнены
         projectPage.moveStageTo("На следующую стадию");
         modalDialog.clickAcceptNextStageTransition();
@@ -249,10 +249,10 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkEntityIsDisplayedInGantt("Проект закрыт");
         projectPage.findInGanttAndOpenEntityPage("Проект закрыт");
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         pointPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
         projectPage.openDocumentsTab();
         projectPage.clickToUploadFinalReport(fileToUpload);
         //Переводим на стадию Постпроектный мониторинг, когда все условия выполнены
@@ -274,10 +274,10 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkEntityIsDisplayedInGantt("Постпроектный мониторинг завершен");
         projectPage.findInGanttAndOpenEntityPage("Постпроектный мониторинг завершен");
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         pointPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
         //Переводим на стадию Архив, когда все условия выполнены
         projectPage.moveStageTo("На следующую стадию");
         modalDialog.clickAcceptNextStageTransition();

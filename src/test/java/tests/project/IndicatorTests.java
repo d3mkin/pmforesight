@@ -1,4 +1,4 @@
-package tests.smoke.project;
+package tests.project;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Story;

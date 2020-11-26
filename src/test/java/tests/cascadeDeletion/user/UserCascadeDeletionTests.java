@@ -1,4 +1,4 @@
-package tests.smoke.cascadeDeletion.user;
+package tests.cascadeDeletion.user;
 
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
@@ -8,7 +8,6 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import helpers.TestSuiteName;
-import helpers.UserProvider;
 import model.Employee;
 import model.User;
 import pages.auth.LogoutPage;

@@ -1,4 +1,4 @@
-package tests.smoke.project;
+package tests.StrageTransition;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Story;
@@ -67,10 +67,10 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.clickToMaximizeOrMinimizeGantt();
         projectPage.findInGanttAndOpenEntityPage("Тестовая КТ");
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         projectPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
         projectPage.checkCurrentProjectStage("Инициирование");
         projectPage.openActivityTab();
@@ -92,11 +92,11 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.clickToMaximizeOrMinimizeGantt();
         projectPage.findInGanttAndOpenEntityPage("Тестовая КТ");
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         pointPage.backInProgressPointAndUploadFile("31.12.2020", fileToUpload);
         projectPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
         projectPage.checkCurrentProjectStage("Инициирование");
         projectPage.openActivityTab();
@@ -118,10 +118,10 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.clickToMaximizeOrMinimizeGantt();
         projectPage.findInGanttAndOpenEntityPage("Тестовая КТ");
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         pointPage.cancelPointAndUploadFile(currentDate, fileToUpload);
         projectPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
         projectPage.checkCurrentProjectStage("Инициирование");
         projectPage.openActivityTab();
@@ -143,11 +143,11 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.clickToMaximizeOrMinimizeGantt();
         projectPage.findInGanttAndOpenEntityPage("Тестовая КТ");
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         pointPage.cancelPointAndUploadFile(currentDate, fileToUpload);
         pointPage.backInProgressPointAndUploadFile("31.12.2020", fileToUpload);
         projectPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
         projectPage.checkCurrentProjectStage("Инициирование");
         projectPage.openActivityTab();
@@ -170,11 +170,11 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.clickToMaximizeOrMinimizeGantt();
         projectPage.findInGanttAndOpenEntityPage("Тестовая КТ");
         projectPage.getBrowserTabs();
-        projectPage.switchToBrowserTab(1);
+        projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         pointPage.approvePointAndUploadFile(fileToUpload);
         projectPage.closeCurrentBrowserTab();
-        projectPage.switchToBrowserTab(0);
+        projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
         projectPage.checkCurrentProjectStage("Инициирование");
         projectPage.openActivityTab();

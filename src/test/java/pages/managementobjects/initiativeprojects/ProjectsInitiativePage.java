@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import model.ProjectsInitiative;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -39,35 +39,35 @@ public class ProjectsInitiativePage extends BasePage {
     @Step("В модальном окне создания Предложения по проекту заполнить обязательные поля на вкладке \"Общая информация\"")
     public void fillGeneralInfo(ProjectsInitiative projectsInitiative) {
         tabCommonInfo.click();
-        typeOrSkip(name, projectsInitiative.getName());
-        searchInSelectAndClickToFirst(nameOfDirection, projectsInitiative.getNameOfDirection());
-        searchInSelectAndClickToFirst(typeOfProject, projectsInitiative.getTypeOfProject());
-        searchInSelectAndClickToFirst(portfolio_program, projectsInitiative.getPortfolio_program());
-        typeOrSkip(commentOnPortfolio_program, projectsInitiative.getCommentOnPortfolio_program());
-        typeOrSkip(projectBackground, projectsInitiative.getProjectBackground());
-        typeOrSkip(formalReasonForInitiationLocation, projectsInitiative.getFormalReasonForInitiationLocation());
+        typeText(name, projectsInitiative.getName());
+        searchAndSelectFirstFromSelect(nameOfDirection, projectsInitiative.getNameOfDirection());
+        searchAndSelectFirstFromSelect(typeOfProject, projectsInitiative.getTypeOfProject());
+        searchAndSelectFirstFromSelect(portfolio_program, projectsInitiative.getPortfolio_program());
+        typeText(commentOnPortfolio_program, projectsInitiative.getCommentOnPortfolio_program());
+        typeText(projectBackground, projectsInitiative.getProjectBackground());
+        typeText(formalReasonForInitiationLocation, projectsInitiative.getFormalReasonForInitiationLocation());
         typeDate(projectStartDate, projectsInitiative.getProjectStartDate());
         typeDate(projectDateEnd, projectsInitiative.getProjectDateEnd());
     }
 
     @Step("В модальном окне создания Предложения по проекту перейти на вкладку \"Дополнительно\" и заполнить обязательные поля")
     public void fillAdditionallyInfo(ProjectsInitiative projectsInitiative) {
-        typeOrSkip(restrictions, projectsInitiative.getRestrictions());
-        typeOrSkip(assumptionsAndProposals, projectsInitiative.getAssumptionsAndProposals());
-        searchInSelectAndClickToFirst(proposalOnTheFormOfImplementation, projectsInitiative.getProposalOnTheFormOfImplementation());
-        typeOrSkip(additionalInformation, projectsInitiative.getAdditionalInformation());
+        typeText(restrictions, projectsInitiative.getRestrictions());
+        typeText(assumptionsAndProposals, projectsInitiative.getAssumptionsAndProposals());
+        searchAndSelectFirstFromSelect(proposalOnTheFormOfImplementation, projectsInitiative.getProposalOnTheFormOfImplementation());
+        typeText(additionalInformation, projectsInitiative.getAdditionalInformation());
     }
 
     @Step("В модальном окне создания Предложения по проекту перейти на вкладку \"Роли\" и заполнить обязательные поля")
     public void fillRoleInfo(ProjectsInitiative projectsInitiative) {
         tabRoles.click();
-        searchInSelectAndClickToFirst(initiator,projectsInitiative.getInitiator());
-        searchInSelectAndClickToFirst(functionalCustomer,projectsInitiative.getFunctionalCustomer());
-        searchInSelectAndClickToFirst(curatorOfTheProject,projectsInitiative.getCuratorOfTheProject());
-        searchInSelectAndClickToFirst(projectManager,projectsInitiative.getProjectManager());
-        searchInSelectAndClickToFirst(mainExecutorsAndCoExecutorOfTheProject,projectsInitiative.getMainExecutorsAndCoExecutorOfTheProject());
-        searchInSelectAndClickToFirst(projectPlanningGroup,projectsInitiative.getProjectPlanningGroup());
-        searchInSelectAndClickToFirst(CPO,projectsInitiative.getCPO());
-        searchInSelectAndClickToFirst(secretaryPC,projectsInitiative.getSecretaryPC());
+        searchAndSelectFirstFromSelect(initiator,projectsInitiative.getInitiator());
+        searchAndSelectFirstFromSelect(functionalCustomer,projectsInitiative.getFunctionalCustomer());
+        searchAndSelectFirstFromSelect(curatorOfTheProject,projectsInitiative.getCuratorOfTheProject());
+        searchAndSelectFirstFromSelect(projectManager,projectsInitiative.getProjectManager());
+        searchAndSelectFirstFromSelect(mainExecutorsAndCoExecutorOfTheProject,projectsInitiative.getMainExecutorsAndCoExecutorOfTheProject());
+        searchAndSelectFirstFromSelect(projectPlanningGroup,projectsInitiative.getProjectPlanningGroup());
+        searchAndSelectFirstFromSelect(CPO,projectsInitiative.getCPO());
+        searchAndSelectFirstFromSelect(secretaryPC,projectsInitiative.getSecretaryPC());
     }
 }

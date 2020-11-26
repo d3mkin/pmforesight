@@ -5,7 +5,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import model.Goal;
 import model.Indicator;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -23,8 +23,8 @@ public class GoalPage extends BasePage {
 
     @Step("Заполнить карточку редактирования Цели")
     public void fillFields(Goal goal) {
-        typeOrSkip(nameInput_EditForm, goal.getName());
-        searchInSelectAndClickToFirstWithCheckDropDown(managementLevelInput_EditForm, goal.getManagementLevel());
+        typeText(nameInput_EditForm, goal.getName());
+        searchAndSelectFirstFromSelect(managementLevelInput_EditForm, goal.getManagementLevel());
         searchAndSelectFirstFromMultiSelect(editorsInput_EditForm, goal.getEditors());
     }
 

@@ -2,7 +2,7 @@ package pages.directories.courses;
 
 import com.codeborne.selenide.SelenideElement;
 import model.Courses;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
@@ -23,12 +23,12 @@ public class CreateCoursesPage extends BasePage {
 
     public void fillFields(Courses courses) {
         sleep(3000);
-        typeOrSkip(nameArea, courses.getName());
-        typeOrSkip(codCurse, courses.getCourseCode());
-        typeOrSkipNumeric(wrapDuration, duration, courses.getDuration());
-        typeOrSkip(programOfCurse, courses.getCourseProgram());
-        typeOrSkipNumeric(wrapWeight, weight, courses.getWeight());
-        typeOrSkip(editor, courses.getEditors());
-        typeOrSkip(descriptionArea, courses.getDescription());
+        typeText(nameArea, courses.getName());
+        typeText(codCurse, courses.getCourseCode());
+        typeNumeric(wrapDuration, duration, courses.getDuration());
+        typeText(programOfCurse, courses.getCourseProgram());
+        typeNumeric(wrapWeight, weight, courses.getWeight());
+        typeText(editor, courses.getEditors());
+        typeText(descriptionArea, courses.getDescription());
     }
 }

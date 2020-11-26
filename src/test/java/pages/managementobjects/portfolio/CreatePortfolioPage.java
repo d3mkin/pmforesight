@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import model.Portfolio;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -23,16 +23,16 @@ public class CreatePortfolioPage extends BasePage {
     @Step("В модальном окне создания портфеля заполнить обязательные поля на вкладке \"Общая информация\"")
     public void fillInConnonInfo(Portfolio portfolio){
         tabCommonInfo.click();
-        typeOrSkip(name,portfolio.getNameValue());
-        typeOrSkip(description,portfolio.getDescription());
-        searchInSelectAndClickToFirstWithCheckDropDown(target, portfolio.getPurpose());
+        typeText(name,portfolio.getNameValue());
+        typeText(description,portfolio.getDescription());
+        searchAndSelectFirstFromSelect(target, portfolio.getPurpose());
     }
     @Step("В модальном окне создания портфеля перейти на вкладку \"Роли\" и заполнить обязательные поля")
     public void fillRoles(Portfolio portfolio){
         tabRoles.click();
-        searchInSelectAndClickToFirstWithCheckDropDown(supervisor, portfolio.getSupervisor());
-        searchInSelectAndClickToFirstWithCheckDropDown(administrator, portfolio.getAdministrator());
-        searchInSelectAndClickToFirstWithCheckDropDown(workingGroup, portfolio.getWorkingGroup());
+        searchAndSelectFirstFromSelect(supervisor, portfolio.getSupervisor());
+        searchAndSelectFirstFromSelect(administrator, portfolio.getAdministrator());
+        searchAndSelectFirstFromSelect(workingGroup, portfolio.getWorkingGroup());
     }
 
 

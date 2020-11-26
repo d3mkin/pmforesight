@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import model.Program;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -26,12 +26,12 @@ public class ProgramPage extends BasePage {
     private SelenideElement nameLesson = $(By.xpath("//div[contains(@id,\"LessonInlineTable\")]/..//div[contains(@class,\"k-grid-content k-auto-scrollable\")]/..//a[contains(@target,\"_blank\")]"));
 
     public void fillFields(Program program) {
-        typeOrSkip(nameProgram, program.getName());
-        searchInSelectAndClickToFirstWithCheckDropDown(portfolioProgramList, program.getPortfolio());
+        typeText(nameProgram, program.getName());
+        searchAndSelectFirstFromSelect(portfolioProgramList, program.getPortfolio());
         tabRolesList.click();
-        searchInSelectAndClickToFirstWithCheckDropDown(functionalCustomerProgramList, program.getCustomer());
-        searchInSelectAndClickToFirstWithCheckDropDown(curatorProgramList, program.getCurator());
-        searchInSelectAndClickToFirstWithCheckDropDown(leaderProgramList, program.getSupervisor());
+        searchAndSelectFirstFromSelect(functionalCustomerProgramList, program.getCustomer());
+        searchAndSelectFirstFromSelect(curatorProgramList, program.getCurator());
+        searchAndSelectFirstFromSelect(leaderProgramList, program.getSupervisor());
     }
 
     @Step("Проверка открытия и корректного названия программы")

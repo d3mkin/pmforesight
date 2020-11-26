@@ -4,9 +4,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import model.Result;
-import pages.elements.BasePage;
+import pages.BasePage;
 import pages.elements.DeleteEntityDialog;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -26,15 +25,15 @@ public class ResultPage extends BasePage {
 
     @Step("Заполнить поля в карточке Результата")
     public void fillFields(Result result) {
-        typeOrSkip(resultName, result.getName());
+        typeText(resultName, result.getName());
         searchInAutocompleteAndClickToFirst(resultUnit, result.getUnit());
-        searchInSelectAndClickToFirstWithCheckDropDown(resultType, result.getType());
+        searchAndSelectFirstFromSelect(resultType, result.getType());
 //        sleep(2000);
-        searchInSelectAndClickToFirstWithCheckDropDown(federalResultLink, result.getFederalResultLink());
-        searchInSelectAndClickToFirstWithCheckDropDown(parentEntityResult, result.getParentEntity());
+        searchAndSelectFirstFromSelect(federalResultLink, result.getFederalResultLink());
+        searchAndSelectFirstFromSelect(parentEntityResult, result.getParentEntity());
         //typeDate(resultCalendarDate,result.getDate());
         selectResultCalendarCurrentDay();
-        typeOrSkip(resultValue, result.getValue());
+        typeText(resultValue, result.getValue());
         tabRoles.click();
         responsibleRole.waitUntil(Condition.visible, 1000);
         searchAndSelectFirstFromMultiSelect(responsibleRole, result.getResponsible());
@@ -54,12 +53,12 @@ public class ResultPage extends BasePage {
 
     @Step ("Заполнить поле 'Связь с результатом федерального уровня' ")
     public void fillFederalResultLink(Result federalResult) {
-        searchInSelectAndClickToFirstWithCheckDropDown(federalResultLink, federalResult.getName());
+        searchAndSelectFirstFromSelect(federalResultLink, federalResult.getName());
     }
 
     @Step ("Заполнить поле 'Родительский результат'")
     public void fillParentEntityResult(Result parentResult){
-        searchInSelectAndClickToFirstWithCheckDropDown(parentEntityResult, parentResult.getName());
+        searchAndSelectFirstFromSelect(parentEntityResult, parentResult.getName());
     }
 
     @Step ("Проверить недоступность поля 'Родительский результат'")
@@ -69,6 +68,6 @@ public class ResultPage extends BasePage {
 
     @Step ("Заполнить поле 'Тип результата'")
     public void fillResultType(String result){
-        searchInSelectAndClickToFirstWithCheckDropDown(resultType, result);
+        searchAndSelectFirstFromSelect(resultType, result);
     }
 }

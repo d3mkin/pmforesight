@@ -5,7 +5,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import model.Indicator;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.cssValue;
@@ -39,15 +39,15 @@ public class IndicatorPage extends BasePage {
 
     @Step("Заполнить поля в карточке Индикатора")
     public void fillRequiredFields(Indicator indicator) {
-        typeOrSkip(nameInput_EditForm, indicator.getName());
-        searchInSelectAndClickToFirstWithCheckDropDown(estimationTypeInput_EditForm, indicator.getEstimationType());
-        searchInSelectAndClickToFirstWithCheckDropDown(kpiTypeInput_EditForm, indicator.getKPI());
+        typeText(nameInput_EditForm, indicator.getName());
+        searchAndSelectFirstFromSelect(estimationTypeInput_EditForm, indicator.getEstimationType());
+        searchAndSelectFirstFromSelect(kpiTypeInput_EditForm, indicator.getKPI());
         searchInAutocompleteAndClickToFirst(unitInput_EditForm, indicator.getUnit());
-        typeOrSkip(basicValueInput_EditForm, indicator.getBasicValue());
-        searchInSelectAndClickToFirstWithCheckDropDown(approvingDocInput_EditForm,indicator.getApprovingDoc());
+        typeText(basicValueInput_EditForm, indicator.getBasicValue());
+        searchAndSelectFirstFromSelect(approvingDocInput_EditForm,indicator.getApprovingDoc());
         rolesTab_EditForm.click();
         responsibleInput_EditForm.shouldBe(visible);
-        searchInSelectAndClickToFirstWithCheckDropDown(responsibleInput_EditForm, indicator.getResponsible());
+        searchAndSelectFirstFromSelect(responsibleInput_EditForm, indicator.getResponsible());
     }
 
     @Step("Проверить что на вкладке 'Связи' по умолчанию 'Объект управления' равен текущему проекту")
@@ -69,10 +69,10 @@ public class IndicatorPage extends BasePage {
 
     @Step("Заполнить плановые, прогнозные и фактические значения показателя")
     public void fillIndicatorsValues(Indicator indicator) {
-        searchInSelectAndClickToFirstWithCheckDropDown(periodInput_EditForm, indicator.getPeriod());
-        typeOrSkip(planInput_EditForm, indicator.getPlan());
-        typeOrSkip(forecastInput_EditForm, indicator.getForecast());
-        typeOrSkip(factInput_EditForm, indicator.getFact());
+        searchAndSelectFirstFromSelect(periodInput_EditForm, indicator.getPeriod());
+        typeText(planInput_EditForm, indicator.getPlan());
+        typeText(forecastInput_EditForm, indicator.getForecast());
+        typeText(factInput_EditForm, indicator.getFact());
     }
 
     @Step("Проверить корректность рассчёта и отображения '% достижение плана'")
@@ -151,7 +151,7 @@ public class IndicatorPage extends BasePage {
         basicValueInput_EditForm.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
         $(By.xpath("//form[@id='KPIEditForm']")).click();
         
-        typeOrSkip(basicValueInput_EditForm, newBasicValue);
+        typeText(basicValueInput_EditForm, newBasicValue);
         clickSaveAndClose();
         $(By.xpath("//div[@name='CurrentFact']")).shouldBe(visible).shouldHave(text(newBasicValue));
     }
@@ -162,7 +162,7 @@ public class IndicatorPage extends BasePage {
         editIndicatorValueButton_ViewForm.click();
         factInput_EditForm.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
         $(By.xpath("//form[@id='KPIValueEditForm']")).click();
-        typeOrSkip(factInput_EditForm, indicator.getFact());
+        typeText(factInput_EditForm, indicator.getFact());
     }
 
     @Step("Изменить Плановое значение")
@@ -171,7 +171,7 @@ public class IndicatorPage extends BasePage {
         editIndicatorValueButton_ViewForm.click();
         planInput_EditForm.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
         $(By.xpath("//form[@id='KPIValueEditForm']")).click();
-        typeOrSkip(planInput_EditForm, indicator.getPlan());
+        typeText(planInput_EditForm, indicator.getPlan());
     }
 
     @Step ("Изменить Тип оценки показателя")
@@ -179,7 +179,7 @@ public class IndicatorPage extends BasePage {
         indicator.setEstimationType(newEstimationType);
         editIndicatorButton_ViewForm.click();
         estimationTypeInput_EditForm.shouldBe(visible);
-        searchInSelectAndClickToFirstWithCheckDropDown(estimationTypeInput_EditForm, newEstimationType);
+        searchAndSelectFirstFromSelect(estimationTypeInput_EditForm, newEstimationType);
         clickSaveAndClose();
         $(By.xpath("//div[@name='KPIValueTypeId']")).shouldBe(visible).shouldHave(text(newEstimationType));
     }

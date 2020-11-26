@@ -1,8 +1,7 @@
-package pages.elements;
+package pages;
 
 import com.codeborne.selenide.*;
 import io.qameta.allure.Step;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -15,7 +14,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public abstract class BasePage {
-    private ArrayList<String> tabs;
+    private ArrayList<String> allTabs;
      private String currentTab;
     protected SelenideElement window = $(".k-window");
     protected SelenideElement header = window.$(".k-window-titlebar");
@@ -63,19 +62,22 @@ public abstract class BasePage {
     //Получаем и записываем id вкладок браузера в список
     @Step ("Получить список открытых вкладок браузера")
     public void getBrowserTabs () {
-        tabs = new ArrayList<String>(WebDriverRunner.getWebDriver().getWindowHandles());
+        allTabs = new ArrayList<String>(WebDriverRunner.getWebDriver().getWindowHandles());
         currentTab = WebDriverRunner.getWebDriver().getWindowHandle();
     }
 
     //Нумерация начинается с 0 - поэтому первоначальная вкладка будет '0', а новая будет '1'
+    @Step("Переключиться на вкладку {numberTab}")
     public void switchToBrowserTab(int numberTab){
-        WebDriverRunner.getWebDriver().switchTo().window(tabs.get(numberTab));
+        WebDriverRunner.getWebDriver().switchTo().window(allTabs.get(numberTab));
     }
 
+    @Step("Переключиться на следующую вкладку браузера")
     public void switchToNextBrowserTab(){
-        WebDriverRunner.getWebDriver().switchTo().window(tabs.get(tabs.size()-1));
+        WebDriverRunner.getWebDriver().switchTo().window(allTabs.get(allTabs.size()-1));
     }
 
+    @Step("Переключиться на предыдущую вкладку браузера")
     public void switchToPreviousBrowserTab(){
         WebDriverRunner.getWebDriver().switchTo().window(currentTab);
     }
@@ -136,13 +138,6 @@ public abstract class BasePage {
         window.shouldNot(visible);
     }
 
-    public void typeOrSkip(SelenideElement el, String value) {
-        if (value == null) {
-            return;
-        }
-        el.waitUntil(visible, 10000).setValue(value);
-    }
-
     //Диалоговое окно про обязательные поля\несохраненные изменения
     @Step("Проверить наличие сообщений в информационном окне")
     public void shouldHaveMessageAboutRequiredFields(String... messages) {
@@ -196,7 +191,16 @@ public abstract class BasePage {
 
 
     //Методы для заполненния данных в зависимости от типа поля
-    public void typeOrSkipNumeric(SelenideElement wrap, SelenideElement input, String value) {
+
+    @Step ("Ввести в текстовое поле значение {value}")
+    public void typeText(SelenideElement el, String value) {
+        if (value == null) {
+            return;
+        }
+        el.waitUntil(visible, Configuration.timeout).setValue(value);
+    }
+
+    public void typeNumeric(SelenideElement wrap, SelenideElement input, String value) {
         if (value == null) {
             return;
         }
@@ -225,6 +229,21 @@ public abstract class BasePage {
         selectFirstItem.click();
     }
 
+    @Step ("Выбрать в выпадающем списке значение {value}")
+    public void searchAndSelectFirstFromSelect(SelenideElement el, String value) {
+        if (value == null) {
+            return;
+        }
+        el.click();
+        selectFilterInput.waitUntil(visible, Configuration.timeout);
+        selectFilterInput.setValue(value);
+        sleep(2000);
+        selectAllItems.shouldHaveSize(1);
+        selectFirstItem.click();
+        el.waitUntil(text(value), Configuration.timeout);
+    }
+
+    @Step ("Ввести дату {value}")
     public void typeDate(SelenideElement dateInput, String value) {
         if (value == null) {
             return;
@@ -252,6 +271,9 @@ public abstract class BasePage {
     }
 
     public void searchAndSelectFirstFromMultiSelect (SelenideElement el, String value) {
+        if (value == null) {
+            return;
+        }
         el.click();
         sleep(1000);
         selectMultiSelectInput.shouldBe(visible).setValue(value);
@@ -259,20 +281,6 @@ public abstract class BasePage {
         selectFirstItem.click();
     }
 
-    public void searchInSelectAndClickToFirstWithCheckDropDown(SelenideElement el, String value) {
-       if (value == null) {
-           return;
-      }
-        el.click();
-        selectFilterInput.waitUntil(visible, 5000);
-        selectFilterInput.setValue(value);
-        sleep(2000);
-        selectAllItems.shouldHaveSize(1);
-        selectFirstItem.click();
-        //Assertions.assertTrue(selectFilterInput.getText() == value );
-        //el.shouldHave();
-        el.waitUntil(text(value), 10000);
-    }
     public void chooseValueFromDropDown(SelenideElement el, String value) {
         el.click();
         selectFilterInput.setValue(value);

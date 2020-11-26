@@ -1,5 +1,6 @@
 package tests.entity_generation.projects;
 
+import com.codeborne.selenide.Configuration;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
@@ -16,14 +17,13 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-
 @Story(TestSuiteName.ENTITY_CREATION)
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreateProjectTests extends BaseTest {
     private SingInPage singIn;
-    private ProjectPage createModal;
-    private ProjectRegistry registry;
+    private ProjectPage projectPage;
+    private ProjectRegistry projectRegistry;
     private Project project;
     private long currentTime;
 
@@ -31,8 +31,8 @@ public class CreateProjectTests extends BaseTest {
     public void setupPages() {
         singIn = new SingInPage();
         singIn.open();
-        createModal = new ProjectPage();
-        registry = new ProjectRegistry();
+        projectPage = new ProjectPage();
+        projectRegistry = new ProjectRegistry();
         project = new Project();
         currentTime = System.currentTimeMillis();
     }
@@ -56,10 +56,10 @@ public class CreateProjectTests extends BaseTest {
                 .setSupervisor(user.getName());
         parameter("Пользователь", user.getName());
         singIn.asUser(user);
-        registry.addProject();
-        createModal.fillFields(project);
-        createModal.clickSaveAndClose();
-        registry.deleteProject(project);
+        projectRegistry.addProject();
+        projectPage.fillFields(project);
+        projectPage.clickSaveAndClose();
+        projectRegistry.deleteProject(project);
     }
 
     @ParameterizedTest(name = "Создание сущности Проект из реестра. Сообщение о несохранённых изменениях для кнопки закрыть")
@@ -76,15 +76,16 @@ public class CreateProjectTests extends BaseTest {
                 .setSupervisor(user.getName());
         parameter("Пользователь", user.getName());
         singIn.asUser(user);
-        registry.addProject();
-        createModal.fillFields(project);
-        createModal.clickClose();
-        createModal.shouldHaveTitle();
-        createModal.shouldHaveMessageAboutUnsaved();
-        createModal.clickDialogCancel();
-        createModal.clickClose();
-        createModal.clickDialogSave();
-        registry.deleteProject(project);
+        projectRegistry.addProject();
+        projectPage.fillFields(project);
+        long L = Configuration.timeout;
+        projectPage.clickClose();
+        projectPage.shouldHaveTitle();
+        projectPage.shouldHaveMessageAboutUnsaved();
+        projectPage.clickDialogCancel();
+        projectPage.clickClose();
+        projectPage.clickDialogSave();
+        projectRegistry.deleteProject(project);
     }
 
     @ParameterizedTest(name = "Создание сущности Проект из реестра. Сообщение о необходимости заполнить обязательные поля для кнопки Сохранить")
@@ -95,11 +96,11 @@ public class CreateProjectTests extends BaseTest {
     public void shouldHaveMessageAboutRequiredFieldsTest(User user) {
         parameter("Пользователь", user.getName());
         singIn.asUser(user);
-        registry.addProject();
-        createModal.shouldBeOpened();
-        createModal.shouldHaveTitle("Проект");
-        createModal.clickSave();
-        createModal
+        projectRegistry.addProject();
+        projectPage.shouldBeOpened();
+        projectPage.shouldHaveTitle("Проект");
+        projectPage.clickSave();
+        projectPage
                 .shouldHaveMessageAboutRequiredFields(
                         "Необходимо заполнить поле \"Наименование\"",
                         "Необходимо заполнить поле \"Тип проекта\"",
@@ -107,9 +108,9 @@ public class CreateProjectTests extends BaseTest {
                         "Необходимо заполнить поле \"Куратор\"",
                         "Необходимо заполнить поле \"Руководитель\""
                 );
-        createModal.closeDialog();
-        createModal.clickClose();
-        registry.shouldBeRegistry();
+        projectPage.closeDialog();
+        projectPage.clickClose();
+        projectRegistry.shouldBeRegistry();
     }
 }
 

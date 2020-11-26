@@ -1,6 +1,5 @@
-package tests.smoke.goal;
+package tests.project;
 
-import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;

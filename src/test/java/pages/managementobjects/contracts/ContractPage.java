@@ -3,7 +3,7 @@ package pages.managementobjects.contracts;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import model.Contract;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -35,23 +35,23 @@ public class ContractPage extends BasePage {
 
     public void fillFields(Contract contract) {
         tabCommonInfo.click();
-        typeOrSkip(contractNumberInput, contract.getContractNumber());
-        typeOrSkip(contractNameInput, contract.getName());
-        typeOrSkip(contractShortNameInput, contract.getShortName());
-        searchInSelectAndClickToFirst(projectSelect, contract.getProject());
-        searchInSelectAndClickToFirst(typeSelect, contract.getContractType());
-        searchInSelectAndClickToFirst(lawSelect, contract.getLaw());
-        typeOrSkipNumeric(wrapExceptedPrice, exceptedPriceInput, contract.getExceptedPrice());
-        typeOrSkipNumeric(wrapActualPrice, actualPriceInput, contract.getActualPrice());
-        typeOrSkip(descriptionArea, contract.getDescription());
-        typeOrSkip(linkToEtpInput, contract.getLinkToEtp());
+        typeText(contractNumberInput, contract.getContractNumber());
+        typeText(contractNameInput, contract.getName());
+        typeText(contractShortNameInput, contract.getShortName());
+        searchAndSelectFirstFromSelect(projectSelect, contract.getProject());
+        searchAndSelectFirstFromSelect(typeSelect, contract.getContractType());
+        searchAndSelectFirstFromSelect(lawSelect, contract.getLaw());
+        typeNumeric(wrapExceptedPrice, exceptedPriceInput, contract.getExceptedPrice());
+        typeNumeric(wrapActualPrice, actualPriceInput, contract.getActualPrice());
+        typeText(descriptionArea, contract.getDescription());
+        typeText(linkToEtpInput, contract.getLinkToEtp());
 
         tabRoles.click();
-        searchInSelectAndClickToFirst(customerSelect, contract.getCustomer());
-        searchInSelectAndClickToFirst(executorSelect, contract.getExecutor());
-        searchInSelectAndClickToFirst(responsiblePersonSelect, contract.getResponsiblePerson());
-//        searchInSelectAndClickToFirst(adminsMultiSelect, contract.getAdmins().get(0));
-//        searchInSelectAndClickToFirst(membersMultiSelect, contract.getMembers().get(0));
+        searchAndSelectFirstFromSelect(customerSelect, contract.getCustomer());
+        searchAndSelectFirstFromSelect(executorSelect, contract.getExecutor());
+        searchAndSelectFirstFromSelect(responsiblePersonSelect, contract.getResponsiblePerson());
+//        searchAndSelectFirstFromSelect(adminsMultiSelect, contract.getAdmins().get(0));
+//        searchAndSelectFirstFromSelect(membersMultiSelect, contract.getMembers().get(0));
     }
 
 }

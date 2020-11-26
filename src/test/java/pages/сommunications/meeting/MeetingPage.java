@@ -3,7 +3,7 @@ package pages.сommunications.meeting;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import model.Meeting;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -18,13 +18,13 @@ public class MeetingPage extends BasePage {
     private SelenideElement secretaryList = $(By.cssSelector("#control-group-Secretary span.k-widget.k-dropdown"));
 
     public void fillFields(Meeting meeting) {
-        typeOrSkip(nameMeeting, meeting.getName());
-        typeOrSkip(placeMeeting, meeting.getLocation());
+        typeText(nameMeeting, meeting.getName());
+        typeText(placeMeeting, meeting.getLocation());
         datesMeeting.click();
-        searchInSelectAndClickToFirstWithCheckDropDown(controlObjectList, meeting.getControlObject());
+        searchAndSelectFirstFromSelect(controlObjectList, meeting.getControlObject());
         tabRoles.click();
-        searchInSelectAndClickToFirstWithCheckDropDown(secretaryList, meeting.getSecretary());
-        searchInSelectAndClickToFirstWithCheckDropDown(chairList, meeting.getChairman());
+        searchAndSelectFirstFromSelect(secretaryList, meeting.getSecretary());
+        searchAndSelectFirstFromSelect(chairList, meeting.getChairman());
     }
 
 

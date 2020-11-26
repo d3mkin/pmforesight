@@ -12,14 +12,13 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 ext {
-    allureVersion = '2.13.5'
-    selenideVersion = '5.14.2'
-    junitVersion = '5.6.2'
+    allureVersion = '2.13.7'
+    selenideVersion = '5.16.2'
+    junitVersion = '5.7.0'
     aspectjweaver = '1.9.5'
     logbackVersion = '1.2.3'
     ownerVersion = '1.0.12'
     restassuredVersion = '4.2.0'
-    dataproviderVersion = '1.13.1'
 }
 
 repositories {
@@ -61,20 +60,20 @@ tasks.withType(JavaCompile) {
 tasks.withType(Test) {
     systemProperties = System.properties
     systemProperty "file.encoding", "UTF-8"
-/*    systemProperties += [
+    /*systemProperties += [
                 'junit.jupiter.execution.parallel.enabled'                 : true,
                 'junit.jupiter.execution.parallel.mode.default'            : 'same_thread',
                 'junit.jupiter.execution.parallel.mode.classes.default'    : 'concurrent',
                 'junit.jupiter.execution.parallel.config.strategy'         : 'fixed',
-                'junit.jupiter.execution.parallel.config.fixed.parallelism': 3
-        ]*/
-    systemProperty 'junit.jupiter.extensions.autodetection.enabled', 'true'
+                'junit.jupiter.execution.parallel.config.fixed.parallelism': 6
+        ]
+    systemProperty 'junit.jupiter.extensions.autodetection.enabled', 'true'*/
 }
 
 task run_tests(type: Test) {
     useJUnitPlatform {
     }
-//   maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+//    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 //    forkEvery = 0
 }
 

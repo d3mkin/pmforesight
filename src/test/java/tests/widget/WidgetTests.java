@@ -1,4 +1,4 @@
-package tests.smoke.widget;
+package tests.widget;
 
 import helpers.TestSuiteName;
 import io.qameta.allure.Story;

@@ -3,7 +3,7 @@ package pages.сommunications.open_questions;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import model.OpenQuestion;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -15,8 +15,8 @@ public class OpenQuestionPage extends BasePage {
     private final SelenideElement afterMonthPlanPeriod = $(By.xpath("//span[@name='quickDates']//span[3]"));
 
     public void fillFields(OpenQuestion openQuestion) {
-        typeOrSkip(nameInput, openQuestion.getName());
-        searchInSelectAndClickToFirstWithCheckDropDown(executorInput, openQuestion.getExecutor());
+        typeText(nameInput, openQuestion.getName());
+        searchAndSelectFirstFromSelect(executorInput, openQuestion.getExecutor());
         typeDate(initDayInput, openQuestion.getInitDate());
         afterMonthPlanPeriod.click();
     }

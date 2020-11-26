@@ -1,12 +1,13 @@
 package pages.managementobjects.project;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import model.Project;
-import pages.elements.BasePage;
+import pages.BasePage;
 import pages.managementobjects.result.ResultPage;
-import helpers.ResultDataStorage;
+import helpers.ResultTypeArray;
 
 import java.io.File;
 import java.util.HashSet;
@@ -161,16 +162,16 @@ public class ProjectPage extends BasePage {
 
     @Step("Заполнить поля проекта")
     public void fillFields(Project project) {
-        parentPortfolioOrProgram.waitUntil(visible, 20000);
-        typeOrSkip(projectName, project.getName());
-        searchInSelectAndClickToFirstWithCheckDropDown(projectLevel, project.getProjectLevel());
-        searchInSelectAndClickToFirstWithCheckDropDown(projectType, project.getType());
-        searchInSelectAndClickToFirstWithCheckDropDown(parentPortfolioOrProgram, project.getProgram());
+        parentPortfolioOrProgram.waitUntil(visible, Configuration.timeout);
+        typeText(projectName, project.getName());
+        searchAndSelectFirstFromSelect(projectLevel, project.getProjectLevel());
+        searchAndSelectFirstFromSelect(projectType, project.getType());
+        searchAndSelectFirstFromSelect(parentPortfolioOrProgram, project.getProgram());
         tabRoles.click();
         curatorRole.waitUntil(visible, 1000);
-        searchInSelectAndClickToFirstWithCheckDropDown(curatorRole, project.getCurator());
+        searchAndSelectFirstFromSelect(curatorRole, project.getCurator());
         sleep(500);
-        searchInSelectAndClickToFirstWithCheckDropDown(managerRole, project.getSupervisor());
+        searchAndSelectFirstFromSelect(managerRole, project.getSupervisor());
     }
 
     @Step("Проверить отображение совещания в созданном проете")
@@ -431,7 +432,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Изменить уровень проекта")
     public void changeProjectLevel(String typeOfProjectLevel){
-        searchInSelectAndClickToFirstWithCheckDropDown(projectLevel,typeOfProjectLevel);
+        searchAndSelectFirstFromSelect(projectLevel,typeOfProjectLevel);
     }
 
     @Step ("Перейти во вкладку 'Связь результатов и КП проекта'")
@@ -452,7 +453,7 @@ public class ProjectPage extends BasePage {
 
     @Step ("Проверить соответствие типа результата с типом КТ/Мероприятием в таблице 'Связь результатов и КП проекта'")
     public void checkValidationInKPAndResultsLinkedTable(ResultPage result, String resultLevel) {
-        for (String resultType : ResultDataStorage.resultTypeArray) {
+        for (String resultType : ResultTypeArray.resultTypeArray) {
             //Проверяется, что таблица результатов появилась
             switch (resultLevel) {
                 case ("Ведомственный"):
@@ -482,61 +483,61 @@ public class ProjectPage extends BasePage {
             //В зависимости от типа результата идёт сравненение значений в выпадаюшем списке со справочником (Используется HashSet для того чтоб не учитывать строгий порядок значений)
             switch (resultType) {
                 case ("Строительство (реконструкция, техническое перевооружение, приобретение) объекта недвижимого имущества"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_1));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_1));
                     break;
                 case ("Оказание услуг (выполнение работ)"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_2));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_2));
                     break;
                 case ("Создание (реорганизация) организации (структурного подразделения)"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_3));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_3));
                     break;
                 case ("Проведение образовательных мероприятий"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_4));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_4));
                     break;
                 case ("Принятие нормативного правового (правового) акта"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_5));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_5));
                     break;
                 case ("Утверждение документа"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_6));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_6));
                     break;
                 case ("Проведение массовых мероприятий"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_7));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_7));
                     break;
                 case ("Создание (развитие) информационно-телекоммуникационного сервиса (информационной системы)"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_8));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_8));
                     break;
                 case ("Благоустройство территории, ремонт объектов недвижимого имущества"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_9));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_9));
                     break;
                 case ("Проведение информационно-коммуникационной кампании"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_10));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_10));
                     break;
                 case ("Обеспечение реализации федерального проекта (результата федерального проекта)"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_11));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_11));
                     break;
                 case ("Проведение научно-исследовательских (опытно-конструкторских) работ, реализация проекта внедрения новой информационной технологии"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_12));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_12));
                     break;
                 case ("Создание Российской промышленной зоны за рубежом"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_13));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_13));
                     break;
                 case ("Приобретение товаров, работ, услуг"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_14));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_14));
                     break;
                 case ("Обеспечено привлечение квалифицированных кадров"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_15));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_15));
                     break;
                 case ("Закупка товаров, работ, услуг"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_16));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_16));
                     break;
                 case ("Предоставление субсидий, иных межбюджетных трансфертов, имеющих целевое назначение, бюджетам бюджетной системы Российской Федерации"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_17));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_17));
                     break;
                 case ("Предоставление субсидий на выполнение государственного задания бюджетным и автономным учреждениям"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_18));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_18));
                     break;
                 case ("Предоставление субсидий юридическим (физическим) лицам, за исключением субсидий на выполнение государственного (муниципального) задания на оказание государственных (муниципальных) услуг (выполнение работ)"):
-                    new HashSet(dropDownValues).equals(new HashSet(ResultDataStorage.dropDownValid_19));
+                    new HashSet(dropDownValues).equals(new HashSet(ResultTypeArray.dropDownValid_19));
                     break;
                 default:
                     break;
@@ -657,7 +658,7 @@ public class ProjectPage extends BasePage {
     @Step ("Найти в Ганте сущность с названием {entityName} и открыть её карточку просмотра")
     public void findInGanttAndOpenEntityPage(String entityName){
         switchTo().frame("ganttframe");
-        typeOrSkip(searchInGanttTableInput, entityName);
+        typeText(searchInGanttTableInput, entityName);
         sleep(1000);
         //первая ссылка в таблице
         $(By.xpath("//div[@id='ganttplace']//a")).click();

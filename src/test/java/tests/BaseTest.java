@@ -25,9 +25,9 @@ public class BaseTest {
                 .includeSelenideSteps(false)
                 .enableLogs(LogType.BROWSER, Level.SEVERE));
 //        Configuration.headless = true;
-        Configuration.timeout = 15000;
+        Configuration.timeout = 30000;
         Configuration.browserSize = "1920x1080";
-        //Configuration.startMaximized = configManager.getStartMaximized();
+//        Configuration.startMaximized = configManager.getStartMaximized();
         Configuration.startMaximized = true;
         Configuration.baseUrl = System.getProperty("baseUrl","http://tgr.hera.test.local");
         String selenoid = System.getProperty("selenoid_url");

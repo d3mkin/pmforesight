@@ -3,7 +3,7 @@ package pages.managementobjects.point;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import java.io.File;
 

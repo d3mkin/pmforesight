@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import model.NationalProject;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -22,11 +22,11 @@ public class NationalProjectPage extends BasePage {
     @Step("В модальном окне создания Национального проекта заполнить обязательные поля на вкладке 'Общая информация' и 'Роли'")
     public void fillInGeneralInformation(NationalProject nationalProject) {
         tabCommonInfo.click();
-        typeOrSkip(nameValue, nationalProject.getNameValue());
-        searchInSelectAndClickToFirst(target, nationalProject.getTarget());
+        typeText(nameValue, nationalProject.getNameValue());
+        searchAndSelectFirstFromSelect(target, nationalProject.getTarget());
         tabRoles.click();
-        searchInSelectAndClickToFirst(curator, nationalProject.getCurator());
-        searchInSelectAndClickToFirst(supervisor, nationalProject.getSupervisor());
-        searchInSelectAndClickToFirst(administrator, nationalProject.getAdministrator());
+        searchAndSelectFirstFromSelect(curator, nationalProject.getCurator());
+        searchAndSelectFirstFromSelect(supervisor, nationalProject.getSupervisor());
+        searchAndSelectFirstFromSelect(administrator, nationalProject.getAdministrator());
     }
 }

@@ -5,7 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import model.GProgram;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -34,12 +34,12 @@ public class GosProgramPage extends BasePage {
     @Step("В модальном окне создания госпрограммы заполнить обязательные поля на вкладке \"Общая информация\"")
     public void fillCommonInfo(GProgram gProgram) {
         tabCommonInfo.click();
-        searchInSelectAndClickToFirstWithCheckDropDown(gosProgramTypeId, gProgram.getTypeObjectGosprogram());
-        typeOrSkip(nameValue, gProgram.getNameValue());
+        searchAndSelectFirstFromSelect(gosProgramTypeId, gProgram.getTypeObjectGosprogram());
+        typeText(nameValue, gProgram.getNameValue());
         textDateStart.waitUntil(visible, 10000);
-        typeOrSkip(textDateStart, gProgram.getTextDateStart());
+        typeText(textDateStart, gProgram.getTextDateStart());
         textDateEnd.waitUntil(visible, 10000);
-        typeOrSkip(textDateEnd, gProgram.getTextDateEnd());
+        typeText(textDateEnd, gProgram.getTextDateEnd());
 
 
     }
@@ -47,7 +47,7 @@ public class GosProgramPage extends BasePage {
     @Step("В модальном окне создания госпрограммы перейти на вкладку \"Роли\" и заполнить обязательные поля")
     public void fillRoleInfo(GProgram gProgram) {
         tabRoles.click();
-        searchInSelectAndClickToFirstWithCheckDropDown(responsibleExecutive, gProgram.getExecutiveOfficer());
+        searchAndSelectFirstFromSelect(responsibleExecutive, gProgram.getExecutiveOfficer());
 
     }
 }

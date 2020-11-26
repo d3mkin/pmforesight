@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import model.Employee;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -40,10 +40,10 @@ public class EmployeePage extends BasePage {
     @Step ("Заполнить поля в карточке редактирования")
     public void fillFields(Employee employee) {
         commonTab.click();
-        typeOrSkip(nameInput, employee.getName());
-        typeOrSkip(lastNameInput, employee.getLastName());
-        typeOrSkip(firstNameInput, employee.getFirstName());
-        typeOrSkip(secondNameInput, employee.getSecondName());
+        typeText(nameInput, employee.getName());
+        typeText(lastNameInput, employee.getLastName());
+        typeText(firstNameInput, employee.getFirstName());
+        typeText(secondNameInput, employee.getSecondName());
         rightsTab.click();
         searchAndSelectFirstFromMultiSelect(groupsBlock, employee.getGroups());
     }

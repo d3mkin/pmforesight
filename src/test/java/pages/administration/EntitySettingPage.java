@@ -9,7 +9,6 @@ import helpers.URLS;
 import static com.codeborne.selenide.Selenide.$;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//TODO
 public class EntitySettingPage extends AbstractAdminPage {
     public EntitySettingPage() {
         super(

@@ -3,7 +3,7 @@ package pages.base_of_knowledge_and_documents.lessons_learned;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import model.LessonLearned;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -25,7 +25,7 @@ public class LessonLearnedPage extends BasePage {
     public void fillFields(LessonLearned lessonLearned) {
         labelOfTab.shouldBe(visible);
         description.waitUntil(visible, 10000);
-        searchInSelectAndClickToFirstWithCheckDropDown(activityDropDown, lessonLearned.getActivity());
-        typeOrSkip(name, lessonLearned.getName());
+        searchAndSelectFirstFromSelect(activityDropDown, lessonLearned.getActivity());
+        typeText(name, lessonLearned.getName());
     }
 }

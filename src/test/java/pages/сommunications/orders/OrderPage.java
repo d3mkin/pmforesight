@@ -3,7 +3,7 @@ package pages.сommunications.orders;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import model.Order;
-import pages.elements.BasePage;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -18,10 +18,10 @@ public class OrderPage extends BasePage {
 
     public void fillFields(Order order ) {
         nameInput.waitUntil(visible, 10000);
-        typeOrSkip(nameInput, order.getName());
-        searchInSelectAndClickToFirstWithCheckDropDown(priorityInput, order.getPriority());
+        typeText(nameInput, order.getName());
+        searchAndSelectFirstFromSelect(priorityInput, order.getPriority());
         typeDate(planDateInput, order.getPlanDate());
         tabRoles.click();
-        searchInSelectAndClickToFirstWithCheckDropDown(executorInput, order.getExecutor());
+        searchAndSelectFirstFromSelect(executorInput, order.getExecutor());
     }
 }

@@ -3,7 +3,7 @@ package helpers;
 import java.util.Arrays;
 import java.util.List;
 
-public class ResultDataStorage {
+public class ResultTypeArray {
     // Справочник типов результата
     public static final String[] resultTypeArray = new String[] {
             "Строительство (реконструкция, техническое перевооружение, приобретение) объекта недвижимого имущества",
