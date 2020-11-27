@@ -24,6 +24,7 @@ import java.util.Calendar;
 
 import static io.qameta.allure.Allure.parameter;
 
+@Tag("PointTransition")
 @Story(TestSuiteName.CHANGE_STATUS)
 public class PointStageTransitionTests extends BaseTest {
     private SingInPage singIn;
@@ -31,6 +32,7 @@ public class PointStageTransitionTests extends BaseTest {
     private ProjectPage modalDialog;
     private PointPage pointPage;
     private File fileToUpload;
+    private File file;
     private String currentDate;
 
     @BeforeEach
@@ -41,6 +43,7 @@ public class PointStageTransitionTests extends BaseTest {
         modalDialog = new ProjectPage();
         pointPage = new PointPage();
         fileToUpload = new File("src/test/resources/test.txt");
+        file = new File("/opt/TeamCity/uploadFile/test.txt");
         currentDate = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
         ActionsViaAPI.createProjectViaAPI("Инициирование","Ведомственный");
     }
@@ -93,7 +96,7 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.findInGanttAndOpenEntityPage("Тестовая КТ");
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
-        pointPage.completePointAndUploadFile(currentDate, fileToUpload);
+        pointPage.completePointAndUploadFile(currentDate, file);
         pointPage.backInProgressPointAndUploadFile("31.12.2020", fileToUpload);
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();

@@ -82,3 +82,9 @@ task authorization (type: Test) {
         includeTags 'Authorization'
     }
 }
+
+task pointTransition (type: Test) {
+    useJUnitPlatform {
+        includeTags 'PointTransition'
+    }
+}

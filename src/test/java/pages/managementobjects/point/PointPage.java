@@ -106,7 +106,8 @@ public class PointPage extends BasePage {
         clickExpand();
         fillActualCompletionDate(date);
         clickUploadFileOnEditForm(); //Загружаем документ
-        uploadFile(file);
+        uploadFileDocker();
+//        uploadFile(file);
         checkFileIsUploaded(file);
         closeUploadWindow();
         clickSaveAndClose(); //Сохраняем изменения в форме Выполнения
