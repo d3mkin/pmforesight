@@ -12,9 +12,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 ext {
-    allureVersion = '2.13.7'
-    selenideVersion = '5.16.2'
-    junitVersion = '5.7.0'
+    allureVersion = '2.13.5'
+    selenideVersion = '5.14.2'
+    junitVersion = '5.6.2'
     aspectjweaver = '1.9.5'
     logbackVersion = '1.2.3'
     ownerVersion = '1.0.12'

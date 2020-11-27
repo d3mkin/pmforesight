@@ -1,4 +1,4 @@
-package tests.StrageTransition;
+package tests.strageTransition;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Story;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import helpers.TestSuiteName;
-import helpers.UserProvider;
 import model.User;
 import pages.auth.LogoutPage;
 import pages.auth.SingInPage;
@@ -32,7 +31,6 @@ public class PointStageTransitionTests extends BaseTest {
     private ProjectPage modalDialog;
     private PointPage pointPage;
     private File fileToUpload;
-    private File file;
     private String currentDate;
 
     @BeforeEach
@@ -43,7 +41,6 @@ public class PointStageTransitionTests extends BaseTest {
         modalDialog = new ProjectPage();
         pointPage = new PointPage();
         fileToUpload = new File("src/test/resources/test.txt");
-        file = new File("/opt/TeamCity/uploadFile/test.txt");
         currentDate = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
         ActionsViaAPI.createProjectViaAPI("Инициирование","Ведомственный");
     }
@@ -96,7 +93,7 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.findInGanttAndOpenEntityPage("Тестовая КТ");
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
-        pointPage.completePointAndUploadFile(currentDate, file);
+        pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         pointPage.backInProgressPointAndUploadFile("31.12.2020", fileToUpload);
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();

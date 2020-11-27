@@ -1,4 +1,4 @@
-package tests.StrageTransition;
+package tests.strageTransition;
 
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;

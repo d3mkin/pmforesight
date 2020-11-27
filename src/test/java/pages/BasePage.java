@@ -4,8 +4,6 @@ import com.codeborne.selenide.*;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.LocalFileDetector;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -297,13 +295,6 @@ public abstract class BasePage {
     @Step ("Загрузить документ")
     public void uploadFile(File fileToUpload){
         uploadInput.uploadFile(fileToUpload);
-    }
-
-    @Step ("Загрузить документ Selenoid")
-    public void uploadFileDocker() {
-        ChromeDriver driver = new ChromeDriver();
-        driver.setFileDetector(new LocalFileDetector());
-        uploadInput.sendKeys("/opt/TeamCity/uploadFile/test.txt");
     }
 
     @Step ("Проверить что документ успешно загружен")

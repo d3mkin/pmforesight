@@ -55,9 +55,11 @@ public class CustomWebDriver implements WebDriverProvider {
 //        }
 
         if(System.getProperty("selenoid_url") != null) {
-            return new RemoteWebDriver(getRemoteWebDriverUrl(), capabilities);
+//            return new RemoteWebDriver(getRemoteWebDriverUrl(), capabilities);
+          return getRemoteWebDriver(capabilities);
         } else {
-            return new ChromeDriver(capabilities);
+//            return new ChromeDriver(capabilities);
+          return   getLocalChromeDriver(capabilities);
         }
 
 //        if(selenoid != null) {
