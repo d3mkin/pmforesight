@@ -70,7 +70,7 @@ public class ProjectPage extends BasePage {
     private final SelenideElement newGanttActivityNameTR = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]"));
     private final SelenideElement newGanttActivityNameTD = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[6]"));
     private final SelenideElement newGanttActivityNameInput = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[6]//input"));
-    private final SelenideElement newGanttActivityApproveDocTD = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[16]"));
+    private final SelenideElement newGanttActivityApproveDocTD = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[16]//div"));
     private final SelenideElement newGanttActivityApproveDocSelect = $(By.xpath("//select[contains(@class,'gantt-select')]"));
     private final SelenideElement newGanttActivityStatusTitle = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]//td[2]//div"));
     private final SelenideElement newGanttActivityStatusIndicator = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]//td[2]//span"));
@@ -686,7 +686,8 @@ public class ProjectPage extends BasePage {
         newGanttActivityNameInput.shouldBe(visible).sendKeys(pointName);
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityApproveDocTD.click();
-        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).click();
+        newGanttActivityApproveDocSelect.shouldBe(visible).click();
+        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
         saveGanttButton.click();
         newGanttActivityStatusTitle.shouldHave(attribute("title", "В работе по плану"));
         newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
@@ -702,7 +703,8 @@ public class ProjectPage extends BasePage {
         newGanttActivityNameInput.shouldBe(visible).sendKeys(workName);
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityApproveDocTD.click();
-        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).click();
+        newGanttActivityApproveDocSelect.shouldBe(visible).click();
+        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
         saveGanttButton.click();
         newGanttActivityStatusTitle.shouldHave(attribute("title", "В работе по плану"));
         newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
@@ -718,14 +720,16 @@ public class ProjectPage extends BasePage {
         newGanttActivityNameInput.shouldBe(visible).sendKeys(stageName);
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityApproveDocTD.click();
-        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).click();
+        newGanttActivityApproveDocSelect.shouldBe(visible).click();
+        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
         newPointAddButton.shouldBe(visible).click();
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityNameTD.shouldBe(visible).click();
         newGanttActivityNameInput.shouldBe(visible).sendKeys("КТ для этапа");
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityApproveDocTD.click();
-        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).click();
+        newGanttActivityApproveDocSelect.shouldBe(visible).click();
+        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
         clickToDownEntityLevel();
         saveGanttButton.click();
         newGanttActivityStatusTitle.shouldHave(attribute("title", "В работе по плану"));
