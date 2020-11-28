@@ -1,5 +1,6 @@
 package tests.entity_generation.meeting;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
@@ -18,7 +19,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.ENTITY_CREATION)
+@Epic(TestSuiteName.ENTITY_CREATION)
+@Story("Совещание")
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreateMeetingTests extends BaseTest {

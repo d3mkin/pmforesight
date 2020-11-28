@@ -1,6 +1,7 @@
 package tests.widget;
 
 import helpers.TestSuiteName;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import model.User;
 import org.junit.Assert;
@@ -16,12 +17,10 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-
-@Story(TestSuiteName.WIDGETS)
+@Epic(TestSuiteName.WIDGETS)
 @Tag("Regression")
 @Tag("Smoke")
 public class WidgetTests  extends BaseTest {
-
     private SingInPage singIn;
     IndexPage indexPage;
 

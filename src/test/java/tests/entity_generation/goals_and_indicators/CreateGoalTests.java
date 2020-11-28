@@ -1,5 +1,6 @@
 package tests.entity_generation.goals_and_indicators;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
@@ -19,7 +20,8 @@ import helpers.ActionsViaAPI;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.ENTITY_CREATION)
+@Epic(TestSuiteName.ENTITY_CREATION)
+@Story("Цель")
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreateGoalTests extends BaseTest {
@@ -51,7 +53,7 @@ public class CreateGoalTests extends BaseTest {
     public void logout() {
         new LogoutPage().open();
     }
-
+    //TODO сделать параметризованный тест
     @ParameterizedTest (name = "Создание сущности Цель с разными уровнями управления: Муниципальный, Федеральный, Региональный, Национальный")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-115")

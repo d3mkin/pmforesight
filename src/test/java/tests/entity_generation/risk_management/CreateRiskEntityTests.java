@@ -1,5 +1,6 @@
 package tests.entity_generation.risk_management;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
@@ -18,7 +19,8 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.ENTITY_CREATION)
+@Epic(TestSuiteName.ENTITY_CREATION)
+@Story("Риски и возможности")
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreateRiskEntityTests extends BaseTest {

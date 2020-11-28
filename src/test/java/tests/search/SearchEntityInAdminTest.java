@@ -1,5 +1,6 @@
 package tests.search;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
@@ -17,7 +18,7 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.SEARCH)
+@Epic(TestSuiteName.SEARCH)
 @Tag("search")
 @Tag("Regression")
 public class SearchEntityInAdminTest extends BaseTest {

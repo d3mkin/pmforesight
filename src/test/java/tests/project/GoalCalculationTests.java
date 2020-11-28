@@ -1,5 +1,6 @@
 package tests.project;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
@@ -20,7 +21,8 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.GOALS)
+@Epic(TestSuiteName.GOALS)
+@Story("Расчет индикатора цели по показателям")
 public class GoalCalculationTests extends BaseTest {
     private SingInPage singIn;
     private IndicatorPage indicatorPage;

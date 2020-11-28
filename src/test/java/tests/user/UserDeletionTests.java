@@ -1,5 +1,6 @@
-package tests.cascadeDeletion.user;
+package tests.user;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
@@ -18,10 +19,10 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.CASCADE_DELETION)
+@Epic(TestSuiteName.USER_DELETION)
 @Tag("cascadeDeletion")
 @Tag("Regression")
-public class UserCascadeDeletionTests extends BaseTest {
+public class UserDeletionTests extends BaseTest {
     private SingInPage singIn;
     private EmployeesRegistry employeesRegistry;
     private EmployeePage employeePage;

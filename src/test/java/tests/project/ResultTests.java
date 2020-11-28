@@ -1,5 +1,6 @@
 package tests.project;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
@@ -17,7 +18,7 @@ import helpers.ActionsViaAPI;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.RESULTS)
+@Epic(TestSuiteName.RESULTS)
 public class ResultTests extends BaseTest {
     private SingInPage singIn;
     private ProjectPage projectPage;
@@ -55,6 +56,7 @@ public class ResultTests extends BaseTest {
         new LogoutPage().open();
     }
 
+    @Story("Отображение таблиц Результатов в Проекте в соответствии с уровнем управления")
     @ParameterizedTest(name = "Отображение таблиц результатов Ведомственного проекта после его создания")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-10")
@@ -68,6 +70,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveDefaultResultsTable();
     }
 
+    @Story("Создание Результата из проекта с учётом уровня управления")
     @ParameterizedTest(name = "Создание Результата Ведомственного проекта в Ведомственном проекте")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-4")
@@ -90,6 +93,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveDepartmentalResult(result.getName());
     }
 
+    @Story("Отображение таблиц Результатов в Проекте в соответствии с уровнем управления")
     @ParameterizedTest(name = "Отображение таблиц результатов Федерального проекта после его создания")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-1")
@@ -103,6 +107,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveFederalResultsTable();
     }
 
+    @Story("Создание Результата из проекта с учётом уровня управления")
     @ParameterizedTest(name = "Создание Федерального результата в Федеральном проекте")
     @MethodSource("helpers.UserProvider#mainFA")
     @TmsLink("411")
@@ -124,6 +129,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveFederalResult(result.getName());
     }
 
+    @Story("Создание Результата из проекта с учётом уровня управления")
     @ParameterizedTest(name = "Создание Федерального результата в Региональном проекте")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-6")
@@ -146,6 +152,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveFederalResult(result.getName());
     }
 
+    @Story("Отображение таблиц Результатов в Проекте в соответствии с уровнем управления")
     @ParameterizedTest(name = "Отображение таблиц результатов Регионального проекта после его создания")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-3")
@@ -159,6 +166,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveRegionalResultsTable();
     }
 
+    @Story("Создание Результата из проекта с учётом уровня управления")
     @ParameterizedTest(name = "Создание Регионального результата в Региональном проекте")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-8")
@@ -181,6 +189,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveRegionalResult(result.getName());
     }
 
+    @Story("Создание Результата из проекта с учётом уровня управления")
     @ParameterizedTest(name = "Создание Результата Регионального проекта, связанного с Результатом Федерального проекта")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-7")
@@ -215,6 +224,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveRegionalResult(regionalResult.getName());
     }
 
+    @Story("Отображение таблиц Результатов в Проекте в соответствии с уровнем управления")
     @ParameterizedTest(name = "Редактирование Результата Регионального проекта: связывание с Результатом Федерального проекта")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-21")
@@ -251,6 +261,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveRegionalResult(regionalResult.getName());
     }
 
+    @Story("Связь результатов и КП проекта")
     @ParameterizedTest(name = "Отображение Результата в таблице 'Связь результатов и КП проекта' после создания Результата из проекта")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-22")
@@ -306,6 +317,7 @@ public class ResultTests extends BaseTest {
         projectPage.checkLinkedResultsInTable(regionalResult.getName(),regionalResult.getType());
     }
 
+    @Story("Связь результатов и КП проекта")
     @ParameterizedTest(name = "Валидация поля 'Тип КТ/Мероприятия' таблицы 'Связь Результатов и КП проекта' (все варианты)")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-25")
@@ -356,6 +368,7 @@ public class ResultTests extends BaseTest {
         projectPage.checkValidationInKPAndResultsLinkedTable(resultPage,"Региональный");
     }
 
+    @Story("Иерархия результатов")
     @ParameterizedTest(name = "Выбор родительского Результата в карточке создания Результата (Фед., Вед.)")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-19")
@@ -408,6 +421,7 @@ public class ResultTests extends BaseTest {
         projectPage.checkIsTheResultChild("Федеральный", federalChildResult.getName());
     }
 
+    @Story("Иерархия результатов")
     @ParameterizedTest(name = "Выбор родительского Результата в карточке редактирования Результата (для Рез-тов Фед. и Вед. проектов)")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-17")
@@ -469,6 +483,7 @@ public class ResultTests extends BaseTest {
 
     }
 
+    @Story("Иерархия результатов")
     @ParameterizedTest(name = "Недоступность выбора родительского результата для рез-та Регионального проекта при создании/редактировании")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-18")

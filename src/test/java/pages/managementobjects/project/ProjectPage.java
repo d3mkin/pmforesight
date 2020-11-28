@@ -685,7 +685,8 @@ public class ProjectPage extends BasePage {
         newGanttActivityNameTD.shouldBe(visible).click();
         newGanttActivityNameInput.shouldBe(visible).sendKeys(pointName);
         newGanttActivityNameTR.shouldBe(visible).click();
-        newGanttActivityApproveDocTD.click();
+        sleep(3000);
+        newGanttActivityApproveDocTD.shouldBe(visible).click();
         newGanttActivityApproveDocSelect.shouldBe(visible).click();
         $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
         saveGanttButton.click();
@@ -702,7 +703,8 @@ public class ProjectPage extends BasePage {
         newGanttActivityNameTD.shouldBe(visible).click();
         newGanttActivityNameInput.shouldBe(visible).sendKeys(workName);
         newGanttActivityNameTR.shouldBe(visible).click();
-        newGanttActivityApproveDocTD.click();
+        sleep(3000);
+        newGanttActivityApproveDocTD.shouldBe(visible).click();
         newGanttActivityApproveDocSelect.shouldBe(visible).click();
         $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
         saveGanttButton.click();
@@ -719,7 +721,8 @@ public class ProjectPage extends BasePage {
         newGanttActivityNameTD.shouldBe(visible).click();
         newGanttActivityNameInput.shouldBe(visible).sendKeys(stageName);
         newGanttActivityNameTR.shouldBe(visible).click();
-        newGanttActivityApproveDocTD.click();
+        sleep(3000);
+        newGanttActivityApproveDocTD.shouldBe(visible).click();
         newGanttActivityApproveDocSelect.shouldBe(visible).click();
         $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
         newPointAddButton.shouldBe(visible).click();
@@ -727,7 +730,8 @@ public class ProjectPage extends BasePage {
         newGanttActivityNameTD.shouldBe(visible).click();
         newGanttActivityNameInput.shouldBe(visible).sendKeys("КТ для этапа");
         newGanttActivityNameTR.shouldBe(visible).click();
-        newGanttActivityApproveDocTD.click();
+        sleep(3000);
+        newGanttActivityApproveDocTD.shouldBe(visible).click();
         newGanttActivityApproveDocSelect.shouldBe(visible).click();
         $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
         clickToDownEntityLevel();

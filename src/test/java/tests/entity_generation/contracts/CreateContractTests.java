@@ -1,5 +1,6 @@
 package tests.entity_generation.contracts;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
@@ -16,7 +17,8 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.ENTITY_CREATION)
+@Epic(TestSuiteName.ENTITY_CREATION)
+@Story("Контракт")
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreateContractTests extends BaseTest {

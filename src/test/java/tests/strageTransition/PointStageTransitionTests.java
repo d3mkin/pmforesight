@@ -1,6 +1,7 @@
 package tests.strageTransition;
 
 import com.codeborne.selenide.Selenide;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
@@ -24,7 +25,8 @@ import java.util.Calendar;
 import static io.qameta.allure.Allure.parameter;
 
 @Tag("Stage_transition")
-@Story(TestSuiteName.CHANGE_STATUS)
+@Epic(TestSuiteName.CHANGE_STATUS)
+@Story("Перевод КТ по стадиям")
 public class PointStageTransitionTests extends BaseTest {
     private SingInPage singIn;
     private ProjectPage projectPage;

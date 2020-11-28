@@ -1,6 +1,7 @@
 package tests.entity_generation.projects;
 
 import com.codeborne.selenide.Configuration;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
@@ -17,7 +18,8 @@ import tests.BaseTest;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.ENTITY_CREATION)
+@Epic(TestSuiteName.ENTITY_CREATION)
+@Story("Проект")
 @Tag("entityGeneration")
 @Tag("Regression")
 public class CreateProjectTests extends BaseTest {

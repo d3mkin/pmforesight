@@ -10,7 +10,7 @@ public class TestSuiteName {
     public static final String SEARCH = "Поиск";
     public static final String REPORTS = "Отчеты";
     public static final String CARD_LINKS = "Связи Карточек";
-    public static final String CHANGE_STATUS = "Переходы статусов";
+    public static final String CHANGE_STATUS = "Переходы по стадиям";
     public static final String MAIN_MENU = "Главное меню";
     public static final String REGISTRIES = "Реестры и представления";
     public static final String PROJECT = "Проект";
@@ -21,5 +21,7 @@ public class TestSuiteName {
     public static final String PERMISSION = "Права доступа";
     public static final String CASCADE_DELETION = "Каскадное удаление";
     public static final String GOALS = "Цели";
+    public static final String USER_DELETION = "Удаление пользователя";
+
 
 }

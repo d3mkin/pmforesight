@@ -1,6 +1,7 @@
 package tests.project;
 
 import com.codeborne.selenide.Selenide;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
@@ -24,7 +25,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static io.qameta.allure.Allure.parameter;
 
 //TODO: сделать параметризованные тесты
-@Story(TestSuiteName.INDICATORS)
+@Epic(TestSuiteName.INDICATORS)
 public class IndicatorTests extends BaseTest {
     private SingInPage singIn;
     private ProjectPage projectPage;
@@ -49,6 +50,7 @@ public class IndicatorTests extends BaseTest {
         new LogoutPage().open();
     }
 
+    @Story("Расчёт общего индикатора Показателя")
     @ParameterizedTest(name = "Создание сущности Показатель из карточки Проекта")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-61")
@@ -71,6 +73,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.shouldHaveIndicator(testIndicator.getName());
     }
 
+    @Story("Расчёт общего индикатора Показателя")
     @ParameterizedTest(name = "Добавление данных за период в Показателе Ведомственного проекта")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-63")
@@ -107,6 +110,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.switchToPreviousBrowserTab();
     }
 
+    @Story("Расчёт процента достижения плана")
     @ParameterizedTest(name = "Общий процент достижения плана %: Возрастающего показателя")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-80")
@@ -147,6 +151,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.switchToPreviousBrowserTab();
     }
 
+    @Story("Расчёт процента достижения плана")
     @ParameterizedTest(name =  "Общий процент достижения плана %: Убывающего показателя")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-81")
@@ -187,6 +192,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.switchToPreviousBrowserTab();
     }
 
+    @Story("Расчёт процента достижения плана")
     @ParameterizedTest(name = "Общий процент достижения плана %: Фиксированного показателя")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-82")
@@ -227,6 +233,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.switchToPreviousBrowserTab();
     }
 
+    @Story("Расчет индикатора периода")
     @ParameterizedTest(name = "Расчет индикатора периода: Возрастающий показатель")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-42")
@@ -301,6 +308,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.switchToPreviousBrowserTab();
     }
 
+    @Story("Расчет индикатора периода")
     @ParameterizedTest(name = "Расчет индикатора периода: Убывающий показатель")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-46")
@@ -375,6 +383,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.switchToPreviousBrowserTab();
     }
 
+    @Story("Расчет индикатора периода")
     @ParameterizedTest(name = "Расчет индикатора периода: Фиксированный показатель")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-50")
@@ -442,6 +451,7 @@ public class IndicatorTests extends BaseTest {
         projectPage.switchToPreviousBrowserTab();
     }
 
+    @Story("Расчёт общего индикатора Показателя")
     @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Год, ВКЛЮЧАЯ текущий")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-54")
@@ -490,6 +500,7 @@ public class IndicatorTests extends BaseTest {
                 cssValue("color", "rgba(255, 89, 64, 1)"));
     }
 
+    @Story("Расчёт общего индикатора Показателя")
     @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Полугодие, ВКЛЮЧАЯ текущее")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-55")
@@ -549,6 +560,7 @@ public class IndicatorTests extends BaseTest {
                 cssValue("color", "rgba(102, 102, 102, 1)"));
     }
 
+    @Story("Расчёт общего индикатора Показателя")
     @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Квартал, ВКЛЮЧАЯ текущий")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-56")
@@ -609,6 +621,7 @@ public class IndicatorTests extends BaseTest {
                 cssValue("color", "rgba(255, 210, 70, 1)"));
     }
 
+    @Story("Расчёт общего индикатора Показателя")
     @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Месяц, ВКЛЮЧАЯ текущий")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-57")

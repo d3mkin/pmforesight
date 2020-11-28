@@ -173,5 +173,4 @@ public class EmployeesRegistry implements Registry {
         searchEmployees(userName);
         shouldNotHaveResults();
     }
-
 }

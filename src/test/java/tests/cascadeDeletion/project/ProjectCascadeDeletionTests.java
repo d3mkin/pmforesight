@@ -1,5 +1,6 @@
 package tests.cascadeDeletion.project;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
@@ -40,7 +41,8 @@ import java.util.Calendar;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Story(TestSuiteName.CASCADE_DELETION)
+@Epic(TestSuiteName.CASCADE_DELETION)
+@Story("Каскадное удаление Проекта и дочерних сущностей")
 @Tag("cascadeDeletion")
 @Tag("Regression")
 
