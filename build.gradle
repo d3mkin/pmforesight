@@ -83,8 +83,8 @@ task authorization (type: Test) {
     }
 }
 
-task stageTransition (type: Test) {
+task stage_transition (type: Test) {
     useJUnitPlatform {
-        includeTags 'Stage transition'
+        includeTags 'Stage_transition'
     }
 }

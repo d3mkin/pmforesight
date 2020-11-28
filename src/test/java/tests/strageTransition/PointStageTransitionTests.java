@@ -23,7 +23,7 @@ import java.util.Calendar;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Tag("Stage transition")
+@Tag("Stage_transition")
 @Story(TestSuiteName.CHANGE_STATUS)
 public class PointStageTransitionTests extends BaseTest {
     private SingInPage singIn;
