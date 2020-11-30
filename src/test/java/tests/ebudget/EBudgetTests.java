@@ -34,7 +34,7 @@ public class EBudgetTests extends BaseTest {
         singIn.open();
         projectPage = new ProjectPage();
         projectRegistry = new ProjectRegistry();
-        importProject = "Финансовая поддержка семей при рождении детей (Волгоградская область)";
+        importProject = "Финансовая поддержка семей при рождении детей";
         importProjectPortfolio = "Портфель национальных проектов";
     }
 
