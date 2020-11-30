@@ -78,7 +78,6 @@ public class CreateContractTests extends BaseTest {
                 .setStage("Инициирование")
                 .setExceptedPrice("50")
                 .setCustomer(user.getName())
-                .setExecutor(user.getName())
                 .setResponsiblePerson(user.getName());
         parameter("Пользователь", user.getName());
         singIn.asUser(user);

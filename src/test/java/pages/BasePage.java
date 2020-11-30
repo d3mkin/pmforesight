@@ -197,7 +197,9 @@ public abstract class BasePage {
         if (value == null) {
             return;
         }
-        el.waitUntil(visible, Configuration.timeout).setValue(value);
+        el.waitUntil(visible, Configuration.timeout);
+        el.setValue(value);
+        el.waitUntil(text(value), Configuration.timeout);
     }
 
     public void typeNumeric(SelenideElement wrap, SelenideElement input, String value) {

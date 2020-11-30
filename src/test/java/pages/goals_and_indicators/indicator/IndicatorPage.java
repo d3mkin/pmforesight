@@ -58,12 +58,12 @@ public class IndicatorPage extends BasePage {
 
     @Step ("Нажать на кнопку Добавить Плановые, прогнозные и фактические значения показателя")
     public void clickAddValueButton() {
-        addValueButton_ViewForm.click();
+        addValueButton_ViewForm.shouldBe(visible).click();
     }
 
     @Step ("Нажать на кнопку Редактировать значения показателя")
     public void clickEditValueButton() {
-        editIndicatorValueButton_ViewForm.click();
+        editIndicatorValueButton_ViewForm.shouldBe(visible).click();
     }
 
 
