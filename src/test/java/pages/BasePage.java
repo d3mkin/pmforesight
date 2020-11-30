@@ -238,7 +238,7 @@ public abstract class BasePage {
         selectFilterInput.waitUntil(visible, Configuration.timeout);
         selectFilterInput.setValue(value);
         sleep(2000);
-        selectAllItems.shouldHaveSize(1);
+        selectAllItems. shouldHaveSize(1);
         selectFirstItem.click();
         el.waitUntil(text(value), Configuration.timeout);
     }

@@ -30,6 +30,7 @@ public class ProjectPage extends BasePage {
 
     //Общая информация
     private final SelenideElement currentProjectStageField = $(".f-card__info");
+    private final SelenideElement projectViewName = $(".f-card__name");
     private final SelenideElement changeProjectStageButton = $(By.xpath("//li[@id='MoveToNextPhase']"));
     private final SelenideElement nextStageButton = $(By.xpath("//div[@class='f-popup__container']//li[@name='NextPhaseButton']"));
     private final SelenideElement prevStageButton = $(By.xpath("//div[@class='f-popup__container']//li[@name='PrevPhaseButton']"));
@@ -159,6 +160,16 @@ public class ProjectPage extends BasePage {
 
     //TODO: сделать отдельный класс для верхней панели карточек
     private final SelenideElement buttonCloseForm = $(By.xpath("//div[@id='closeForm']"));
+
+    @Step ("Проверить что наименование Проекта соответствует названию {projectName}")
+    public void checkProjectName (String projectName) {
+        projectViewName.waitUntil(visible, Configuration.timeout).shouldHave(text(projectName));
+    }
+
+    @Step ("Проверить что наименование Портфеля проекта соответствует названию {projectPortfolioName}")
+    public void checkProjectPortfolioName (String projectPortfolioName) {
+        $x("//div[@id='Parent']//a[contains(text(),'"+projectPortfolioName+"')]").shouldHave(text(projectPortfolioName));
+    }
 
     @Step("Заполнить поля проекта")
     public void fillFields(Project project) {
@@ -365,7 +376,6 @@ public class ProjectPage extends BasePage {
     public void checkLinkBetweenFederalAndRegionalResults(String result){
         linkedFederalResultsTD.shouldHave(text(result));
     }
-
 
     @Step ("Удалить Ведомственный результат")
     public void clickDeleteDefaultResult() {
@@ -857,7 +867,6 @@ public class ProjectPage extends BasePage {
     public void clickAddPositiveLesson() {
         addPositiveLessonButton.shouldBe(visible).click();
     }
-
 
     @Step ("Нажать кнопку 'Добавить Возможность'")
     public void clickAddOpportunity () {

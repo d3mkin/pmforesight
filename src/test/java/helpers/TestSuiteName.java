@@ -2,7 +2,6 @@ package helpers;
 
 public class TestSuiteName {
     public static final String AUTH = "Авторизация";
-    public static final String SMOKE = "Первичная проверка системы";
     public static final String MENU_AND_REGISTRY = "Проверка меню и реестров";
     public static final String WIDGETS = "Проверка виджетов главной страницы";
     public static final String ENTITY_CREATION = "Создание и проверка сущностей из реестра";
@@ -22,6 +21,5 @@ public class TestSuiteName {
     public static final String CASCADE_DELETION = "Каскадное удаление";
     public static final String GOALS = "Цели";
     public static final String USER_DELETION = "Удаление пользователя";
-
-
+    public static final String ELECTRONIC_BUDGET = "Электронный бюджет";
 }

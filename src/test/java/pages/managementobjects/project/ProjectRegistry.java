@@ -1,9 +1,6 @@
 package pages.managementobjects.project;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.*;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import model.Project;
@@ -14,8 +11,7 @@ import pages.elements.DeleteEntityDialog;
 import pages.elements.Header;
 import pages.elements.MainMenu;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -32,9 +28,14 @@ public class ProjectRegistry implements Registry {
     private final SelenideElement registryName = $("#f-grid-title span");
     private final SelenideElement table = mainContainer.$("div.f-grid__grid");
     private final SelenideElement firstFoundRow = table.$(".slick-row.odd");
-    private final SelenideElement firstProjectRow = table.$(By.xpath(".//div[@class = 'ui-widget-content slick-row even']"));
+    private final SelenideElement firstProjectRow = table.$x(".//div[@class = 'ui-widget-content slick-row even']");
     private final SelenideElement allRows = table.$(".grid-canvas .slick-row");
-    private final SelenideElement foundCheckBox = $(By.cssSelector("div[class='slick-cell l0 r0 slick-cell-checkboxsel']"));
+    private final SelenideElement foundCheckBox = $("div[class='slick-cell l0 r0 slick-cell-checkboxsel']");
+    private final SelenideElement importFromEBudgetButton = $(".k-toolbar a[data-tooltip='Загрузить из Электронного Бюджета']");
+    private final SelenideElement eBudgetDialogHeader = $("span.k-window-title");
+    private final SelenideElement eBudgetProjectNameInput = $("input[aria-label='Наименование']");
+    private final SelenideElement loadingImage = $("div .k-loading-mask");
+
 
     public ProjectRegistry() {
         this.mainMenu = new MainMenu();
@@ -52,6 +53,13 @@ public class ProjectRegistry implements Registry {
         sleep(1000);
         controlPanel.typeSearchValue(projectName);
         //controlPanel.clickSearch();
+    }
+
+    @Step("Поиск проекта {projectName} в реестре")
+    public void searchAndOpenProject(String projectName) {
+        searchProject(projectName);
+        shouldHaveCreatedRecord(projectName);
+        firstProjectRow.shouldBe(visible).click();
     }
 
     //TODO: Перенести метод в BaseRegistry
@@ -120,7 +128,7 @@ public class ProjectRegistry implements Registry {
 
     @Step("Подтвердить удаление")
     public void acceptDelete() {
-        $(By.xpath("//div[@class='k-widget k-window k-dialog']")).shouldBe(visible);
+        $(By.xpath("//div[@class='k-widget k-window k-dialog']")).waitUntil(visible,Configuration.timeout);
         $(By.xpath("//label[@for='dialog-check-all']")).click();
         new DeleteEntityDialog().clickDeleteYes();
     }
@@ -133,6 +141,7 @@ public class ProjectRegistry implements Registry {
         selectRow();
         clickDelete();
         acceptDelete();
+        loadingImage.waitUntil(not(visible), 1200000);
         searchProject(project.getName());
         shouldNotHaveResults();
     }
@@ -145,13 +154,14 @@ public class ProjectRegistry implements Registry {
         selectRow();
         clickDelete();
         acceptDelete();
+        loadingImage.waitUntil(not(visible), 1200000);
         searchProject(projectName);
         shouldNotHaveResults();
     }
 
-
+    @Step("Проверить что ничего не найдено")
     public void shouldNotHaveResults() {
-        allRows.shouldNot(visible);
+        allRows.waitUntil(not(visible), Configuration.timeout);
     }
 
     @Step ("Добавить проект из реестра")
@@ -167,5 +177,19 @@ public class ProjectRegistry implements Registry {
         controlPanel.changeView(viewName);
         $x("//span[contains(text(),'"+viewName+"')]").shouldBe(visible);
         $("#f-grid-viewlist .k-input").shouldHave(text(""+viewName+""));
+    }
+
+    @Step ("Импортировать из Электронного Бюджета проект {projectName}")
+    public void importProjectFromEBudget(String projectName) {
+        importFromEBudgetButton.shouldBe(visible).click();
+        eBudgetDialogHeader.waitUntil(visible, Configuration.timeout).shouldHave(text("Доступные для импорта проекты"));
+        eBudgetProjectNameInput.shouldBe(visible).setValue(projectName).pressEnter();
+        $x("//td[contains(text(),'" + projectName + "')]").shouldBe(visible).click();
+        $x("//button[contains(text(),'Импорт')]").click();
+//        $x("//div[@id='ebimport_progress']").waitUntil(not(visible), 1200000);
+//        $x("//h4[contains(text(),'Идет импорт проектов...')]").waitUntil(visible,1200000);
+        eBudgetDialogHeader.waitUntil(text("Загруженные проекты"), 1200000);
+        $("div.k-grid-content tr td div").shouldBe(visible).shouldHave(text("Проект успешно загружен"));
+        $x("//button[contains(text(),'Закрыть')]").shouldBe(visible).click();
     }
 }
