@@ -48,7 +48,7 @@ public class EBudgetTests extends BaseTest {
     @Tag("C1322")
     @Tag("ATEST-168")
     @TmsLink("1322")
-    public void CreateEBudgetFromRegistryTest(User user) {
+    public void createEBudgetFromRegistryTest(User user) {
         parameter("Пользователь", user.getName());
         parameter("Проект для импорта", importProject);
         parameter("Связь с портфелем", importProjectPortfolio);

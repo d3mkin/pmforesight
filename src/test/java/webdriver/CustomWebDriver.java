@@ -35,11 +35,7 @@ public class CustomWebDriver implements WebDriverProvider {
         capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", false);
-        capabilities.setCapability("screenResolution", "1920x1080");
-        capabilities.setCapability("name", "testName");
         capabilities.setCapability("timeZone", "Europe/Moscow");
-
-
         capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
         WebDriverManager.chromedriver().setup();
 
@@ -63,7 +59,7 @@ public class CustomWebDriver implements WebDriverProvider {
           return getRemoteWebDriver(capabilities);
         } else {
 //            return new ChromeDriver(capabilities);
-          return   getLocalChromeDriver(capabilities);
+          return getLocalChromeDriver(capabilities);
         }
 
 //        if(selenoid != null) {
@@ -80,7 +76,6 @@ public class CustomWebDriver implements WebDriverProvider {
     private WebDriver getRemoteWebDriver(DesiredCapabilities capabilities) {
         RemoteWebDriver remoteWebDriver = new RemoteWebDriver(getRemoteWebDriverUrl(), capabilities);
         remoteWebDriver.setFileDetector(new LocalFileDetector());
-
         return remoteWebDriver;
     }
 
@@ -95,12 +90,10 @@ public class CustomWebDriver implements WebDriverProvider {
 
     private ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
-
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-notifications");
         chromeOptions.addArguments("--disable-infobars");
         chromeOptions.addArguments("--lang=ru");
-
         return chromeOptions;
     }
 }

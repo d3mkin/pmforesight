@@ -35,3 +35,4 @@ target/
 /gradle/
 gradlew
 gradlew.bat
+/java_pid7812.hprof
