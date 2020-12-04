@@ -41,12 +41,20 @@ public class ProgramPage extends BasePage {
     private SelenideElement searchCreateLesson = $(By.xpath("//div[contains(@id,\"LessonInlineTable\")]/..//input[contains(@placeholder,\"Поиск...\")]"));
     private SelenideElement nameLesson = $(By.xpath("//div[contains(@id,\"LessonInlineTable\")]/..//div[contains(@class,\"k-grid-content k-auto-scrollable\")]/..//a[contains(@target,\"_blank\")]"));
     //Показатели
-    private final SelenideElement indicatorAddButton = $("#KPIDivContent .itv-add-button[data-tooltip=\"Показатель\"]");
+    private final SelenideElement indicatorAddButton = $("#KPIDivContent .itv-add-button[data-tooltip='Показатель']");
     //Таблицы показателей
     private final SelenideElement objectIndicatorsTable = $("#KPIDivContent .k-grid-content");
     private final SelenideElement objectIndicatorsHeader = $x("//span[contains(text(),'Показатели объекта')]");
     private final SelenideElement indicatorTableSearchInput = $("#KPIDivContent input[placeholder='Поиск...']");
     private final SelenideElement firstFoundIndicator = $x("//div[@id='KPIDivContent']//tbody/tr[1]/td[2]");
+    //Результаты
+    private final SelenideElement addResultButton = $("#ResultDivContent .itv-add-button[data-tooltip='Результат']");
+    private final SelenideElement resultsTable = $("#ResultDivContent inlinetableview");
+    private final SelenideElement resultsHeader = $x("//span[contains(text(),'Подчинённые результаты')]");
+    private final SelenideElement resultsSearch = $("#ResultDivContent input[placeholder='Поиск...']");
+    private final SelenideElement firstFoundResult = $x("//div[@id='ResultDivContent']//tbody/tr[1]/td[2]");
+
+
 
     public void fillFields(Program program) {
         typeText(nameProgram, program.getName());
@@ -104,5 +112,28 @@ public class ProgramPage extends BasePage {
         indicatorTableSearchInput.sendKeys(indicatorName);
         firstFoundIndicator.shouldBe(visible);
         firstFoundIndicator.shouldHave(text(indicatorName));
+    }
+
+    @Step("Открыть вкладку Результаты")
+    public void openResultsTab() {
+        tabResults.click();
+        sleep(1000);
+    }
+
+    @Step ("Нажать кнопку Добавить результат")
+    public void clickAddResult() {
+        addResultButton.click();
+    }
+
+    @Step ("Проверка таблицы подчиненных результатов")
+    public void shouldHaveResultsTable() {
+        resultsTable.shouldBe(visible);
+        resultsHeader.shouldHave(text("Подчинённые результаты"));
+    }
+    @Step ("Проверить наличие результата в таблице")
+    public void shouldHaveResult(String resultName){
+        resultsSearch.click();
+        resultsSearch.sendKeys(resultName);
+        firstFoundResult.shouldBe(visible).shouldHave(text(resultName));
     }
 }

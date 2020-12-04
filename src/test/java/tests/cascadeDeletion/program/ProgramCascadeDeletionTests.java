@@ -130,8 +130,8 @@ public class ProgramCascadeDeletionTests extends BaseTest {
 
     @ParameterizedTest(name = "Каскадное удаление: Показатели Программы")
     @MethodSource("helpers.UserProvider#mainFA")
-    @Tag("ATEST-89")
-    @TmsLink("1221")
+    @Tag("ATEST-147")
+    @TmsLink("1246")
     public void cascadeDeletionIndicatorInProgram (User user) {
         parameter("Пользователь", user.getName());
         singIn.asUser(user);
@@ -140,7 +140,7 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         programPage.openIndicatorsTab();
         programPage.clickAddIndicator();
         indicator
-                .setName("Тест_C1240_" + currentTime)
+                .setName("Тест_C1246_" + currentTime)
                 .setEstimationType("Возрастающий")
                 .setUnit("Единица")
                 .setBasicValue("1");
@@ -158,5 +158,36 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         indicatorsRegistry.checkIndicatorNotExist(indicator.getName());
         searchForm.checkEntityNotFoundInGlobalSearch(programName);
         searchForm.checkEntityNotFoundInGlobalSearch(indicator.getName());
+    }
+
+    @ParameterizedTest(name = "Каскадное удаление: Результаты Программы")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-148")
+    @TmsLink("1247")
+    public void cascadeDeletionResultInProgram (User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProgramCreatedFromAPI();
+        programPage.checkCurrentProgramStage("Инициирование");
+        programPage.openResultsTab();
+        programPage.clickAddResult();
+        result
+                .setName("Тест_C1247_" + currentTime)
+                .setUnit("Единица")
+                .setDate(currentDate)
+                .setValue("1");
+        resultPage.fillFields(result);
+        resultPage.clickSaveAndClose();
+        programPage.shouldHaveResultsTable();
+        programPage.shouldHaveResult(result.getName());
+        programRegistry.open();
+        String programName = ActionsViaAPI.getProgramNameFromAPI();
+        programRegistry.changeView("Все программы");
+        programRegistry.deleteEntity(programName);
+        resultsRegistry.open();
+        resultsRegistry.changeView("Все результаты");
+        resultsRegistry.checkEntityNotExist(result.getName());
+        searchForm.checkEntityNotFoundInGlobalSearch(programName);
+        searchForm.checkEntityNotFoundInGlobalSearch(result.getName());
     }
 }
