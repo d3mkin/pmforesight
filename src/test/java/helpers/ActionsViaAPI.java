@@ -16,10 +16,11 @@ public class ActionsViaAPI {
     static private int projectId;
     static private int goalId;
     static private int userId;
+    static private int programId;
     static private String projectName;
     static private String goalName;
     static private String userName;
-
+    static private String programName;
 
     static long currentTime = System.currentTimeMillis();
 
@@ -34,6 +35,11 @@ public class ActionsViaAPI {
         return goalId;
     }
     public static String getGoalNameFromAPI() { return goalName; }
+
+    public static int getProgramId() {
+        return programId;
+    }
+    public static String getProgramNameFromAPI() { return programName; }
 
     public static int getUserId() {
         return goalId;
@@ -348,5 +354,78 @@ public class ActionsViaAPI {
 
         userId = response.path("id");
         userName = response.path ("Name");
+    }
+
+    @Step ("Создать Программу через API")
+    public static void createProgramViaAPI() {
+
+        String testProgramBody = "{\n" +
+                "  ActivityPhaseId: 40047,\n" +
+                "  OwnerId: 100070,\n" +
+                "  LeaderId: 100070,\n" +
+                "  CustomerId: 100070,\n" +
+                "  EntityId: '396abf01-5bf3-46a3-b4a5-a7ef4cdb8859',\n" +
+                "  PriorityId: 2,\n" +
+                "  ParentId: 292214,\n" +
+                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  UserAccount: 'FA',\n" +
+                "  UserAccountId: '100070',\n" +
+                "  classid: '396abf01-5bf3-46a3-b4a5-a7ef4cdb8859',\n" +
+                "  classname: 'LProgram',\n" +
+                "  classtitle: 'Программа',\n" +
+                "  entityname: 'LProgram',\n" +
+                "  id: 'new',\n" +
+                "  keyfield: 'LProgramId',\n" +
+                "  namefield: 'Name',\n" +
+                "}";
+
+        String stageProgramBody = "{\n" +
+                "  ActivityPhaseId: 40047,\n" +
+                "  OwnerId: 100070,\n" +
+                "  LeaderId: 100070,\n" +
+                "  CustomerId: 100070,\n" +
+                "  EntityId: '396abf01-5bf3-46a3-b4a5-a7ef4cdb8859',\n" +
+                "  PriorityId: 2,\n" +
+                "  ParentId: 4,\n" +
+                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  UserAccount: 'FA',\n" +
+                "  UserAccountId: '100070',\n" +
+                "  classid: '396abf01-5bf3-46a3-b4a5-a7ef4cdb8859',\n" +
+                "  classname: 'LProgram',\n" +
+                "  classtitle: 'Программа',\n" +
+                "  entityname: 'LProgram',\n" +
+                "  id: 'new',\n" +
+                "  keyfield: 'LProgramId',\n" +
+                "  namefield: 'Name',\n" +
+                "}";
+
+        String body;
+        getCookiesFromLogIn();
+
+        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
+            body = testProgramBody;
+        } else {
+            body = stageProgramBody;
+        }
+
+        Response response =
+                given()
+                        .cookies(cookies)
+                        .contentType(ContentType.JSON)
+                        .when()
+                        .body(body)
+                        .post("/entity/LProgram/new")
+                        .then()
+                        .statusCode(200)
+                        .extract()
+                        .response();
+
+        programId = response.path("id");
+        programName = response.path ("Name");
+    }
+
+    @Step ("Открыть созданную через API Программу")
+    public  static void openProgramCreatedFromAPI() {
+        Selenide.open(Configuration.baseUrl + "/LProgram/Form/auto/" + getProgramId());
     }
 }

@@ -85,7 +85,7 @@ public class CreateLessonTests extends BaseTest {
         createModal.fillFields(program);
         createModal.clickSaveAndClose();
         programRegistry.searchProgram(program.getName());
-        programRegistry.shouldHaveCreatedRecord();
+        programRegistry.shouldHaveCreatedRecord(program.getName());
         programRegistry.clickFirstProgramRow();
         //createModal.openAndCheckProgramName(program.getName());
         createModal.positiveLessonsLearned();
@@ -107,7 +107,7 @@ public class CreateLessonTests extends BaseTest {
         programRegistry.open();
         programRegistry.shouldBeRegistry();
         programRegistry.searchProgram(program.getName());
-        programRegistry.shouldHaveCreatedRecord();
+        programRegistry.shouldHaveCreatedRecord(program.getName());
         programRegistry.selectRow();
         programRegistry.clickDelete();
         programRegistry.acceptDelete();

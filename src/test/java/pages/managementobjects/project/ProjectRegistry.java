@@ -152,6 +152,7 @@ public class ProjectRegistry implements Registry {
         shouldNotHaveResults();
     }
 
+    //TODO: Перенести в универсальный класс
     @Step ("Удалить проект из реестра")
     public void deleteProject(String projectName){
         shouldBeRegistry();

@@ -91,7 +91,7 @@ public class CreateProgramTests extends BaseTest {
         programPage.clickSaveAndClose();
         programRegistry.shouldBeRegistry();
         programRegistry.searchProgram(program.getName());
-        programRegistry.shouldHaveCreatedRecord();
+        programRegistry.shouldHaveCreatedRecord(program.getName());
         programRegistry.selectRow();
         programRegistry.clickDelete();
         programRegistry.acceptDelete();

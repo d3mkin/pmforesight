@@ -13,10 +13,8 @@ import pages.elements.DeleteEntityDialog;
 import pages.elements.Header;
 import pages.elements.MainMenu;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -37,6 +35,7 @@ public class ProgramRegistry implements Registry {
     private final SelenideElement foundCheckBox = $(By.cssSelector("div[class=\"slick-cell l0 r0 slick-cell-checkboxsel\"]"));
     private final SelenideElement firstProjectRow = table.$(By.xpath(".//div[@class = 'ui-widget-content slick-row even']"));
     private final SelenideElement firstProgramRow = table.$(By.xpath(".//div[contains(@class,\"ui-widget-content slick-row odd\")]"));
+    private final SelenideElement loadingImage = $("div .k-loading-mask");
 
     public ProgramRegistry() {
         this.mainMenu = new MainMenu();
@@ -52,8 +51,10 @@ public class ProgramRegistry implements Registry {
     }
 
     @Step("Проверка отображения совещания после создания записи")
-    public void shouldHaveCreatedRecord() {
-        firstFoundRow.shouldBe(visible);
+    public void shouldHaveCreatedRecord(String programName) {
+        $x("//div[contains(text(),'"+programName+"')]").waitUntil(visible, Configuration.timeout);
+        //firstFoundRow.shouldBe(visible);
+        sleep(1000);
     }
 
     @Override
@@ -130,5 +131,25 @@ public class ProgramRegistry implements Registry {
     @Step("Проверка отображения программы после создания записи")
     public void clickFirstProgramRow() {
         firstProgramRow.click();
+    }
+
+    @Step ("Сменить представление на {viewName}")
+    public void changeView(String viewName){
+        controlPanel.changeView(viewName);
+        $x("//span[contains(text(),'"+viewName+"')]").shouldBe(visible);
+        $("#f-grid-viewlist .k-input").shouldHave(text(""+viewName+""));
+    }
+
+    @Step ("Удалить программу из реестра")
+    public void deleteEntity(String entityName){
+        shouldBeRegistry();
+        searchProgram(entityName);
+        shouldHaveCreatedRecord(entityName);
+        selectRow();
+        clickDelete();
+        acceptDelete();
+        loadingImage.waitUntil(not(visible), 1200000);
+        searchProgram(entityName);
+        shouldNotHaveResults();
     }
 }
