@@ -23,16 +23,17 @@ public class ProgramPage extends BasePage {
     private final SelenideElement currentProgramStageField = $(".f-card__info");
 
     //Основные вкладки
-    private final SelenideElement tabMeetings = $(By.cssSelector("a[href='#tab-meeting']"));
-    private final SelenideElement tabResults = $(By.cssSelector("a[href='#tab-result']"));
-    private final SelenideElement tabIndicators = $(By.cssSelector("a[href='#tab-kpi']"));
-    private final SelenideElement tabActivity = $(By.cssSelector("a[href='#tab-activity']"));
-    private final SelenideElement tabDocuments = $(By.cssSelector("a[href='#tab-documents']"));
-    private final SelenideElement tabContracts = $(By.cssSelector("a[href='#tab-contract']"));
-    private final SelenideElement tabRisksOpportunities = $(By.cssSelector("a[href='#tab-risk']"));
-    private final SelenideElement tabLessons = $(By.cssSelector("a[href='#tab-gleaning']"));
-    private final SelenideElement tabOrders = $(By.cssSelector("a[href='#tab-order']"));
-    private final SelenideElement tabOpenQuestions = $(By.cssSelector("a[href='#tab-lov']"));
+    private final SelenideElement tabMeetings = $("a[href='#tab-meeting']");
+    private final SelenideElement tabResults = $("a[href='#tab-result']");
+    private final SelenideElement tabIndicators = $("a[href='#tab-kpi']");
+    private final SelenideElement tabComponents = $("a[href='#tab-component']");
+    private final SelenideElement tabActivity = $("a[href='#tab-activity']");
+    private final SelenideElement tabDocuments = $("a[href='#tab-documents']");
+    private final SelenideElement tabContracts = $("a[href='#tab-contract']");
+    private final SelenideElement tabRisksOpportunities = $("a[href='#tab-risk']");
+    private final SelenideElement tabLessons = $("a[href='#tab-gleaning']");
+    private final SelenideElement tabOrders = $("a[href='#tab-order']");
+    private final SelenideElement tabOpenQuestions = $("a[href='#tab-lov']");
 
     //создание "извлеченного урока" в карточке программы
     private SelenideElement nameProjectAfterOpen = $("#card-Name");
@@ -44,15 +45,21 @@ public class ProgramPage extends BasePage {
     private final SelenideElement indicatorAddButton = $("#KPIDivContent .itv-add-button[data-tooltip='Показатель']");
     //Таблицы показателей
     private final SelenideElement objectIndicatorsTable = $("#KPIDivContent .k-grid-content");
-    private final SelenideElement objectIndicatorsHeader = $x("//span[contains(text(),'Показатели объекта')]");
+    private final SelenideElement objectIndicatorsTableHeader = $x("//span[contains(text(),'Показатели объекта')]");
     private final SelenideElement indicatorTableSearchInput = $("#KPIDivContent input[placeholder='Поиск...']");
     private final SelenideElement firstFoundIndicator = $x("//div[@id='KPIDivContent']//tbody/tr[1]/td[2]");
     //Результаты
     private final SelenideElement addResultButton = $("#ResultDivContent .itv-add-button[data-tooltip='Результат']");
     private final SelenideElement resultsTable = $("#ResultDivContent inlinetableview");
-    private final SelenideElement resultsHeader = $x("//span[contains(text(),'Подчинённые результаты')]");
+    private final SelenideElement resultsTableHeader = $x("//span[contains(text(),'Подчинённые результаты')]");
     private final SelenideElement resultsSearch = $("#ResultDivContent input[placeholder='Поиск...']");
     private final SelenideElement firstFoundResult = $x("//div[@id='ResultDivContent']//tbody/tr[1]/td[2]");
+    //Компоненты программы
+    private final SelenideElement addProjectButton = $("#tab-component a[data-tooltip='Добавить новый проект в программу']");
+    private final SelenideElement componentsTable = $("#ComponentTable .inlineTableView-grid");
+    private final SelenideElement componentsTableHeader = $x("//div[@class='f-widget__header-name']//span[contains(text(),'Компоненты программы')]");
+    private final SelenideElement componentsSearch = $("#ComponentTable input[placeholder='Поиск...']");
+    private final SelenideElement firstFoundComponent = $x("//div[@id='ComponentTable']//tbody/tr[1]/td[2]");
 
 
 
@@ -103,7 +110,7 @@ public class ProgramPage extends BasePage {
     @Step ("Проверить наличие таблицы 'Показатели объекта'")
     public void shouldHaveIndicatorsTable() {
         objectIndicatorsTable.shouldBe(visible);
-        objectIndicatorsHeader.shouldHave(text("Показатели объекта"));
+        objectIndicatorsTableHeader.shouldHave(text("Показатели объекта"));
     }
 
     @Step ("Проверить наличие показателя в таблице 'Персональные показатели проекта'")
@@ -120,20 +127,43 @@ public class ProgramPage extends BasePage {
         sleep(1000);
     }
 
+    @Step("Открыть вкладку Компоненты программы")
+    public void openComponentsTab() {
+        tabComponents.click();
+        sleep(1000);
+    }
+
     @Step ("Нажать кнопку Добавить результат")
     public void clickAddResult() {
         addResultButton.click();
     }
 
-    @Step ("Проверка таблицы подчиненных результатов")
+    @Step ("Проверка наличия таблицы подчиненных результатов")
     public void shouldHaveResultsTable() {
         resultsTable.shouldBe(visible);
-        resultsHeader.shouldHave(text("Подчинённые результаты"));
+        resultsTableHeader.shouldHave(text("Подчинённые результаты"));
     }
     @Step ("Проверить наличие результата в таблице")
     public void shouldHaveResult(String resultName){
         resultsSearch.click();
         resultsSearch.sendKeys(resultName);
         firstFoundResult.shouldBe(visible).shouldHave(text(resultName));
+    }
+
+    @Step("Нажать 'Добавить проект'")
+    public void clickAddProject() {
+        addProjectButton.click();
+    }
+
+    @Step("Проверка наличия таблицы 'Компоненты программы'")
+    public void shouldHaveComponentsTable() {
+        componentsTable.shouldBe(visible);
+        componentsTableHeader.shouldHave(text("Компоненты программы"));
+    }
+
+    public void shouldHaveComponent(String componentName) {
+        componentsSearch.click();
+        componentsSearch.sendKeys(componentName);
+        firstFoundComponent.shouldBe(visible).shouldHave(text(componentName));
     }
 }

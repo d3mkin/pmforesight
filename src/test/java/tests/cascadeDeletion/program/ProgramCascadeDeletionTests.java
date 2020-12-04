@@ -79,6 +79,9 @@ public class ProgramCascadeDeletionTests extends BaseTest {
     private LessonsLearnedRegistry lessonsRegistry;
     private ProgramPage programPage;
     private ProgramRegistry programRegistry;
+    private ProjectPage projectPage;
+    private Project project;
+
 
 
 
@@ -119,6 +122,8 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         lessonsRegistry = new LessonsLearnedRegistry();
         programPage = new ProgramPage();
         programRegistry = new ProgramRegistry();
+        projectPage = new ProjectPage();
+        project = new Project();
 
         ActionsViaAPI.createProgramViaAPI();
     }
@@ -189,5 +194,35 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         resultsRegistry.checkEntityNotExist(result.getName());
         searchForm.checkEntityNotFoundInGlobalSearch(programName);
         searchForm.checkEntityNotFoundInGlobalSearch(result.getName());
+    }
+
+    @ParameterizedTest(name = "Каскадное удаление: Проект Программы")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-149")
+    @TmsLink("1248")
+    public void cascadeDeletionProjectInProgram (User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProgramCreatedFromAPI();
+        programPage.checkCurrentProgramStage("Инициирование");
+        programPage.openComponentsTab();
+        programPage.clickAddProject();
+        project
+                .setName("Тест_C384_" + currentTime)
+                .setType("Информационные технологии")
+                .setSupervisor(user.getName());
+        projectPage.fillFields(project);
+        projectPage.clickSaveAndClose();
+        programPage.shouldHaveComponentsTable();
+        programPage.shouldHaveComponent(project.getName());
+        programRegistry.open();
+        String programName = ActionsViaAPI.getProgramNameFromAPI();
+        programRegistry.changeView("Все программы");
+        programRegistry.deleteEntity(programName);
+        projectRegistry.open();
+        projectRegistry.changeView("Все проекты");
+        projectRegistry.checkProjectNotExist(project.getName());
+        searchForm.checkEntityNotFoundInGlobalSearch(programName);
+        searchForm.checkEntityNotFoundInGlobalSearch(project.getName());
     }
 }

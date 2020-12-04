@@ -36,6 +36,8 @@ public class ProjectRegistry implements Registry {
     private final SelenideElement eBudgetProjectNameInput = $("input[aria-label='Наименование']");
     private final SelenideElement loadingImage = $("div .k-loading-mask");
     private final SelenideElement reloadButton = $("#f-reload");
+    private SelenideElement loadImage = mainContainer.$(".k-loading-image");
+    private final SelenideElement tableWithEntities = $ (By.xpath("//div[@class='slick-viewport']"));
 
     public ProjectRegistry() {
         this.mainMenu = new MainMenu();
@@ -197,5 +199,18 @@ public class ProjectRegistry implements Registry {
         eBudgetDialogHeader.waitUntil(text("Загруженные проекты"), 1200000);
         $("div.k-grid-content tr td div").shouldBe(visible).shouldHave(text("Проект успешно загружен"));
         $x("//button[contains(text(),'Закрыть')]").shouldBe(visible).click();
+    }
+
+    @Step ("Проверить что реестр загрузился")
+    public void checkRegistryIsLoaded () {
+        loadImage.shouldNotBe(visible);
+        tableWithEntities.shouldBe(visible);
+    }
+
+    @Step ("Проверка что Проект не отображается в реестре")
+    public void checkProjectNotExist(String entityName){
+        checkRegistryIsLoaded();
+        searchProject(entityName);
+        shouldNotHaveResults();
     }
 }
