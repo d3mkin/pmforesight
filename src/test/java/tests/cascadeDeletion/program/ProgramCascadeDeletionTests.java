@@ -24,6 +24,7 @@ import pages.managementobjects.StagesWorksAndPointsRegistry;
 import pages.managementobjects.contracts.ContractPage;
 import pages.managementobjects.contracts.ContractsRegistry;
 import pages.managementobjects.nonprojectevent.NonProjectEventPage;
+import pages.managementobjects.point.PointPage;
 import pages.managementobjects.program.ProgramPage;
 import pages.managementobjects.program.ProgramRegistry;
 import pages.managementobjects.project.ProjectPage;
@@ -86,6 +87,9 @@ public class ProgramCascadeDeletionTests extends BaseTest {
     private NonProjectEvent nonProjectEvent;
     private NonProjectEventPage nonProjectEventPage;
     private NonProjectEventRegistry nonProjectEventRegistry;
+    private Point point;
+    private PointPage pointPage;
+    private StagesWorksAndPointsRegistry pointsRegistry;
 
 
 
@@ -132,6 +136,9 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         nonProjectEvent = new NonProjectEvent();
         nonProjectEventPage = new NonProjectEventPage();
         nonProjectEventRegistry = new NonProjectEventRegistry();
+        point = new Point();
+        pointPage = new PointPage();
+        pointsRegistry = new StagesWorksAndPointsRegistry();
 
         ActionsViaAPI.createProgramViaAPI();
     }
@@ -262,5 +269,34 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         nonProjectEventRegistry.checkEventNotExist(nonProjectEvent.getName());
         searchForm.checkEntityNotFoundInGlobalSearch(programName);
         searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEvent.getName());
+    }
+
+    @ParameterizedTest(name = "Каскадное удаление: Нетиповые КТ в Программе")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-151")
+    @TmsLink("1249")
+    public void cascadeDeletionNonTypicalPointsInProgram(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProgramCreatedFromAPI();
+        programPage.checkCurrentProgramStage("Инициирование");
+        programPage.openGanttTab();
+        programPage.clickAddNonTypicalPoint();
+        point
+                .setName("Тест_C1249_" + currentTime)
+                .setPlanDate(currentDate)
+                .setForecastDate(currentDate);
+        pointPage.fillFields(point);
+        pointPage.clickSaveAndClose();
+        programPage.shouldHaveNonTypicalPoint(point);
+        programRegistry.open();
+        String programName = ActionsViaAPI.getProgramNameFromAPI();
+        programRegistry.changeView("Все программы");
+        programRegistry.deleteEntity(programName);
+        pointsRegistry.open();
+        pointsRegistry.changeView("Все");
+        pointsRegistry.checkEntityNotExist(point.getName());
+        searchForm.checkEntityNotFoundInGlobalSearch(programName);
+        searchForm.checkEntityNotFoundInGlobalSearch(point.getName());
     }
 }

@@ -1,7 +1,9 @@
 package pages.managementobjects.program;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import model.Point;
 import org.openqa.selenium.By;
 import model.Program;
 import pages.BasePage;
@@ -27,6 +29,7 @@ public class ProgramPage extends BasePage {
     private final SelenideElement tabResults = $("a[href='#tab-result']");
     private final SelenideElement tabIndicators = $("a[href='#tab-kpi']");
     private final SelenideElement tabComponents = $("a[href='#tab-component']");
+    private final SelenideElement tabGantt = $("a[href='#tab-gantt']");
     private final SelenideElement tabActivity = $("a[href='#tab-activity']");
     private final SelenideElement tabDocuments = $("a[href='#tab-documents']");
     private final SelenideElement tabContracts = $("a[href='#tab-contract']");
@@ -61,6 +64,8 @@ public class ProgramPage extends BasePage {
     private final SelenideElement componentsTableHeader = $x("//div[@class='f-widget__header-name']//span[contains(text(),'Компоненты программы')]");
     private final SelenideElement componentsSearch = $("#ComponentTable input[placeholder='Поиск...']");
     private final SelenideElement firstFoundComponent = $x("//div[@id='ComponentTable']//tbody/tr[1]/td[2]");
+    //Календарный план
+    private final SelenideElement addPointButton = $("#btnCreatePoints");
 
 
 
@@ -128,6 +133,12 @@ public class ProgramPage extends BasePage {
         sleep(1000);
     }
 
+    @Step("Открыть вкладку Календарный план")
+    public void openGanttTab() {
+        tabGantt.click();
+        sleep(1000);
+    }
+
     @Step("Открыть вкладку Компоненты программы")
     public void openComponentsTab() {
         tabComponents.click();
@@ -167,9 +178,19 @@ public class ProgramPage extends BasePage {
         componentsTableHeader.shouldHave(text("Компоненты программы"));
     }
 
+    @Step("Проверка наличия компонента в таблице")
     public void shouldHaveComponent(String componentName) {
         componentsSearch.click();
         componentsSearch.sendKeys(componentName);
         firstFoundComponent.shouldBe(visible).shouldHave(text(componentName));
+    }
+
+    @Step ("Нажать 'Создать нетиповую контрольную точку'")
+    public void clickAddNonTypicalPoint() {
+        addPointButton.click();
+    }
+
+    public void shouldHaveNonTypicalPoint(Point point) {
+        $x("//span[contains(text(),'"+point.getName()+"')]").waitUntil(visible, Configuration.timeout).shouldBe(visible);
     }
 }

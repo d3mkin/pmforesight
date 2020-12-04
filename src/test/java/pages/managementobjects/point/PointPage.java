@@ -2,33 +2,37 @@ package pages.managementobjects.point;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
+import model.Point;
 import pages.BasePage;
 
 import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 
 public class PointPage extends BasePage {
-
-    private final SelenideElement completeButton_ViewForm = $(By.xpath("//a[text()='Выполнить']"));
-    private final SelenideElement backInProgressButton_ViewForm = $(By.xpath("//a[text()='Вернуть в работу']"));
-    private final SelenideElement approveButton_ViewForm = $(By.xpath("//a[text()='Согласовать']"));
-    private final SelenideElement cancelButton_ViewForm = $(By.xpath("//a[text()='Отменить']"));
-    private final SelenideElement actualCompletionDateInput_EditForm = $(By.xpath("//input[@id='FactDate']"));
-    private final SelenideElement actualCompletionDate_ViewForm = $(By.xpath("//div[@name='FactDate']"));
-    private final SelenideElement commentInput_EditForm = $(By.xpath("//textarea[@id='Comment']"));
-    private final SelenideElement commentInputIsRequired_EditForm = $(By.xpath("//div[@id='control-group-Comment']//span[@class='required-input']"));
-    private final SelenideElement forecastCompletionDateInput_EditForm = $(By.xpath("//input[@id='ForecastDate']"));
-    private final SelenideElement forecastDateInputIsRequired_EditForm = $(By.xpath("//div[@id='control-group-ForecastDate']//span[@class='required-input']"));
-    private final SelenideElement forecastCompletionDate_ViewForm = $(By.xpath("//div[@name='ForecastDate']"));
-    private final SelenideElement documentsWidget_EditForm = $(By.xpath("//div[@id='DocDiv']//documents[@class='f-documents']"));
-    private final SelenideElement documentsWidgetIsRequired_EditForm = $(By.xpath("//div[@id='control-group-DocDiv']//span[@class='required-input']"));
-    private final SelenideElement pointStatusField_ViewForm = $(By.xpath("//div[@class='f-card__info']"));
-    private final SelenideElement uploadDocumentButton_EditForm = $(By.xpath("//div[@id='control-group-DocDiv']//div[@data-tooltip='Загрузить документ']"));
+    //Форма редактирования
+    private final SelenideElement pointName = $("#Name");
+    private final SelenideElement pointPlanDate = $x("//input[@id='PlanDate']");
+    private final SelenideElement pointForecastDate = $x("//input[@id='ForecastDate']");
+    private final SelenideElement approvingDoc = $("#control-group-ApprovingDocumentId .k-widget");
+    //Форма просмотра
+    private final SelenideElement completeButton_ViewForm = $x("//a[text()='Выполнить']");
+    private final SelenideElement backInProgressButton_ViewForm = $x("//a[text()='Вернуть в работу']");
+    private final SelenideElement approveButton_ViewForm = $x("//a[text()='Согласовать']");
+    private final SelenideElement cancelButton_ViewForm = $x("//a[text()='Отменить']");
+    private final SelenideElement actualCompletionDateInput_EditForm = $x("//input[@id='FactDate']");
+    private final SelenideElement actualCompletionDate_ViewForm = $x("//div[@name='FactDate']");
+    private final SelenideElement commentInput_EditForm = $x("//textarea[@id='Comment']");
+    private final SelenideElement commentInputIsRequired_EditForm = $x("//div[@id='control-group-Comment']//span[@class='required-input']");
+    private final SelenideElement forecastCompletionDateInput_EditForm = $x("//input[@id='ForecastDate']");
+    private final SelenideElement forecastDateInputIsRequired_EditForm = $x("//div[@id='control-group-ForecastDate']//span[@class='required-input']");
+    private final SelenideElement forecastCompletionDate_ViewForm = $x("//div[@name='ForecastDate']");
+    private final SelenideElement documentsWidget_EditForm = $x(("//div[@id='DocDiv']//documents[@class='f-documents']"));
+    private final SelenideElement documentsWidgetIsRequired_EditForm = $x("//div[@id='control-group-DocDiv']//span[@class='required-input']");
+    private final SelenideElement pointStatusField_ViewForm = $x("//div[@class='f-card__info']");
+    private final SelenideElement uploadDocumentButton_EditForm = $x("//div[@id='control-group-DocDiv']//div[@data-tooltip='Загрузить документ']");
 
     @Step ("Нажать кнопку Выполнить")
     public void clickCompleteButton(){
@@ -152,5 +156,12 @@ public class PointPage extends BasePage {
         closeUploadWindow();
         clickSaveAndClose(); //Сохраняем изменения
         checkPointStatus("Подтверждена");
+    }
+
+    public void fillFields(Point point) {
+        typeText(pointName, point.getName());
+        typeDate(pointPlanDate, point.getPlanDate());
+        typeDate(pointForecastDate, point.getForecastDate());
+        searchAndSelectFirstFromSelect(approvingDoc, point.getApprovingDocument());
     }
 }
