@@ -18,10 +18,12 @@ import pages.base_of_knowledge_and_documents.lessons_learned.LessonLearnedPage;
 import pages.elements.SearchForm;
 import pages.goals_and_indicators.IndicatorsRegistry;
 import pages.goals_and_indicators.indicator.IndicatorPage;
+import pages.managementobjects.NonProjectEventRegistry;
 import pages.managementobjects.ResultsRegistry;
 import pages.managementobjects.StagesWorksAndPointsRegistry;
 import pages.managementobjects.contracts.ContractPage;
 import pages.managementobjects.contracts.ContractsRegistry;
+import pages.managementobjects.nonprojectevent.NonProjectEventPage;
 import pages.managementobjects.program.ProgramPage;
 import pages.managementobjects.program.ProgramRegistry;
 import pages.managementobjects.project.ProjectPage;
@@ -81,6 +83,9 @@ public class ProgramCascadeDeletionTests extends BaseTest {
     private ProgramRegistry programRegistry;
     private ProjectPage projectPage;
     private Project project;
+    private NonProjectEvent nonProjectEvent;
+    private NonProjectEventPage nonProjectEventPage;
+    private NonProjectEventRegistry nonProjectEventRegistry;
 
 
 
@@ -124,6 +129,9 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         programRegistry = new ProgramRegistry();
         projectPage = new ProjectPage();
         project = new Project();
+        nonProjectEvent = new NonProjectEvent();
+        nonProjectEventPage = new NonProjectEventPage();
+        nonProjectEventRegistry = new NonProjectEventRegistry();
 
         ActionsViaAPI.createProgramViaAPI();
     }
@@ -208,7 +216,7 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         programPage.openComponentsTab();
         programPage.clickAddProject();
         project
-                .setName("Тест_C384_" + currentTime)
+                .setName("Тест_C1248_" + currentTime)
                 .setType("Информационные технологии")
                 .setSupervisor(user.getName());
         projectPage.fillFields(project);
@@ -224,5 +232,35 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         projectRegistry.checkProjectNotExist(project.getName());
         searchForm.checkEntityNotFoundInGlobalSearch(programName);
         searchForm.checkEntityNotFoundInGlobalSearch(project.getName());
+    }
+
+    @ParameterizedTest(name = "Каскадное удаление: Непроектное мероприятие Программы")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-150")
+    @TmsLink("1251")
+    public void cascadeDeletionNonProjectEventInProgram (User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProgramCreatedFromAPI();
+        programPage.checkCurrentProgramStage("Инициирование");
+        programPage.openComponentsTab();
+        programPage.clickAddEvent();
+        nonProjectEvent
+                .setName("Тест_C1251_" + currentTime)
+                .setCurator(user.getName())
+                .setManager(user.getName());
+        nonProjectEventPage.fillFields(nonProjectEvent);
+        nonProjectEventPage.clickSaveAndClose();
+        programPage.shouldHaveComponentsTable();
+        programPage.shouldHaveComponent(nonProjectEvent.getName());
+        programRegistry.open();
+        String programName = ActionsViaAPI.getProgramNameFromAPI();
+        programRegistry.changeView("Все программы");
+        programRegistry.deleteEntity(programName);
+        nonProjectEventRegistry.open();
+        nonProjectEventRegistry.changeView("Все мероприятия");
+        nonProjectEventRegistry.checkEventNotExist(nonProjectEvent.getName());
+        searchForm.checkEntityNotFoundInGlobalSearch(programName);
+        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEvent.getName());
     }
 }

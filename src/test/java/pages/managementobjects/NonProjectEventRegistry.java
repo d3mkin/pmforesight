@@ -5,30 +5,37 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import pages.Registry;
 import pages.auth.LogoutPage;
+import pages.elements.ControlPanel;
 import pages.elements.Header;
 import pages.elements.MainMenu;
 
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Непроектные мероприятия
  */
-public class NotProjectEventRegistry implements Registry {
+public class NonProjectEventRegistry implements Registry {
     private Header header;
     private MainMenu mainMenu;
+    private final ControlPanel controlPanel;
 
     private String url = Configuration.baseUrl + "/page/register?view=event";
     private SelenideElement mainContainer = $("#mainBodyContainer");
     private SelenideElement registryName = $("#f-grid-title span");
     private SelenideElement table = mainContainer.$("div.f-grid__grid");
+    private final SelenideElement allRows = table.$(".grid-canvas .slick-row");
+    private SelenideElement loadImage = mainContainer.$(".k-loading-image");
+    private final SelenideElement tableWithEntities = $ (By.xpath("//div[@class='slick-viewport']"));
 
-    public NotProjectEventRegistry() {
+    public NonProjectEventRegistry() {
         this.header = new Header();
         this.mainMenu = new MainMenu();
+        this.controlPanel = new ControlPanel();
     }
 
     @Override
@@ -57,20 +64,54 @@ public class NotProjectEventRegistry implements Registry {
     }
 
     @Step("Проверка корректности ссылки {this.url}")
-    public NotProjectEventRegistry shouldHaveCorrectLink() {
+    public NonProjectEventRegistry shouldHaveCorrectLink() {
         assertTrue(WebDriverRunner.url().startsWith(url), "Урл не соответствет " + url);
         return this;
     }
 
+    @Step("Поиск мероприятия {eventName} в реестре")
+    public void searchEvent(String eventName) {
+        sleep(1000);
+        controlPanel.typeSearchValue(eventName);
+        //controlPanel.clickSearch();
+    }
+
     @Step("Проверка наличия имени реестра")
-    public NotProjectEventRegistry shouldHaveName() {
+    public NonProjectEventRegistry shouldHaveName() {
         registryName.shouldBe(visible);
         return this;
     }
 
+    @Step("Проверить что ничего не найдено")
+    private void shouldNotHaveResults() {
+        allRows.waitUntil(not(visible), Configuration.timeout);
+    }
+
     @Step("Проверка отображения табличной части")
-    public NotProjectEventRegistry shouldHaveContent() {
+    public NonProjectEventRegistry shouldHaveContent() {
         table.shouldBe(visible);
         return this;
     }
+
+    @Step ("Сменить представление на {viewName}")
+    public void changeView(String viewName){
+        controlPanel.changeView(viewName);
+        $x("//span[contains(text(),'"+viewName+"')]").shouldBe(visible);
+        $("#f-grid-viewlist .k-input").shouldHave(text(""+viewName+""));
+    }
+
+    @Step ("Проверить что реестр загрузился")
+    public void checkRegistryIsLoaded () {
+        loadImage.shouldNotBe(visible);
+        tableWithEntities.shouldBe(visible);
+    }
+
+    @Step ("Проверка что Мероприятие не отображается в реестре")
+    public void checkEventNotExist(String entityName){
+        checkRegistryIsLoaded();
+        searchEvent(entityName);
+        shouldNotHaveResults();
+    }
+
+
 }

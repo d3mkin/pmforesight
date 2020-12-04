@@ -79,9 +79,9 @@ public class ManagementObjects extends AbstractMenuItem {
     }
 
     @Step("Открыть 'Непроектные мероприятия'")
-    public NotProjectEventRegistry openNotProjectEvent() {
+    public NonProjectEventRegistry openNotProjectEvent() {
         clickItem(managementObjects, notProjectEvent);
-        return new NotProjectEventRegistry();
+        return new NonProjectEventRegistry();
     }
 
     @Step("Открыть 'Контракты'")

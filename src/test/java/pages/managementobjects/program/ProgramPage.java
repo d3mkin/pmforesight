@@ -56,6 +56,7 @@ public class ProgramPage extends BasePage {
     private final SelenideElement firstFoundResult = $x("//div[@id='ResultDivContent']//tbody/tr[1]/td[2]");
     //Компоненты программы
     private final SelenideElement addProjectButton = $("#tab-component a[data-tooltip='Добавить новый проект в программу']");
+    private final SelenideElement addEventButton = $("#tab-component a[data-tooltip='Добавить новое непроектное меропритие в программу']");
     private final SelenideElement componentsTable = $("#ComponentTable .inlineTableView-grid");
     private final SelenideElement componentsTableHeader = $x("//div[@class='f-widget__header-name']//span[contains(text(),'Компоненты программы')]");
     private final SelenideElement componentsSearch = $("#ComponentTable input[placeholder='Поиск...']");
@@ -153,6 +154,11 @@ public class ProgramPage extends BasePage {
     @Step("Нажать 'Добавить проект'")
     public void clickAddProject() {
         addProjectButton.click();
+    }
+
+    @Step("Нажать 'Добавить непроектное мероприятие'")
+    public void clickAddEvent() {
+        addEventButton.click();
     }
 
     @Step("Проверка наличия таблицы 'Компоненты программы'")
