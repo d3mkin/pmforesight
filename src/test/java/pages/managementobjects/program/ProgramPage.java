@@ -71,6 +71,8 @@ public class ProgramPage extends BasePage {
     //Таблица Риски и возможности
     private  final SelenideElement addRiskButton = $("#RiskDivContent a[data-tooltip='Добавить']");
     private  final SelenideElement addOpportunityButton = $("#ChanceDivContent a[data-tooltip='Добавить']");
+    //Поручения
+    private final SelenideElement addOrderButton = $("#OrderInlineTable a[data-tooltip='Добавить']");
 
 
 
@@ -238,5 +240,21 @@ public class ProgramPage extends BasePage {
 
     public void checkOpportunityPresentInTable(String opportunityName) {
         $(By.xpath("//div[@id='ChanceDivContent']//td//a[contains(text(),'"+ opportunityName +"')]")).shouldBe(visible);
+    }
+
+    @Step ("Открыть вкладку Поручения")
+    public void openOrdersTab(){
+        tabOrders.click();
+        sleep(1000);
+    }
+
+    @Step ("Нажать кнопку 'Добавить Поручение'")
+    public void clickAddOrder () {
+        addOrderButton.shouldBe(visible).click();
+    }
+
+    @Step("Проверить наличие Поручения в таблице Поручений")
+    public void checkOrderPresentInTable(String orderName){
+        $(By.xpath("//div[@id='OrderInlineTable']//td//a[contains(text(),'"+ orderName +"')]")).shouldBe(visible);
     }
 }

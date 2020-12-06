@@ -91,9 +91,6 @@ public class ProgramCascadeDeletionTests extends BaseTest {
     private PointPage pointPage;
     private StagesWorksAndPointsRegistry pointsRegistry;
 
-
-
-
     @BeforeEach
     public void setupPages() {
         singIn = new SingInPage();
@@ -350,7 +347,7 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         programPage.checkRiskPresentInTable(risk.getRisksAndOpportunitiesName());
         programPage.clickAddOpportunity();
         opportunity
-                .setRisksAndOpportunitiesName("ATEST-123_" + currentTime)
+                .setRisksAndOpportunitiesName("ATEST-152_" + currentTime)
                 .setCategory("Финансовая возможность");
         risksAndOpportunitiesPage.fillFields(opportunity);
         risksAndOpportunitiesPage.clickSaveAndClose();
@@ -366,5 +363,35 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         searchForm.checkEntityNotFoundInGlobalSearch(programName);
         searchForm.checkEntityNotFoundInGlobalSearch(risk.getRisksAndOpportunitiesName());
         searchForm.checkEntityNotFoundInGlobalSearch(opportunity.getRisksAndOpportunitiesName());
+    }
+
+    @ParameterizedTest(name = "Каскадное удаление: Поручение в Программе")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-153")
+    @TmsLink("1252")
+    public void cascadeDeletionOrderInProgram(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProgramCreatedFromAPI();
+        programPage.checkCurrentProgramStage("Инициирование");
+        programPage.openOrdersTab();
+        programPage.clickAddOrder();
+        order
+                .setName("ATEST-153_" + currentTime)
+                .setPriority("Высокий")
+                .setPlanDate(currentDate)
+                .setExecutor(user.getName());
+        orderPage.fillFields(order);
+        orderPage.clickSaveAndClose();
+        programPage.checkOrderPresentInTable(order.getName());
+        programRegistry.open();
+        String programName = ActionsViaAPI.getProgramNameFromAPI();
+        programRegistry.changeView("Все программы");
+        programRegistry.deleteEntity(programName);
+        orderRegistry.open();
+        orderRegistry.changeView("Все поручения");
+        orderRegistry.checkOrderNotExist(order.getName());
+        searchForm.checkEntityNotFoundInGlobalSearch(programName);
+        searchForm.checkEntityNotFoundInGlobalSearch(order.getName());
     }
 }
