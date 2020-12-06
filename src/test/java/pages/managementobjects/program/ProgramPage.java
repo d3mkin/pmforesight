@@ -68,6 +68,9 @@ public class ProgramPage extends BasePage {
     private final SelenideElement addPointButton = $("#btnCreatePoints");
     //Открытые вопросы
     private final SelenideElement addOpenQuestionButton = $("#tab-lov a[data-tooltip='Добавить']");
+    //Таблица Риски и возможности
+    private  final SelenideElement addRiskButton = $("#RiskDivContent a[data-tooltip='Добавить']");
+    private  final SelenideElement addOpportunityButton = $("#ChanceDivContent a[data-tooltip='Добавить']");
 
 
 
@@ -210,5 +213,30 @@ public class ProgramPage extends BasePage {
     @Step("Проверить наличие Открытого вопроса в таблице Открытых вопросов")
     public void checkOpenQuestionPresentInTable(String questionName){
         $(By.xpath("//div[@id='tab-lov']//td//a[contains(text(),'"+ questionName +"')]")).shouldBe(visible);
+    }
+
+    @Step ("Открыть вкладку Риски и возможности")
+    public void openRisksOpportunitiesTab(){
+        tabRisksOpportunities.click();
+        sleep(1000);
+    }
+
+    @Step ("Нажать кнопку 'Добавить Риск'")
+    public void clickAddRisk () {
+        addRiskButton.shouldBe(visible).click();
+    }
+
+    @Step("Проверить наличие Риска в таблице Рисков")
+    public void checkRiskPresentInTable(String riskName){
+        $(By.xpath("//div[@id='RiskDivContent']//td//a[contains(text(),'"+ riskName +"')]")).shouldBe(visible);
+    }
+
+    @Step ("Нажать кнопку 'Добавить Возможность'")
+    public void clickAddOpportunity () {
+        addOpportunityButton.shouldBe(visible).click();
+    }
+
+    public void checkOpportunityPresentInTable(String opportunityName) {
+        $(By.xpath("//div[@id='ChanceDivContent']//td//a[contains(text(),'"+ opportunityName +"')]")).shouldBe(visible);
     }
 }

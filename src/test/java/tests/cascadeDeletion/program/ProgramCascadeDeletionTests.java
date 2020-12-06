@@ -330,4 +330,41 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         searchForm.checkEntityNotFoundInGlobalSearch(programName);
         searchForm.checkEntityNotFoundInGlobalSearch(openQuestion.getName());
     }
+
+    @ParameterizedTest(name = "Каскадное удаление: Риски/Возможности программы")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-152")
+    @TmsLink("1253")
+    public void cascadeDeletionRiskAndOpportunitiesInProgram(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProgramCreatedFromAPI();
+        programPage.checkCurrentProgramStage("Инициирование");
+        programPage.openRisksOpportunitiesTab();
+        programPage.clickAddRisk();
+        risk
+                .setRisksAndOpportunitiesName("ATEST-152_" + currentTime)
+                .setCategory("Финансовый риск");
+        risksAndOpportunitiesPage.fillFields(risk);
+        risksAndOpportunitiesPage.clickSaveAndClose();
+        programPage.checkRiskPresentInTable(risk.getRisksAndOpportunitiesName());
+        programPage.clickAddOpportunity();
+        opportunity
+                .setRisksAndOpportunitiesName("ATEST-123_" + currentTime)
+                .setCategory("Финансовая возможность");
+        risksAndOpportunitiesPage.fillFields(opportunity);
+        risksAndOpportunitiesPage.clickSaveAndClose();
+        programPage.checkOpportunityPresentInTable(opportunity.getRisksAndOpportunitiesName());
+        programRegistry.open();
+        String programName = ActionsViaAPI.getProgramNameFromAPI();
+        programRegistry.changeView("Все программы");
+        programRegistry.deleteEntity(programName);
+        risksAndOpportunitiesRegistry.open();
+        risksAndOpportunitiesRegistry.changeView("Все");
+        risksAndOpportunitiesRegistry.checkRiskOrOpportunityNotExist(risk.getRisksAndOpportunitiesName());
+        risksAndOpportunitiesRegistry.checkRiskOrOpportunityNotExist(opportunity.getRisksAndOpportunitiesName());
+        searchForm.checkEntityNotFoundInGlobalSearch(programName);
+        searchForm.checkEntityNotFoundInGlobalSearch(risk.getRisksAndOpportunitiesName());
+        searchForm.checkEntityNotFoundInGlobalSearch(opportunity.getRisksAndOpportunitiesName());
+    }
 }
