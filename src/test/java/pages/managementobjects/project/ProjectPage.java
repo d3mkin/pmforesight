@@ -700,7 +700,7 @@ public class ProjectPage extends BasePage {
         newGanttActivityApproveDocSelect.shouldBe(visible).click();
         $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
         saveGanttButton.click();
-        newGanttActivityStatusTitle.shouldHave(attribute("title", "В работе по плану"));
+        newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "В работе по плану"));
         newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
         switchTo().defaultContent();
     }
@@ -718,7 +718,7 @@ public class ProjectPage extends BasePage {
         newGanttActivityApproveDocSelect.shouldBe(visible).click();
         $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
         saveGanttButton.click();
-        newGanttActivityStatusTitle.shouldHave(attribute("title", "В работе по плану"));
+        newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "В работе по плану"));
         newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
         switchTo().defaultContent();
     }
@@ -746,7 +746,7 @@ public class ProjectPage extends BasePage {
         $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
         clickToDownEntityLevel();
         saveGanttButton.click();
-        newGanttActivityStatusTitle.shouldHave(attribute("title", "В работе по плану"));
+        newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "В работе по плану"));
         newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
         switchTo().defaultContent();
     }
@@ -755,27 +755,27 @@ public class ProjectPage extends BasePage {
     public void checkPointStatus (String status) {
         switchTo().frame("ganttframe");
         if (status.equals("В работе")) {
-            newGanttActivityStatusTitle.shouldHave(attribute("title", "В работе по плану"));
+            newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "В работе по плану"));
             newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
         }
         if (status.equals("Выполнено")) {
-            newGanttActivityStatusTitle.shouldHave(attribute("title", "Выполнено"));
+            newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "Выполнено"));
             newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(95, 175, 97, 1)"));
         }
         if (status.equals("Подтверждена")) {
-            newGanttActivityStatusTitle.shouldHave(attribute("title", "Подтверждено"));
+            newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "Подтверждено"));
             newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(95, 175, 97, 1)"));
         }
         if (status.equals("Просрочено")) {
-            newGanttActivityStatusTitle.shouldHave(attribute("title", "Просрочено (дата планового окончания уже прошла)"));
+            newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "Просрочено (дата планового окончания уже прошла)"));
             newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(255, 89, 64, 1)"));
         }
         if (status.equals("Отменена")) {
-            newGanttActivityStatusTitle.shouldHave(attribute("title", "Отменено"));
+            newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "Отменено"));
             newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(68, 68, 68, 1)"));
         }
         if (status.equals("Прогноз срыва сроков")) {
-            newGanttActivityStatusTitle.shouldHave(attribute("title", "Прогноз срыва сроков"));
+            newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "Прогноз срыва сроков"));
             newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(255, 210, 70, 1)"));
         }
         switchTo().defaultContent();
