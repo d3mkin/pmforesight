@@ -32,7 +32,7 @@ public class ControlPanel {
     @Step("Ввести значение для поиска '{0}'")
     public void typeSearchValue(String value) {
         searchInput.clear();
-        searchInput.sendKeys(value);
+        searchInput.setValue(value).pressEnter();
     }
 
     @Step("Осуществить выборку")
