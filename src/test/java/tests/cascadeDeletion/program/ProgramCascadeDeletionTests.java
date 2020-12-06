@@ -299,4 +299,35 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         searchForm.checkEntityNotFoundInGlobalSearch(programName);
         searchForm.checkEntityNotFoundInGlobalSearch(point.getName());
     }
+
+    @ParameterizedTest(name = "Каскадное удаление: Открытые вопросы в Программе")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-155")
+    @TmsLink("1255")
+    public void cascadeDeletionOpenQuestionsInProgram(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProgramCreatedFromAPI();
+        programPage.checkCurrentProgramStage("Инициирование");
+        programPage.openOpenQuestionsTab();
+        programPage.clickAddOpenQuestion();
+        openQuestion
+                .setName("ATEST-155_" + currentTime)
+                .setExecutor(user.getName())
+                .setInitDate(currentDate)
+                .setPlanDate(currentDate);
+        openQuestionPage.fillFields(openQuestion);
+        openQuestionPage.clickSaveAndClose();
+        programPage.checkOpenQuestionPresentInTable(openQuestion.getName());
+        programRegistry.open();
+        programRegistry.shouldBeRegistry();
+        String programName = ActionsViaAPI.getProgramNameFromAPI();
+        programRegistry.changeView("Все программы");
+        programRegistry.deleteEntity(programName);
+        openQuestionsRegistry.open();
+        openQuestionsRegistry.changeView("Все открытые вопросы");
+        openQuestionsRegistry.checkOpenQuestionNotExist(openQuestion.getName());
+        searchForm.checkEntityNotFoundInGlobalSearch(programName);
+        searchForm.checkEntityNotFoundInGlobalSearch(openQuestion.getName());
+    }
 }

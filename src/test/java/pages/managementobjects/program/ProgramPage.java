@@ -66,6 +66,8 @@ public class ProgramPage extends BasePage {
     private final SelenideElement firstFoundComponent = $x("//div[@id='ComponentTable']//tbody/tr[1]/td[2]");
     //Календарный план
     private final SelenideElement addPointButton = $("#btnCreatePoints");
+    //Открытые вопросы
+    private final SelenideElement addOpenQuestionButton = $("#tab-lov a[data-tooltip='Добавить']");
 
 
 
@@ -192,5 +194,21 @@ public class ProgramPage extends BasePage {
 
     public void shouldHaveNonTypicalPoint(Point point) {
         $x("//span[contains(text(),'"+point.getName()+"')]").waitUntil(visible, Configuration.timeout).shouldBe(visible);
+    }
+
+    @Step ("Открыть вкладку Открытые вопросы")
+    public void openOpenQuestionsTab(){
+        tabOpenQuestions.click();
+        sleep(1000);
+    }
+
+    @Step ("Нажать кнопку 'Добавить Открытый вопрос'")
+    public void clickAddOpenQuestion () {
+        addOpenQuestionButton.shouldBe(visible).click();
+    }
+
+    @Step("Проверить наличие Открытого вопроса в таблице Открытых вопросов")
+    public void checkOpenQuestionPresentInTable(String questionName){
+        $(By.xpath("//div[@id='tab-lov']//td//a[contains(text(),'"+ questionName +"')]")).shouldBe(visible);
     }
 }
