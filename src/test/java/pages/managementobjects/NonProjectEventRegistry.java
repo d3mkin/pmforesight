@@ -82,7 +82,7 @@ public class NonProjectEventRegistry implements Registry {
         return this;
     }
 
-    @Step("Проверить что ничего не найдено")
+    @Step("Проверка отсутствия результатов поиска")
     private void shouldNotHaveResults() {
         allRows.waitUntil(not(visible), Configuration.timeout);
     }

@@ -168,7 +168,7 @@ public class ProjectRegistry implements Registry {
         shouldNotHaveResults();
     }
 
-    @Step("Проверить что ничего не найдено")
+    @Step("Проверка отсутствия результатов поиска")
     public void shouldNotHaveResults() {
         allRows.waitUntil(not(visible), Configuration.timeout);
     }

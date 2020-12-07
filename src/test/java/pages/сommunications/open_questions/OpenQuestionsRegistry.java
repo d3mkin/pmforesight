@@ -62,6 +62,7 @@ public class OpenQuestionsRegistry implements Registry {
         shouldHaveContent();
     }
 
+    @Step("Проверка отсутствия результатов поиска")
     public void shouldNotHaveResults() {
         allRows.shouldNot(visible);
     }

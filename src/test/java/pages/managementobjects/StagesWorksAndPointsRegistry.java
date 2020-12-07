@@ -98,6 +98,7 @@ public class StagesWorksAndPointsRegistry implements Registry {
         sleep(1000);
     }
 
+    @Step("Проверка отсутствия результатов поиска")
     public void shouldNotHaveResults() {
         allRows.shouldNot(visible);
     }

@@ -143,6 +143,7 @@ public class GoalRegistry implements Registry {
         shouldNotHaveResults();
     }
 
+    @Step("Проверка отсутствия результатов поиска")
     public void shouldNotHaveResults() {
         allRows.shouldNot(visible);
     }

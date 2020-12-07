@@ -116,6 +116,7 @@ public class MeetingsRegistry implements Registry {
         new DeleteEntityDialog().clickDeleteYes();
     }
 
+    @Step("Проверка отсутствия результатов поиска")
     public void shouldNotHaveResults() {
         allRows.shouldNot(visible);
     }

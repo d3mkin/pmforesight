@@ -113,6 +113,7 @@ public class ContractsRegistry implements Registry {
         controlPanel.clickDelete();
     }
 
+    @Step("Проверка отсутствия результатов поиска")
     public void shouldNotHaveResults() {
         allFoundRow.shouldHaveSize(0);
     }

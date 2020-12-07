@@ -94,6 +94,7 @@ public class ResultsRegistry implements Registry {
         sleep(1000);
     }
 
+    @Step ("Проверка что нет данных в таблице реестра")
     public void shouldNotHaveResults() {
         allRows.shouldNot(visible);
     }
