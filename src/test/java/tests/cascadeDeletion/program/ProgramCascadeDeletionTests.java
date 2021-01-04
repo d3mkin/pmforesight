@@ -51,7 +51,6 @@ public class ProgramCascadeDeletionTests extends BaseTest {
     private SingInPage singIn;
     private long currentTime;
     private String currentDate;
-    private StagesWorksAndPointsRegistry swpRegistry;
     private ProjectRegistry projectRegistry;
     private Result result;
     private ResultPage resultPage;
@@ -95,7 +94,6 @@ public class ProgramCascadeDeletionTests extends BaseTest {
     public void setupPages() {
         singIn = new SingInPage();
         singIn.open();
-        swpRegistry = new StagesWorksAndPointsRegistry();
         projectRegistry = new ProjectRegistry();
         currentTime = System.currentTimeMillis();
         currentDate = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
@@ -393,5 +391,34 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         orderRegistry.checkOrderNotExist(order.getName());
         searchForm.checkEntityNotFoundInGlobalSearch(programName);
         searchForm.checkEntityNotFoundInGlobalSearch(order.getName());
+    }
+
+    @ParameterizedTest(name = "Каскадное удаление: Совещание в Программе")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-154")
+    @TmsLink("1254")
+    public void cascadeDeletionMeetingInProgram(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProgramCreatedFromAPI();
+        programPage.checkCurrentProgramStage("Инициирование");
+        programPage.openMeetingTab();
+        programPage.clickAddMeeting();
+        meeting
+                .setName("ATEST-154_" + currentTime)
+                .setLocation("Переговорка 'Север'")
+                .setSecretary(user.getName());
+        meetingPage.fillFields(meeting);
+        meetingPage.clickSaveAndClose();
+        programPage.checkMeetingPresentInTable(meeting.getName());
+        programRegistry.open();
+        String programName = ActionsViaAPI.getProgramNameFromAPI();
+        programRegistry.changeView("Все программы");
+        programRegistry.deleteEntity(programName);
+        meetingsRegistry.open();
+        meetingsRegistry.changeView("Все совещания");
+        meetingsRegistry.checkOrderNotExist(meeting.getName());
+        searchForm.checkEntityNotFoundInGlobalSearch(programName);
+        searchForm.checkEntityNotFoundInGlobalSearch(meeting.getName());
     }
 }

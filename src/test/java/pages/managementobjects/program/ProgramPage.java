@@ -73,6 +73,8 @@ public class ProgramPage extends BasePage {
     private  final SelenideElement addOpportunityButton = $("#ChanceDivContent a[data-tooltip='Добавить']");
     //Поручения
     private final SelenideElement addOrderButton = $("#OrderInlineTable a[data-tooltip='Добавить']");
+    //Совещания
+    private final SelenideElement addMeetingButton = $("#tab-meeting a[data-tooltip='Добавить']");
 
 
 
@@ -256,5 +258,20 @@ public class ProgramPage extends BasePage {
     @Step("Проверить наличие Поручения в таблице Поручений")
     public void checkOrderPresentInTable(String orderName){
         $(By.xpath("//div[@id='OrderInlineTable']//td//a[contains(text(),'"+ orderName +"')]")).shouldBe(visible);
+    }
+
+    @Step("Открыть вкладку Совещания")
+    public void openMeetingTab() {
+        tabMeetings.click();
+    }
+
+    @Step("Добавить новое Совещание из карточки Программы")
+    public void clickAddMeeting() {
+        addMeetingButton.click();
+    }
+
+    @Step("Проверить наличие Совещания в таблице Совещаний")
+    public void checkMeetingPresentInTable(String meetingName){
+        $(By.xpath("//div[@id='tab-meeting']//td//a[contains(text(),'"+ meetingName +"')]")).shouldBe(visible);
     }
 }
