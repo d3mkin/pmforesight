@@ -35,7 +35,6 @@ public class CustomWebDriver implements WebDriverProvider {
         capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", false);
-        capabilities.setVersion("85.0");
         capabilities.setCapability("timeZone", "Europe/Moscow");
         capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
         WebDriverManager.chromedriver().setup();
