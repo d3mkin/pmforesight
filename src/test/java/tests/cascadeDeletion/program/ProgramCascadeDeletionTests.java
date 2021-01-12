@@ -1,5 +1,6 @@
 package tests.cascadeDeletion.program;
 
+import com.codeborne.selenide.Selenide;
 import helpers.ActionsViaAPI;
 import helpers.TestSuiteName;
 import io.qameta.allure.Epic;
@@ -420,5 +421,40 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         meetingsRegistry.checkOrderNotExist(meeting.getName());
         searchForm.checkEntityNotFoundInGlobalSearch(programName);
         searchForm.checkEntityNotFoundInGlobalSearch(meeting.getName());
+    }
+
+    @ParameterizedTest(name = "Каскадное удаление: Извлеченные уроки в Программе")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-156")
+    @TmsLink("1256")
+    public void cascadeDeletionLessonsInProgram(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProgramCreatedFromAPI();
+        programPage.checkCurrentProgramStage("Инициирование");
+        programPage.openLessonsTab();
+        programPage.clickAddNegativeLesson();
+        negativeLesson
+                .setName("Негативный урок_ATEST-156_" + currentTime);
+        lessonPage.fillFields(negativeLesson);
+        lessonPage.clickSaveAndClose();
+        programPage.checkLessonPresentInTable(negativeLesson.getName());
+        programPage.clickAddPositiveLesson();
+        positiveLesson
+                .setName("Позитивный урок_ATEST-156_" + currentTime);
+        lessonPage.fillFields(positiveLesson);
+        lessonPage.clickSaveAndClose();
+        programPage.checkLessonPresentInTable(positiveLesson.getName());
+        programRegistry.open();
+        String programName = ActionsViaAPI.getProgramNameFromAPI();
+        programRegistry.changeView("Все программы");
+        programRegistry.deleteEntity(programName);
+        lessonsRegistry.open();
+        lessonsRegistry.changeView("Все уроки");
+        lessonsRegistry.checkLessonNotExist(negativeLesson.getName());
+        lessonsRegistry.checkLessonNotExist(positiveLesson.getName());
+        searchForm.checkEntityNotFoundInGlobalSearch(programName);
+        searchForm.checkEntityNotFoundInGlobalSearch(negativeLesson.getName());
+        searchForm.checkEntityNotFoundInGlobalSearch(positiveLesson.getName());
     }
 }

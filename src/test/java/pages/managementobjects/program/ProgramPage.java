@@ -75,6 +75,9 @@ public class ProgramPage extends BasePage {
     private final SelenideElement addOrderButton = $("#OrderInlineTable a[data-tooltip='Добавить']");
     //Совещания
     private final SelenideElement addMeetingButton = $("#tab-meeting a[data-tooltip='Добавить']");
+    //Извчлеченные уроки
+    private final SelenideElement addNegativeLessonButton = $("#LessonInlineTable [data-tooltip='Отрицательный урок']");
+    private final SelenideElement addPositiveLessonButton = $("#LessonInlineTable [data-tooltip='Положительный урок']");
 
 
 
@@ -273,5 +276,26 @@ public class ProgramPage extends BasePage {
     @Step("Проверить наличие Совещания в таблице Совещаний")
     public void checkMeetingPresentInTable(String meetingName){
         $(By.xpath("//div[@id='tab-meeting']//td//a[contains(text(),'"+ meetingName +"')]")).shouldBe(visible);
+    }
+
+    @Step ("Открыть вкладку Извлеченный уроки")
+    public void openLessonsTab(){
+        tabLessons.click();
+        sleep(1000);
+    }
+
+    @Step ("Нажать кнопку 'Добавить Отрицательный урок'")
+    public void clickAddNegativeLesson() {
+        addNegativeLessonButton.shouldBe(visible).click();
+    }
+
+    @Step ("Нажать кнопку 'Добавить Положительный урок'")
+    public void clickAddPositiveLesson() {
+        addPositiveLessonButton.shouldBe(visible).click();
+    }
+
+    @Step("Проверить наличие Урока в таблице Извлеченных уроков")
+    public void checkLessonPresentInTable(String lessonName){
+        $(By.xpath("//div[@name='LessonTable']//td//a[contains(text(),'"+ lessonName +"')]")).shouldBe(visible);
     }
 }
