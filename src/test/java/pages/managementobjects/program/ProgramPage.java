@@ -298,4 +298,15 @@ public class ProgramPage extends BasePage {
     public void checkLessonPresentInTable(String lessonName){
         $(By.xpath("//div[@name='LessonTable']//td//a[contains(text(),'"+ lessonName +"')]")).shouldBe(visible);
     }
+
+    @Step("Добавить Итоговый вывод с описанием {description}")
+    public void addSummaryConclusion(String description) {
+        $("#btnCreateSummary").click();
+        $("#Description").setValue(description);
+        clickSaveAndClose();
+    }
+
+    public void checkSummaryConclusionPresent(String FinalConclusionName) {
+        $x("//a[contains(text(),'"+FinalConclusionName+"')]").shouldBe(visible);
+    }
 }

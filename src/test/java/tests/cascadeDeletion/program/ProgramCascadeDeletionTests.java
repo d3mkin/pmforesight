@@ -1,6 +1,5 @@
 package tests.cascadeDeletion.program;
 
-import com.codeborne.selenide.Selenide;
 import helpers.ActionsViaAPI;
 import helpers.TestSuiteName;
 import io.qameta.allure.Epic;
@@ -15,6 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import pages.auth.LogoutPage;
 import pages.auth.SingInPage;
 import pages.base_of_knowledge_and_documents.LessonsLearnedRegistry;
+import pages.base_of_knowledge_and_documents.SummaryConclusionsRegistry;
 import pages.base_of_knowledge_and_documents.lessons_learned.LessonLearnedPage;
 import pages.elements.SearchForm;
 import pages.goals_and_indicators.IndicatorsRegistry;
@@ -90,6 +90,7 @@ public class ProgramCascadeDeletionTests extends BaseTest {
     private Point point;
     private PointPage pointPage;
     private StagesWorksAndPointsRegistry pointsRegistry;
+    private SummaryConclusionsRegistry summaryConclusionsRegistry;
 
     @BeforeEach
     public void setupPages() {
@@ -135,6 +136,7 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         point = new Point();
         pointPage = new PointPage();
         pointsRegistry = new StagesWorksAndPointsRegistry();
+        summaryConclusionsRegistry = new SummaryConclusionsRegistry();
 
         ActionsViaAPI.createProgramViaAPI();
     }
@@ -456,5 +458,25 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         searchForm.checkEntityNotFoundInGlobalSearch(programName);
         searchForm.checkEntityNotFoundInGlobalSearch(negativeLesson.getName());
         searchForm.checkEntityNotFoundInGlobalSearch(positiveLesson.getName());
+    }
+
+    @ParameterizedTest(name = "Каскадное удаление: Итоговый вывод в Программе")
+    @MethodSource("helpers.UserProvider#mainFA")
+    public void cascadeDeletionSummaryConclusionInProgram(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProgramCreatedFromAPI();
+        programPage.checkCurrentProgramStage("Инициирование");
+        programPage.openLessonsTab();
+        programPage.addSummaryConclusion("cascadeDeletionSummaryConclusionInProgram");
+        String programName = ActionsViaAPI.getProgramNameFromAPI();
+        programPage.checkSummaryConclusionPresent(programName);
+        programRegistry.open();
+        programRegistry.changeView("Все программы");
+        programRegistry.deleteEntity(programName);
+        summaryConclusionsRegistry.open();
+        summaryConclusionsRegistry.changeView("Все итоговые выводы");
+        summaryConclusionsRegistry.checkSummaryConclusionNotExist(programName);
+        searchForm.checkEntityNotFoundInGlobalSearch(programName);
     }
 }

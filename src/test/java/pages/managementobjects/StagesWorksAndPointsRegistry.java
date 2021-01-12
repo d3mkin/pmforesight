@@ -103,7 +103,7 @@ public class StagesWorksAndPointsRegistry implements Registry {
         allRows.shouldNot(visible);
     }
 
-    //TODO Забрать метод в общий класс
+    //TODO Перенести метод в BaseRegistry
     @Step ("Проверка что сущность не отображается в реестре")
     public void checkEntityNotExist(String entityName){
         checkRegistryIsLoaded();
@@ -111,14 +111,14 @@ public class StagesWorksAndPointsRegistry implements Registry {
         shouldNotHaveResults();
     }
 
-    //TODO Забрать метод в общий класс
+    //TODO Перенести метод в BaseRegistry
     @Step ("Проверить что реестр загрузился")
     public void checkRegistryIsLoaded () {
         loadImage.shouldNotBe(visible);
         tableWithEntities.shouldBe(visible);
     }
 
-    //TODO Забрать метод в общий класс
+    //TODO Перенести метод в BaseRegistry
     @Step ("Сменить представление на {viewName}")
     public void changeView(String viewName){
         controlPanel.changeView(viewName);
