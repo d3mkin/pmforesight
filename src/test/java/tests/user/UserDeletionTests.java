@@ -1,7 +1,6 @@
 package tests.user;
 
 import io.qameta.allure.Epic;
-import io.qameta.allure.Story;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

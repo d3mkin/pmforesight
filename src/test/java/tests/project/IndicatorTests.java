@@ -576,7 +576,7 @@ public class IndicatorTests extends BaseTest {
                 .setUnit("Единица")
                 .setKPI("Квартал")
                 .setBasicValue("100")
-                .setPeriod("Кв 1 2020")
+                .setPeriod("Кв 1 2021")
                 .setFact("110")
                 .setPlan("110");
         projectPage.clickAddIndicator();
@@ -595,7 +595,7 @@ public class IndicatorTests extends BaseTest {
         //'Срыв срока' 2ой квартал 2020
         testIndicator
                 .setBasicValue("100")
-                .setPeriod("Кв 2 2020")
+                .setPeriod("Кв 2 2021")
                 .setFact("140")
                 .setPlan("150");
         indicatorPage.clickAddValueButton();
@@ -605,7 +605,7 @@ public class IndicatorTests extends BaseTest {
         //'Нет данных' 3ий квартал 2020
         testIndicator
                 .setBasicValue("100")
-                .setPeriod("Кв 3 2020")
+                .setPeriod("Кв 3 2021")
                 .setFact("100")
                 .setPlan("100");
         indicatorPage.clickAddValueButton();

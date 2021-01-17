@@ -1,4 +1,4 @@
-package tests.cascadeDeletion.project;
+package tests.cascade_deletion.project;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
@@ -126,7 +126,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         new LogoutPage().open();
     }
 
-    @ParameterizedTest(name = "Каскадное удаление: КТ в проекте")
+    @ParameterizedTest(name = "Каскадное удаление: КТ/Этап/Работа в проекте")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-119")
     @TmsLink("1237")

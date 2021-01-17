@@ -33,6 +33,7 @@ public class GoalRegistry implements Registry {
     private final SelenideElement viewList = $ (By.xpath("//span[@class='k-input']"));
     private final SelenideElement foundCheckBox = $(By.cssSelector("div[class='slick-cell l0 r0 slick-cell-checkboxsel']"));
     private final SelenideElement indicatorByIndex = $(By.xpath("//div[@class='slick-cell l3 r3']//span"));
+    private final SelenideElement loadingImage = $("div .k-loading-mask");
 
     public GoalRegistry() {
         this.header = new Header();
@@ -98,7 +99,7 @@ public class GoalRegistry implements Registry {
     @Step ("Сменить представление на {viewName}")
     public void changeView(String viewName){
         controlPanel.changeView(viewName);
-        sleep(1000);
+        sleep(3000);
     }
 
     @Step("Осуществить поиск цели")
@@ -131,14 +132,34 @@ public class GoalRegistry implements Registry {
         new DeleteEntityDialog().clickDeleteYes();
     }
 
+    @Step("Проверка отображения сущности после создания")
+    public void shouldHaveCreatedRecord(String entityName) {
+        $x("//div[contains(text(),'"+ entityName +"')]").waitUntil(visible, Configuration.timeout);
+        //firstFoundRow.shouldBe(visible);
+        sleep(1000);
+    }
+
+//    @Step ("Найти и удалить цель из реестра")
+//    public void findAndDeleteGoal(Goal goal){
+//        shouldBeRegistry();
+//        searchGoal(goal.getName());
+//        shouldHaveCreatedRecord();
+//        selectRow();
+//        clickDelete();
+//        acceptDelete();
+//        searchGoal(goal.getName());
+//        shouldNotHaveResults();
+//    }
+
     @Step ("Найти и удалить цель из реестра")
     public void findAndDeleteGoal(Goal goal){
         shouldBeRegistry();
         searchGoal(goal.getName());
-        shouldHaveCreatedRecord();
+        shouldHaveCreatedRecord(goal.getName());
         selectRow();
         clickDelete();
         acceptDelete();
+        loadingImage.waitUntil(not(visible), 1200000);
         searchGoal(goal.getName());
         shouldNotHaveResults();
     }

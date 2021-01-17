@@ -29,6 +29,7 @@ public class ProjectPage extends BasePage {
     private final SelenideElement editForm = $(".f-card__header .m-i-pencil2");
 
     //Общая информация
+    //TODO Рефакторинг локаторов
     private final SelenideElement currentProjectStageField = $(".f-card__info");
     private final SelenideElement projectViewName = $(".f-card__name");
     private final SelenideElement changeProjectStageButton = $(By.xpath("//li[@id='MoveToNextPhase']"));
@@ -681,12 +682,14 @@ public class ProjectPage extends BasePage {
         editGanttButton.shouldBe(visible).click();
         switchTo().defaultContent();
     }
+
     @Step("Перевести Гант в полноэкранный или оконный режим просмотра")
     public void clickToMaximizeOrMinimizeGantt(){
         switchTo().frame("ganttframe");
         maximizeOrMinimizeGanttButton.shouldBe(visible).click();
         switchTo().defaultContent();
     }
+
     @Step("Добавить на Гант КТ с назаванием {pointName} и утверждающим документом {approvingDoc}")
     public void addNewPointInGantt(String pointName, String approvingDoc){
         switchTo().frame("ganttframe");

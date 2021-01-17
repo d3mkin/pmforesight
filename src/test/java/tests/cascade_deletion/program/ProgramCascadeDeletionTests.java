@@ -1,4 +1,4 @@
-package tests.cascadeDeletion.program;
+package tests.cascade_deletion.program;
 
 import helpers.ActionsViaAPI;
 import helpers.TestSuiteName;
@@ -22,8 +22,6 @@ import pages.goals_and_indicators.indicator.IndicatorPage;
 import pages.managementobjects.NonProjectEventRegistry;
 import pages.managementobjects.ResultsRegistry;
 import pages.managementobjects.StagesWorksAndPointsRegistry;
-import pages.managementobjects.contracts.ContractPage;
-import pages.managementobjects.contracts.ContractsRegistry;
 import pages.managementobjects.nonprojectevent.NonProjectEventPage;
 import pages.managementobjects.point.PointPage;
 import pages.managementobjects.program.ProgramPage;
@@ -59,9 +57,6 @@ public class ProgramCascadeDeletionTests extends BaseTest {
     private IndicatorPage indicatorPage;
     private Indicator indicator;
     private IndicatorsRegistry indicatorsRegistry;
-    private ContractPage contractPage;
-    private Contract contact;
-    private ContractsRegistry contractsRegistry;
     private SearchForm searchForm;
     private RisksAndOpportunities risk;
     private RisksAndOpportunities opportunity;
@@ -105,9 +100,6 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         indicatorPage = new IndicatorPage();
         indicator = new Indicator();
         indicatorsRegistry = new IndicatorsRegistry();
-        contact = new Contract();
-        contractPage = new ContractPage();
-        contractsRegistry = new ContractsRegistry();
         searchForm = new SearchForm();
         risk = new RisksAndOpportunities();
         opportunity = new RisksAndOpportunities();

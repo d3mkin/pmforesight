@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import pages.Registry;
 import pages.auth.LogoutPage;
 import pages.elements.ControlPanel;
+import pages.elements.DeleteEntityDialog;
 import pages.elements.Header;
 import pages.elements.MainMenu;
 
@@ -28,9 +29,11 @@ public class NonProjectEventRegistry implements Registry {
     private SelenideElement mainContainer = $("#mainBodyContainer");
     private SelenideElement registryName = $("#f-grid-title span");
     private SelenideElement table = mainContainer.$("div.f-grid__grid");
-    private final SelenideElement allRows = table.$(".grid-canvas .slick-row");
     private SelenideElement loadImage = mainContainer.$(".k-loading-image");
     private final SelenideElement tableWithEntities = $ (By.xpath("//div[@class='slick-viewport']"));
+    private final SelenideElement allRows = table.$(".grid-canvas .slick-row");
+    private final SelenideElement foundCheckBox = $(By.cssSelector("div[class=\"slick-cell l0 r0 slick-cell-checkboxsel\"]"));
+    private final SelenideElement loadingImage = $("div .k-loading-mask");
 
     public NonProjectEventRegistry() {
         this.header = new Header();
@@ -113,5 +116,42 @@ public class NonProjectEventRegistry implements Registry {
         shouldNotHaveResults();
     }
 
+    @Step("Проверка отображения сущности")
+    public void shouldHaveCreatedRecord(String programName) {
+        $x("//div[contains(text(),'"+programName+"')]").waitUntil(visible, Configuration.timeout);
+        //firstFoundRow.shouldBe(visible);
+        sleep(1000);
+    }
+
+    @Step("Выбрать найденную запись")
+    public void selectRow() {
+        sleep(1000);
+        foundCheckBox.click();
+    }
+
+    @Step ("Нажать удалить")
+    public void clickDelete() {
+        controlPanel.clickDelete();
+    }
+
+    @Step ("Подтвердить удаление")
+    public void acceptDelete() {
+        $(By.xpath("//div[@class='k-widget k-window k-dialog']")).shouldBe(visible);
+        $(By.xpath("//label[@for='dialog-check-all']")).click();
+        new DeleteEntityDialog().clickDeleteYes();
+    }
+
+    @Step ("Удалить Непроектное мероприятие из реестра")
+    public void deleteEntity(String entityName){
+        shouldBeRegistry();
+        searchEvent(entityName);
+        shouldHaveCreatedRecord(entityName);
+        selectRow();
+        clickDelete();
+        acceptDelete();
+        loadingImage.waitUntil(not(visible), 1200000);
+        searchEvent(entityName);
+        shouldNotHaveResults();
+    }
 
 }

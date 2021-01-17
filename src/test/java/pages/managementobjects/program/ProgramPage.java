@@ -11,16 +11,17 @@ import pages.BasePage;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProgramPage extends BasePage {
     //Создание программы
-    private SelenideElement nameProgram = $(By.xpath("//input[contains(@data-binding-title,\"Наименование\") and contains(@name,\"Name\")]"));
-    private SelenideElement portfolioProgramList = $(By.cssSelector("#control-group-ParentId span.k-widget.k-dropdown"));
-    private SelenideElement tabRolesList = $(By.xpath("//li[contains(@id,\"tab-roles\")]"));
-    private SelenideElement functionalCustomerProgramList = $(By.cssSelector("#control-group-Customer span.k-widget.k-dropdown"));
-    private SelenideElement curatorProgramList = $(By.cssSelector("#control-group-Owner span.k-widget.k-dropdown"));
-    private SelenideElement leaderProgramList = $(By.cssSelector("#control-group-Leader span.k-widget.k-dropdown"));
+    private final SelenideElement nameProgram = $(By.xpath("//input[contains(@data-binding-title,\"Наименование\") and contains(@name,\"Name\")]"));
+    private final SelenideElement portfolioProgramList = $(By.cssSelector("#control-group-ParentId span.k-widget.k-dropdown"));
+    private final SelenideElement tabRolesList = $(By.xpath("//li[contains(@id,\"tab-roles\")]"));
+    private final SelenideElement functionalCustomerProgramList = $(By.cssSelector("#control-group-Customer span.k-widget.k-dropdown"));
+    private final SelenideElement curatorProgramList = $(By.cssSelector("#control-group-Owner span.k-widget.k-dropdown"));
+    private final SelenideElement leaderProgramList = $(By.cssSelector("#control-group-Leader span.k-widget.k-dropdown"));
     //Общие
     private final SelenideElement currentProgramStageField = $(".f-card__info");
 
@@ -30,20 +31,17 @@ public class ProgramPage extends BasePage {
     private final SelenideElement tabIndicators = $("a[href='#tab-kpi']");
     private final SelenideElement tabComponents = $("a[href='#tab-component']");
     private final SelenideElement tabGantt = $("a[href='#tab-gantt']");
-    private final SelenideElement tabActivity = $("a[href='#tab-activity']");
-    private final SelenideElement tabDocuments = $("a[href='#tab-documents']");
-    private final SelenideElement tabContracts = $("a[href='#tab-contract']");
     private final SelenideElement tabRisksOpportunities = $("a[href='#tab-risk']");
     private final SelenideElement tabLessons = $("a[href='#tab-gleaning']");
     private final SelenideElement tabOrders = $("a[href='#tab-order']");
     private final SelenideElement tabOpenQuestions = $("a[href='#tab-lov']");
 
     //создание "извлеченного урока" в карточке программы
-    private SelenideElement nameProjectAfterOpen = $("#card-Name");
-    private SelenideElement learnedLesson = $(By.xpath("//span[text()='Извлечённые уроки']"));
-    private SelenideElement positiveLesson = $(By.xpath("//a[contains(@class,\"itv-custom-buttons btn btn-small btn-success k-button\") and contains(@data-tooltip,\"Положительный урок\")]"));
-    private SelenideElement searchCreateLesson = $(By.xpath("//div[contains(@id,\"LessonInlineTable\")]/..//input[contains(@placeholder,\"Поиск...\")]"));
-    private SelenideElement nameLesson = $(By.xpath("//div[contains(@id,\"LessonInlineTable\")]/..//div[contains(@class,\"k-grid-content k-auto-scrollable\")]/..//a[contains(@target,\"_blank\")]"));
+    private final SelenideElement nameProjectAfterOpen = $("#card-Name");
+    private final SelenideElement learnedLesson = $(By.xpath("//span[text()='Извлечённые уроки']"));
+    private final SelenideElement positiveLesson = $(By.xpath("//a[contains(@class,\"itv-custom-buttons btn btn-small btn-success k-button\") and contains(@data-tooltip,\"Положительный урок\")]"));
+    private final SelenideElement searchCreateLesson = $(By.xpath("//div[contains(@id,\"LessonInlineTable\")]/..//input[contains(@placeholder,\"Поиск...\")]"));
+    private final SelenideElement nameLesson = $(By.xpath("//div[contains(@id,\"LessonInlineTable\")]/..//div[contains(@class,\"k-grid-content k-auto-scrollable\")]/..//a[contains(@target,\"_blank\")]"));
     //Показатели
     private final SelenideElement indicatorAddButton = $("#KPIDivContent .itv-add-button[data-tooltip='Показатель']");
     //Таблицы показателей
@@ -106,7 +104,7 @@ public class ProgramPage extends BasePage {
     public void checkCreateLesson(String value) {
         searchCreateLesson.clear();
         searchCreateLesson.sendKeys(value);
-        assertTrue(nameLesson.getText().equals(value));
+        assertEquals(value, nameLesson.getText());
     }
 
     @Step ("Проверить текущую стадию программы")
@@ -167,6 +165,7 @@ public class ProgramPage extends BasePage {
         resultsTable.shouldBe(visible);
         resultsTableHeader.shouldHave(text("Подчинённые результаты"));
     }
+
     @Step ("Проверить наличие результата в таблице")
     public void shouldHaveResult(String resultName){
         resultsSearch.click();

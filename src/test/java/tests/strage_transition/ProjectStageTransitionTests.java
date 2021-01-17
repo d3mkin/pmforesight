@@ -1,4 +1,4 @@
-package tests.strageTransition;
+package tests.strage_transition;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Story;

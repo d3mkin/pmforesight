@@ -1,4 +1,4 @@
-package tests.strageTransition;
+package tests.strage_transition;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Epic;
@@ -96,7 +96,7 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
-        pointPage.backInProgressPointAndUploadFile("31.12.2020", fileToUpload);
+        pointPage.backInProgressPointAndUploadFile("31.12.2021", fileToUpload);
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
@@ -147,7 +147,7 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         pointPage.cancelPointAndUploadFile(currentDate, fileToUpload);
-        pointPage.backInProgressPointAndUploadFile("31.12.2020", fileToUpload);
+        pointPage.backInProgressPointAndUploadFile("31.12.2021", fileToUpload);
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();

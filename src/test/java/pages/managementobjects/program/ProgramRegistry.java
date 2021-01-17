@@ -50,7 +50,8 @@ public class ProgramRegistry implements Registry {
         //controlPanel.clickSearch();
     }
 
-    @Step("Проверка отображения совещания после создания записи")
+    //TODO перенести в BaseRegistry
+    @Step("Проверка отображения сущности")
     public void shouldHaveCreatedRecord(String programName) {
         $x("//div[contains(text(),'"+programName+"')]").waitUntil(visible, Configuration.timeout);
         //firstFoundRow.shouldBe(visible);
@@ -106,10 +107,12 @@ public class ProgramRegistry implements Registry {
         foundCheckBox.click();
     }
 
+    @Step ("Нажать удалить")
     public void clickDelete() {
         controlPanel.clickDelete();
     }
 
+    @Step ("Подтвердить удаление")
     public void acceptDelete() {
         $(By.xpath("//div[@class='k-widget k-window k-dialog']")).shouldBe(visible);
         $(By.xpath("//label[@for='dialog-check-all']")).click();
