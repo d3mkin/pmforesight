@@ -23,6 +23,8 @@ public abstract class BasePage {
     protected SelenideElement content = window.$(".k-window-content");
     //Разворачивает окно на полный экран
     protected SelenideElement expandButton = actions.$("a[aria-label='window-Maximize']");
+    //Форма редактирования
+    private final SelenideElement editForm = $(".f-card__header .m-i-pencil2");
     //Кнопка Восстановить из полноэкронного режима
     protected SelenideElement restoreButton = actions.$("a[aria-label='window-restore']");
     protected SelenideElement saveAndOpenCardButton = $("a[aria-label='hyperlink-open']");
@@ -189,6 +191,10 @@ public abstract class BasePage {
         closeDialog();
     }
 
+    @Step("Открыть форму редактирования Проекта")
+    public void clickEditForm() {
+        editForm.click();
+    }
 
     //Методы для заполненния данных в зависимости от типа поля
 

@@ -285,7 +285,7 @@ public class ResultTests extends BaseTest {
         projectPage.checkLinkedResultsInTable(departmentalResult.getName(),departmentalResult.getType());
         projectPage.switchToProjectResultsTab();
 
-        projectPage.openProjectEditForm();
+        projectPage.clickEditForm();
         projectPage.changeProjectLevel("Федеральный");
         projectPage.clickSaveAndClose();
         projectPage.clickAddResult("Федеральный");
@@ -301,7 +301,7 @@ public class ResultTests extends BaseTest {
         projectPage.checkLinkedResultsInTable(federalResult.getName(),federalResult.getType());
         projectPage.switchToProjectResultsTab();
 
-        projectPage.openProjectEditForm();
+        projectPage.clickEditForm();
         projectPage.changeProjectLevel("Региональный");
         projectPage.clickSaveAndClose();
         projectPage.clickAddResult("Региональный");
@@ -340,7 +340,7 @@ public class ResultTests extends BaseTest {
         projectPage.checkValidationInKPAndResultsLinkedTable(resultPage,"Ведомственный");
 
         //Создаем Федеральный результат и проверяем соответствие между типами результата и типами КТ\Мероприятий
-        projectPage.openProjectEditForm();
+        projectPage.clickEditForm();
         projectPage.changeProjectLevel("Федеральный");
         projectPage.clickSaveAndClose();
         projectPage.clickAddResult("Федеральный");
@@ -354,7 +354,7 @@ public class ResultTests extends BaseTest {
         projectPage.checkValidationInKPAndResultsLinkedTable(resultPage,"Федеральный");
 
         //Создаем Региональный результат и проверяем соответствие между типами результата и типами КТ\Мероприятий
-        projectPage.openProjectEditForm();
+        projectPage.clickEditForm();
         projectPage.changeProjectLevel("Региональный");
         projectPage.clickSaveAndClose();
         projectPage.clickAddResult("Региональный");
@@ -398,7 +398,7 @@ public class ResultTests extends BaseTest {
         resultPage.clickSaveAndClose();
         projectPage.checkIsTheResultChild("Ведомственный", departmentalChildResult.getName());
 
-        projectPage.openProjectEditForm();
+        projectPage.clickEditForm();
         projectPage.changeProjectLevel("Федеральный");
         projectPage.clickSaveAndClose();
         projectPage.clickAddResult("Федеральный");
@@ -456,7 +456,7 @@ public class ResultTests extends BaseTest {
         projectPage.checkIsTheResultChild("Ведомственный", departmentalChildResult.getName());
 
 
-        projectPage.openProjectEditForm();
+        projectPage.clickEditForm();
         projectPage.changeProjectLevel("Федеральный");
         projectPage.clickSaveAndClose();
         projectPage.clickAddResult("Федеральный");

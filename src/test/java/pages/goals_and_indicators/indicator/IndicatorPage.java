@@ -50,10 +50,11 @@ public class IndicatorPage extends BasePage {
         searchAndSelectFirstFromSelect(responsibleInput_EditForm, indicator.getResponsible());
     }
 
-    @Step("Проверить что на вкладке 'Связи' по умолчанию 'Объект управления' равен текущему проекту")
-    public void checkDefaultControlObject(String projectName) {
+    //TODO вынести в BasePage
+    @Step("Проверить что на вкладке 'Связи' по умолчанию 'Объект управления' указан верно")
+    public void checkDefaultControlObject(String entityName) {
         linkTab.click();
-        $(By.xpath("//span[@class='k-dropdown-wrap k-state-disabled']")).shouldHave(text(projectName));
+        $(By.xpath("//span[@class='k-dropdown-wrap k-state-disabled']")).shouldHave(text(entityName));
     }
 
     @Step ("Нажать на кнопку Добавить Плановые, прогнозные и фактические значения показателя")

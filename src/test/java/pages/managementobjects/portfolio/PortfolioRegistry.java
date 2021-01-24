@@ -10,9 +10,8 @@ import pages.elements.DeleteEntityDialog;
 import pages.elements.Header;
 import pages.elements.MainMenu;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -30,6 +29,8 @@ public class PortfolioRegistry implements Registry {
     private SelenideElement firstFoundRow = $("div.slick-cell.l3.r3");
     private SelenideElement firstFoundCheckBox = $(".slick-cell-checkboxsel input");
     private ElementsCollection allFoundRow = table.$$(".grid-canvas div.slick-row");
+    private final SelenideElement foundCheckBox = $(By.cssSelector("div[class=\"slick-cell l0 r0 slick-cell-checkboxsel\"]"));
+    private final SelenideElement loadingImage = $("div .k-loading-mask");
 
     public PortfolioRegistry() {
         this.mainMenu = new MainMenu();
@@ -79,19 +80,21 @@ public class PortfolioRegistry implements Registry {
         table.shouldBe(visible);
         return this;
     }
-    @Step("Осуществить поиск контракта")
-    public void searchGprogram(String value) {
+    @Step("Осуществить поиск Портфеля")
+    public void searchPortfolio(String value) {
         controlPanel.typeSearchValue(value);
     }
 
-    @Step("Проверка отображения Госпрограммы после создания записи")
+    @Step("Проверка отображения Портфеля после создания записи")
     public void shouldHaveCreatedRecord() {
         firstFoundRow.shouldBe(visible);
     }
+
     @Step("Проверка наличия найденной записи")
-    public void shouldHaveCreatedRecord(String name) {
-        allFoundRow.shouldHaveSize(1);
-        firstFoundRow.shouldHave(text(name));
+    public void shouldHaveCreatedRecord(String entityName) {
+        $x("//div[contains(text(),'"+entityName+"')]").waitUntil(visible, Configuration.timeout);
+        //firstFoundRow.shouldBe(visible);
+        sleep(1000);
     }
 
     @Step("Выбрать первую запись")
@@ -106,8 +109,8 @@ public class PortfolioRegistry implements Registry {
 
     @Step("Подтвердить удаление")
     public void acceptDelete() {
-        $(By.xpath("//div[@class='k-widget k-window k-dialog']")).shouldBe(visible);
-        $(By.xpath("//label[@for='dialog-check-all']")).click();
+        $x("//div[@class='k-widget k-window k-dialog']").waitUntil(visible, Configuration.timeout);
+        $x("//label[@for='dialog-check-all']").click();
         new DeleteEntityDialog().clickDeleteYes();
     }
 
@@ -117,6 +120,34 @@ public class PortfolioRegistry implements Registry {
     }
     public ControlPanel controlPanel() {
         return controlPanel;
+    }
+
+    @Step("Выбрать найденную запись")
+    public void selectRow() {
+        sleep(2000);
+        foundCheckBox.click();
+    }
+
+    @Step ("Сменить представление на {viewName}")
+    public void changeView(String viewName){
+        controlPanel.changeView(viewName);
+        $x("//span[contains(text(),'"+viewName+"')]").shouldBe(visible);
+        $("#f-grid-viewlist .k-input").shouldHave(text(""+viewName+""));
+        loadingImage.waitUntil(not(visible), 1200000);
+    }
+
+    @Step ("Удалить программу из реестра")
+    public void deleteEntity(String entityName){
+        shouldBeRegistry();
+        searchPortfolio(entityName);
+        shouldHaveCreatedRecord(entityName);
+        selectRow();
+        sleep(3000);
+        controlPanel.clickDelete();
+        acceptDelete();
+        loadingImage.waitUntil(not(visible), 1200000);
+        searchPortfolio(entityName);
+        shouldNotHaveResults();
     }
 
 }

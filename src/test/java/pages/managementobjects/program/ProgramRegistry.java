@@ -36,6 +36,8 @@ public class ProgramRegistry implements Registry {
     private final SelenideElement firstProjectRow = table.$(By.xpath(".//div[@class = 'ui-widget-content slick-row even']"));
     private final SelenideElement firstProgramRow = table.$(By.xpath(".//div[contains(@class,\"ui-widget-content slick-row odd\")]"));
     private final SelenideElement loadingImage = $("div .k-loading-mask");
+    private SelenideElement loadImage = mainContainer.$(".k-loading-image");
+    private final SelenideElement tableWithEntities = $ (By.xpath("//div[@class='slick-viewport']"));
 
     public ProgramRegistry() {
         this.mainMenu = new MainMenu();
@@ -126,7 +128,6 @@ public class ProgramRegistry implements Registry {
         return controlPanel;
     }
 
-    @Step("Проверка отображения проекты после создания записи")
     public void clickFirstRow() {
         firstProjectRow.click();
     }
@@ -143,7 +144,7 @@ public class ProgramRegistry implements Registry {
         $("#f-grid-viewlist .k-input").shouldHave(text(""+viewName+""));
     }
 
-    @Step ("Удалить программу из реестра")
+    @Step ("Удалить Программу из реестра")
     public void deleteEntity(String entityName){
         shouldBeRegistry();
         searchProgram(entityName);
@@ -152,6 +153,19 @@ public class ProgramRegistry implements Registry {
         clickDelete();
         acceptDelete();
         loadingImage.waitUntil(not(visible), 1200000);
+        searchProgram(entityName);
+        shouldNotHaveResults();
+    }
+
+    @Step ("Проверить что реестр загрузился")
+    public void checkRegistryIsLoaded () {
+        loadImage.shouldNotBe(visible);
+        tableWithEntities.shouldBe(visible);
+    }
+
+    @Step ("Проверка что Программа не отображается в реестре")
+    public void checkProgramNotExist(String entityName){
+        checkRegistryIsLoaded();
         searchProgram(entityName);
         shouldNotHaveResults();
     }

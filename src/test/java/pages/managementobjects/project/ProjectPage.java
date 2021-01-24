@@ -42,6 +42,7 @@ public class ProjectPage extends BasePage {
     private final SelenideElement reasonOfCancelingIsRequired = $(By.xpath("//span[@class='required-input']"));
 
     //Основные вкладки
+    private final SelenideElement tabMain = $(By.cssSelector("a[href='#tab-main']"));
     private final SelenideElement tabMeetings = $(By.cssSelector("a[href='#tab-meeting']"));
     private final SelenideElement tabResults = $(By.cssSelector("a[href='#tab-result']"));
     private final SelenideElement tabIndicators = $(By.cssSelector("a[href='#tab-kpi']"));
@@ -52,7 +53,6 @@ public class ProjectPage extends BasePage {
     private final SelenideElement tabLessons = $(By.cssSelector("a[href='#tab-gleaning']"));
     private final SelenideElement tabOrders = $(By.cssSelector("a[href='#tab-order']"));
     private final SelenideElement tabOpenQuestions = $(By.cssSelector("a[href='#tab-lov']"));
-
 
     //Календарный план
     private final SelenideElement initiationDateInput = $(By.xpath("//div[@class='stage stage1']//input"));
@@ -167,7 +167,7 @@ public class ProjectPage extends BasePage {
         projectViewName.waitUntil(visible, Configuration.timeout).shouldHave(text(projectName));
     }
 
-    @Step ("Проверить что наименование Портфеля проекта соответствует названию {projectPortfolioName}")
+    @Step ("Проверить что наименование Портфеля соответствует названию {projectPortfolioName}")
     public void checkProjectPortfolioName (String projectPortfolioName) {
         $x("//div[@id='Parent']//a[contains(text(),'"+projectPortfolioName+"')]").shouldHave(text(projectPortfolioName));
     }
@@ -205,6 +205,11 @@ public class ProjectPage extends BasePage {
     @Step("Открыть вкладку Совещания")
     public void openMeetingTab() {
         tabMeetings.click();
+    }
+
+    @Step("Открыть вкладку 'Общая информация'")
+    public void openMainTab() {
+        tabMain.click();
     }
 
     @Step("Проверка открытия проекта")
@@ -436,8 +441,9 @@ public class ProjectPage extends BasePage {
         }
     }
 
+    //TODO: Перенести в BasePage
     @Step("Открыть форму редактирования Проекта")
-    public void openProjectEditForm() {
+    public void clickEditForm() {
         editForm.click();
     }
 

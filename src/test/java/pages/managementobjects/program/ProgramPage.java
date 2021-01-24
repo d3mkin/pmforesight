@@ -35,6 +35,7 @@ public class ProgramPage extends BasePage {
     private final SelenideElement tabLessons = $("a[href='#tab-gleaning']");
     private final SelenideElement tabOrders = $("a[href='#tab-order']");
     private final SelenideElement tabOpenQuestions = $("a[href='#tab-lov']");
+    private final SelenideElement tabMain = $("a[href='#tab-main']");
 
     //создание "извлеченного урока" в карточке программы
     private final SelenideElement nameProjectAfterOpen = $("#card-Name");
@@ -129,7 +130,7 @@ public class ProgramPage extends BasePage {
         objectIndicatorsTableHeader.shouldHave(text("Показатели объекта"));
     }
 
-    @Step ("Проверить наличие показателя в таблице 'Персональные показатели проекта'")
+    @Step ("Проверить наличие показателя в таблице 'Показатели объекта'")
     public void shouldHaveIndicator(String indicatorName) {
         indicatorTableSearchInput.click();
         indicatorTableSearchInput.sendKeys(indicatorName);
@@ -211,6 +212,11 @@ public class ProgramPage extends BasePage {
         sleep(1000);
     }
 
+    @Step("Открыть вкладку 'Общая информация'")
+    public void openMainTab() {
+        tabMain.click();
+    }
+
     @Step ("Нажать кнопку 'Добавить Открытый вопрос'")
     public void clickAddOpenQuestion () {
         addOpenQuestionButton.shouldBe(visible).click();
@@ -259,7 +265,7 @@ public class ProgramPage extends BasePage {
 
     @Step("Проверить наличие Поручения в таблице Поручений")
     public void checkOrderPresentInTable(String orderName){
-        $(By.xpath("//div[@id='OrderInlineTable']//td//a[contains(text(),'"+ orderName +"')]")).shouldBe(visible);
+        $x("//div[@id='OrderInlineTable']//td//a[contains(text(),'"+ orderName +"')]").shouldBe(visible);
     }
 
     @Step("Открыть вкладку Совещания")
@@ -274,7 +280,7 @@ public class ProgramPage extends BasePage {
 
     @Step("Проверить наличие Совещания в таблице Совещаний")
     public void checkMeetingPresentInTable(String meetingName){
-        $(By.xpath("//div[@id='tab-meeting']//td//a[contains(text(),'"+ meetingName +"')]")).shouldBe(visible);
+        $x("//div[@id='tab-meeting']//td//a[contains(text(),'"+ meetingName +"')]").shouldBe(visible);
     }
 
     @Step ("Открыть вкладку Извлеченный уроки")
@@ -307,5 +313,10 @@ public class ProgramPage extends BasePage {
 
     public void checkSummaryConclusionPresent(String FinalConclusionName) {
         $x("//a[contains(text(),'"+FinalConclusionName+"')]").shouldBe(visible);
+    }
+
+    @Step ("Проверить что наименование Портфеля соответствует названию {projectPortfolioName}")
+    public void checkProjectPortfolioName (String projectPortfolioName) {
+        $x("//div[@id='ParentId']//a[contains(text(),'"+projectPortfolioName+"')]").shouldHave(text(projectPortfolioName));
     }
 }

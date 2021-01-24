@@ -69,7 +69,6 @@ public class ActionsViaAPI {
     }
     public static String getNonProjectEventNameFromAPI() { return nonProjectEventName; }
 
-    @Step ("Получить cookie для авторизации")
     public static void getCookiesFromLogIn() {
         RestAssured.baseURI = Configuration.baseUrl;
         cookies = RestAssured
@@ -513,6 +512,11 @@ public class ActionsViaAPI {
 
         portfolioId = response.path("id");
         portfolioName = response.path ("Name");
+    }
+
+    @Step ("Открыть созданный через API Портфель")
+    public  static void openPortfolioCreatedFromAPI() {
+        Selenide.open(Configuration.baseUrl + "/Portfolio/Form/auto/" + getPortfolioId());
     }
 
     //Нац. проект

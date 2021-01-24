@@ -13,7 +13,7 @@ import pages.auth.LogoutPage;
 import pages.auth.SingInPage;
 import pages.elements.ControlPanel;
 import pages.managementobjects.portfolio.PortfolioRegistry;
-import pages.managementobjects.portfolio.CreatePortfolioPage;
+import pages.managementobjects.portfolio.PortfolioPage;
 import tests.BaseTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -27,7 +27,7 @@ import static io.qameta.allure.Allure.parameter;
 public class CreatePortfolioTests extends BaseTest {
    private SingInPage singIn;
     private PortfolioRegistry portfolioRegistry;
-    private CreatePortfolioPage portfolioPage;
+    private PortfolioPage portfolioPage;
     private Portfolio portfolio;
     private ControlPanel controlPanel;
 
@@ -36,7 +36,7 @@ public class CreatePortfolioTests extends BaseTest {
         singIn = new SingInPage();
         singIn.open();
         portfolioRegistry = new PortfolioRegistry();
-        portfolioPage = new CreatePortfolioPage();
+        portfolioPage = new PortfolioPage();
         portfolio = new Portfolio();
         controlPanel = new ControlPanel();
     }
@@ -83,16 +83,16 @@ public class CreatePortfolioTests extends BaseTest {
         portfolioRegistry.controlPanel().clickAddButton();
         portfolioPage.shouldBeOpened();
         portfolioPage.shouldHaveTitle("Портфель");
-        portfolioPage.fillInConnonInfo(portfolio);
+        portfolioPage.fillFields(portfolio);
         portfolioPage.fillRoles(portfolio);
         portfolioPage.clickSaveAndClose();
         portfolioRegistry.shouldBeRegistry();
-        portfolioRegistry.searchGprogram(portfolio.getNameValue());
+        portfolioRegistry.searchPortfolio(portfolio.getNameValue());
         portfolioRegistry.shouldHaveCreatedRecord(portfolio.getNameValue());
         portfolioRegistry.selectFirstRow();
         portfolioRegistry.clickDelete();
         portfolioRegistry.acceptDelete();
-        portfolioRegistry.searchGprogram(portfolio.getNameValue());
+        portfolioRegistry.searchPortfolio(portfolio.getNameValue());
         portfolioRegistry.shouldNotHaveResults();
     }
 
