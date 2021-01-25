@@ -99,7 +99,7 @@ public class IndicatorsRegistry implements Registry {
         allRows.shouldNot(visible);
     }
 
-    @Step ("Проверка что Индикатор не отображается в реестре")
+    @Step ("Проверка что Показатель не отображается в реестре")
     public void checkIndicatorNotExist(String indicatorName){
         checkRegistryIsLoaded();
         searchIndicator(indicatorName);

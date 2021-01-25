@@ -37,7 +37,7 @@ public class IndicatorPage extends BasePage {
     private final SelenideElement editIndicatorValueButton_ViewForm =$(By.xpath("//div[@class='k-grid-content k-auto-scrollable']//tr[last()]//span[@class='k-icon k-i-edit']"));
     private final SelenideElement indicatorValueStatus =$(By.xpath("//div[@class='k-grid-content k-auto-scrollable']//tr[last()]//td/span"));
 
-    @Step("Заполнить поля в карточке Индикатора")
+    @Step("Заполнить поля в карточке Показателя")
     public void fillRequiredFields(Indicator indicator) {
         typeText(nameInput_EditForm, indicator.getName());
         searchAndSelectFirstFromSelect(estimationTypeInput_EditForm, indicator.getEstimationType());

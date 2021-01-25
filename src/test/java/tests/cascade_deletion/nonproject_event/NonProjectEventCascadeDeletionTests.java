@@ -277,15 +277,14 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         openQuestionPage.fillFields(openQuestion);
         openQuestionPage.clickSaveAndClose();
         nonProjectEventPage.checkOpenQuestionPresentInTable(openQuestion.getName());
-        programRegistry.open();
-        programRegistry.shouldBeRegistry();
-        String programName = ActionsViaAPI.getProgramNameFromAPI();
-        programRegistry.changeView("Все программы");
-        programRegistry.deleteEntity(programName);
+        nonProjectEventRegistry.open();
+        String nonProjectEventName = ActionsViaAPI.getNonProjectEventNameFromAPI();
+        nonProjectEventRegistry.changeView("Все мероприятия");
+        nonProjectEventRegistry.deleteEntity(nonProjectEventName);
         openQuestionsRegistry.open();
         openQuestionsRegistry.changeView("Все открытые вопросы");
         openQuestionsRegistry.checkOpenQuestionNotExist(openQuestion.getName());
-        searchForm.checkEntityNotFoundInGlobalSearch(programName);
+        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEventName);
         searchForm.checkEntityNotFoundInGlobalSearch(openQuestion.getName());
     }
 }

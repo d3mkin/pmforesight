@@ -136,7 +136,7 @@ public class PortfolioRegistry implements Registry {
         loadingImage.waitUntil(not(visible), 1200000);
     }
 
-    @Step ("Удалить программу из реестра")
+    @Step ("Удалить Портфель из реестра")
     public void deleteEntity(String entityName){
         shouldBeRegistry();
         searchPortfolio(entityName);
