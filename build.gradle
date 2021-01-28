@@ -73,8 +73,8 @@ tasks.withType(Test) {
 task run_tests(type: Test) {
     useJUnitPlatform {
     }
-//    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
-//    forkEvery = 0
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+    forkEvery = 0
 }
 
 task authorization (type: Test) {
@@ -87,4 +87,14 @@ task stage_transition (type: Test) {
     useJUnitPlatform {
         includeTags 'Stage_transition'
     }
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+    forkEvery = 0
+}
+
+task cascade_deletion (type: Test) {
+    useJUnitPlatform {
+        includeTags 'cascadeDeletion'
+    }
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+    forkEvery = 0
 }
