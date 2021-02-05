@@ -13,7 +13,7 @@ targetCompatibility = 1.8
 
 ext {
     allureVersion = '2.13.5'
-    selenideVersion = '5.14.2'
+    selenideVersion = '5.18.0'
     junitVersion = '5.6.2'
     aspectjweaver = '1.9.5'
     logbackVersion = '1.2.3'
@@ -73,6 +73,11 @@ tasks.withType(Test) {
 task run_tests(type: Test) {
     useJUnitPlatform {
     }
+}
+
+task run_tests_parallel(type: Test) {
+    useJUnitPlatform {
+    }
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
     forkEvery = 0
 }
@@ -87,14 +92,10 @@ task stage_transition (type: Test) {
     useJUnitPlatform {
         includeTags 'Stage_transition'
     }
-//    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
-//    forkEvery = 0
 }
 
 task cascade_deletion (type: Test) {
     useJUnitPlatform {
         includeTags 'cascadeDeletion'
     }
-//    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
-//    forkEvery = 0
 }
