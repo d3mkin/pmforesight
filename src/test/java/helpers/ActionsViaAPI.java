@@ -210,6 +210,7 @@ public class ActionsViaAPI {
                 .body(body)
                 .delete("/entity")
                 .then()
+                .log().all()
                 .statusCode(200);
     }
 

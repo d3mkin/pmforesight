@@ -70,12 +70,12 @@ public class ProjectPage extends BasePage {
     private final SelenideElement newPointAddButton = $(By.xpath("//a[@id='tbBtnCreatePoint']"));
     private final SelenideElement newWorkOrStageAddButton = $(By.xpath("//a[@id='tbBtnCreateTask']"));
     private final SelenideElement newGanttActivityNameTR = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]"));
-    private final SelenideElement newGanttActivityNameTD = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[6]"));
-    private final SelenideElement newGanttActivityNameInput = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[6]//input"));
-    private final SelenideElement newGanttActivityApproveDocTD = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[16]//div"));
-    private final SelenideElement newGanttActivityApproveDocSelect = $(By.xpath("//select[contains(@class,'gantt-select')]"));
-    private final SelenideElement newGanttActivityStatusTitle = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]//td[2]//div"));
-    private final SelenideElement newGanttActivityStatusIndicator = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]//td[2]//span"));
+    private final SelenideElement newGanttActivityNameTD = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[7]"));
+    private final SelenideElement newGanttActivityNameInput = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[7]//div"));
+    private final SelenideElement newGanttActivityApproveDocTD = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[18]//div"));
+    private final SelenideElement newGanttActivityCheckBox = $x("//div[@class='ui-widget-content ui-grid-body']//tr[last()]/td[2]");
+    private final SelenideElement newGanttActivityApproveDocSelect = $(".editor .k-select");
+    private final SelenideElement newGanttActivityStatusTitle = $(By.xpath("//div[@class='ui-widget-content ui-grid-body']//tr[last()]//td[3]//img"));
 
     //Контракты
     private final SelenideElement addContractButton = $(By.xpath("//div//a[@data-tooltip = 'Контракт']"));
@@ -702,15 +702,17 @@ public class ProjectPage extends BasePage {
         newPointAddButton.shouldBe(visible).click();
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityNameTD.shouldBe(visible).click();
-        newGanttActivityNameInput.shouldBe(visible).sendKeys(pointName);
+        newGanttActivityNameInput.shouldBe(visible).click();
+        $x("//div[@class='editor']/input").sendKeys(pointName);
         newGanttActivityNameTR.shouldBe(visible).click();
         sleep(3000);
         newGanttActivityApproveDocTD.shouldBe(visible).click();
         newGanttActivityApproveDocSelect.shouldBe(visible).click();
-        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
+        $("div.k-animation-container[aria-hidden='false'] .k-textbox").setValue(approvingDoc);
+        sleep(3000);
+        $("div.k-animation-container[aria-hidden='false'] .k-textbox").pressEnter();
         saveGanttButton.click();
         newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "В работе по плану"));
-        newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
         switchTo().defaultContent();
     }
 
@@ -720,15 +722,17 @@ public class ProjectPage extends BasePage {
         newWorkOrStageAddButton.shouldBe(visible).click();
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityNameTD.shouldBe(visible).click();
-        newGanttActivityNameInput.shouldBe(visible).sendKeys(workName);
+        newGanttActivityNameInput.shouldBe(visible).click();
+        $x("//div[@class='editor']/input").sendKeys(workName);
         newGanttActivityNameTR.shouldBe(visible).click();
         sleep(3000);
         newGanttActivityApproveDocTD.shouldBe(visible).click();
         newGanttActivityApproveDocSelect.shouldBe(visible).click();
-        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
+        $("div.k-animation-container[aria-hidden='false'] .k-textbox").setValue(approvingDoc);
+        sleep(3000);
+        $("div.k-animation-container[aria-hidden='false'] .k-textbox").pressEnter();
         saveGanttButton.click();
         newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "В работе по плану"));
-        newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
         switchTo().defaultContent();
     }
 
@@ -738,25 +742,31 @@ public class ProjectPage extends BasePage {
         newWorkOrStageAddButton.shouldBe(visible).click();
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityNameTD.shouldBe(visible).click();
-        newGanttActivityNameInput.shouldBe(visible).sendKeys(stageName);
+        newGanttActivityNameInput.shouldBe(visible).click();
+        $x("//div[@class='editor']/input").sendKeys(stageName);
         newGanttActivityNameTR.shouldBe(visible).click();
         sleep(3000);
         newGanttActivityApproveDocTD.shouldBe(visible).click();
         newGanttActivityApproveDocSelect.shouldBe(visible).click();
-        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
+        $("div.k-animation-container[aria-hidden='false'] .k-textbox").setValue(approvingDoc);
+        sleep(3000);
+        $("div.k-animation-container[aria-hidden='false'] .k-textbox").pressEnter();
         newPointAddButton.shouldBe(visible).click();
         newGanttActivityNameTR.shouldBe(visible).click();
         newGanttActivityNameTD.shouldBe(visible).click();
-        newGanttActivityNameInput.shouldBe(visible).sendKeys("КТ для этапа");
+        newGanttActivityNameInput.shouldBe(visible).click();
+        $x("//div[@class='editor']/input").sendKeys("КТ для этапа");
         newGanttActivityNameTR.shouldBe(visible).click();
         sleep(3000);
         newGanttActivityApproveDocTD.shouldBe(visible).click();
         newGanttActivityApproveDocSelect.shouldBe(visible).click();
-        $(By.xpath("//option[contains(text(),'"+approvingDoc+"')]")).shouldBe(visible).click();
+        $("div.k-animation-container[aria-hidden='false'] .k-textbox").setValue(approvingDoc);
+        sleep(3000);
+        $("div.k-animation-container[aria-hidden='false'] .k-textbox").pressEnter();
+        newGanttActivityCheckBox.click();
         clickToDownEntityLevel();
         saveGanttButton.click();
         newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "В работе по плану"));
-        newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
         switchTo().defaultContent();
     }
 
@@ -765,27 +775,21 @@ public class ProjectPage extends BasePage {
         switchTo().frame("ganttframe");
         if (status.equals("В работе")) {
             newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "В работе по плану"));
-            newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(102, 102, 102, 1)"));
         }
         if (status.equals("Выполнено")) {
             newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "Выполнено"));
-            newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(95, 175, 97, 1)"));
         }
-        if (status.equals("Подтверждена")) {
+        if (status.equals("Подтверждено")) {
             newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "Подтверждено"));
-            newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(95, 175, 97, 1)"));
         }
         if (status.equals("Просрочено")) {
             newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "Просрочено (дата планового окончания уже прошла)"));
-            newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(255, 89, 64, 1)"));
         }
-        if (status.equals("Отменена")) {
+        if (status.equals("Отменено")) {
             newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "Отменено"));
-            newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(68, 68, 68, 1)"));
         }
         if (status.equals("Прогноз срыва сроков")) {
             newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "Прогноз срыва сроков"));
-            newGanttActivityStatusIndicator.shouldHave(cssValue("color", "rgba(255, 210, 70, 1)"));
         }
         switchTo().defaultContent();
     }
