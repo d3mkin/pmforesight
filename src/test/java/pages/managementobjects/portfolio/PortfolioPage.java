@@ -16,7 +16,7 @@ public class PortfolioPage extends BasePage {
     private SelenideElement name=$("#Name");
     private SelenideElement description=$("#Description");
     private SelenideElement target=$("#control-group-ActivityGoal");
-    private SelenideElement supervisor=$("#control-group-Leader");
+    private SelenideElement supervisor=$("#control-group-Leader .k-input");
     private SelenideElement administrator=$("#control-group-Administrator");
     private SelenideElement workingGroup=$("#control-group-WorkGroup");
 

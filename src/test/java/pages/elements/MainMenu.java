@@ -357,7 +357,6 @@ public class MainMenu {
     }
     @Step("Проверка открытия пунктов 'Служба поддержки' для функционального администратора")
     public void shouldHaveAndOpenSuportForUserFA() {
-        support.checkButton();
         support.checkReqFields();
         support.clickCancel();
     }
@@ -494,7 +493,6 @@ public class MainMenu {
     }
     @Step("Проверка открытия пунктов 'Служба поддержки' для пользователя из рабочей группы")
     public void shouldHaveAndOpenSuportForUserWG() {
-        support.checkButton();
         support.checkReqFields();
         support.clickCancel();
     }
@@ -638,7 +636,6 @@ public class MainMenu {
     }
     @Step("Проверка открытия пунктов 'Служба поддержки' для пользователя из команды управления проектом")
     public void shouldHaveAndOpenSuportForUserPM() {
-        support.checkButton();
         support.checkReqFields();
         support.clickCancel();
     }
@@ -770,7 +767,6 @@ public class MainMenu {
     }
     @Step("Проверка открытия пунктов 'Служба поддержки' для пользователя из команды проектный комитет")
     public void shouldHaveAndOpenSuportForUserPС() {
-        support.checkButton();
         support.checkReqFields();
         support.clickCancel();
     }
@@ -941,7 +937,6 @@ public class MainMenu {
     }
     @Step("Проверка открытия пунктов 'Служба поддержки' для пользователя из команды проектный офис")
     public void shouldHaveAndOpenSuportForUserPO() {
-        support.checkButton();
         support.checkReqFields();
         support.clickCancel();
     }
@@ -1051,7 +1046,6 @@ public class MainMenu {
     }
     @Step("Проверка открытия пунктов 'Служба поддержки' для пользователя из команды проектный офис")
     public void shouldHaveAndOpenSuportForUserSC() {
-        support.checkButton();
         support.checkReqFields();
         support.clickCancel();
     }
@@ -1212,7 +1206,6 @@ public class MainMenu {
     }
     @Step("Проверка открытия пунктов 'Служба поддержки' для пользователя из команды ВПО/МПО")
     public void shouldHaveAndOpenSuportForUserVPOMPO() {
-        support.checkButton();
         support.checkReqFields();
         support.clickCancel();
     }
@@ -1260,7 +1253,6 @@ public class MainMenu {
     }
     @Step("Проверка открытия пунктов 'Служба поддержки' для пользователя из команды внешний наблюдатель")
     public void shouldHaveAndOpenSuportForUserEO() {
-        support.checkButton();
         support.checkReqFields();
         support.clickCancel();
     }

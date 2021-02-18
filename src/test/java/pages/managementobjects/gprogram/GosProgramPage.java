@@ -25,7 +25,7 @@ public class GosProgramPage extends BasePage {
     private SelenideElement quest = $("#Tasks");
     private SelenideElement expectedResult = $("#control-group-Results");
     private SelenideElement consequencesUnrealization = $("#control-group-Effect");
-    private SelenideElement responsibleExecutive = $("#control-group-Leader");
+    private SelenideElement responsibleExecutive = $("#control-group-Leader .k-input");
     private SelenideElement admins = $("#control-group-Administrator");
     private SelenideElement executors = $("#control-group-WorkGroup");
     //Роли

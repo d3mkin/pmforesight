@@ -192,10 +192,10 @@ public class ActionsViaAPI {
         given()
                 .cookies(cookies)
                 .contentType(ContentType.JSON)
-                .when()
+        .when()
                 .body(body)
                 .post("/entity/Project/"+ getProjectId() +"")
-                .then()
+        .then()
                 .statusCode(200);
     }
 
@@ -206,10 +206,10 @@ public class ActionsViaAPI {
         given()
                 .cookies(cookies)
                 .contentType(ContentType.JSON)
-                .when()
+        .when()
                 .body(body)
                 .delete("/entity")
-                .then()
+        .then()
                 .log().all()
                 .statusCode(200);
     }

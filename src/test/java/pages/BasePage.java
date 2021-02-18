@@ -21,6 +21,7 @@ public abstract class BasePage {
     protected SelenideElement windowName = header.$(".k-window-title");
     protected SelenideElement actions = header.$(".k-window-actions");
     protected SelenideElement content = window.$(".k-window-content");
+    protected SelenideElement loadImage = $(".k-loading-image");
     //Разворачивает окно на полный экран
     protected SelenideElement expandButton = actions.$("a[aria-label='window-Maximize']");
     //Форма редактирования
@@ -314,5 +315,10 @@ public abstract class BasePage {
     public void closeUploadWindow() {
         $x("//span[contains(text(),'Файлы')]").click();
         $x("//div[@class='k-widget k-window']//a[@role='button']").click();
+    }
+
+    @Step ("Проверить что cтраница загрузилась")
+    public void checkPageIsLoaded () {
+        loadImage.shouldNotBe(visible);
     }
 }

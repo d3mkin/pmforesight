@@ -114,21 +114,23 @@ public class ProjectPage extends BasePage {
     private final SelenideElement departmentalResultsTable = $(By.xpath("//div[@name='Result']"));
     private final SelenideElement departmentalResultsHeader = $(By.xpath("//*[text() = 'Результаты проекта']"));
     private final SelenideElement departmentalResultsSearch = $(By.xpath("//div[@name='Results']//div//input[@placeholder='Поиск...']"));
-    private final SelenideElement departmentalFirstFoundResult = $(By.xpath("//div[@name='Result']//div[@class='inlineTableView-grid k-grid k-widget k-display-block']//a[@href]"));
+//    private final SelenideElement departmentalFirstFoundResult = $(By.xpath("//div[@name='Result']//div[@class='inlineTableView-grid k-grid k-widget k-display-block']//a[@href]"));
+    private final SelenideElement departmentalFirstFoundResult = $x("//div[@name='Result']//td[@data-column-field='FullName']//a");
     private final SelenideElement departmentalResultDelete = $(By.xpath("//div[@name='Results']//a[@class='itv-remove-button k-grid-trash']"));
     private final SelenideElement departmentalResultEdit = $(By.xpath("//div[@name='Results']//a[@class='itv-edit-button k-grid-edit']"));
     private final SelenideElement departmentalResultChild = $(By.xpath("//div[@name='Results']//span[@style='padding-left: 30px']"));
     private final SelenideElement federalResultsTable = $(By.xpath("//div[@name='FederalResult']"));
     private final SelenideElement federalResultsHeader = $(By.xpath("//*[text() = 'Результаты федерального проекта']"));
     private final SelenideElement federalResultsSearch = $(By.xpath("//div[@name='FederalResults']//input[@class='itv-inlineSearch k-textbox']"));
-    private final SelenideElement federalFirstFoundResult = $(By.xpath("//div[@name='FederalResults']//div[@class='inlineTableView-grid k-grid k-widget k-display-block']//a[@href]"));
+    private final SelenideElement federalFirstFoundResult = $x("//div[@name='FederalResults']//td[@data-column-field='FullName']//a");
     private final SelenideElement federalResultDelete = $(By.xpath("//div[@name='FederalResults']//a[@class='itv-remove-button k-grid-trash']"));
     private final SelenideElement federalResultEdit = $(By.xpath("//div[@name='FederalResults']//a[@class='itv-edit-button k-grid-edit']"));
     private final SelenideElement federalResultChild = $(By.xpath("//div[@name='FederalResults']//span[@style='padding-left: 30px']"));
     private final SelenideElement regionalResultsTable = $(By.xpath("//div[@name='FederalResult']"));
     private final SelenideElement regionalResultsHeader = $(By.xpath("//*[text() = 'Результаты регионального проекта']"));
     private final SelenideElement regionalResultsSearch = $(By.xpath("//div[@name='RegionalResults']//input[@class='itv-inlineSearch k-textbox']"));
-    private final SelenideElement regionalFirstFoundResult = $(By.xpath("//div[@name='RegionalResults']//div[@class='inlineTableView-grid k-grid k-widget k-display-block']//a[@href]"));
+//    private final SelenideElement regionalFirstFoundResult = $(By.xpath("//div[@name='RegionalResults']//div[@class='inlineTableView-grid k-grid k-widget k-display-block']//a[@href]"));
+    private final SelenideElement regionalFirstFoundResult = $x("//div[@name='RegionalResults']//td[@data-column-field='FullName']//a");
     private final SelenideElement regionalResultDelete = $(By.xpath("//div[@id='RegionalResults']//a[@class='itv-remove-button k-grid-trash']"));
     private final SelenideElement regionalResultEdit = $(By.xpath("//div[@name='RegionalResults']//a[@class='itv-edit-button k-grid-edit']"));
     private final SelenideElement regionalResultChild = $(By.xpath("//div[@name='RegionalResults']//span[@style='padding-left: 30px']"));
@@ -358,6 +360,7 @@ public class ProjectPage extends BasePage {
     public void shouldHaveDepartmentalResult(String result){
         departmentalResultsSearch.click();
         departmentalResultsSearch.sendKeys(result);
+        checkPageIsLoaded();
         departmentalFirstFoundResult.shouldBe(visible);
         departmentalFirstFoundResult.shouldHave(text(result));
     }

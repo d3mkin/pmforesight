@@ -15,8 +15,8 @@ public class NationalProjectPage extends BasePage {
     private final SelenideElement nameValue = $("#Name");
     private final SelenideElement target = $("#control-group-ActivityGoal");
 
-    private final SelenideElement curator = $("#control-group-Owner");
-    private final SelenideElement supervisor = $("#control-group-Leader");
+    private final SelenideElement curator = $("#control-group-Owner .k-input");
+    private final SelenideElement supervisor = $("#control-group-Leader .k-input");
     private final SelenideElement administrator = $("#control-group-Administrator");
 
     @Step("В модальном окне создания Национального проекта заполнить обязательные поля на вкладке 'Общая информация' и 'Роли'")

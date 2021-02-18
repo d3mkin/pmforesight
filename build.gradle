@@ -82,7 +82,7 @@ task run_tests_parallel(type: Test) {
     forkEvery = 0
 }
 
-task authorization (type: Test) {
+task auth (type: Test) {
     useJUnitPlatform {
         includeTags 'Authorization'
     }

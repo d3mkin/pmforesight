@@ -24,7 +24,7 @@ public class EmployeePage extends BasePage {
     public SelenideElement emailInput = $("#EMail");
     public SelenideElement unitMultiSelect = $("#UserOrgUnit");
     //Вкладка Права
-    public SelenideElement rightsTab = $(By.xpath("//li[@id='tab2']//a"));
+    public SelenideElement rightsTab = $("#link-tab-rights");
     public SelenideElement activeCheck = $("#label-Enabled");
     public SelenideElement assignToRolesCheck = $("#label-IsAssignment");
     public SelenideElement groupsBlock = $("#control-group-GroupMember");
@@ -60,12 +60,12 @@ public class EmployeePage extends BasePage {
 
     @Step ("Проверить что пользователь входит в группу")
     public void checkUserIsMemberOfGroup (String groupName) {
-        $ (By.xpath("//div[@id='Rights']//li/a[text()='"+groupName+"']")).shouldBe(visible);
+        $ (By.xpath("//div[@name='GroupMember']//li//a[text()='"+groupName+"']")).shouldBe(visible);
     }
 
     @Step ("Проверить что пользователь НЕ входит в группу")
     public void checkUserIsNotMemberOfGroup (String groupName) {
-        $ (By.xpath("//div[@id='Rights']//li/a[text()='"+groupName+"']")).shouldNotBe(visible);
+        $ (By.xpath("//div[@name='GroupMember']//li//a[text()='"+groupName+"']")).shouldNotBe(visible);
     }
 
     @Step ("Открыть карточку редактирования сотрудника")

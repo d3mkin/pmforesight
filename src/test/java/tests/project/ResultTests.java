@@ -89,6 +89,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(result);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.shouldHaveDefaultResultsTable();
         projectPage.shouldHaveDepartmentalResult(result.getName());
     }
@@ -125,6 +126,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(result);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.shouldHaveFederalResultsTable();
         projectPage.shouldHaveFederalResult(result.getName());
     }
@@ -148,6 +150,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(result);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.shouldHaveFederalResultsTable();
         projectPage.shouldHaveFederalResult(result.getName());
     }
@@ -185,6 +188,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(result);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.shouldHaveRegionalResultsTable();
         projectPage.shouldHaveRegionalResult(result.getName());
     }
@@ -208,6 +212,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(federalResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.shouldHaveFederalResultsTable();
         projectPage.clickAddResult("Региональный");
         regionalResult
@@ -218,6 +223,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(regionalResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.shouldHaveRegionalResultsTable();
         projectPage.shouldHaveFederalResult(federalResult.getName());
         projectPage.checkLinkBetweenFederalAndRegionalResults(regionalResult.getName());
@@ -243,6 +249,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(federalResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.shouldHaveFederalResultsTable();
         projectPage.clickAddResult("Региональный");
         regionalResult
@@ -252,10 +259,12 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(regionalResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.shouldHaveRegionalResultsTable();
         projectPage.editRegionalResultCard();
         resultPage.fillFederalResultLink(federalResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.shouldHaveFederalResult(federalResult.getName());
         projectPage.checkLinkBetweenFederalAndRegionalResults(regionalResult.getName());
         projectPage.shouldHaveRegionalResult(regionalResult.getName());
@@ -281,6 +290,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(departmentalResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.switchToLinkedKPAndResultsTableTab();
         projectPage.checkLinkedResultsInTable(departmentalResult.getName(),departmentalResult.getType());
         projectPage.switchToProjectResultsTab();
@@ -288,6 +298,7 @@ public class ResultTests extends BaseTest {
         projectPage.clickEditForm();
         projectPage.changeProjectLevel("Федеральный");
         projectPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.clickAddResult("Федеральный");
         federalResult
                 .setName("Федеральный_С1044_" + currentTime)
@@ -297,6 +308,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(federalResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.switchToLinkedKPAndResultsTableTab();
         projectPage.checkLinkedResultsInTable(federalResult.getName(),federalResult.getType());
         projectPage.switchToProjectResultsTab();
@@ -304,6 +316,7 @@ public class ResultTests extends BaseTest {
         projectPage.clickEditForm();
         projectPage.changeProjectLevel("Региональный");
         projectPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.clickAddResult("Региональный");
         regionalResult
                 .setName("Региональный_С1044_" + currentTime)
@@ -313,6 +326,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(regionalResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.switchToLinkedKPAndResultsTableTab();
         projectPage.checkLinkedResultsInTable(regionalResult.getName(),regionalResult.getType());
     }
@@ -337,6 +351,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(departmentalResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.checkValidationInKPAndResultsLinkedTable(resultPage,"Ведомственный");
 
         //Создаем Федеральный результат и проверяем соответствие между типами результата и типами КТ\Мероприятий
@@ -351,6 +366,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(federalResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.checkValidationInKPAndResultsLinkedTable(resultPage,"Федеральный");
 
         //Создаем Региональный результат и проверяем соответствие между типами результата и типами КТ\Мероприятий
@@ -365,6 +381,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(regionalResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.checkValidationInKPAndResultsLinkedTable(resultPage,"Региональный");
     }
 
@@ -387,6 +404,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(departmentalParentResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.clickAddResult("Ведомственный");
         departmentalChildResult
                 .setName("Ведомственный Дочерний_" + currentTime)
@@ -396,11 +414,13 @@ public class ResultTests extends BaseTest {
                 .setParentEntity(departmentalParentResult.getName());
         resultPage.fillFields(departmentalChildResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.checkIsTheResultChild("Ведомственный", departmentalChildResult.getName());
 
         projectPage.clickEditForm();
         projectPage.changeProjectLevel("Федеральный");
         projectPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.clickAddResult("Федеральный");
         federalParentResult
                 .setName("Федеральный Родительский" + currentTime)
@@ -409,6 +429,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(federalParentResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.clickAddResult("Федеральный");
         federalChildResult
                 .setName("Федеральный Дочерний" + currentTime)
@@ -418,6 +439,7 @@ public class ResultTests extends BaseTest {
                 .setParentEntity(federalParentResult.getName());
         resultPage.fillFields(federalChildResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.checkIsTheResultChild("Федеральный", federalChildResult.getName());
     }
 
@@ -441,6 +463,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(departmentalParentResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.clickAddResult("Ведомственный");
         departmentalChildResult
                 .setName("Ведомственный Дочерний_" + currentTime)
@@ -449,16 +472,19 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(departmentalChildResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.shouldHaveDepartmentalResult(departmentalChildResult.getName());
         projectPage.openResultEditForm("Ведомственный");
         resultPage.fillParentEntityResult(departmentalParentResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.checkIsTheResultChild("Ведомственный", departmentalChildResult.getName());
 
 
         projectPage.clickEditForm();
         projectPage.changeProjectLevel("Федеральный");
         projectPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.clickAddResult("Федеральный");
         federalParentResult
                 .setName("Федеральный Родительский_" + currentTime)
@@ -467,6 +493,7 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(federalParentResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.clickAddResult("Федеральный");
         federalChildResult
                 .setName("Федеральный Дочерний_" + currentTime)
@@ -475,10 +502,12 @@ public class ResultTests extends BaseTest {
                 .setResponsible(user.getName());
         resultPage.fillFields(federalChildResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.shouldHaveFederalResult(federalChildResult.getName());
         projectPage.openResultEditForm("Федеральный");
         resultPage.fillParentEntityResult(federalParentResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.checkIsTheResultChild("Федеральный", federalChildResult.getName());
 
     }
@@ -503,6 +532,7 @@ public class ResultTests extends BaseTest {
         resultPage.checkParentEntityResultIsNotVisible();
         resultPage.fillFields(regionalResult);
         resultPage.clickSaveAndClose();
+        resultPage.checkPageIsLoaded();
         projectPage.shouldHaveRegionalResult(regionalResult.getName());
         projectPage.openResultEditForm("Региональный");
         resultPage.checkParentEntityResultIsNotVisible();

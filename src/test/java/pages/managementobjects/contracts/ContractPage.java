@@ -26,11 +26,11 @@ public class ContractPage extends BasePage {
 
     //Вкладка роли
     private SelenideElement tabRoles = $(By.linkText("Роли"));
-    private SelenideElement customerSelect = $("#control-group-Owner");
-    private SelenideElement executorSelect = $("#control-group-ContractorId");
-    private SelenideElement responsiblePersonSelect = $("#control-group-Leader");
-    private SelenideElement adminsMultiSelect = $("#control-group-Administrator");
-    private SelenideElement membersMultiSelect = $("#control-group-WorkGroup");
+    private SelenideElement customerSelect = $("#control-group-Owner .k-input");
+    private SelenideElement executorSelect = $("#control-group-ContractorId .k-input");
+    private SelenideElement responsiblePersonSelect = $("#control-group-Leader .k-input");
+    private SelenideElement adminsMultiSelect = $("#control-group-Administrator .k-input");
+    private SelenideElement membersMultiSelect = $("#control-group-WorkGroup .k-input");
 
 
     public void fillFields(Contract contract) {
@@ -48,7 +48,7 @@ public class ContractPage extends BasePage {
 
         tabRoles.click();
         searchAndSelectFirstFromSelect(customerSelect, contract.getCustomer());
-        searchAndSelectFirstFromSelect(executorSelect, contract.getExecutor());
+//        searchAndSelectFirstFromSelect(executorSelect, contract.getExecutor());
         searchAndSelectFirstFromSelect(responsiblePersonSelect, contract.getResponsiblePerson());
 //        searchAndSelectFirstFromSelect(adminsMultiSelect, contract.getAdmins().get(0));
 //        searchAndSelectFirstFromSelect(membersMultiSelect, contract.getMembers().get(0));

@@ -27,14 +27,14 @@ public class ProjectsInitiativePage extends BasePage {
     private SelenideElement proposalOnTheFormOfImplementation = $("#control-group-ObjectTypeId");
     private SelenideElement additionalInformation = $("#MoreInformation");
 
-    private SelenideElement initiator = $("#control-group-Initiator");
-    private SelenideElement functionalCustomer = $("#control-group-FunctionalCustomer");
-    private SelenideElement curatorOfTheProject = $("#control-group-Owner");
-    private SelenideElement projectManager = $("#control-group-Leader");
-    private SelenideElement mainExecutorsAndCoExecutorOfTheProject = $("#control-group-Executor");
-    private SelenideElement projectPlanningGroup = $("#control-group-PlaningGroup");
-    private SelenideElement CPO = $("#control-group-CPO");
-    private SelenideElement secretaryPC = $("#control-group-CPOSecretary");
+    private SelenideElement initiator = $("#control-group-Initiator .k-input");
+    private SelenideElement functionalCustomer = $("#control-group-FunctionalCustomer .k-input");
+    private SelenideElement curatorOfTheProject = $("#control-group-Owner .k-input");
+    private SelenideElement projectManager = $("#control-group-Leader .k-input");
+    private SelenideElement mainExecutorsAndCoExecutorOfTheProject = $("#control-group-Executor .k-input");
+    private SelenideElement projectPlanningGroup = $("#control-group-PlaningGroup .k-input");
+    private SelenideElement CPO = $("#control-group-CPO .k-input");
+    private SelenideElement secretaryPC = $("#control-group-CPOSecretary .k-input");
 
     @Step("В модальном окне создания Предложения по проекту заполнить обязательные поля на вкладке \"Общая информация\"")
     public void fillGeneralInfo(ProjectsInitiative projectsInitiative) {
