@@ -3,6 +3,7 @@ package pages.managementobjects.project;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import model.Snapshot;
 import org.openqa.selenium.By;
 import model.Project;
 import pages.BasePage;
@@ -53,6 +54,7 @@ public class ProjectPage extends BasePage {
     private final SelenideElement tabLessons = $(By.cssSelector("a[href='#tab-gleaning']"));
     private final SelenideElement tabOrders = $(By.cssSelector("a[href='#tab-order']"));
     private final SelenideElement tabOpenQuestions = $(By.cssSelector("a[href='#tab-lov']"));
+    private final SelenideElement tabSnapshot = $(By.cssSelector("a[href='#tab-snapshot']"));
 
     //Календарный план
     private final SelenideElement initiationDateInput = $(By.xpath("//div[@class='stage stage1']//input"));
@@ -159,6 +161,13 @@ public class ProjectPage extends BasePage {
     //Извчлеченные уроки
     private final SelenideElement addNegativeLessonButton = $("#LessonInlineTable [data-tooltip='Отрицательный урок']");
     private final SelenideElement addPositiveLessonButton = $("#LessonInlineTable [data-tooltip='Положительный урок']");
+
+    //Слепки
+    private final SelenideElement addSnapshotButton = $("#SnapshotInlineTableView a[data-tooltip='Создать новый слепок']");
+    private final SelenideElement snapshotSearchInput = $("#SnapshotInlineTableView [placeholder='Поиск...']");
+    private final SelenideElement snapshotTable = $("#tab-snapshot");
+    private final SelenideElement firstFoundSnapshotName = $("#SnapshotInlineTableView [data-column-field='Name'] a");
+    private final SelenideElement firstFoundSnapshotStatus = $("#SnapshotInlineTableView [data-column-field='ActivityPhaseName']");
 
 
     //TODO: сделать отдельный класс для верхней панели карточек
@@ -289,6 +298,12 @@ public class ProjectPage extends BasePage {
     @Step ("Открыть вкладку Извлеченный уроки")
     public void openLessonsTab(){
         tabLessons.click();
+        sleep(1000);
+    }
+
+    @Step ("Открыть вкладку Слепки")
+    public void openSnapshotTab() {
+        tabSnapshot.click();
         sleep(1000);
     }
 
@@ -905,5 +920,28 @@ public class ProjectPage extends BasePage {
         $(".f-notify__title").shouldHave(text("Внимание, создан слепок!"));
         $(".f-notify__close").click();
         $(".k-notification-success").shouldNotBe(visible);
+    }
+
+    @Step("Нажать 'Создать новый слепок'")
+    public void clickAddSnapshot() {
+        addSnapshotButton.click();
+    }
+
+    @Step("Найти в таблице Слепок с наименованием {snapshotName}")
+    public void searchSnapshotInTable(String snapshotName) {
+        snapshotTable.shouldBe(visible);
+        snapshotSearchInput.shouldBe(visible).setValue(snapshotName).pressEnter();
+    }
+
+    @Step("Проверить имя слепка и его статус в таблице слепков")
+    public void checkSnapshotNameAndStatusInTable(String snapshotName, String snapshotStatus) {
+        firstFoundSnapshotName.shouldBe(visible).shouldHave(text(snapshotName));
+        firstFoundSnapshotStatus.shouldBe(visible).shouldHave(text(snapshotStatus));
+    }
+
+    @Step("Открыть карточку слепка с наименованием {snapshotName}")
+    public void openSnapshotCard(String snapshotName) {
+        searchSnapshotInTable(snapshotName);
+        firstFoundSnapshotName.click();
     }
 }

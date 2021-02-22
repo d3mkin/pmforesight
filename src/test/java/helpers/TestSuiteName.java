@@ -22,4 +22,5 @@ public class TestSuiteName {
     public static final String GOALS = "Цели";
     public static final String USER_DELETION = "Удаление пользователя";
     public static final String ELECTRONIC_BUDGET = "Электронный бюджет";
+    public static final String SNAPSHOTS = "Слепки";
 }
