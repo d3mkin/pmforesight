@@ -11,7 +11,7 @@ public class PagesPage extends AbstractAdminPage {
     public PagesPage() {
         super(
                 Configuration.baseUrl + URLS.PAGES,
-                "MetaPage",
+                "Мета-страницы",
                 $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );

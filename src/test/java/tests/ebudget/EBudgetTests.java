@@ -34,7 +34,7 @@ public class EBudgetTests extends BaseTest {
         singIn.open();
         projectPage = new ProjectPage();
         projectRegistry = new ProjectRegistry();
-        importProject = "Финансовая поддержка семей при рождении детей";
+        importProject = "Сохранение лесов";
         importProjectPortfolio = "Портфель национальных проектов";
     }
 
@@ -57,6 +57,7 @@ public class EBudgetTests extends BaseTest {
         projectRegistry.shouldBeRegistry();
         projectRegistry.changeView("Все проекты");
         projectRegistry.importProjectFromEBudget(importProject);
+        projectRegistry.checkRegistryIsLoaded();
         projectRegistry.searchAndOpenProject(importProject);
         Selenide.sleep(3000);
         projectPage.checkProjectName(importProject);

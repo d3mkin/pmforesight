@@ -11,7 +11,7 @@ public class ReportsPage extends AbstractAdminPage {
     public ReportsPage() {
         super(
                 Configuration.baseUrl + URLS.REPORTS,
-                "Reporting",
+                "Отчетность",
                 $(".f-page__grid-name"),
                 $("#mainBodyContainer")
         );

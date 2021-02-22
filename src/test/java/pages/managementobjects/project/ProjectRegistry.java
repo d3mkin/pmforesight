@@ -32,7 +32,8 @@ public class ProjectRegistry implements Registry {
     private final SelenideElement allRows = table.$(".grid-canvas .slick-row");
     private final SelenideElement foundCheckBox = $("div[class='slick-cell l0 r0 slick-cell-checkboxsel']");
     private final SelenideElement importFromEBudgetButton = $(".k-toolbar a[data-tooltip='Загрузить из Электронного Бюджета']");
-    private final SelenideElement eBudgetDialogHeader = $("span.k-window-title");
+    private final SelenideElement eBudgetТNonImportedDialogHeader = $x("//span[.='Доступные для импорта проекты']");
+    private final SelenideElement eBudgetImportedDialogHeader = $("span.k-window-title");
     private final SelenideElement eBudgetProjectNameInput = $("input[aria-label='Наименование']");
     private final SelenideElement loadingImage = $("div .k-loading-mask");
     private final SelenideElement reloadButton = $("#f-reload");
@@ -66,7 +67,7 @@ public class ProjectRegistry implements Registry {
 
     @Step ("Обновить данные в реестре")
     public void clickReloadButton() {
-        reloadButton.click();
+        reloadButton.shouldBe(visible).click();
         loadingImage.waitUntil(not(visible), Configuration.timeout);
     }
 
@@ -163,7 +164,7 @@ public class ProjectRegistry implements Registry {
         selectRow();
         clickDelete();
         acceptDelete();
-        loadingImage.waitUntil(not(visible), 1200000);
+        checkRegistryIsLoaded();
         searchProject(projectName);
         shouldNotHaveResults();
     }
@@ -191,12 +192,12 @@ public class ProjectRegistry implements Registry {
     @Step ("Импортировать из Электронного Бюджета проект {projectName}")
     public void importProjectFromEBudget(String projectName) {
         importFromEBudgetButton.shouldBe(visible).click();
-        eBudgetDialogHeader.waitUntil(visible, Configuration.timeout).shouldHave(text("Доступные для импорта проекты"));
+        eBudgetТNonImportedDialogHeader.waitUntil(visible, Configuration.timeout).shouldHave(text("Доступные для импорта проекты"));
         eBudgetProjectNameInput.shouldBe(visible).setValue(projectName);
         $x("//li[contains(text(),'"+projectName+"')]").waitUntil(visible, Configuration.timeout).click();
         $x("//td[contains(text(),'" + projectName + "')]").waitUntil(visible, Configuration.timeout).click();
         $x("//button[contains(text(),'Импорт')]").click();
-        eBudgetDialogHeader.waitUntil(text("Загруженные проекты"), 1200000);
+        eBudgetImportedDialogHeader.waitUntil(text("Загруженные проекты"), 1200000);
         $("div.k-grid-content tr td div").shouldBe(visible).shouldHave(text("Проект успешно загружен"));
         $x("//button[contains(text(),'Закрыть')]").shouldBe(visible).click();
     }

@@ -121,6 +121,7 @@ public class EmployeesRegistry implements Registry {
     @Step("Подтвердить удаление")
     public void acceptDelete() {
         $(By.xpath("//div[@class='k-widget k-window k-dialog']")).shouldBe(visible);
+        $("a[href='#tab-main']").shouldBe(visible).click();
         $(By.xpath("//label[@for='dialog-check-all']")).click();
         new DeleteEntityDialog().clickDeleteYes();
     }
