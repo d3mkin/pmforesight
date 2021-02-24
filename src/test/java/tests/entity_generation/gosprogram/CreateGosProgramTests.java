@@ -62,8 +62,8 @@ public class CreateGosProgramTests extends BaseTest {
         gProgramRegistry.open();
         gProgramRegistry.shouldBeRegistry();
         gProgramRegistry.controlPanel().clickAddButton();
-        gProgramPage.shouldHaveTitle("Объект госпрограммы");
-        gProgramPage.shouldBeOpened();
+        gProgramPage.modalWindowShouldHaveTitle("Объект госпрограммы");
+        gProgramPage.modalWindowShouldBeOpened();
         gProgramPage.fillCommonInfo(gProgram);
         gProgramPage.fillRoleInfo(gProgram);
         gProgramPage.clickSaveAndClose();
@@ -87,9 +87,9 @@ public class CreateGosProgramTests extends BaseTest {
         singIn.asUser(user);
         gProgramRegistry.open();
         gProgramRegistry.controlPanel().clickAddButton();
-        gProgramPage.shouldBeOpened();
+        gProgramPage.modalWindowShouldBeOpened();
         gProgramRegistry.shouldBeRegistry();
-        gProgramPage.shouldHaveTitle("Объект госпрограммы");
+        gProgramPage.modalWindowShouldHaveTitle("Объект госпрограммы");
         gProgramPage.clickSave();
         gProgramPage.shouldHaveMessageAboutRequiredFields(
                         "Необходимо заполнить поле \"Вид объекта госпрограммы\"",

@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.runner.RunWith;
 import helpers.TestSuiteName;
 import model.Employee;
 import model.User;
@@ -60,8 +59,8 @@ public class CreateEmployeeTests extends BaseTest {
         parameter("Пользователь", user.getName());
         singIn.asUser(user);
         registry.controlPanel().clickAddButton();
-        createEmployee.shouldBeOpened();
-        createEmployee.shouldHaveTitle("Пользователь");
+        createEmployee.modalWindowShouldBeOpened();
+        createEmployee.modalWindowShouldHaveTitle("Пользователь");
         createEmployee.fillFields(employee);
         createEmployee.clickSaveAndClose();
         createEmployee.shouldBeClosed();

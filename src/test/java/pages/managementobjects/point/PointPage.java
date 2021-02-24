@@ -32,6 +32,7 @@ public class PointPage extends BasePage {
     private final SelenideElement documentsWidget_EditForm = $x(("//div[@id='DocDiv']//documents[@class='f-documents']"));
     private final SelenideElement documentsWidgetIsRequired_EditForm = $x("//div[@id='control-group-DocDiv']//span[@class='required-input']");
     private final SelenideElement pointStatusField_ViewForm = $x("//div[@class='f-card__info']");
+    //TODO: вынести в базовый класс селектор кнопки Загрузить документ + метод клика по ней
     private final SelenideElement uploadDocumentButton_EditForm = $x("//div[@id='control-group-DocDiv']//div[@data-tooltip='Загрузить документ']");
 
     @Step ("Нажать кнопку Выполнить")

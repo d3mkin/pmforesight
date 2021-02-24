@@ -55,8 +55,8 @@ public class CreatePortfolioTests extends BaseTest {
         singIn.asUser(user);
         portfolioRegistry.open();
         portfolioRegistry.controlPanel().clickAddButton();
-        portfolioPage.shouldBeOpened();
-        portfolioPage.shouldHaveTitle("Портфель");
+        portfolioPage.modalWindowShouldBeOpened();
+        portfolioPage.modalWindowShouldHaveTitle("Портфель");
         portfolioPage.clickSave();
         portfolioPage
                 .shouldHaveMessageAboutRequiredFields(
@@ -81,8 +81,8 @@ public class CreatePortfolioTests extends BaseTest {
         portfolioRegistry.open();
         portfolioRegistry.shouldBeRegistry();
         portfolioRegistry.controlPanel().clickAddButton();
-        portfolioPage.shouldBeOpened();
-        portfolioPage.shouldHaveTitle("Портфель");
+        portfolioPage.modalWindowShouldBeOpened();
+        portfolioPage.modalWindowShouldHaveTitle("Портфель");
         portfolioPage.fillFields(portfolio);
         portfolioPage.fillRoles(portfolio);
         portfolioPage.clickSaveAndClose();

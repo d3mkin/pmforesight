@@ -62,8 +62,8 @@ public class MatchExternalObserverToTopManagementTest extends BaseTest {
                 .setSecondName("Отчество " + currentTime)
                 .setGroups("Команда управления проектом");
         employeeRegistry.addUser();
-        employeePage.shouldBeOpened();
-        employeePage.shouldHaveTitle("Пользователь");
+        employeePage.modalWindowShouldBeOpened();
+        employeePage.modalWindowShouldHaveTitle("Пользователь");
         employeePage.fillFields(employee);
         employeePage.clickSaveAndOpenCard();
         employeePage.userCarsShouldBeOpened(employee);

@@ -58,7 +58,7 @@ public class CreateProjectInitiativeTests extends BaseTest {
         singIn.asUser(user);
         registry.open();
         registry.controlPanel().clickAddButton();
-        projectInitiativePage.shouldBeOpened();
+        projectInitiativePage.modalWindowShouldBeOpened();
         projectInitiativePage.fillGeneralInfo(projectsInitiative);
         projectInitiativePage.fillRoleInfo(projectsInitiative);
         projectInitiativePage.clickSaveAndClose();
@@ -80,8 +80,8 @@ public class CreateProjectInitiativeTests extends BaseTest {
         singIn.asUser(user);
         registry.open();
         registry.controlPanel().clickAddButton();
-        projectInitiativePage.shouldBeOpened();
-        projectInitiativePage.shouldHaveTitle("Предложения по проекту");
+        projectInitiativePage.modalWindowShouldBeOpened();
+        projectInitiativePage.modalWindowShouldHaveTitle("Предложения по проекту");
         projectInitiativePage.clickSave();
         projectInitiativePage
                 .shouldHaveMessageAboutRequiredFields(

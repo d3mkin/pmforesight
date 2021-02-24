@@ -63,8 +63,8 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkCurrentProjectStage("Инициирование");
         projectPage.checkPossibilityProjectStaging();
         projectPage.moveStageTo("Отменить");
-        modalDialog.shouldBeOpened();
-        modalDialog.shouldHaveTitle("Отмена проекта");
+        modalDialog.modalWindowShouldBeOpened();
+        modalDialog.modalWindowShouldHaveTitle("Отмена проекта");
         modalDialog.shouldHaveReasonField();
         modalDialog.fillReasonField("Веская причина для отмены");
         modalDialog.clickSaveAndClose();
@@ -83,8 +83,8 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkCurrentProjectStage("Инициирование");
         projectPage.checkPossibilityProjectStaging();
         projectPage.moveStageTo("Отменить");
-        modalDialog.shouldBeOpened();
-        modalDialog.shouldHaveTitle("Отмена проекта");
+        modalDialog.modalWindowShouldBeOpened();
+        modalDialog.modalWindowShouldHaveTitle("Отмена проекта");
         modalDialog.shouldHaveReasonField();
         modalDialog.clickSaveAndClose();
         modalDialog.shouldHaveMessage("Необходимо заполнить поле \"Причина отмены проекта\"");
@@ -107,8 +107,8 @@ public class ProjectStageTransitionTests extends BaseTest {
         modalDialog.shouldHaveMessageAboutRequiredFields("Это первая стадия");
         modalDialog.closeDialog();
         projectPage.moveStageTo("Отменить");
-        modalDialog.shouldBeOpened();
-        modalDialog.shouldHaveTitle("Отмена проекта");
+        modalDialog.modalWindowShouldBeOpened();
+        modalDialog.modalWindowShouldHaveTitle("Отмена проекта");
         modalDialog.shouldHaveReasonField();
         modalDialog.fillReasonField("Веская причина для отмены");
         modalDialog.clickSaveAndClose();

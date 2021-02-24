@@ -53,8 +53,8 @@ public class CreateMeetingTests extends BaseTest {
         meetingRegistry.open();
         meetingRegistry.shouldBeRegistry();
         meetingRegistry.controlPanel().clickAddButton();
-        meetingPage.shouldBeOpened();
-        meetingPage.shouldHaveTitle("Совещание");
+        meetingPage.modalWindowShouldBeOpened();
+        meetingPage.modalWindowShouldHaveTitle("Совещание");
         meetingPage.clickSave();
         meetingPage
                 .shouldHaveMessageAboutRequiredFields(
@@ -87,7 +87,7 @@ public class CreateMeetingTests extends BaseTest {
         meetingRegistry.open();
         meetingRegistry.shouldBeRegistry();
         meetingRegistry.controlPanel().clickAddButton();
-        meetingPage.shouldBeOpened();
+        meetingPage.modalWindowShouldBeOpened();
         meetingPage.fillFields(meeting);
         meetingPage.clickSaveAndClose();
         meetingRegistry.shouldBeRegistry();

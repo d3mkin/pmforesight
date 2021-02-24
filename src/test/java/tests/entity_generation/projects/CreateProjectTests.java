@@ -82,7 +82,7 @@ public class CreateProjectTests extends BaseTest {
         projectPage.fillFields(project);
         long L = Configuration.timeout;
         projectPage.clickClose();
-        projectPage.shouldHaveTitle();
+        projectPage.dialogWindowShouldHaveTitle();
         projectPage.shouldHaveMessageAboutUnsaved();
         projectPage.clickDialogCancel();
         projectPage.clickClose();
@@ -99,8 +99,8 @@ public class CreateProjectTests extends BaseTest {
         parameter("Пользователь", user.getName());
         singIn.asUser(user);
         projectRegistry.addProject();
-        projectPage.shouldBeOpened();
-        projectPage.shouldHaveTitle("Проект");
+        projectPage.modalWindowShouldBeOpened();
+        projectPage.modalWindowShouldHaveTitle("Проект");
         projectPage.clickSave();
         projectPage
                 .shouldHaveMessageAboutRequiredFields(

@@ -6,7 +6,10 @@ import io.qameta.allure.Step;
 import model.Snapshot;
 import pages.BasePage;
 
+import java.io.File;
+
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class SnapshotPage extends BasePage {
     private final SelenideElement nameInput = $("input#Name");
@@ -15,6 +18,8 @@ public class SnapshotPage extends BasePage {
     private final SelenideElement reviewerInput = $("#control-group-Reviewer .k-input");
     private final SelenideElement snapshotStatus = $(".f-card__info");
     private final SelenideElement snapshotName = $("[name='Name']");
+    private final SelenideElement sendToApproveButton = $x("//a[text() = 'Отправить на согласование']");
+    private final SelenideElement uploadDocumentButton_EditForm = $x("//div[@id='control-group-DocDiv']//div[@data-tooltip='Загрузить документ']");
 
 
     @Step("Заполнить поля карточки редактирования Слепка")
@@ -30,5 +35,32 @@ public class SnapshotPage extends BasePage {
         snapshotName.shouldBe(Condition.visible).shouldHave(Condition.text(name));
         snapshotStatus.shouldBe(Condition.visible).shouldHave(Condition.text(status));
 
+    }
+
+    @Step ("Нажать на кнопку Загрузить документ в форме редактирования")
+    public void clickUploadFileOnEditForm(){
+        uploadDocumentButton_EditForm.click();
+    }
+
+    @Step("Отправить на согласование")
+    public void sendToApprove(String comment, File file) {
+        sendToApproveButton.click();
+        modalWindowShouldBeOpened();
+        modalWindowShouldHaveTitle("Отправить на согласование");
+        clickExpand();
+        commentInput.setValue(comment);
+        clickUploadFileOnEditForm();
+        uploadFile(file);
+        checkFileIsUploaded(file);
+        closeUploadWindow();
+        clickSaveAndClose();
+    }
+
+    public void shouldHaveRecordInTable(String userName, String status, String snapshotComment, String docName) {
+        checkPageIsLoaded();
+        $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+ userName +"']").shouldBe(Condition.visible);
+        $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+ status +"']").shouldBe(Condition.visible);
+        $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+ snapshotComment +"']").shouldBe(Condition.visible);
+        $x("//div[@id='StateEdgeWorkflowWidget_container']//a[text()='"+ docName +"']").shouldBe(Condition.visible);
     }
 }

@@ -19,6 +19,8 @@ import pages.managementobjects.project.ProjectPage;
 import pages.snapshot.SnapshotPage;
 import tests.BaseTest;
 
+import java.io.File;
+
 import static io.qameta.allure.Allure.parameter;
 
 
@@ -31,6 +33,7 @@ public class SnapshotTests extends BaseTest {
     private long currentTime;
     private Snapshot snapshot;
     private SnapshotPage snapshotPage;
+    private File fileToUpload;
 
     @BeforeEach
     public void setupPages() {
@@ -41,6 +44,7 @@ public class SnapshotTests extends BaseTest {
         snapshot = new Snapshot();
         snapshotPage = new SnapshotPage();
         ActionsViaAPI.createProjectViaAPI("Инициирование", "Ведомственный");
+        fileToUpload = new File("src/test/resources/test.txt");
     }
 
     @AfterEach
@@ -69,5 +73,31 @@ public class SnapshotTests extends BaseTest {
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
+    }
+
+    @ParameterizedTest(name = "Отправка на согласование слепка в проекте")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-210")
+    @TmsLink("1504")
+    @Severity(SeverityLevel.CRITICAL)
+    public void sendToApproveSnapshotInProjectTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
+        projectPage.clickAddSnapshot();
+        snapshot.setName("ATEST-210" + currentTime);
+        snapshotPage.fillFields(snapshot);
+        snapshotPage.clickSaveAndClose();
+        projectPage.searchSnapshotInTable(snapshot.getName());
+        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.openSnapshotCard(snapshot.getName());
+        projectPage.getBrowserTabs();
+        projectPage.switchToNextBrowserTab();
+        String snapshotComment = "Комментарий" + currentTime;
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
+        snapshotPage.sendToApprove(snapshotComment, fileToUpload);
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "На согласовании");
+        snapshotPage.shouldHaveRecordInTable(user.getName(), "Отправлен на согласование", snapshotComment, fileToUpload.getName());
     }
 }

@@ -54,8 +54,8 @@ public class CreateNationalProjectTests extends BaseTest {
         nProjectRegistry.open();
         new SingInPage().asUser(user);
         nProjectRegistry.controlPanel().clickAddButton();
-        nProjectPage.shouldBeOpened();
-        nProjectPage.shouldHaveTitle("Национальный проект");
+        nProjectPage.modalWindowShouldBeOpened();
+        nProjectPage.modalWindowShouldHaveTitle("Национальный проект");
         nProjectPage.fillInGeneralInformation(nationalProject);
         nProjectPage.clickSaveAndClose();
         nProjectRegistry.searchGProgram(nationalProject.getNameValue());
@@ -76,8 +76,8 @@ public class CreateNationalProjectTests extends BaseTest {
         nProjectRegistry.open();
         new SingInPage().asUser(user);
         nProjectRegistry.controlPanel().clickAddButton();
-        nProjectPage.shouldBeOpened();
-        nProjectPage.shouldHaveTitle("Национальный проект");
+        nProjectPage.modalWindowShouldBeOpened();
+        nProjectPage.modalWindowShouldHaveTitle("Национальный проект");
         nProjectPage.clickSave();
         nProjectPage
                 .shouldHaveMessageAboutRequiredFields(

@@ -54,8 +54,8 @@ public class CreateContractorTests extends BaseTest {
         singIn.asUser(user);
         contractRegistry.open();
         contractRegistry.controlPanel().clickAddButton();
-        createModal.shouldBeOpened();
-        createModal.shouldHaveTitle("Подрядчики");
+        createModal.modalWindowShouldBeOpened();
+        createModal.modalWindowShouldHaveTitle("Подрядчики");
         createModal.clickSave();
         createModal
                 .shouldHaveMessageAboutRequiredFields(

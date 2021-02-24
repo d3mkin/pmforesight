@@ -53,8 +53,8 @@ public class CreateProgramTests extends BaseTest {
         programRegistry.open();
         programRegistry.shouldBeRegistry();
         programRegistry.controlPanel().clickAddButton();
-        programPage.shouldBeOpened();
-        programPage.shouldHaveTitle("Программа");
+        programPage.modalWindowShouldBeOpened();
+        programPage.modalWindowShouldHaveTitle("Программа");
         programPage.clickSave();
         programPage
                 .shouldHaveMessageAboutRequiredFields(
@@ -86,7 +86,7 @@ public class CreateProgramTests extends BaseTest {
         programRegistry.open();
         programRegistry.shouldBeRegistry();
         programRegistry.controlPanel().clickAddButton();
-        programPage.shouldBeOpened();
+        programPage.modalWindowShouldBeOpened();
         programPage.fillFields(program);
         programPage.clickSaveAndClose();
         programRegistry.shouldBeRegistry();

@@ -92,7 +92,7 @@ public abstract class BasePage {
     }
 
     @Step("Проверка открытия модального окна")
-    public void shouldBeOpened() {
+    public void modalWindowShouldBeOpened() {
         window.shouldBe(visible);
         header.shouldBe(visible);
         windowName.shouldBe(visible);
@@ -101,7 +101,7 @@ public abstract class BasePage {
     }
 
     @Step("Проверка названия модального окна")
-    public void shouldHaveTitle(String name) {
+    public void modalWindowShouldHaveTitle(String name) {
         windowName.shouldHave(text(name));
     }
 
@@ -159,7 +159,7 @@ public abstract class BasePage {
         closeInDialog.click();
     }
 
-    public void shouldHaveTitle() {
+    public void dialogWindowShouldHaveTitle() {
         dialogTitle.shouldHave(text("Закрыть карточку"));
     }
 
@@ -192,7 +192,7 @@ public abstract class BasePage {
         closeDialog();
     }
 
-    @Step("Открыть форму редактирования Проекта")
+    @Step("Открыть форму редактирования")
     public void clickEditForm() {
         editForm.click();
     }
@@ -278,6 +278,7 @@ public abstract class BasePage {
         calendarCurrentDay.shouldBe(visible).click();
     }
 
+    @Step ("Выбрать в выпадающем списке значение {value}")
     public void searchAndSelectFirstFromMultiSelect (SelenideElement el, String value) {
         if (value == null) {
             return;

@@ -81,7 +81,7 @@ public class CreateLessonTests extends BaseTest {
         singIn.asUser(user);
         programRegistry.open();
         programRegistry.controlPanel().clickAddButton();
-        createModal.shouldBeOpened();
+        createModal.modalWindowShouldBeOpened();
         createModal.fillFields(program);
         createModal.clickSaveAndClose();
         programRegistry.searchProgram(program.getName());
@@ -89,7 +89,7 @@ public class CreateLessonTests extends BaseTest {
         programRegistry.clickFirstProgramRow();
         //createModal.openAndCheckProgramName(program.getName());
         createModal.positiveLessonsLearned();
-        createModal.shouldBeOpened();
+        createModal.modalWindowShouldBeOpened();
 
         lessonPage.fillFields(lessonLearned);
         createModal.clickSaveAndClose();
@@ -130,7 +130,7 @@ public class CreateLessonTests extends BaseTest {
         lessonRegistry.open();
         lessonRegistry.shouldBeRegistry();
         lessonRegistry.controlPanel().clickAddButton();
-        lessonPage.shouldBeOpened();
+        lessonPage.modalWindowShouldBeOpened();
         lessonPage.fillFields(lessonLearned);
         lessonPage.clickSaveAndClose();
         lessonRegistry.searchLesson(lessonLearned.getName());
@@ -162,7 +162,7 @@ public class CreateLessonTests extends BaseTest {
         projectRegistry.open();
         projectRegistry.shouldBeRegistry();
         projectRegistry.controlPanel().clickAddButton();
-        projectPage.shouldBeOpened();
+        projectPage.modalWindowShouldBeOpened();
         projectPage.fillFields(project);
         projectPage.clickSaveAndClose();
         projectRegistry.shouldBeRegistry();
@@ -170,7 +170,7 @@ public class CreateLessonTests extends BaseTest {
         projectRegistry.shouldHaveCreatedRecord(project.getName());
         projectRegistry.clickFirstRow();
         projectPage.positiveLessonsLearned();
-        projectPage.shouldBeOpened();
+        projectPage.modalWindowShouldBeOpened();
 
         lessonPage.fillFields(lessonLearned);
         lessonPage.clickSaveAndClose();

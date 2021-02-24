@@ -55,8 +55,8 @@ public class CreateRiskEntityTests extends BaseTest {
         singIn.asUser(user);
         riskRegistry.open();
         riskRegistry.controlPanel().clickAddButton();
-        riskPage.shouldBeOpened();
-        riskPage.shouldHaveTitle("Риски и возможности");
+        riskPage.modalWindowShouldBeOpened();
+        riskPage.modalWindowShouldHaveTitle("Риски и возможности");
         riskRegistry.shouldBeRegistry();
         riskPage.clickSave();
         riskPage
@@ -94,7 +94,7 @@ public class CreateRiskEntityTests extends BaseTest {
         singIn.asUser(user);
         riskRegistry.open();
         riskRegistry.controlPanel().clickAddButton();
-        riskPage.shouldBeOpened();
+        riskPage.modalWindowShouldBeOpened();
         riskPage.fillFields(risksAndOpportunities);
         riskPage.clickSaveAndClose();
         riskRegistry.chooseTypeOfSearchAllMy();

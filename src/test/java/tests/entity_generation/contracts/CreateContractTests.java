@@ -50,8 +50,8 @@ public class CreateContractTests extends BaseTest {
         singIn.asUser(user);
         contractRegistry.open();
         contractRegistry.controlPanel().clickAddButton();
-        contractPage.shouldBeOpened();
-        contractPage.shouldHaveTitle("Контракт");
+        contractPage.modalWindowShouldBeOpened();
+        contractPage.modalWindowShouldHaveTitle("Контракт");
         contractPage.clickSave();
         contractPage.shouldHaveMessageAboutRequiredFields(
                 "Необходимо заполнить поле \"Наименование\"",
@@ -83,7 +83,7 @@ public class CreateContractTests extends BaseTest {
         singIn.asUser(user);
         contractRegistry.open();
         contractRegistry.controlPanel().clickAddButton();
-        contractPage.shouldBeOpened();
+        contractPage.modalWindowShouldBeOpened();
         contractPage.fillFields(contract);
         contractPage.clickSaveAndClose();
         contractRegistry.changeView("Все контракты");
