@@ -1,5 +1,6 @@
-package tests.snapshot;
+package tests.snapshots;
 
+import com.codeborne.selenide.Selenide;
 import helpers.ActionsViaAPI;
 import helpers.TestSuiteName;
 import io.qameta.allure.Epic;
@@ -99,5 +100,46 @@ public class SnapshotTests extends BaseTest {
         snapshotPage.sendToApprove(snapshotComment, fileToUpload);
         snapshotPage.checkNameAndStatus(snapshot.getName(), "На согласовании");
         snapshotPage.shouldHaveRecordInTable(user.getName(), "Отправлен на согласование", snapshotComment, fileToUpload.getName());
+        projectPage.closeCurrentBrowserTab();
+        projectPage.switchToPreviousBrowserTab();
+        Selenide.refresh();
+        projectPage.openSnapshotTab();
+        projectPage.searchSnapshotInTable(snapshot.getName());
+        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "На согласовании");
+    }
+
+    @ParameterizedTest(name = "Согласование слепка в проекте")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-211")
+    @TmsLink("1505")
+    @Severity(SeverityLevel.CRITICAL)
+    public void approveSnapshotInProjectTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
+        projectPage.clickAddSnapshot();
+        snapshot.setName("ATEST-211" + currentTime);
+        snapshotPage.fillFields(snapshot);
+        snapshotPage.clickSaveAndClose();
+        projectPage.searchSnapshotInTable(snapshot.getName());
+        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.openSnapshotCard(snapshot.getName());
+        projectPage.getBrowserTabs();
+        projectPage.switchToNextBrowserTab();
+        String snapshotComment = "Комментарий" + currentTime;
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
+        snapshotPage.sendToApprove(snapshotComment, fileToUpload);
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "На согласовании");
+        snapshotPage.shouldHaveRecordInTable(user.getName(), "Отправлен на согласование", snapshotComment, fileToUpload.getName());
+        snapshotPage.approveSnapshot(snapshotComment, fileToUpload);
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "Согласован");
+        snapshotPage.shouldHaveRecordInTable(user.getName(), "Слепок согласован", snapshotComment, fileToUpload.getName());
+        projectPage.closeCurrentBrowserTab();
+        projectPage.switchToPreviousBrowserTab();
+        Selenide.refresh();
+        projectPage.openSnapshotTab();
+        projectPage.searchSnapshotInTable(snapshot.getName());
+        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Согласован");
     }
 }

@@ -19,6 +19,9 @@ public class SnapshotPage extends BasePage {
     private final SelenideElement snapshotStatus = $(".f-card__info");
     private final SelenideElement snapshotName = $("[name='Name']");
     private final SelenideElement sendToApproveButton = $x("//a[text() = 'Отправить на согласование']");
+    private final SelenideElement approveButton = $x("//a[text() = 'Согласовать']");
+    private final SelenideElement rejectButton = $x("//a[text() = 'Отклонить']");
+    private final SelenideElement recallButton = $x("//a[text() = 'Отозвать']");
     private final SelenideElement uploadDocumentButton_EditForm = $x("//div[@id='control-group-DocDiv']//div[@data-tooltip='Загрузить документ']");
 
 
@@ -43,12 +46,26 @@ public class SnapshotPage extends BasePage {
     }
 
     @Step("Отправить на согласование")
-    public void sendToApprove(String comment, File file) {
-        sendToApproveButton.click();
+    public void sendToApprove(String snapshotComment, File file) {
+        sendToApproveButton.shouldBe(Condition.visible).click();
         modalWindowShouldBeOpened();
         modalWindowShouldHaveTitle("Отправить на согласование");
         clickExpand();
-        commentInput.setValue(comment);
+        commentInput.setValue(snapshotComment);
+        clickUploadFileOnEditForm();
+        uploadFile(file);
+        checkFileIsUploaded(file);
+        closeUploadWindow();
+        clickSaveAndClose();
+    }
+
+    @Step("Согласовать слепок")
+    public void approveSnapshot(String snapshotComment, File file) {
+        approveButton.shouldBe(Condition.visible).click();
+        modalWindowShouldBeOpened();
+        modalWindowShouldHaveTitle("Согласовать");
+        clickExpand();
+        commentInput.setValue(snapshotComment);
         clickUploadFileOnEditForm();
         uploadFile(file);
         checkFileIsUploaded(file);
@@ -63,4 +80,6 @@ public class SnapshotPage extends BasePage {
         $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+ snapshotComment +"']").shouldBe(Condition.visible);
         $x("//div[@id='StateEdgeWorkflowWidget_container']//a[text()='"+ docName +"']").shouldBe(Condition.visible);
     }
+
+
 }
