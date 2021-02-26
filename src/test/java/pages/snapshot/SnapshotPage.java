@@ -22,6 +22,7 @@ public class SnapshotPage extends BasePage {
     private final SelenideElement approveButton = $x("//a[text() = 'Согласовать']");
     private final SelenideElement rejectButton = $x("//a[text() = 'Отклонить']");
     private final SelenideElement recallButton = $x("//a[text() = 'Отозвать']");
+    private final SelenideElement deleteButton = $x("//a[text() = 'Удалить']");
     private final SelenideElement uploadDocumentButton_EditForm = $x("//div[@id='control-group-DocDiv']//div[@data-tooltip='Загрузить документ']");
 
 
@@ -101,6 +102,20 @@ public class SnapshotPage extends BasePage {
         clickSaveAndClose();
     }
 
+    @Step("Удалить слепок")
+    public void deleteSnapshot(String snapshotComment, File file) {
+        deleteButton.shouldBe(Condition.visible).click();
+        modalWindowShouldBeOpened();
+        modalWindowShouldHaveTitle("Удалить");
+        clickExpand();
+        commentInput.setValue(snapshotComment);
+        clickUploadFileOnEditForm();
+        uploadFile(file);
+        checkFileIsUploaded(file);
+        closeUploadWindow();
+        clickSaveAndClose();
+    }
+
     public void shouldHaveRecordInTable(String userName, String status, String snapshotComment, String docName) {
         checkPageIsLoaded();
         $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+ userName +"']").shouldBe(Condition.visible);
@@ -108,6 +123,7 @@ public class SnapshotPage extends BasePage {
         $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+ snapshotComment +"']").shouldBe(Condition.visible);
         $x("//div[@id='StateEdgeWorkflowWidget_container']//a[text()='"+ docName +"']").shouldBe(Condition.visible);
     }
+
 
 
 }

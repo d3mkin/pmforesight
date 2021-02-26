@@ -939,6 +939,13 @@ public class ProjectPage extends BasePage {
         firstFoundSnapshotStatus.shouldBe(visible).shouldHave(text(snapshotStatus));
     }
 
+    @Step("Проверить что слепок не отображается в таблице слепков")
+    public void checkSnapshotNotExistInTable(String snapshotName) {
+        searchSnapshotInTable(snapshotName);
+        firstFoundSnapshotName.shouldBe(not(visible));
+        firstFoundSnapshotStatus.shouldBe(not(visible));
+    }
+
     @Step("Открыть карточку слепка с наименованием {snapshotName}")
     public void openSnapshotCard(String snapshotName) {
         searchSnapshotInTable(snapshotName);
