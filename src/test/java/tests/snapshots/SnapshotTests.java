@@ -142,4 +142,75 @@ public class SnapshotTests extends BaseTest {
         projectPage.searchSnapshotInTable(snapshot.getName());
         projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Согласован");
     }
+
+    @ParameterizedTest(name = "Отзыв слепка с согласования")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-212")
+    @TmsLink("1506")
+    @Severity(SeverityLevel.CRITICAL)
+    public void recallSnapshotInProjectTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
+        projectPage.clickAddSnapshot();
+        snapshot.setName("ATEST-212" + currentTime);
+        snapshotPage.fillFields(snapshot);
+        snapshotPage.clickSaveAndClose();
+        projectPage.searchSnapshotInTable(snapshot.getName());
+        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.openSnapshotCard(snapshot.getName());
+        projectPage.getBrowserTabs();
+        projectPage.switchToNextBrowserTab();
+        String snapshotComment = "Комментарий" + currentTime;
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
+        snapshotPage.sendToApprove(snapshotComment, fileToUpload);
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "На согласовании");
+        snapshotPage.shouldHaveRecordInTable(user.getName(), "Отправлен на согласование", snapshotComment, fileToUpload.getName());
+        snapshotPage.recallSnapshot(snapshotComment, fileToUpload);
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
+        snapshotPage.shouldHaveRecordInTable(user.getName(), "Согласование отозвано", snapshotComment, fileToUpload.getName());
+        projectPage.closeCurrentBrowserTab();
+        projectPage.switchToPreviousBrowserTab();
+        Selenide.refresh();
+        projectPage.openSnapshotTab();
+        projectPage.searchSnapshotInTable(snapshot.getName());
+        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+    }
+
+    @ParameterizedTest(name = "Отклонение согласования слепка")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-213")
+    @TmsLink("1507")
+    @Severity(SeverityLevel.CRITICAL)
+    public void rejectSnapshotInProjectTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
+        projectPage.clickAddSnapshot();
+        snapshot.setName("ATEST-213" + currentTime);
+        snapshotPage.fillFields(snapshot);
+        snapshotPage.clickSaveAndClose();
+        projectPage.searchSnapshotInTable(snapshot.getName());
+        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.openSnapshotCard(snapshot.getName());
+        projectPage.getBrowserTabs();
+        projectPage.switchToNextBrowserTab();
+        String snapshotComment = "Комментарий" + currentTime;
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
+        snapshotPage.sendToApprove(snapshotComment, fileToUpload);
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "На согласовании");
+        snapshotPage.shouldHaveRecordInTable(user.getName(), "Отправлен на согласование", snapshotComment, fileToUpload.getName());
+        snapshotPage.rejectSnapshot(snapshotComment, fileToUpload);
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "Отклонён");
+        snapshotPage.shouldHaveRecordInTable(user.getName(), "Слепок отклонён", snapshotComment, fileToUpload.getName());
+        projectPage.closeCurrentBrowserTab();
+        projectPage.switchToPreviousBrowserTab();
+        Selenide.refresh();
+        projectPage.openSnapshotTab();
+        projectPage.searchSnapshotInTable(snapshot.getName());
+        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Отклонён");
+    }
+
 }

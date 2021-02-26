@@ -73,6 +73,34 @@ public class SnapshotPage extends BasePage {
         clickSaveAndClose();
     }
 
+    @Step("Отозвать слепок")
+    public void recallSnapshot(String snapshotComment, File file) {
+        recallButton.shouldBe(Condition.visible).click();
+        modalWindowShouldBeOpened();
+        modalWindowShouldHaveTitle("Отозвать");
+        clickExpand();
+        commentInput.setValue(snapshotComment);
+        clickUploadFileOnEditForm();
+        uploadFile(file);
+        checkFileIsUploaded(file);
+        closeUploadWindow();
+        clickSaveAndClose();
+    }
+
+    @Step("Отклонить слепок")
+    public void rejectSnapshot(String snapshotComment, File file) {
+        rejectButton.shouldBe(Condition.visible).click();
+        modalWindowShouldBeOpened();
+        modalWindowShouldHaveTitle("Отклонить");
+        clickExpand();
+        commentInput.setValue(snapshotComment);
+        clickUploadFileOnEditForm();
+        uploadFile(file);
+        checkFileIsUploaded(file);
+        closeUploadWindow();
+        clickSaveAndClose();
+    }
+
     public void shouldHaveRecordInTable(String userName, String status, String snapshotComment, String docName) {
         checkPageIsLoaded();
         $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+ userName +"']").shouldBe(Condition.visible);
