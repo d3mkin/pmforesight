@@ -168,6 +168,8 @@ public class ProjectPage extends BasePage {
     private final SelenideElement snapshotTable = $("#tab-snapshot");
     private final SelenideElement firstFoundSnapshotName = $("#SnapshotInlineTableView [data-column-field='Name'] a");
     private final SelenideElement firstFoundSnapshotStatus = $("#SnapshotInlineTableView [data-column-field='ActivityPhaseName']");
+    private final SelenideElement deleteSnapshotButton = $("#SnapshotInlineTableView .k-i-trash");
+
 
 
     //TODO: сделать отдельный класс для верхней панели карточек
@@ -950,5 +952,15 @@ public class ProjectPage extends BasePage {
     public void openSnapshotCard(String snapshotName) {
         searchSnapshotInTable(snapshotName);
         firstFoundSnapshotName.click();
+    }
+
+    @Step("Удалить слепок из таблицы Слепков в проекте")
+    public void deleteSnapshot(String snapshotName) {
+        searchSnapshotInTable(snapshotName);
+        checkPageIsLoaded();
+        $("#SnapshotInlineTableView .k-checkbox-label").click();
+        deleteSnapshotButton.click();
+        clickDialogSave();
+        checkPageIsLoaded();
     }
 }

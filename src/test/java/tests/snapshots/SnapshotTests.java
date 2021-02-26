@@ -280,4 +280,67 @@ public class SnapshotTests extends BaseTest {
         projectPage.openSnapshotTab();
         projectPage.checkSnapshotNotExistInTable(snapshot.getName());
     }
+
+    @ParameterizedTest(name = "Удаление нового слепка из карточки проекта")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-215")
+    @TmsLink("1509")
+    @Severity(SeverityLevel.CRITICAL)
+    public void deleteNewSnapshotFromProjectPage(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
+        projectPage.clickAddSnapshot();
+        snapshot.setName("ATEST-215" + currentTime);
+        snapshotPage.fillFields(snapshot);
+        snapshotPage.clickSaveAndClose();
+        projectPage.searchSnapshotInTable(snapshot.getName());
+        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.openSnapshotCard(snapshot.getName());
+        projectPage.getBrowserTabs();
+        projectPage.switchToNextBrowserTab();
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
+        projectPage.closeCurrentBrowserTab();
+        projectPage.switchToPreviousBrowserTab();
+        Selenide.refresh();
+        projectPage.openSnapshotTab();
+        projectPage.deleteSnapshot(snapshot.getName());
+        projectPage.checkSnapshotNotExistInTable(snapshot.getName());
+    }
+
+    @ParameterizedTest(name = "Удаление отклоннёного слепка из карточки проекта")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-215")
+    @TmsLink("1509")
+    @Severity(SeverityLevel.CRITICAL)
+    public void deleteRejectedSnapshotFromProjectPage(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
+        projectPage.clickAddSnapshot();
+        snapshot.setName("ATEST-215" + currentTime);
+        snapshotPage.fillFields(snapshot);
+        snapshotPage.clickSaveAndClose();
+        projectPage.searchSnapshotInTable(snapshot.getName());
+        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.openSnapshotCard(snapshot.getName());
+        projectPage.getBrowserTabs();
+        projectPage.switchToNextBrowserTab();
+        String snapshotComment = "Комментарий" + currentTime;
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
+        snapshotPage.sendToApprove(snapshotComment, fileToUpload);
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "На согласовании");
+        snapshotPage.shouldHaveRecordInTable(user.getName(), "Отправлен на согласование", snapshotComment, fileToUpload.getName());
+        snapshotPage.rejectSnapshot(snapshotComment, fileToUpload);
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "Отклонён");
+        snapshotPage.shouldHaveRecordInTable(user.getName(), "Слепок отклонён", snapshotComment, fileToUpload.getName());
+        projectPage.closeCurrentBrowserTab();
+        projectPage.switchToPreviousBrowserTab();
+        Selenide.refresh();
+        projectPage.openSnapshotTab();
+        projectPage.deleteSnapshot(snapshot.getName());
+        projectPage.checkSnapshotNotExistInTable(snapshot.getName());
+    }
 }
