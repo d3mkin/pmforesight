@@ -3,7 +3,6 @@ package pages.managementobjects.project;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import model.Snapshot;
 import org.openqa.selenium.By;
 import model.Project;
 import pages.BasePage;
@@ -167,6 +166,8 @@ public class ProjectPage extends BasePage {
     private final SelenideElement snapshotSearchInput = $("#SnapshotInlineTableView [placeholder='Поиск...']");
     private final SelenideElement snapshotTable = $("#tab-snapshot");
     private final SelenideElement firstFoundSnapshotName = $("#SnapshotInlineTableView [data-column-field='Name'] a");
+    private final SelenideElement firstFoundCreationDate = $("#SnapshotInlineTableView [data-column-field='CreationDate']");
+    private final SelenideElement firstFoundSnapshotComment = $("#SnapshotInlineTableView [data-column-field='Comment']");
     private final SelenideElement firstFoundSnapshotStatus = $("#SnapshotInlineTableView [data-column-field='ActivityPhaseName']");
     private final SelenideElement deleteSnapshotButton = $("#SnapshotInlineTableView .k-i-trash");
 
@@ -936,8 +937,16 @@ public class ProjectPage extends BasePage {
     }
 
     @Step("Проверить имя слепка и его статус в таблице слепков")
-    public void checkSnapshotNameAndStatusInTable(String snapshotName, String snapshotStatus) {
+    public void checkSnapshotExistInTable(String snapshotName, String snapshotStatus) {
         firstFoundSnapshotName.shouldBe(visible).shouldHave(text(snapshotName));
+        firstFoundSnapshotStatus.shouldBe(visible).shouldHave(text(snapshotStatus));
+    }
+
+    @Step("Проверить имя слепка и его статус в таблице слепков")
+    public void checkSnapshotExistInTable(String snapshotName, String snapshotDate, String snapshotComment, String snapshotStatus) {
+        firstFoundSnapshotName.shouldBe(visible).shouldHave(text(snapshotName));
+        firstFoundCreationDate.shouldBe(visible).shouldHave(text(snapshotDate));
+        firstFoundSnapshotComment.shouldBe(visible).shouldHave(text(snapshotComment));
         firstFoundSnapshotStatus.shouldBe(visible).shouldHave(text(snapshotStatus));
     }
 
@@ -945,7 +954,6 @@ public class ProjectPage extends BasePage {
     public void checkSnapshotNotExistInTable(String snapshotName) {
         searchSnapshotInTable(snapshotName);
         firstFoundSnapshotName.shouldBe(not(visible));
-        firstFoundSnapshotStatus.shouldBe(not(visible));
     }
 
     @Step("Открыть карточку слепка с наименованием {snapshotName}")

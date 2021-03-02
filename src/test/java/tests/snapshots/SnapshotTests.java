@@ -16,11 +16,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import pages.auth.LogoutPage;
 import pages.auth.SingInPage;
+import pages.managementobjects.point.PointPage;
 import pages.managementobjects.project.ProjectPage;
 import pages.snapshot.SnapshotPage;
 import tests.BaseTest;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import static io.qameta.allure.Allure.parameter;
 
@@ -35,6 +38,8 @@ public class SnapshotTests extends BaseTest {
     private Snapshot snapshot;
     private SnapshotPage snapshotPage;
     private File fileToUpload;
+    private PointPage pointPage;
+    private String currentDate;
 
     @BeforeEach
     public void setupPages() {
@@ -44,8 +49,10 @@ public class SnapshotTests extends BaseTest {
         projectPage = new ProjectPage();
         snapshot = new Snapshot();
         snapshotPage = new SnapshotPage();
+        pointPage = new PointPage();
         ActionsViaAPI.createProjectViaAPI("Инициирование", "Ведомственный");
         fileToUpload = new File("src/test/resources/test.txt");
+        currentDate = new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
     }
 
     @AfterEach
@@ -69,7 +76,7 @@ public class SnapshotTests extends BaseTest {
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
-        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Новый");
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
@@ -91,7 +98,7 @@ public class SnapshotTests extends BaseTest {
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
-        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Новый");
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
@@ -105,7 +112,7 @@ public class SnapshotTests extends BaseTest {
         Selenide.refresh();
         projectPage.openSnapshotTab();
         projectPage.searchSnapshotInTable(snapshot.getName());
-        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "На согласовании");
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "На согласовании");
     }
 
     @ParameterizedTest(name = "Согласование слепка в проекте")
@@ -123,7 +130,7 @@ public class SnapshotTests extends BaseTest {
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
-        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Новый");
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
@@ -140,7 +147,7 @@ public class SnapshotTests extends BaseTest {
         Selenide.refresh();
         projectPage.openSnapshotTab();
         projectPage.searchSnapshotInTable(snapshot.getName());
-        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Согласован");
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Согласован");
     }
 
     @ParameterizedTest(name = "Отзыв слепка с согласования")
@@ -158,7 +165,7 @@ public class SnapshotTests extends BaseTest {
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
-        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Новый");
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
@@ -175,7 +182,7 @@ public class SnapshotTests extends BaseTest {
         Selenide.refresh();
         projectPage.openSnapshotTab();
         projectPage.searchSnapshotInTable(snapshot.getName());
-        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Новый");
     }
 
     @ParameterizedTest(name = "Отклонение согласования слепка")
@@ -193,7 +200,7 @@ public class SnapshotTests extends BaseTest {
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
-        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Новый");
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
@@ -210,7 +217,7 @@ public class SnapshotTests extends BaseTest {
         Selenide.refresh();
         projectPage.openSnapshotTab();
         projectPage.searchSnapshotInTable(snapshot.getName());
-        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Отклонён");
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Отклонён");
     }
 
     @ParameterizedTest(name = "Удаление нового слепка из карточки слепка")
@@ -228,7 +235,7 @@ public class SnapshotTests extends BaseTest {
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
-        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Новый");
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
@@ -259,7 +266,7 @@ public class SnapshotTests extends BaseTest {
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
-        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Новый");
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
@@ -296,7 +303,7 @@ public class SnapshotTests extends BaseTest {
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
-        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Новый");
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
@@ -324,7 +331,7 @@ public class SnapshotTests extends BaseTest {
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
-        projectPage.checkSnapshotNameAndStatusInTable(snapshot.getName(), "Новый");
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Новый");
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
@@ -342,5 +349,125 @@ public class SnapshotTests extends BaseTest {
         projectPage.openSnapshotTab();
         projectPage.deleteSnapshot(snapshot.getName());
         projectPage.checkSnapshotNotExistInTable(snapshot.getName());
+    }
+
+    @ParameterizedTest(name = "Создание авто-слепка")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-216")
+    @TmsLink("1510")
+    public void creatingAutoSnapshotsTest(User user){
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        ActionsViaAPI.createProjectViaAPI("Инициирование", "Ведомственный");
+        ActionsViaAPI.openProjectCreatedFromAPI();
+        String snapshotName = "Авто-слепок "+ currentDate;
+        String snapshotDate = currentDate;
+        projectPage.checkCurrentProjectStage("Инициирование");
+        //Выполняем условия для перевода на стадию Подготовка
+        projectPage.openActivityTab();
+        projectPage.expandRequiredPointsWidget();
+        projectPage.createRequiredStagePoint("Инициирование", currentDate);
+        projectPage.checkEntityIsDisplayedInGantt("Проект запущен");
+        projectPage.findInGanttAndOpenEntityPage("Проект запущен");
+        projectPage.getBrowserTabs();
+        projectPage.switchToNextBrowserTab();
+        pointPage.completePointAndUploadFile(currentDate, fileToUpload);
+        //Закрываем вкладку браузера и переключаем фокус WebDriver на предыдущую вкладку
+        pointPage.closeCurrentBrowserTab();
+        projectPage.switchToPreviousBrowserTab();
+        //Переводим на стадию Подготовка, когда все условия выполнены
+        projectPage.moveStageTo("На следующую стадию");
+        projectPage.clickAcceptNextStageTransition();
+        projectPage.checkCurrentProjectStage("Подготовка");
+        projectPage.closeCreatedSnapshotNotification();
+        //Проверяем, что Автослепок создан
+        projectPage.openSnapshotTab();
+        projectPage.checkPageIsLoaded();
+        projectPage.searchSnapshotInTable(snapshotName);
+        projectPage.checkSnapshotExistInTable(snapshotName, snapshotDate, "Создан автоматически при переходе на стадию ЖЦ \"Подготовка\"", "Новый");
+        //Выполняем условия для перевода на стадию Реализация
+        projectPage.openActivityTab();
+        projectPage.createRequiredStagePoint("Подготовка",currentDate);
+        projectPage.checkEntityIsDisplayedInGantt("Выполнение работ разрешено");
+        projectPage.findInGanttAndOpenEntityPage("Выполнение работ разрешено");
+        projectPage.getBrowserTabs();
+        projectPage.switchToNextBrowserTab();
+        pointPage.completePointAndUploadFile(currentDate, fileToUpload);
+        pointPage.closeCurrentBrowserTab();
+        projectPage.switchToPreviousBrowserTab();
+        projectPage.openDocumentsTab();
+        projectPage.expandDocuments();
+        projectPage.clickToUploadProjectPassport(fileToUpload);
+        projectPage.clickToUploadProjectConsolidatePlan(fileToUpload);
+        //Переводим на стадию Реализация, когда все условия выполнены
+        projectPage.moveStageTo("На следующую стадию");
+        projectPage.clickAcceptNextStageTransition();
+        projectPage.checkCurrentProjectStage("Реализация");
+        projectPage.closeCreatedSnapshotNotification();
+        //Проверяем, что Автослепок создан
+        projectPage.openSnapshotTab();
+        projectPage.checkPageIsLoaded();
+        projectPage.searchSnapshotInTable(snapshotName);
+        projectPage.checkSnapshotExistInTable(snapshotName, snapshotDate, "Создан автоматически при переходе на стадию ЖЦ \"Реализация\"", "Согласован");
+        //Выполняем условия для перевода на стадию Завершение
+        projectPage.openActivityTab();
+        projectPage.createRequiredStagePoint("Реализация", currentDate);
+        projectPage.checkEntityIsDisplayedInGantt("Результаты работ приняты");
+        projectPage.findInGanttAndOpenEntityPage("Результаты работ приняты");
+        projectPage.getBrowserTabs();
+        projectPage.switchToNextBrowserTab();
+        pointPage.completePointAndUploadFile(currentDate, fileToUpload);
+        pointPage.closeCurrentBrowserTab();
+        projectPage.switchToPreviousBrowserTab();
+        //Переводим на стадию Завершение, когда все условия выполнены
+        projectPage.moveStageTo("На следующую стадию");
+        projectPage.clickAcceptNextStageTransition();
+        projectPage.checkCurrentProjectStage("Завершение");
+        projectPage.closeCreatedSnapshotNotification();
+        //Проверяем, что Автослепок создан
+        projectPage.openSnapshotTab();
+        projectPage.checkPageIsLoaded();
+        projectPage.searchSnapshotInTable(snapshotName);
+        projectPage.checkSnapshotExistInTable(snapshotName, snapshotDate, "Создан автоматически при переходе на стадию ЖЦ \"Завершение\"", "Согласован");
+        //Выполняем условия для перевода на стадию Постпроектный мониторинг
+        projectPage.createRequiredStagePoint("Завершение", currentDate);
+        projectPage.checkEntityIsDisplayedInGantt("Проект закрыт");
+        projectPage.findInGanttAndOpenEntityPage("Проект закрыт");
+        projectPage.getBrowserTabs();
+        projectPage.switchToNextBrowserTab();
+        pointPage.completePointAndUploadFile(currentDate, fileToUpload);
+        pointPage.closeCurrentBrowserTab();
+        projectPage.switchToPreviousBrowserTab();
+        projectPage.openDocumentsTab();
+        projectPage.clickToUploadFinalReport(fileToUpload);
+        //Переводим на стадию Постпроектный мониторинг, когда все условия выполнены
+        projectPage.moveStageTo("На следующую стадию");
+        projectPage.clickAcceptNextStageTransition();
+        projectPage.checkCurrentProjectStage("Постпроектный мониторинг");
+        projectPage.closeCreatedSnapshotNotification();
+        //Проверяем, что Автослепок создан
+        projectPage.openSnapshotTab();
+        projectPage.checkPageIsLoaded();
+        projectPage.searchSnapshotInTable(snapshotName);
+        projectPage.checkSnapshotExistInTable(snapshotName, snapshotDate, "Создан автоматически при переходе на стадию ЖЦ \"Постпроектный мониторинг\"", "Новый");
+        //Выполняем условия для перевода на стадию Архив
+        projectPage.openActivityTab();
+        projectPage.createRequiredStagePoint("Постпроектный мониторинг", currentDate);
+        projectPage.checkEntityIsDisplayedInGantt("Постпроектный мониторинг завершен");
+        projectPage.findInGanttAndOpenEntityPage("Постпроектный мониторинг завершен");
+        projectPage.getBrowserTabs();
+        projectPage.switchToNextBrowserTab();
+        pointPage.completePointAndUploadFile(currentDate, fileToUpload);
+        pointPage.closeCurrentBrowserTab();
+        projectPage.switchToPreviousBrowserTab();
+        //Переводим на стадию Архив, когда все условия выполнены
+        projectPage.moveStageTo("На следующую стадию");
+        projectPage.clickAcceptNextStageTransition();
+        projectPage.checkCurrentProjectStage("Архив");
+        //Проверяем, что Автослепок создан
+        projectPage.openSnapshotTab();
+        projectPage.checkPageIsLoaded();
+        projectPage.searchSnapshotInTable(snapshotName);
+        projectPage.checkSnapshotExistInTable(snapshotName, snapshotDate, "Создан автоматически при переходе на стадию ЖЦ \"Архив\"", "Новый");
     }
 }
