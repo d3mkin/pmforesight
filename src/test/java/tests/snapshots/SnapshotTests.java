@@ -428,8 +428,9 @@ public class SnapshotTests extends BaseTest {
         projectPage.openSnapshotTab();
         projectPage.checkPageIsLoaded();
         projectPage.searchSnapshotInTable(snapshotName);
-        projectPage.checkSnapshotExistInTable(snapshotName, snapshotDate, "Создан автоматически при переходе на стадию ЖЦ \"Завершение\"", "Согласован");
+        projectPage.checkSnapshotExistInTable(snapshotName, snapshotDate, "Создан автоматически при переходе на стадию ЖЦ \"Завершение\"", "Новый");
         //Выполняем условия для перевода на стадию Постпроектный мониторинг
+        projectPage.openActivityTab();
         projectPage.createRequiredStagePoint("Завершение", currentDate);
         projectPage.checkEntityIsDisplayedInGantt("Проект закрыт");
         projectPage.findInGanttAndOpenEntityPage("Проект закрыт");

@@ -110,10 +110,10 @@ public class PointPage extends BasePage {
         clickCompleteButton(); //Выполняем КТ
         clickExpand();
         fillActualCompletionDate(date);
-        clickUploadFileOnEditForm(); //Загружаем документ
-        uploadFile(file);
-        checkFileIsUploaded(file);
-        closeUploadWindow();
+//        clickUploadFileOnEditForm(); //Загружаем документ
+//        uploadFile(file);
+//        checkFileIsUploaded(file);
+//        closeUploadWindow();
         clickSaveAndClose(); //Сохраняем изменения в форме Выполнения
         checkCompletionDateField(date);
         checkPointStatus("Выполнена");
