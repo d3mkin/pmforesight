@@ -124,10 +124,10 @@ public class PointPage extends BasePage {
         clickBackInProgressButton(); //Возвращаем в работу
         clickExpand();
         fillComment("Какая-то причина для возврата");
-        clickUploadFileOnEditForm(); //Загружаем документ
-        uploadFile(file);
-        checkFileIsUploaded(file);
-        closeUploadWindow();
+//        clickUploadFileOnEditForm(); //Загружаем документ
+//        uploadFile(file);
+//        checkFileIsUploaded(file);
+//        closeUploadWindow();
         fillForecastCompletionDate(date);
         clickSaveAndClose(); //Сохраняем изменения
         checkForecastCompletionDateField(date);
@@ -139,10 +139,10 @@ public class PointPage extends BasePage {
         clickCancelButton(); //Отменить КТ
         clickExpand();
         fillComment("Какая-то причина отмены");
-        clickUploadFileOnEditForm(); //Загружаем документ
-        uploadFile(file);
-        checkFileIsUploaded(file);
-        closeUploadWindow();
+//        clickUploadFileOnEditForm(); //Загружаем документ
+//        uploadFile(file);
+//        checkFileIsUploaded(file);
+//        closeUploadWindow();
         clickSaveAndClose(); //Сохраняем изменения
         checkPointStatus("Отменено");
     }
@@ -151,10 +151,10 @@ public class PointPage extends BasePage {
     public void approvePointAndUploadFile (File file) {
         clickApproveButton(); //Согласовать КТ
         clickExpand();
-        clickUploadFileOnEditForm(); //Загружаем документ
-        uploadFile(file);
-        checkFileIsUploaded(file);
-        closeUploadWindow();
+//        clickUploadFileOnEditForm(); //Загружаем документ
+//        uploadFile(file);
+//        checkFileIsUploaded(file);
+//        closeUploadWindow();
         clickSaveAndClose(); //Сохраняем изменения
         checkPointStatus("Подтверждена");
     }
