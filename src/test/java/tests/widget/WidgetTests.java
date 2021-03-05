@@ -7,6 +7,7 @@ import model.User;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -36,6 +37,7 @@ public class WidgetTests  extends BaseTest {
         new LogoutPage().open();
     }
 
+    @Disabled
     @ParameterizedTest (name = "Создание и удаление виджета")
     @MethodSource("helpers.UserProvider#mainFA")
     public void createAndDeleteWidgetTest(User user) {

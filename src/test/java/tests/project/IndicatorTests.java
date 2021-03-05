@@ -560,6 +560,7 @@ public class IndicatorTests extends BaseTest {
                 cssValue("color", "rgba(102, 102, 102, 1)"));
     }
 
+    @Disabled
     @Story("Расчёт общего индикатора Показателя")
     @ParameterizedTest(name = "Расчёт общего индикатора Показателя: Квартал, ВКЛЮЧАЯ текущий")
     @MethodSource("helpers.UserProvider#mainFA")

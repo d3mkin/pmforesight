@@ -270,6 +270,7 @@ public class ResultTests extends BaseTest {
         projectPage.shouldHaveRegionalResult(regionalResult.getName());
     }
 
+    @Disabled
     @Story("Связь результатов и КП проекта")
     @ParameterizedTest(name = "Отображение Результата в таблице 'Связь результатов и КП проекта' после создания Результата из проекта")
     @MethodSource("helpers.UserProvider#mainFA")
@@ -331,6 +332,7 @@ public class ResultTests extends BaseTest {
         projectPage.checkLinkedResultsInTable(regionalResult.getName(),regionalResult.getType());
     }
 
+    @Disabled
     @Story("Связь результатов и КП проекта")
     @ParameterizedTest(name = "Валидация поля 'Тип КТ/Мероприятия' таблицы 'Связь Результатов и КП проекта' (все варианты)")
     @MethodSource("helpers.UserProvider#mainFA")
