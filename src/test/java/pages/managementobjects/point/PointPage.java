@@ -48,16 +48,16 @@ public class PointPage extends BasePage {
         commentInputIsRequired_EditForm.shouldBe(visible);
         forecastCompletionDateInput_EditForm.shouldBe(visible);
         forecastDateInputIsRequired_EditForm.shouldBe(visible);
-        documentsWidget_EditForm.shouldBe(visible);
-        documentsWidgetIsRequired_EditForm.shouldBe(visible);
+//        documentsWidget_EditForm.shouldBe(visible);
+//        documentsWidgetIsRequired_EditForm.shouldBe(visible);
     }
 
     @Step ("Нажать кнопку Согласовать")
     public void clickApproveButton(){
         approveButton_ViewForm.shouldBe(visible).click();
         commentInput_EditForm.shouldBe(visible);
-        documentsWidget_EditForm.shouldBe(visible);
-        documentsWidgetIsRequired_EditForm.shouldBe(visible);
+//        documentsWidget_EditForm.shouldBe(visible);
+//        documentsWidgetIsRequired_EditForm.shouldBe(visible);
     }
 
     @Step ("Нажать кнопку Отменить")
@@ -65,8 +65,8 @@ public class PointPage extends BasePage {
         cancelButton_ViewForm.shouldBe(visible).click();
         commentInput_EditForm.shouldBe(visible);
         commentInputIsRequired_EditForm.shouldBe(visible);
-        documentsWidget_EditForm.shouldBe(visible);
-        documentsWidgetIsRequired_EditForm.shouldBe(visible);
+//        documentsWidget_EditForm.shouldBe(visible);
+//        documentsWidgetIsRequired_EditForm.shouldBe(visible);
     }
 
     @Step ("Заполнить Фактическую дату окончания выполнения")
