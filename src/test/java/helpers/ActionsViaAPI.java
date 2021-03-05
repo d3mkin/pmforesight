@@ -171,14 +171,41 @@ public class ActionsViaAPI {
                 "  id: 'new'\n" +
                 "}";
 
-        String body;
+        String prodProjectBody = "{\n" +
+                "  classid: '46caa4ad-02b8-4d70-a1db-196bab860742', \n" +
+                "  classname: 'Project',\n" +
+                "  classtitle: 'Проект',\n" +
+                "  entityname: 'Project',\n" +
+                "  keyfield: 'ProjectId',\n" +
+                "  namefield: 'Name',\n" +
+                "  UserAccountId: 100070,\n" +
+                "  UserAccount: 'FA',\n" +
+                "  OwnerId: 100070,\n" +
+                "  LeaderId: 100070,\n" +
+                "  ProjectLevelId: "+projectLevel+",\n" +
+                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() + "',\n" +
+                "  EntityId: '46caa4ad-02b8-4d70-a1db-196bab860742',\n" +
+                "  ParentId: 2,\n" +
+                "  ActivityPhaseId: "+projectStage+",\n" +
+                "  ProjectTypeId: 3,\n" +
+                "  PriorityId: 2,\n" +
+//                "  ControlSubjectId: 238,\n" +
+                "  IsEBSynced: false,\n" +
+                "  id: 'new'\n" +
+                "}";
+
+        String body = null;
         getCookiesFromLogIn();
 
-        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
-            body = testProjectBody;
-        } else {
-            body = stageProjectBody;
-        }
+        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testProjectBody;
+        if (Configuration.baseUrl.equals("http://npdemo.pmf2-gos.pmpractice.ru")) body = stageProjectBody;
+        if (Configuration.baseUrl.equals("https://releasetest.pmforesight.ru")) body = prodProjectBody;
+
+//        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
+//            body = testProjectBody;
+//        } else {
+//            body = stageProjectBody;
+//        }
 
         Response response =
                 given()
@@ -298,14 +325,35 @@ public class ActionsViaAPI {
                 "  namefield: 'Name',\n" +
                 "}";
 
-        String body;
+        String prodGoalBody = "{\n" +
+                "  ControlLevelId: "+goalLevel+",\n" +
+                "  EditorsId: 100070,\n" +
+                "  IsComplete: false,\n" +
+                "  IsNationalProjectTask: false,\n" +
+                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  UserAccount: 'FA',\n" +
+                "  UserAccountId: '100070',\n" +
+                "  classid: 'a7db6e46-462a-4087-a7e3-d5623648cca0',\n" +
+                "  classname: 'Goal',\n" +
+                "  classtitle: 'Цель',\n" +
+                "  entityname: 'Goal',\n" +
+                "  id: 'new',\n" +
+                "  keyfield: 'GoalId',\n" +
+                "  namefield: 'Name',\n" +
+                "}";
+
+        String body = null;
         getCookiesFromLogIn();
 
-        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
-            body = testGoalBody;
-        } else {
-            body = stageGoalBody;
-        }
+        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testGoalBody;
+        if (Configuration.baseUrl.equals("http://npdemo.pmf2-gos.pmpractice.ru")) body = stageGoalBody;
+        if (Configuration.baseUrl.equals("https://releasetest.pmforesight.ru")) body = prodGoalBody;
+
+//        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
+//            body = testGoalBody;
+//        } else {
+//            body = stageGoalBody;
+//        }
 
         Response response =
                 given()
@@ -513,14 +561,38 @@ public class ActionsViaAPI {
                 "  namefield: 'Name',\n" +
                 "}";
 
-        String body;
+        String prodProgramBody = "{\n" +
+                "  ActivityPhaseId: 40047,\n" +
+                "  OwnerId: 100070,\n" +
+                "  LeaderId: 100070,\n" +
+                "  CustomerId: 100070,\n" +
+                "  EntityId: '396abf01-5bf3-46a3-b4a5-a7ef4cdb8859',\n" +
+                "  PriorityId: 2,\n" +
+                "  ParentId: 2,\n" +
+                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  UserAccount: 'FA',\n" +
+                "  UserAccountId: '100070',\n" +
+                "  classid: '396abf01-5bf3-46a3-b4a5-a7ef4cdb8859',\n" +
+                "  classname: 'LProgram',\n" +
+                "  classtitle: 'Программа',\n" +
+                "  entityname: 'LProgram',\n" +
+                "  id: 'new',\n" +
+                "  keyfield: 'LProgramId',\n" +
+                "  namefield: 'Name',\n" +
+                "}";
+
+        String body = null;
         getCookiesFromLogIn();
 
-        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
-            body = testProgramBody;
-        } else {
-            body = stageProgramBody;
-        }
+        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testProgramBody;
+        if (Configuration.baseUrl.equals("http://npdemo.pmf2-gos.pmpractice.ru")) body = stageProgramBody;
+        if (Configuration.baseUrl.equals("https://releasetest.pmforesight.ru")) body = prodProgramBody;
+
+//        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
+//            body = testProgramBody;
+//        } else {
+//            body = stageProgramBody;
+//        }
 
         Response response =
                 given()
@@ -592,14 +664,33 @@ public class ActionsViaAPI {
                 "  namefield: 'Name',\n" +
                 "}";
 
-        String body;
+        String prodPortfolioBody = "{\n" +
+                "  LeaderId: 100070,\n" +
+                "  EntityId: 'bfed1f68-33a7-4428-855f-799640070a53',\n" +
+                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  UserAccount: 'FA',\n" +
+                "  UserAccountId: '100070',\n" +
+                "  classid: 'bfed1f68-33a7-4428-855f-799640070a53',\n" +
+                "  classname: 'Portfolio',\n" +
+                "  classtitle: 'Портфель',\n" +
+                "  entityname: 'Portfolio',\n" +
+                "  id: 'new',\n" +
+                "  keyfield: 'PortfolioId',\n" +
+                "  namefield: 'Name',\n" +
+                "}";
+
+        String body = null;
         getCookiesFromLogIn();
 
-        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
-            body = testPortfolioBody;
-        } else {
-            body = stagePortfolioBody;
-        }
+        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testPortfolioBody;
+        if (Configuration.baseUrl.equals("http://npdemo.pmf2-gos.pmpractice.ru")) body = stagePortfolioBody;
+        if (Configuration.baseUrl.equals("https://releasetest.pmforesight.ru")) body = prodPortfolioBody;
+
+//        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
+//            body = testPortfolioBody;
+//        } else {
+//            body = stagePortfolioBody;
+//        }
 
         Response response =
                 given()
@@ -658,14 +749,34 @@ public class ActionsViaAPI {
                 "  namefield: 'Name',\n" +
                 "}";
 
-        String body;
+        String prodNationalProjectBody = "{\n" +
+                "  LeaderId: 100070,\n" +
+                "  OwnerId: 100070,\n" +
+                "  EntityId: 'e29b23c0-3d72-45eb-b400-9e26caa1e22d',\n" +
+                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  UserAccount: 'FA',\n" +
+                "  UserAccountId: '100070',\n" +
+                "  classid: 'e29b23c0-3d72-45eb-b400-9e26caa1e22d',\n" +
+                "  classname: 'NationalProject',\n" +
+                "  classtitle: 'Национальный проект',\n" +
+                "  entityname: 'NationalProject',\n" +
+                "  id: 'new',\n" +
+                "  keyfield: 'NationalProjectId',\n" +
+                "  namefield: 'Name',\n" +
+                "}";
+
+        String body = null;
         getCookiesFromLogIn();
 
-        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
-            body = testNationalProjectBody;
-        } else {
-            body = stageNationalProjectBody;
-        }
+        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testNationalProjectBody;
+        if (Configuration.baseUrl.equals("http://npdemo.pmf2-gos.pmpractice.ru")) body = stageNationalProjectBody;
+        if (Configuration.baseUrl.equals("https://releasetest.pmforesight.ru")) body = prodNationalProjectBody;
+
+//        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
+//            body = testNationalProjectBody;
+//        } else {
+//            body = stageNationalProjectBody;
+//        }
 
         Response response =
                 given()
@@ -741,14 +852,36 @@ public class ActionsViaAPI {
                 "  namefield: 'Name',\n" +
                 "}";
 
-        String body;
+        String prodNonProjectEventBody = "{\n" +
+                "  CustomerId: 100070,\n" +
+                "  LeaderId: 100070,\n" +
+                "  ParentId: 2,\n" +
+                "  ActivityPhaseId : 40045,\n" +
+                "  EntityId: '327c5b7d-47d0-4b13-8ea5-82bef6255ed9',\n" +
+                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() +"',\n" +
+                "  UserAccount: 'FA',\n" +
+                "  UserAccountId: '100070',\n" +
+                "  classid: '327c5b7d-47d0-4b13-8ea5-82bef6255ed9',\n" +
+                "  classname: 'Event',\n" +
+                "  classtitle: 'Непроектное мероприятие',\n" +
+                "  entityname: 'Event',\n" +
+                "  id: 'new',\n" +
+                "  keyfield: 'EventId',\n" +
+                "  namefield: 'Name',\n" +
+                "}";
+
+        String body = null;
         getCookiesFromLogIn();
 
-        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
-            body = testNonProjectEventBody;
-        } else {
-            body = stageNonProjectEventBody;
-        }
+        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testNonProjectEventBody;
+        if (Configuration.baseUrl.equals("http://npdemo.pmf2-gos.pmpractice.ru")) body = stageNonProjectEventBody;
+        if (Configuration.baseUrl.equals("https://releasetest.pmforesight.ru")) body = prodNonProjectEventBody;
+
+//        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
+//            body = testNonProjectEventBody;
+//        } else {
+//            body = stageNonProjectEventBody;
+//        }
 
         Response response =
                 given()
