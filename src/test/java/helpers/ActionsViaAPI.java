@@ -77,7 +77,7 @@ public class ActionsViaAPI {
                     .param("name", "fa")
                     .param("password", "1qaz@WSX")
                 .when()
-                    .post("Login?ReturnUrl=%2FPage%2FIndex")
+                    .post("/login")
                 .then()
                     .statusCode(302)
                     .assertThat()
@@ -198,8 +198,8 @@ public class ActionsViaAPI {
         getCookiesFromLogIn();
 
         if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testProjectBody;
-        if (Configuration.baseUrl.equals("http://npdemo.pmf2-gos.pmpractice.ru")) body = stageProjectBody;
-        if (Configuration.baseUrl.equals("https://releasetest.pmforesight.ru")) body = prodProjectBody;
+        if (Configuration.baseUrl.equals("https://npdemo.pmf2-gos.pmpractice.ru")) body = stageProjectBody;
+        if (Configuration.baseUrl.equals("http://releasetest.pmforesight.ru")) body = prodProjectBody;
 
 //        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
 //            body = testProjectBody;
@@ -346,8 +346,8 @@ public class ActionsViaAPI {
         getCookiesFromLogIn();
 
         if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testGoalBody;
-        if (Configuration.baseUrl.equals("http://npdemo.pmf2-gos.pmpractice.ru")) body = stageGoalBody;
-        if (Configuration.baseUrl.equals("https://releasetest.pmforesight.ru")) body = prodGoalBody;
+        if (Configuration.baseUrl.equals("https://npdemo.pmf2-gos.pmpractice.ru")) body = stageGoalBody;
+        if (Configuration.baseUrl.equals("http://releasetest.pmforesight.ru")) body = prodGoalBody;
 
 //        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
 //            body = testGoalBody;
@@ -585,8 +585,8 @@ public class ActionsViaAPI {
         getCookiesFromLogIn();
 
         if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testProgramBody;
-        if (Configuration.baseUrl.equals("http://npdemo.pmf2-gos.pmpractice.ru")) body = stageProgramBody;
-        if (Configuration.baseUrl.equals("https://releasetest.pmforesight.ru")) body = prodProgramBody;
+        if (Configuration.baseUrl.equals("https://npdemo.pmf2-gos.pmpractice.ru")) body = stageProgramBody;
+        if (Configuration.baseUrl.equals("http://releasetest.pmforesight.ru")) body = prodProgramBody;
 
 //        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
 //            body = testProgramBody;
@@ -683,8 +683,8 @@ public class ActionsViaAPI {
         getCookiesFromLogIn();
 
         if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testPortfolioBody;
-        if (Configuration.baseUrl.equals("http://npdemo.pmf2-gos.pmpractice.ru")) body = stagePortfolioBody;
-        if (Configuration.baseUrl.equals("https://releasetest.pmforesight.ru")) body = prodPortfolioBody;
+        if (Configuration.baseUrl.equals("https://npdemo.pmf2-gos.pmpractice.ru")) body = stagePortfolioBody;
+        if (Configuration.baseUrl.equals("http://releasetest.pmforesight.ru")) body = prodPortfolioBody;
 
 //        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
 //            body = testPortfolioBody;
@@ -769,8 +769,8 @@ public class ActionsViaAPI {
         getCookiesFromLogIn();
 
         if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testNationalProjectBody;
-        if (Configuration.baseUrl.equals("http://npdemo.pmf2-gos.pmpractice.ru")) body = stageNationalProjectBody;
-        if (Configuration.baseUrl.equals("https://releasetest.pmforesight.ru")) body = prodNationalProjectBody;
+        if (Configuration.baseUrl.equals("https://npdemo.pmf2-gos.pmpractice.ru")) body = stageNationalProjectBody;
+        if (Configuration.baseUrl.equals("http://releasetest.pmforesight.ru")) body = prodNationalProjectBody;
 
 //        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
 //            body = testNationalProjectBody;
@@ -874,8 +874,8 @@ public class ActionsViaAPI {
         getCookiesFromLogIn();
 
         if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testNonProjectEventBody;
-        if (Configuration.baseUrl.equals("http://npdemo.pmf2-gos.pmpractice.ru")) body = stageNonProjectEventBody;
-        if (Configuration.baseUrl.equals("https://releasetest.pmforesight.ru")) body = prodNonProjectEventBody;
+        if (Configuration.baseUrl.equals("https://npdemo.pmf2-gos.pmpractice.ru")) body = stageNonProjectEventBody;
+        if (Configuration.baseUrl.equals("http://releasetest.pmforesight.ru")) body = prodNonProjectEventBody;
 
 //        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
 //            body = testNonProjectEventBody;
