@@ -34,7 +34,7 @@ public class EBudgetTests extends BaseTest {
         singIn.open();
         projectPage = new ProjectPage();
         projectRegistry = new ProjectRegistry();
-        importProject = "Учитель будущего (город федерального значения Москва)";
+        importProject = "Учитель будущего";
         importProjectPortfolio = "Портфель национальных проектов";
     }
 

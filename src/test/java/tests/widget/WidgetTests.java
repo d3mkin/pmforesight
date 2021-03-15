@@ -21,6 +21,7 @@ import static io.qameta.allure.Allure.parameter;
 @Epic(TestSuiteName.WIDGETS)
 @Tag("Regression")
 @Tag("Smoke")
+@Disabled
 public class WidgetTests  extends BaseTest {
     private SingInPage singIn;
     IndexPage indexPage;
@@ -37,7 +38,6 @@ public class WidgetTests  extends BaseTest {
         new LogoutPage().open();
     }
 
-    @Disabled
     @ParameterizedTest (name = "Создание и удаление виджета")
     @MethodSource("helpers.UserProvider#mainFA")
     public void createAndDeleteWidgetTest(User user) {

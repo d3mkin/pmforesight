@@ -192,8 +192,8 @@ public class ProjectStageTransitionTests extends BaseTest {
         modalDialog.clickAcceptNextStageTransition();
         modalDialog.shouldHaveMessageAboutRequiredFields(
                 "Должна быть создана типовая контрольная точка 'Выполнение работ разрешено'",
-                "Необходимо прикрепить документ 'Паспорт проекта'",
                 "Необходимо прикрепить документ 'Сводный план проекта'",
+                "Необходимо прикрепить документ 'Паспорт проекта'",
                 "Должна быть создана и завершена типовая контрольная точка 'Выполнение работ разрешено'");
         modalDialog.closeDialog();
         //Выполняем условия для перевода на стадию Реализация
