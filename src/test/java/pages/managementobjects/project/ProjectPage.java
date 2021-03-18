@@ -10,6 +10,7 @@ import pages.managementobjects.result.ResultPage;
 import helpers.ResultTypeArray;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.HashSet;
 import java.util.List;
 
@@ -194,7 +195,7 @@ public class ProjectPage extends BasePage {
         searchAndSelectFirstFromSelect(projectType, project.getType());
         searchAndSelectFirstFromSelect(parentPortfolioOrProgram, project.getProgram());
         tabRoles.click();
-        curatorRole.waitUntil(visible, 1000);
+        curatorRole.shouldBe(visible, Duration.ofMillis(Configuration.timeout));
         searchAndSelectFirstFromSelect(curatorRole, project.getCurator());
         sleep(500);
         searchAndSelectFirstFromSelect(managerRole, project.getSupervisor());

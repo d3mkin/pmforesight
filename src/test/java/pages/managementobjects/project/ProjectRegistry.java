@@ -11,6 +11,8 @@ import pages.elements.DeleteEntityDialog;
 import pages.elements.Header;
 import pages.elements.MainMenu;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -149,8 +151,10 @@ public class ProjectRegistry implements Registry {
         shouldHaveCreatedRecord(project.getName());
         selectRow();
         clickDelete();
+        loadImage.shouldNotBe(visible, Duration.ofMinutes(10));
+        $(".k-loading-mask").shouldNotBe(exist, Duration.ofMinutes(10));
         acceptDelete();
-        loadingImage.waitUntil(not(visible), 1200000);
+        checkRegistryIsLoaded();
         searchProject(project.getName());
         shouldNotHaveResults();
     }
@@ -163,6 +167,8 @@ public class ProjectRegistry implements Registry {
         shouldHaveCreatedRecord(projectName);
         selectRow();
         clickDelete();
+        loadImage.shouldNotBe(visible, Duration.ofMinutes(10));
+        $(".k-loading-mask").shouldNotBe(exist, Duration.ofMinutes(10));
         acceptDelete();
         checkRegistryIsLoaded();
         searchProject(projectName);
@@ -204,7 +210,8 @@ public class ProjectRegistry implements Registry {
 
     @Step ("Проверить что реестр загрузился")
     public void checkRegistryIsLoaded () {
-        loadImage.shouldNotBe(visible);
+        loadImage.shouldNotBe(visible, Duration.ofMinutes(10));
+        $(".k-loading-mask").shouldNotBe(exist, Duration.ofMinutes(10));
         tableWithEntities.shouldBe(visible);
     }
 
