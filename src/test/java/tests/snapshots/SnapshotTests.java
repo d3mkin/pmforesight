@@ -72,7 +72,7 @@ public class SnapshotTests extends BaseTest {
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.openSnapshotTab();
         projectPage.clickAddSnapshot();
-        snapshot.setName("ATEST-209" + currentTime);
+        snapshot.setName("ATEST-209_" + currentTime);
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
@@ -94,7 +94,7 @@ public class SnapshotTests extends BaseTest {
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.openSnapshotTab();
         projectPage.clickAddSnapshot();
-        snapshot.setName("ATEST-210" + currentTime);
+        snapshot.setName("ATEST-210_" + currentTime);
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
@@ -126,7 +126,7 @@ public class SnapshotTests extends BaseTest {
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.openSnapshotTab();
         projectPage.clickAddSnapshot();
-        snapshot.setName("ATEST-211" + currentTime);
+        snapshot.setName("ATEST-211_" + currentTime);
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
@@ -161,7 +161,7 @@ public class SnapshotTests extends BaseTest {
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.openSnapshotTab();
         projectPage.clickAddSnapshot();
-        snapshot.setName("ATEST-212" + currentTime);
+        snapshot.setName("ATEST-212_" + currentTime);
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
@@ -196,7 +196,7 @@ public class SnapshotTests extends BaseTest {
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.openSnapshotTab();
         projectPage.clickAddSnapshot();
-        snapshot.setName("ATEST-213" + currentTime);
+        snapshot.setName("ATEST-213_" + currentTime);
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
@@ -231,7 +231,7 @@ public class SnapshotTests extends BaseTest {
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.openSnapshotTab();
         projectPage.clickAddSnapshot();
-        snapshot.setName("ATEST-214" + currentTime);
+        snapshot.setName("ATEST-214_" + currentTime);
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
@@ -262,7 +262,7 @@ public class SnapshotTests extends BaseTest {
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.openSnapshotTab();
         projectPage.clickAddSnapshot();
-        snapshot.setName("ATEST-214" + currentTime);
+        snapshot.setName("ATEST-214_" + currentTime);
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
@@ -299,7 +299,7 @@ public class SnapshotTests extends BaseTest {
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.openSnapshotTab();
         projectPage.clickAddSnapshot();
-        snapshot.setName("ATEST-215" + currentTime);
+        snapshot.setName("ATEST-215_" + currentTime);
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());
@@ -327,7 +327,7 @@ public class SnapshotTests extends BaseTest {
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.openSnapshotTab();
         projectPage.clickAddSnapshot();
-        snapshot.setName("ATEST-215" + currentTime);
+        snapshot.setName("ATEST-215_" + currentTime);
         snapshotPage.fillFields(snapshot);
         snapshotPage.clickSaveAndClose();
         projectPage.searchSnapshotInTable(snapshot.getName());

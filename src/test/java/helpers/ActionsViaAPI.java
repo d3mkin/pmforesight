@@ -260,7 +260,7 @@ public class ActionsViaAPI {
                 .body(body)
                 .delete("/entity")
         .then()
-                .log().all()
+                //.log().all()
                 .statusCode(200);
     }
 
@@ -386,7 +386,8 @@ public class ActionsViaAPI {
         .when()
                 .body(body)
                 .delete("/entity")
-        .then().log().all()
+        .then()
+                //.log().all()
                 .statusCode(200);
     }
 

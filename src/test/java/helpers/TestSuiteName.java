@@ -23,4 +23,5 @@ public class TestSuiteName {
     public static final String USER_DELETION = "Удаление пользователя";
     public static final String ELECTRONIC_BUDGET = "Электронный бюджет";
     public static final String SNAPSHOTS = "Слепки";
+    public static final String CHANGE_REQUEST = "Запрос на изменение";
 }

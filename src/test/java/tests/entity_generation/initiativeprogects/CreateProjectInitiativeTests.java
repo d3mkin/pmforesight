@@ -13,7 +13,7 @@ import model.ProjectsInitiative;
 import model.User;
 import pages.auth.LogoutPage;
 import pages.auth.SingInPage;
-import pages.managementobjects.ProjectsInitiativeRegistry;
+import pages.managementobjects.initiativeprojects.ProjectsInitiativeRegistry;
 import pages.managementobjects.initiativeprojects.ProjectsInitiativePage;
 import tests.BaseTest;
 

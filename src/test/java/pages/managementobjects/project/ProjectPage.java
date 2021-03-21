@@ -55,6 +55,7 @@ public class ProjectPage extends BasePage {
     private final SelenideElement tabOrders = $(By.cssSelector("a[href='#tab-order']"));
     private final SelenideElement tabOpenQuestions = $(By.cssSelector("a[href='#tab-lov']"));
     private final SelenideElement tabSnapshot = $(By.cssSelector("a[href='#tab-snapshot']"));
+    private final SelenideElement changeRequestSnapshotTab = $("a[href='#tab-changerequest-snapshot']");
 
     //Календарный план
     private final SelenideElement initiationDateInput = $(By.xpath("//div[@class='stage stage1']//input"));
@@ -107,7 +108,7 @@ public class ProjectPage extends BasePage {
     //Таблицы показателей
     private final SelenideElement personalIndicatorsTable = $("div[name='KPIs'] .k-grid-content");
     private final SelenideElement getPersonalIndicatorsHeader = $("div[name='KPIs'] .f-widget__header-text");
-    private final SelenideElement indicatorTableSearchInput = $(By.xpath("//div[@name='KPIs']//input[@placeholder='Поиск...']"));
+    private final SelenideElement indicatorTableSearchInput = $x("//div[@name='KPIs']//input[@placeholder='Поиск...']");
     private final SelenideElement firstFoundIndicator = $x("//div[@name='KPIs']//tbody/tr[1]/td[2]");
 
     //Таблицы результатов
@@ -172,6 +173,15 @@ public class ProjectPage extends BasePage {
     private final SelenideElement firstFoundSnapshotStatus = $("#SnapshotInlineTableView [data-column-field='ActivityPhaseName']");
     private final SelenideElement deleteSnapshotButton = $("#SnapshotInlineTableView .k-i-trash");
 
+    //ЗИ
+    private final SelenideElement createChangeRequestButton = $("[name='CreateCHLi']");
+    private final SelenideElement changeRequestTableSearchInput = $x("//div[@name='SnapshotCRInlineTableView']//input[@placeholder='Поиск...']");
+    private final SelenideElement foundChangeRequestName = $("#SnapshotCRInlineTableView [data-column-field='Name'] a");
+    private final SelenideElement foundChangeRequestCreationDate = $("#SnapshotCRInlineTableView [data-column-field='CreationDate']");
+    private final SelenideElement foundChangeRequestComment = $("#SnapshotCRInlineTableView [data-column-field='Comment']");
+    private final SelenideElement foundChangeRequestCreationAuthorName = $("#SnapshotCRInlineTableView [data-column-field='CreationAuthorName']");
+    private final SelenideElement foundChangeRequestStatus = $("#SnapshotCRInlineTableView [data-column-field='ActivityPhaseName']");
+    private final SelenideElement foundChangeRequestApprovedSnapshotName = $("#SnapshotCRInlineTableView [data-column-field='ApprovedSnapshotName'] a");
 
 
     //TODO: сделать отдельный класс для верхней панели карточек
@@ -308,6 +318,12 @@ public class ProjectPage extends BasePage {
     @Step ("Открыть вкладку Слепки")
     public void openSnapshotTab() {
         tabSnapshot.click();
+        sleep(1000);
+    }
+
+    @Step ("Открыть вкладку Запросы на изменения(Слепки)")
+    public void openChangeRequestSnapshotTab() {
+        changeRequestSnapshotTab.click();
         sleep(1000);
     }
 
@@ -971,5 +987,37 @@ public class ProjectPage extends BasePage {
         deleteSnapshotButton.click();
         clickDialogSave();
         checkPageIsLoaded();
+    }
+
+    @Step ("Нажать Сформировать ЗИ")
+    public void clickAddChangeRequest() {
+        createChangeRequestButton.shouldBe(visible).click();
+        modalWindowShouldBeOpened();
+        modalWindowShouldHaveTitle("Запрос на изменение");
+    }
+
+    @Step ("Проверить наличие Запроса на изменение с наименованием {changeRequestName} в таблице 'Запросы на изменение'")
+    public void shouldHaveChangeRequest(String changeRequestName) {
+        changeRequestTableSearchInput.click();
+        changeRequestTableSearchInput.sendKeys(changeRequestName);
+        foundChangeRequestName.shouldBe(visible);
+        foundChangeRequestName.shouldHave(text(changeRequestName));
+    }
+
+    @Step ("Найти Запрос на изменение с наименованием {changeRequestName} в таблице 'Запросы на изменение' и открыть его форму просмотра")
+    public void findAndOpenChangeRequestViewForm(String changeRequestName) {
+        changeRequestTableSearchInput.clear();
+        changeRequestTableSearchInput.click();
+        changeRequestTableSearchInput.sendKeys(changeRequestName);
+        foundChangeRequestName.shouldBe(visible);
+        foundChangeRequestName.shouldHave(text(changeRequestName)).click();
+    }
+
+    @Step ("Проверить что Запрос на изменение содержит наименование{changeRequestName}, комментарий{changeRequestComment}, состояние{changeRequestStatus}, утвержденный слепок{changeRequestSnapshot}")
+    public void checkChangeRequestData(String changeRequestName, String changeRequestComment, String changeRequestStatus, String changeRequestSnapshot){
+        foundChangeRequestName.shouldHave(text(changeRequestName));
+        foundChangeRequestComment.shouldHave(text(changeRequestComment));
+        foundChangeRequestStatus.shouldHave(text(changeRequestStatus));
+        foundChangeRequestApprovedSnapshotName.shouldHave(text(changeRequestSnapshot));
     }
 }

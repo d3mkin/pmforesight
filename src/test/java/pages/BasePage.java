@@ -6,11 +6,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.CollectionCondition.texts;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public abstract class BasePage {
@@ -100,9 +100,15 @@ public abstract class BasePage {
         content.shouldBe(visible);
     }
 
+    @Step("Проверка закрытия модального окна")
+    public void modalWindowShouldBeClosed() {
+        window.shouldNotBe(visible);
+        header.shouldNotBe(visible);
+    }
+
     @Step("Проверка названия модального окна")
-    public void modalWindowShouldHaveTitle(String name) {
-        windowName.shouldHave(text(name));
+    public void modalWindowShouldHaveTitle(String titleName) {
+        windowName.shouldHave(text(titleName));
     }
 
     @Step("Нажать развернуть на весь экран")
@@ -204,6 +210,7 @@ public abstract class BasePage {
         if (value == null) {
             return;
         }
+        el.clear();
         el.setValue(value);
         sleep(1000);
     }
@@ -318,8 +325,10 @@ public abstract class BasePage {
         $x("//div[@class='k-widget k-window']//a[@role='button']").click();
     }
 
-    @Step ("Проверить что cтраница загрузилась")
+    @Step ("Проверить что страница загрузилась")
     public void checkPageIsLoaded () {
-        loadImage.shouldNotBe(visible);
+        loadImage.shouldNotBe(visible, Duration.ofMinutes(1));
+        $(".k-loading-mask").shouldNotBe(exist, Duration.ofMinutes(10));
+
     }
 }

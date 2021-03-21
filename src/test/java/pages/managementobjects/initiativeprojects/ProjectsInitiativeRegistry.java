@@ -1,4 +1,4 @@
-package pages.managementobjects;
+package pages.managementobjects.initiativeprojects;
 
 import com.codeborne.selenide.*;
 import io.qameta.allure.Step;

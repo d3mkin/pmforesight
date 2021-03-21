@@ -1,4 +1,4 @@
-package pages.managementobjects;
+package pages.managementobjects.nonprojectevent;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;

@@ -1,4 +1,4 @@
-package pages.managementobjects;
+package pages.managementobjects.gprogram;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;

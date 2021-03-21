@@ -1,4 +1,4 @@
-package pages.monitoring_and_control;
+package pages.monitoring_and_control.change_requests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Запросы на изменение
  */
-public class ChangeRequestsRegistry implements Registry {
+public class ConsolidatedChangeRequestsRegistry implements Registry {
     private Header header;
     private MainMenu mainMenu;
 
@@ -26,7 +26,7 @@ public class ChangeRequestsRegistry implements Registry {
     private SelenideElement registryName = $("#f-grid-title span");
     private SelenideElement table = $("div.f-grid__grid");
 
-    public ChangeRequestsRegistry() {
+    public ConsolidatedChangeRequestsRegistry() {
         this.header = new Header();
         this.mainMenu = new MainMenu();
     }
@@ -56,19 +56,19 @@ public class ChangeRequestsRegistry implements Registry {
     }
 
     @Step("Проверка корректности ссылки {this.url}")
-    public ChangeRequestsRegistry shouldHaveCorrectLink() {
+    public ConsolidatedChangeRequestsRegistry shouldHaveCorrectLink() {
         assertTrue(WebDriverRunner.url().startsWith(url), "Урл не соответствет " + url);
         return this;
     }
 
     @Step("Проверка наличия имени реестра")
-    public ChangeRequestsRegistry shouldHaveName() {
+    public ConsolidatedChangeRequestsRegistry shouldHaveName() {
         registryName.shouldBe(visible);
         return this;
     }
 
     @Step("Проверка отображения табличной части")
-    public ChangeRequestsRegistry shouldHaveContent() {
+    public ConsolidatedChangeRequestsRegistry shouldHaveContent() {
         table.shouldBe(visible);
         return this;
     }

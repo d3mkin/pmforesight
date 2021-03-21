@@ -3,7 +3,7 @@ package pages.elements.mainmenuitems;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import pages.monitoring_and_control.ChangeRequestsRegistry;
+import pages.monitoring_and_control.change_requests.ConsolidatedChangeRequestsRegistry;
 import pages.monitoring_and_control.StatusReporRegistry;
 
 import static com.codeborne.selenide.Condition.text;
@@ -28,9 +28,9 @@ public class MonitoringAndControl extends AbstractMenuItem {
     }
 
     @Step("Открыть запросы на изменения")
-    public ChangeRequestsRegistry openRequestsForChange() {
+    public ConsolidatedChangeRequestsRegistry openRequestsForChange() {
         clickItem(monitoringAndControl, requestsForChange);
-        return new ChangeRequestsRegistry();
+        return new ConsolidatedChangeRequestsRegistry();
     }
 
 

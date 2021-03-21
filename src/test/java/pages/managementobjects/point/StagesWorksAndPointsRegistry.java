@@ -1,4 +1,4 @@
-package pages.managementobjects;
+package pages.managementobjects.point;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
@@ -12,43 +12,47 @@ import pages.elements.ControlPanel;
 import pages.elements.Header;
 import pages.elements.MainMenu;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Результаты
+ * Этапы / Работы / КТ
  */
-public class ResultsRegistry implements Registry {
+public class StagesWorksAndPointsRegistry implements Registry {
+
     private Header header;
     private MainMenu mainMenu;
     private final ControlPanel controlPanel;
 
-    private String url = Configuration.baseUrl + "/page/register?view=ActivityResult";
+    private String url = Configuration.baseUrl + "/page/register?view=point";
     private SelenideElement mainContainer = $("#mainBodyContainer");
     private SelenideElement registryName = $("#f-grid-title span");
     private SelenideElement table = mainContainer.$("div.f-grid__grid");
+    private SelenideElement loadImage = mainContainer.$(".k-loading-image");
     private final SelenideElement firstFoundRow = table.$(".slick-row.odd");
     private final SelenideElement allRows = table.$(".grid-canvas .slick-row");
-    private SelenideElement loadImage = mainContainer.$(".k-loading-image");
+    private final SelenideElement loadingImage = $ (By.xpath("//div[@class='k-loading-image']"));
     private final SelenideElement tableWithEntities = $ (By.xpath("//div[@class='slick-viewport']"));
 
-    public ResultsRegistry() {
+    public StagesWorksAndPointsRegistry() {
         this.header = new Header();
         this.mainMenu = new MainMenu();
         this.controlPanel = new ControlPanel();
     }
+
     @Override
-    @Step("Открыть реестр 'Результаты' по прямой ссылке")
+    @Step("Открыть реестр 'Этапы / Работы / КТ' по прямой ссылке")
     public void open() {
         Selenide.open(url);
     }
 
     @Override
-    @Step("Открыть реестр 'Результаты' через меню")
+    @Step("Открыть реестр 'Этапы / Работы / КТ' через меню")
     public void openFromMenu() {
-        mainMenu.managementObjects().openResults();
+        mainMenu.managementObjects().openStagesWorksKT();
     }
 
     @Override
@@ -57,7 +61,7 @@ public class ResultsRegistry implements Registry {
     }
 
     @Override
-    @Step("Проверка открытия реестра 'Результаты'")
+    @Step("Проверка открытия реестра 'Этапы / Работы / КТ'")
     public void shouldBeRegistry() {
         shouldHaveCorrectLink();
         shouldHaveName();
@@ -65,19 +69,19 @@ public class ResultsRegistry implements Registry {
     }
 
     @Step("Проверка корректности ссылки {this.url}")
-    public ResultsRegistry shouldHaveCorrectLink() {
+    public StagesWorksAndPointsRegistry shouldHaveCorrectLink() {
         assertTrue(WebDriverRunner.url().startsWith(url), "Урл не соответствет " + url);
         return this;
     }
 
     @Step("Проверка наличия имени реестра")
-    public ResultsRegistry shouldHaveName() {
-        registryName.shouldBe(visible);
+    public StagesWorksAndPointsRegistry shouldHaveName() {
+        registryName.shouldBe(visible).shouldHave(text("Этапы / Работы / КТ"));
         return this;
     }
 
     @Step("Проверка отображения табличной части")
-    public ResultsRegistry shouldHaveContent() {
+    public StagesWorksAndPointsRegistry shouldHaveContent() {
         table.shouldBe(visible);
         return this;
     }
@@ -94,11 +98,12 @@ public class ResultsRegistry implements Registry {
         sleep(1000);
     }
 
-    @Step ("Проверка что нет данных в таблице реестра")
+    @Step("Проверка отсутствия результатов поиска")
     public void shouldNotHaveResults() {
         allRows.shouldNot(visible);
     }
 
+    //TODO Перенести метод в BaseRegistry
     @Step ("Проверка что сущность не отображается в реестре")
     public void checkEntityNotExist(String entityName){
         checkRegistryIsLoaded();
@@ -106,12 +111,14 @@ public class ResultsRegistry implements Registry {
         shouldNotHaveResults();
     }
 
+    //TODO Перенести метод в BaseRegistry
     @Step ("Проверить что реестр загрузился")
     public void checkRegistryIsLoaded () {
         loadImage.shouldNotBe(visible);
         tableWithEntities.shouldBe(visible);
     }
 
+    //TODO Перенести метод в BaseRegistry
     @Step ("Сменить представление на {viewName}")
     public void changeView(String viewName){
         controlPanel.changeView(viewName);

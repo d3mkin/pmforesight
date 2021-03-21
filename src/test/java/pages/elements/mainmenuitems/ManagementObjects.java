@@ -3,13 +3,17 @@ package pages.elements.mainmenuitems;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import pages.managementobjects.*;
 import pages.managementobjects.contracts.ContractsRegistry;
+import pages.managementobjects.gprogram.GProgramHierarchyRegistry;
 import pages.managementobjects.gprogram.GProgramRegistry;
+import pages.managementobjects.initiativeprojects.ProjectsInitiativeRegistry;
 import pages.managementobjects.nationalproject.NationalProjectRegistry;
+import pages.managementobjects.nonprojectevent.NonProjectEventRegistry;
+import pages.managementobjects.point.StagesWorksAndPointsRegistry;
 import pages.managementobjects.portfolio.PortfolioRegistry;
 import pages.managementobjects.program.ProgramRegistry;
 import pages.managementobjects.project.ProjectRegistry;
+import pages.managementobjects.result.ResultsRegistry;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
