@@ -48,7 +48,7 @@ public class CustomWebDriver implements WebDriverProvider {
                 capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
                 WebDriverManager.chromedriver().setup();
                 break;
-            case WebDriverRunner.INTERNET_EXPLORER:
+            case WebDriverRunner.IE:
                 capabilities.setCapability("browserName", "internet explorer");
                 capabilities.setCapability("browserVersion", "11");
                 capabilities.setCapability("timeZone", "Europe/Moscow");
