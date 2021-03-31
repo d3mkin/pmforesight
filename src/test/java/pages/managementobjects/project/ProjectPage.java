@@ -11,6 +11,7 @@ import helpers.ResultTypeArray;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -22,7 +23,9 @@ public class ProjectPage extends BasePage {
     //Создание проекта
     private final SelenideElement projectName = $("#Name");
     private final SelenideElement projectLevel = $("#control-group-ProjectLevelId span.k-widget.k-dropdown");
+    private final SelenideElement projectPriority = $("#control-group-PriorityId span.k-widget.k-dropdown");
     private final SelenideElement projectType = $("#control-group-ProjectTypeId span.k-widget.k-dropdown");
+    private final SelenideElement projectGoal = $("#control-group-ActivityGoal .k-multiselect");
     private final SelenideElement parentPortfolioOrProgram = $("#control-group-ParentId span.k-widget.k-dropdown");
     private final SelenideElement tabRoles = $("#tab-roles > a");
     private final SelenideElement curatorRole = $("#control-group-Owner span.k-widget.k-dropdown");
@@ -33,29 +36,31 @@ public class ProjectPage extends BasePage {
     //TODO Рефакторинг локаторов
     private final SelenideElement currentProjectStageField = $(".f-card__info");
     private final SelenideElement projectViewName = $(".f-card__name");
-    private final SelenideElement changeProjectStageButton = $(By.xpath("//li[@id='MoveToNextPhase']"));
-    private final SelenideElement nextStageButton = $(By.xpath("//div[@class='f-popup__container']//li[@name='NextPhaseButton']"));
-    private final SelenideElement prevStageButton = $(By.xpath("//div[@class='f-popup__container']//li[@name='PrevPhaseButton']"));
-    private final SelenideElement cancelStageButton = $(By.xpath("//div[@class='f-popup__container']//li[@name='CancelListItem']"));
+    private final SelenideElement changeProjectStageButton = $x("//li[@id='MoveToNextPhase']");
+    private final SelenideElement nextStageButton = $x("//div[@class='f-popup__container']//li[@name='NextPhaseButton']");
+    private final SelenideElement prevStageButton = $x("//div[@class='f-popup__container']//li[@name='PrevPhaseButton']");
+    private final SelenideElement cancelStageButton = $x("//div[@class='f-popup__container']//li[@name='CancelListItem']");
 
     //Модальное окно
-    private final SelenideElement reasonOfCancelingField = $(By.xpath("//textarea[@id='ReasonOfCanceling']"));
-    private final SelenideElement reasonOfCancelingIsRequired = $(By.xpath("//span[@class='required-input']"));
+    private final SelenideElement reasonOfCancelingField = $x("//textarea[@id='ReasonOfCanceling']");
+    private final SelenideElement reasonOfCancelingIsRequired = $x("//span[@class='required-input']");
 
     //Основные вкладки
-    private final SelenideElement tabMain = $(By.cssSelector("a[href='#tab-main']"));
-    private final SelenideElement tabMeetings = $(By.cssSelector("a[href='#tab-meeting']"));
-    private final SelenideElement tabResults = $(By.cssSelector("a[href='#tab-result']"));
-    private final SelenideElement tabIndicators = $(By.cssSelector("a[href='#tab-kpi']"));
-    private final SelenideElement tabActivity = $(By.cssSelector("a[href='#tab-activity']"));
-    private final SelenideElement tabDocuments = $(By.cssSelector("a[href='#tab-documents']"));
-    private final SelenideElement tabContracts = $(By.cssSelector("a[href='#tab-contract']"));
-    private final SelenideElement tabRisksOpportunities = $(By.cssSelector("a[href='#tab-risk']"));
-    private final SelenideElement tabLessons = $(By.cssSelector("a[href='#tab-gleaning']"));
-    private final SelenideElement tabOrders = $(By.cssSelector("a[href='#tab-order']"));
-    private final SelenideElement tabOpenQuestions = $(By.cssSelector("a[href='#tab-lov']"));
-    private final SelenideElement tabSnapshot = $(By.cssSelector("a[href='#tab-snapshot']"));
-    private final SelenideElement changeRequestSnapshotTab = $("a[href='#tab-changerequest-snapshot']");
+    private final SelenideElement tabMain = $("a[href='#tab-main']");
+    private final SelenideElement tabMeetings = $("a[href='#tab-meeting']");
+    private final SelenideElement tabResults = $("a[href='#tab-result']");
+    private final SelenideElement tabIndicators = $("a[href='#tab-kpi']");
+    private final SelenideElement tabActivity = $("a[href='#tab-activity']");
+    private final SelenideElement tabDocuments = $("a[href='#tab-documents']");
+    private final SelenideElement tabContracts = $("a[href='#tab-contract']");
+    private final SelenideElement tabRisksOpportunities = $("a[href='#tab-risk']");
+    private final SelenideElement tabLessons = $("a[href='#tab-gleaning']");
+    private final SelenideElement tabOrders = $("a[href='#tab-order']");
+    private final SelenideElement tabOpenQuestions = $("a[href='#tab-lov']");
+    private final SelenideElement tabSnapshot = $("a[href='#tab-snapshot']");
+    private final SelenideElement tabChangeRequestSnapshot = $("a[href='#tab-changerequest-snapshot']");
+    private final SelenideElement tabGoals = $("a[href='#tab-goal']");
+
 
     //Календарный план
     private final SelenideElement initiationDateInput = $(By.xpath("//div[@class='stage stage1']//input"));
@@ -199,11 +204,14 @@ public class ProjectPage extends BasePage {
 
     @Step("Заполнить поля проекта")
     public void fillFields(Project project) {
-        parentPortfolioOrProgram.waitUntil(visible, Configuration.timeout);
+        checkPageIsLoaded();
         typeText(projectName, project.getName());
+        searchAndSelectFirstFromSelect(projectPriority, project.getPriority());
         searchAndSelectFirstFromSelect(projectLevel, project.getProjectLevel());
         searchAndSelectFirstFromSelect(projectType, project.getType());
         searchAndSelectFirstFromSelect(parentPortfolioOrProgram, project.getProgram());
+        searchAndSelectFirstFromMultiSelect(projectGoal, project.getGoal());
+
         tabRoles.click();
         curatorRole.shouldBe(visible, Duration.ofMillis(Configuration.timeout));
         searchAndSelectFirstFromSelect(curatorRole, project.getCurator());
@@ -279,6 +287,12 @@ public class ProjectPage extends BasePage {
        sleep(1000);
     }
 
+    @Step ("Открыть вкладку Цели")
+    public void openGoalsTab(){
+       tabGoals.click();
+       sleep(1000);
+    }
+
     @Step ("Открыть вкладку Документы")
     public void openDocumentsTab(){
         tabDocuments.click();
@@ -323,7 +337,7 @@ public class ProjectPage extends BasePage {
 
     @Step ("Открыть вкладку Запросы на изменения(Слепки)")
     public void openChangeRequestSnapshotTab() {
-        changeRequestSnapshotTab.click();
+        tabChangeRequestSnapshot.click();
         sleep(1000);
     }
 
@@ -479,12 +493,6 @@ public class ProjectPage extends BasePage {
         }
     }
 
-    //TODO: Перенести в BasePage
-    @Step("Открыть форму редактирования Проекта")
-    public void clickEditForm() {
-        editForm.click();
-    }
-
     @Step("Изменить уровень проекта")
     public void changeProjectLevel(String typeOfProjectLevel){
         searchAndSelectFirstFromSelect(projectLevel,typeOfProjectLevel);
@@ -617,8 +625,9 @@ public class ProjectPage extends BasePage {
     }
 
     @Step ("Открыть карточку показателя")
-    public void openIndicatorCard() {
-        firstFoundIndicator.click();
+    public void openIndicatorCard(String indicatorName) {
+        $x("//a[contains(text(),'"+indicatorName+"')]").shouldBe(visible).click();
+//        firstFoundIndicator.click();
     }
 
     @Step ("Проверить текущую стадию проекта")
@@ -961,7 +970,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Проверить имя слепка и его статус в таблице слепков")
     public void checkSnapshotExistInTable(String snapshotName, String snapshotDate, String snapshotComment, String snapshotStatus) {
-        firstFoundSnapshotName.shouldBe(visible).shouldHave(text(snapshotName));
+         firstFoundSnapshotName.shouldBe(visible).shouldHave(text(snapshotName));
         firstFoundCreationDate.shouldBe(visible).shouldHave(text(snapshotDate));
         firstFoundSnapshotComment.shouldBe(visible).shouldHave(text(snapshotComment));
         firstFoundSnapshotStatus.shouldBe(visible).shouldHave(text(snapshotStatus));
@@ -1019,5 +1028,55 @@ public class ProjectPage extends BasePage {
         foundChangeRequestComment.shouldHave(text(changeRequestComment));
         foundChangeRequestStatus.shouldHave(text(changeRequestStatus));
         foundChangeRequestApprovedSnapshotName.shouldHave(text(changeRequestSnapshot));
+    }
+
+    @Step("Проверить что карточка Проекта открыта в режиме Слепка")
+    public void checkPageIsOnSnapshotMode(String snapshotName){
+        checkPageIsLoaded();
+        $(".f-notify_inline").shouldBe(visible);
+        $x("//span[contains(text(),'"+snapshotName+"')]").shouldBe(visible);
+    }
+
+    @Step("Проверить что кол-во изменений соотвестует цифре {tabChangesCount} на вкладке Общая информация и цифре {containerChangesCount} на виджете Общая информация")
+    public void checkCountOfMainChanges(int tabChangesCount, int containerChangesCount) {
+        checkPageIsLoaded();
+        $("a[href='#tab-main'] > .f-tag").shouldHave(text(""+tabChangesCount+""));
+        $$("span[data-name='SnapshotPrev']").shouldHaveSize(containerChangesCount);
+    }
+
+    @Step("Проверить что кол-во изменений соотвестует цифре {tabChangesCount} на вкладке Цели и статусу {status} в таблице Цели")
+    public void checkCountOfGoalChanges(int tabChangesCount) {
+        checkPageIsLoaded();
+        $("a[href='#tab-goal'] > .f-tag").shouldHave(text(""+tabChangesCount+""));
+    }
+
+    @Step("Добавить в Проект Цели {goalsNames}")
+    public void addGoals(ArrayList<String> goalsNames){
+        for (String goal:goalsNames) {
+            checkPageIsLoaded();
+            searchAndSelectFirstFromMultiSelect($("#control-group-ActivityGoal .k-widget"), goal);
+            checkPageIsLoaded();
+        }
+    }
+
+
+    public void checkGoalStatusInTable(String goalName, String goalStatus) {
+        $x("//div[@id='tab-goal']//input[@placeholder='Поиск...']").clear();
+        $x("//div[@id='tab-goal']//input[@placeholder='Поиск...']").sendKeys(goalName);
+
+        switch (goalStatus){
+            case ("Добавлено"):
+                $(".prevsnapshot-td-indicator").shouldHave(
+                        attribute("data-tooltip", ""+goalStatus+""),
+                        cssValue("background-color", "rgba(95, 175, 97, 1)"));
+                break;
+            case ("Удалено"):
+                $(".prevsnapshot-td-indicator").shouldHave(
+                        attribute("data-tooltip", ""+goalStatus+""),
+                        cssValue("background-color", "rgba(255, 89, 64, 1)"));
+                break;
+            default:
+                break;
+        }
     }
 }

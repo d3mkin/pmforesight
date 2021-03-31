@@ -10,8 +10,11 @@ import pages.elements.DeleteEntityDialog;
 import pages.elements.Header;
 import pages.elements.MainMenu;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.timeout;
 import static com.codeborne.selenide.Selenide.*;
+import static java.time.Duration.ofMillis;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -28,6 +31,7 @@ public class PortfolioRegistry implements Registry {
     private SelenideElement table = mainContainer.$("div.f-grid__grid");
     private SelenideElement firstFoundRow = $("div.slick-cell.l3.r3");
     private SelenideElement firstFoundCheckBox = $(".slick-cell-checkboxsel input");
+    private SelenideElement firstPortfolioRow = $x(".//div[@class = 'ui-widget-content slick-row even']");
     private ElementsCollection allFoundRow = table.$$(".grid-canvas div.slick-row");
     private final SelenideElement foundCheckBox = $(By.cssSelector("div[class=\"slick-cell l0 r0 slick-cell-checkboxsel\"]"));
     private final SelenideElement loadingImage = $("div .k-loading-mask");
@@ -82,7 +86,9 @@ public class PortfolioRegistry implements Registry {
     }
     @Step("Осуществить поиск Портфеля")
     public void searchPortfolio(String value) {
+        sleep(1000);
         controlPanel.typeSearchValue(value);
+        checkRegistryIsLoaded();
     }
 
     @Step("Проверка отображения Портфеля после создания записи")
@@ -150,4 +156,17 @@ public class PortfolioRegistry implements Registry {
         shouldNotHaveResults();
     }
 
+    @Step ("Проверить что страница загрузилась")
+    public void checkRegistryIsLoaded () {
+        //loadImage.shouldNotBe(visible, Duration.ofMinutes(1));
+        $$(".k-loading-image").shouldBe(size(0), ofMillis(timeout));
+        $(".k-loading-mask").shouldNotBe(exist, ofMillis(timeout));
+    }
+
+    @Step("Найти Портфель {portfolioName} в реестре и открыть его карточку")
+    public void searchAndOpenPortfolio(String portfolioName) {
+        searchPortfolio(portfolioName);
+        shouldHaveCreatedRecord(portfolioName);
+        firstPortfolioRow.shouldBe(visible).click();
+    }
 }

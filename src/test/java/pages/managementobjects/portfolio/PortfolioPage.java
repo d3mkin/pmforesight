@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import model.Portfolio;
 import pages.BasePage;
 
+import java.util.ArrayList;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
@@ -57,6 +59,7 @@ public class PortfolioPage extends BasePage {
         typeText(description,portfolio.getDescription());
         searchAndSelectFirstFromSelect(target, portfolio.getPurpose());
     }
+
     @Step("В модальном окне создания портфеля перейти на вкладку \"Роли\" и заполнить обязательные поля")
     public void fillRoles(Portfolio portfolio){
         tabRoles.click();
@@ -137,4 +140,12 @@ public class PortfolioPage extends BasePage {
         $(By.xpath("//div[@id='tab-lov']//td//a[contains(text(),'"+ questionName +"')]")).shouldBe(visible);
     }
 
+    @Step("Добавить в Портфель Цели {goalsNames}")
+    public void addGoals(ArrayList<String> goalsNames){
+        for (String goal:goalsNames) {
+            checkPageIsLoaded();
+            searchAndSelectFirstFromMultiSelect($("#control-group-ActivityGoal .k-widget"), goal);
+            checkPageIsLoaded();
+        }
+    }
 }

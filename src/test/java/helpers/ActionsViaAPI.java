@@ -143,7 +143,7 @@ public class ActionsViaAPI {
                 "  ActivityPhaseId: "+projectStage+",\n" +
                 "  ProjectTypeId: 3,\n" +
                 "  PriorityId: 2,\n" +
-                "  ControlSubjectId: 238,\n" +
+               // "  ControlSubjectId: 238,\n" +
                 "  IsEBSynced: false,\n" +
                 "  id: 'new'\n" +
                 "}";
@@ -377,8 +377,8 @@ public class ActionsViaAPI {
     }
 
     @Step ("Удалить цель через API")
-    public static void deleteGoalCreatedFromAPI(){
-        String body = String.format("{remove: [{entityName: 'Goal', dataIds: ["+ getGoalId() +"]}], force: true, async: true}");
+    public static void deleteGoalCreatedFromAPI(int goalId){
+        String body = String.format("{remove: [{entityName: 'Goal', dataIds: ["+ goalId +"]}], force: true, async: true}");
 
         given()
                 .cookies(cookies)

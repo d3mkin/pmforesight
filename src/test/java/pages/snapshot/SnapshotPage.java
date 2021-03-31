@@ -8,6 +8,7 @@ import pages.BasePage;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -36,19 +37,19 @@ public class SnapshotPage extends BasePage {
 
     @Step("Проверить наименование слепка и его статуса")
     public void checkNameAndStatus(String name, String status) {
-        snapshotName.shouldBe(Condition.visible).shouldHave(Condition.text(name));
-        snapshotStatus.shouldBe(Condition.visible).shouldHave(Condition.text(status));
+        snapshotName.shouldBe(visible).shouldHave(Condition.text(name));
+        snapshotStatus.shouldBe(visible).shouldHave(Condition.text(status));
 
     }
 
-    @Step ("Нажать на кнопку Загрузить документ в форме редактирования")
+    @Step("Нажать на кнопку Загрузить документ в форме редактирования")
     public void clickUploadFileOnEditForm(){
         uploadDocumentButton_EditForm.click();
     }
 
     @Step("Отправить на согласование")
     public void sendToApprove(String snapshotComment, File file) {
-        sendToApproveButton.shouldBe(Condition.visible).click();
+        sendToApproveButton.shouldBe(visible).click();
         modalWindowShouldBeOpened();
         modalWindowShouldHaveTitle("Отправить на согласование");
         clickExpand();
@@ -62,7 +63,7 @@ public class SnapshotPage extends BasePage {
 
     @Step("Согласовать слепок")
     public void approveSnapshot(String snapshotComment, File file) {
-        approveButton.shouldBe(Condition.visible).click();
+        approveButton.shouldBe(visible).click();
         modalWindowShouldBeOpened();
         modalWindowShouldHaveTitle("Согласовать");
         clickExpand();
@@ -76,7 +77,7 @@ public class SnapshotPage extends BasePage {
 
     @Step("Отозвать слепок")
     public void recallSnapshot(String snapshotComment, File file) {
-        recallButton.shouldBe(Condition.visible).click();
+        recallButton.shouldBe(visible).click();
         modalWindowShouldBeOpened();
         modalWindowShouldHaveTitle("Отозвать");
         clickExpand();
@@ -90,7 +91,7 @@ public class SnapshotPage extends BasePage {
 
     @Step("Отклонить слепок")
     public void rejectSnapshot(String snapshotComment, File file) {
-        rejectButton.shouldBe(Condition.visible).click();
+        rejectButton.shouldBe(visible).click();
         modalWindowShouldBeOpened();
         modalWindowShouldHaveTitle("Отклонить");
         clickExpand();
@@ -104,7 +105,7 @@ public class SnapshotPage extends BasePage {
 
     @Step("Удалить слепок")
     public void deleteSnapshot(String snapshotComment, File file) {
-        deleteButton.shouldBe(Condition.visible).click();
+        deleteButton.shouldBe(visible).click();
         modalWindowShouldBeOpened();
         modalWindowShouldHaveTitle("Удалить");
         clickExpand();
@@ -116,14 +117,22 @@ public class SnapshotPage extends BasePage {
         clickSaveAndClose();
     }
 
+    @Step("Проверить, что Слепок в таблице имеет наименование {userName}, статус{status}, комментарий{snapshotComment} и название документа{docName}")
     public void shouldHaveRecordInTable(String userName, String status, String snapshotComment, String docName) {
         checkPageIsLoaded();
-        $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+ userName +"']").shouldBe(Condition.visible);
-        $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+ status +"']").shouldBe(Condition.visible);
-        $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+ snapshotComment +"']").shouldBe(Condition.visible);
-        $x("//div[@id='StateEdgeWorkflowWidget_container']//a[text()='"+ docName +"']").shouldBe(Condition.visible);
+        $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+userName+"']").shouldBe(visible);
+        $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+status +"']").shouldBe(visible);
+        $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+snapshotComment+"']").shouldBe(visible);
+        $x("//div[@id='StateEdgeWorkflowWidget_container']//a[text()='"+docName+"']").shouldBe(visible);
     }
 
+    @Step("Проверить, что кнопка {workflowButton} отображается")
+    public void checkWorkflowButtonExist(String workflowButton) {
+        $x("//*[@class='EntityStateEdgeWorkflow']//a[.='"+workflowButton+"']").shouldBe(visible);
+    }
 
-
+    @Step("Проверить, что кнопка {workflowButton} НЕ отображается")
+    public void checkWorkflowButtonNotExist(String workflowButton) {
+        $x("//*[@class='EntityStateEdgeWorkflow']//a[.='"+workflowButton+"']").shouldNotBe(visible);
+    }
 }

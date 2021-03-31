@@ -98,7 +98,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         projectPage.shouldHaveIndicatorsTable();
         projectPage.shouldHaveIndicator(testIndicator.getName());
-        projectPage.openIndicatorCard();
+        projectPage.openIndicatorCard(testIndicator.getName());
         projectPage.getBrowserTabs();
         //Переключение на другую вкладку
         projectPage.switchToNextBrowserTab();
@@ -135,7 +135,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         projectPage.shouldHaveIndicatorsTable();
         projectPage.shouldHaveIndicator(testIndicator.getName());
-        projectPage.openIndicatorCard();
+        projectPage.openIndicatorCard(testIndicator.getName());
         projectPage.getBrowserTabs();
         //Переключение на другую вкладку
         projectPage.switchToNextBrowserTab();
@@ -176,7 +176,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         projectPage.shouldHaveIndicatorsTable();
         projectPage.shouldHaveIndicator(testIndicator.getName());
-        projectPage.openIndicatorCard();
+        projectPage.openIndicatorCard(testIndicator.getName());
         projectPage.getBrowserTabs();
         //Переключение на другую вкладку
         projectPage.switchToNextBrowserTab();
@@ -217,7 +217,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         projectPage.shouldHaveIndicatorsTable();
         projectPage.shouldHaveIndicator(testIndicator.getName());
-        projectPage.openIndicatorCard();
+        projectPage.openIndicatorCard(testIndicator.getName());
         projectPage.getBrowserTabs();
         //Переключение на другую вкладку
         projectPage.switchToNextBrowserTab();
@@ -259,7 +259,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         projectPage.shouldHaveIndicatorsTable();
         projectPage.shouldHaveIndicator(testIndicator.getName());
-        projectPage.openIndicatorCard();
+        projectPage.openIndicatorCard(testIndicator.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
@@ -334,7 +334,7 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         projectPage.shouldHaveIndicatorsTable();
         projectPage.shouldHaveIndicator(testIndicator.getName());
-        projectPage.openIndicatorCard();
+        projectPage.openIndicatorCard(testIndicator.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
@@ -409,7 +409,8 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         projectPage.shouldHaveIndicatorsTable();
         projectPage.shouldHaveIndicator(testIndicator.getName());
-        projectPage.openIndicatorCard();
+        projectPage.checkPageIsLoaded();
+        projectPage.openIndicatorCard(testIndicator.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
@@ -474,7 +475,8 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         projectPage.shouldHaveIndicatorsTable();
         projectPage.shouldHaveIndicator(testIndicator.getName());
-        projectPage.openIndicatorCard();
+        projectPage.checkPageIsLoaded();
+        projectPage.openIndicatorCard(testIndicator.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
@@ -524,7 +526,8 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         projectPage.shouldHaveIndicatorsTable();
         projectPage.shouldHaveIndicator(testIndicator.getName());
-        projectPage.openIndicatorCard();
+        projectPage.checkPageIsLoaded();
+        projectPage.openIndicatorCard(testIndicator.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
@@ -585,7 +588,8 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         projectPage.shouldHaveIndicatorsTable();
         projectPage.shouldHaveIndicator(testIndicator.getName());
-        projectPage.openIndicatorCard();
+        projectPage.checkPageIsLoaded();
+        projectPage.openIndicatorCard(testIndicator.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();
@@ -646,7 +650,8 @@ public class IndicatorTests extends BaseTest {
         indicatorPage.clickSaveAndClose();
         projectPage.shouldHaveIndicatorsTable();
         projectPage.shouldHaveIndicator(testIndicator.getName());
-        projectPage.openIndicatorCard();
+        projectPage.checkPageIsLoaded();
+        projectPage.openIndicatorCard(testIndicator.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         indicatorPage.clickAddValueButton();

@@ -55,16 +55,9 @@ public class SnapshotChangeRequestsPage extends BasePage {
     }
 
     @Step("Нажать кнопку 'Внести изменения'")
-    public void clickAddChangesButton(){
+    public void clickAddChanges(){
         viewForm_AddChangesButton.shouldBe(visible).click();
         getBrowserTabs();
         switchToNextBrowserTab();
-    }
-
-    @Step("Проверить что карточка Проекта открыта в режиме Слепка")
-    public void checkProjectCardIsOnSnapshotMode(String snapshotName){
-        checkPageIsLoaded();
-        $(".f-notify_inline").shouldBe(visible);
-        $x("//span[contains(text(),'"+snapshotName+"')]").shouldBe(visible);
     }
 }

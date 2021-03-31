@@ -70,6 +70,7 @@ public class IndicatorPage extends BasePage {
 
     @Step("Заполнить плановые, прогнозные и фактические значения показателя")
     public void fillIndicatorsValues(Indicator indicator) {
+        checkPageIsLoaded();
         searchAndSelectFirstFromSelect(periodInput_EditForm, indicator.getPeriod());
         typeText(planInput_EditForm, indicator.getPlan());
         typeText(forecastInput_EditForm, indicator.getForecast());

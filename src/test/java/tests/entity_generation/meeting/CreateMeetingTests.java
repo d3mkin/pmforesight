@@ -95,6 +95,7 @@ public class CreateMeetingTests extends BaseTest {
         meetingRegistry.shouldHaveCreatedRecord();
         meetingRegistry.selectRow();
         meetingRegistry.clickDelete();
+        meetingRegistry.checkRegistryIsLoaded();
         meetingRegistry.acceptDelete();
         meetingRegistry.searchMeeting(meeting.getName());
         meetingRegistry.shouldNotHaveResults();

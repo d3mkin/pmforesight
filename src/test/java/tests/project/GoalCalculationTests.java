@@ -19,6 +19,8 @@ import pages.goals_and_indicators.goal.GoalPage;
 import pages.goals_and_indicators.indicator.IndicatorPage;
 import tests.BaseTest;
 
+import static helpers.ActionsViaAPI.deleteGoalCreatedFromAPI;
+import static helpers.ActionsViaAPI.getGoalId;
 import static io.qameta.allure.Allure.parameter;
 
 @Epic(TestSuiteName.GOALS)
@@ -52,7 +54,7 @@ public class GoalCalculationTests extends BaseTest {
 
     @AfterEach
     public void logout() {
-        ActionsViaAPI.deleteGoalCreatedFromAPI();
+        deleteGoalCreatedFromAPI(getGoalId());
         new LogoutPage().open();
     }
 

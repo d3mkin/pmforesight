@@ -6,24 +6,28 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 import java.io.File;
-import java.time.Duration;
 import java.util.ArrayList;
 
+import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.time.Duration.ofMillis;
 
 public abstract class BasePage {
     private ArrayList<String> allTabs;
-     private String currentTab;
+    private String currentTab;
     protected SelenideElement window = $(".k-window");
     protected SelenideElement header = window.$(".k-window-titlebar");
     protected SelenideElement windowName = header.$(".k-window-title");
     protected SelenideElement actions = header.$(".k-window-actions");
     protected SelenideElement content = window.$(".k-window-content");
     protected SelenideElement loadImage = $(".k-loading-image");
+
     //Разворачивает окно на полный экран
     protected SelenideElement expandButton = actions.$("a[aria-label='window-Maximize']");
+
     //Форма редактирования
     private final SelenideElement editForm = $(".f-card__header .m-i-pencil2");
     //Кнопка Восстановить из полноэкронного режима
@@ -35,31 +39,31 @@ public abstract class BasePage {
     protected SelenideElement anyDropDown = $x("//div[contains(@class,'k-list-container k-popup k-group k-reset k-state-border-up')]");
 
     //Виджет календаря
-    private final SelenideElement resultCalendarSelect = $(By.xpath ("//span[@class='k-widget k-datepicker']//span[@class='k-select']"));
-    private final SelenideElement CalendarInput = $(By.xpath("//input[@id='DateAndTime']"));
-    private final SelenideElement calendarCurrentDay = $(By.xpath("//a[@class='k-link k-nav-today']"));
+    private final SelenideElement resultCalendarSelect = $x("//span[@class='k-widget k-datepicker']//span[@class='k-select']");
+    private final SelenideElement CalendarInput = $x("//input[@id='DateAndTime']");
+    private final SelenideElement calendarCurrentDay = $x("//a[@class='k-link k-nav-today']");
 
     //Селекты
     private final SelenideElement selectBlock = $("div.k-animation-container[aria-hidden='false']");
     private final SelenideElement selectFilterInput = selectBlock.$(".k-textbox");
-    private final SelenideElement selectMultiSelectInput = $ (By.xpath("//div[@class='k-multiselect-wrap k-floatwrap']//input[@class='k-input']"));
+    private final SelenideElement selectMultiSelectInput = $x("//div[@class='k-multiselect-wrap k-floatwrap']//input[@class='k-input']");
     private final SelenideElement selectFirstItem = selectBlock.$("li:first-child");
     private final ElementsCollection selectAllItems = $$("div.k-animation-container[aria-hidden='false'] li");
 
     //Диалоговое окно с предупреждением
-    private final SelenideElement closeInDialog = $(By.xpath("//button[@class='k-button k-primary']"));
-    private final ElementsCollection dialogWarnings = $$(By.xpath("//div[@data-role='dialog']//li"));
+    private final SelenideElement closeInDialog = $x("//button[@class='k-button k-primary']");
+    private final ElementsCollection dialogWarnings = $$x("//div[@data-role='dialog']//li");
     private final SelenideElement dialogTitle = $(".k-dialog-title");
     private final SelenideElement dialogMessage = $(".k-dialog-content");
-    private final SelenideElement closeDialogWithSave = $(By.xpath("//button[@class='k-button k-primary']"));
-    private final SelenideElement closeDialogWithoutSave = $(By.xpath("//body//button[2]"));
-    private final SelenideElement cancelDialog = $(By.xpath("//body//button[3]"));
-    private final SelenideElement deleteEntity =  $(By.xpath("//button[@class='k-button k-primary']"));
+    private final SelenideElement closeDialogWithSave = $x("//button[@class='k-button k-primary']");
+    private final SelenideElement closeDialogWithoutSave = $x("//body//button[2]");
+    private final SelenideElement cancelDialog = $x("//body//button[3]");
+    private final SelenideElement deleteEntity =  $x("//button[@class='k-button k-primary']");
 
     //Модальное окно загрузки файлов
-    private final SelenideElement uploadInput = $(By.xpath("//input[@id='f-file-uploader']"));
-    private final SelenideElement uploadedFileName = $(By.xpath("//span[@class='k-file-name']"));
-    private final SelenideElement uploadedFileStatus = $(By.xpath("//strong[@class='k-upload-status k-upload-status-total']"));
+    private final SelenideElement uploadInput = $x("//input[@id='f-file-uploader']");
+    private final SelenideElement uploadedFileName = $x("//span[@class='k-file-name']");
+    private final SelenideElement uploadedFileStatus = $x("//strong[@class='k-upload-status k-upload-status-total']");
 
     //Методы по работе с вкладками браузера
     //Получаем и записываем id вкладок браузера в список
@@ -201,6 +205,7 @@ public abstract class BasePage {
     @Step("Открыть форму редактирования")
     public void clickEditForm() {
         editForm.click();
+        modalWindowShouldBeOpened();
     }
 
     //Методы для заполненния данных в зависимости от типа поля
@@ -250,12 +255,12 @@ public abstract class BasePage {
             return;
         }
         el.click();
-        selectFilterInput.waitUntil(visible, Configuration.timeout);
+        selectFilterInput.shouldBe(visible, ofMillis(timeout));
         selectFilterInput.setValue(value);
         sleep(2000);
         selectAllItems. shouldHaveSize(1);
         selectFirstItem.click();
-        el.waitUntil(text(value), Configuration.timeout);
+        el.waitUntil(text(value), timeout);
     }
 
     @Step ("Ввести дату {value}")
@@ -327,8 +332,8 @@ public abstract class BasePage {
 
     @Step ("Проверить что страница загрузилась")
     public void checkPageIsLoaded () {
-        loadImage.shouldNotBe(visible, Duration.ofMinutes(1));
-        $(".k-loading-mask").shouldNotBe(exist, Duration.ofMinutes(10));
-
+        //loadImage.shouldNotBe(visible, Duration.ofMinutes(1));
+        $$(".k-loading-image").shouldBe(size(0), ofMillis(timeout));
+        $(".k-loading-mask").shouldNotBe(exist, ofMillis(timeout));
     }
 }

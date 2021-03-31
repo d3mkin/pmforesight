@@ -81,6 +81,12 @@ public class SnapshotTests extends BaseTest {
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
+        snapshotPage.checkWorkflowButtonExist("Отправить на согласование");
+        snapshotPage.checkWorkflowButtonExist("Удалить");
+        snapshotPage.checkWorkflowButtonNotExist("Отозвать");
+        snapshotPage.checkWorkflowButtonNotExist("Согласовать");
+        snapshotPage.checkWorkflowButtonNotExist("Отклонить");
+
     }
 
     @ParameterizedTest(name = "Отправка на согласование слепка в проекте")
@@ -102,10 +108,13 @@ public class SnapshotTests extends BaseTest {
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
-        String snapshotComment = "Комментарий" + currentTime;
+        String snapshotComment = "Комментарий_" + currentTime;
         snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
         snapshotPage.sendToApprove(snapshotComment, fileToUpload);
         snapshotPage.checkNameAndStatus(snapshot.getName(), "На согласовании");
+        snapshotPage.checkWorkflowButtonExist("Отозвать");
+        snapshotPage.checkWorkflowButtonExist("Согласовать");
+        snapshotPage.checkWorkflowButtonExist("Отклонить");
         snapshotPage.shouldHaveRecordInTable(user.getName(), "Отправлен на согласование", snapshotComment, fileToUpload.getName());
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
@@ -134,14 +143,22 @@ public class SnapshotTests extends BaseTest {
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
-        String snapshotComment = "Комментарий" + currentTime;
+        String snapshotComment = "Комментарий_" + currentTime;
         snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
         snapshotPage.sendToApprove(snapshotComment, fileToUpload);
         snapshotPage.checkNameAndStatus(snapshot.getName(), "На согласовании");
         snapshotPage.shouldHaveRecordInTable(user.getName(), "Отправлен на согласование", snapshotComment, fileToUpload.getName());
+        snapshotPage.checkWorkflowButtonExist("Отозвать");
+        snapshotPage.checkWorkflowButtonExist("Согласовать");
+        snapshotPage.checkWorkflowButtonExist("Отклонить");
         snapshotPage.approveSnapshot(snapshotComment, fileToUpload);
         snapshotPage.checkNameAndStatus(snapshot.getName(), "Согласован");
         snapshotPage.shouldHaveRecordInTable(user.getName(), "Слепок согласован", snapshotComment, fileToUpload.getName());
+        snapshotPage.checkWorkflowButtonNotExist("Отправить на согласование");
+        snapshotPage.checkWorkflowButtonNotExist("Удалить");
+        snapshotPage.checkWorkflowButtonNotExist("Отозвать");
+        snapshotPage.checkWorkflowButtonNotExist("Согласовать");
+        snapshotPage.checkWorkflowButtonNotExist("Отклонить");
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
@@ -169,7 +186,7 @@ public class SnapshotTests extends BaseTest {
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
-        String snapshotComment = "Комментарий" + currentTime;
+        String snapshotComment = "Комментарий_" + currentTime;
         snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
         snapshotPage.sendToApprove(snapshotComment, fileToUpload);
         snapshotPage.checkNameAndStatus(snapshot.getName(), "На согласовании");
@@ -177,6 +194,11 @@ public class SnapshotTests extends BaseTest {
         snapshotPage.recallSnapshot(snapshotComment, fileToUpload);
         snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
         snapshotPage.shouldHaveRecordInTable(user.getName(), "Согласование отозвано", snapshotComment, fileToUpload.getName());
+        snapshotPage.checkWorkflowButtonExist("Отправить на согласование");
+        snapshotPage.checkWorkflowButtonExist("Удалить");
+        snapshotPage.checkWorkflowButtonNotExist("Отозвать");
+        snapshotPage.checkWorkflowButtonNotExist("Согласовать");
+        snapshotPage.checkWorkflowButtonNotExist("Отклонить");
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
@@ -204,7 +226,7 @@ public class SnapshotTests extends BaseTest {
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
-        String snapshotComment = "Комментарий" + currentTime;
+        String snapshotComment = "Комментарий_" + currentTime;
         snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
         snapshotPage.sendToApprove(snapshotComment, fileToUpload);
         snapshotPage.checkNameAndStatus(snapshot.getName(), "На согласовании");
@@ -212,6 +234,11 @@ public class SnapshotTests extends BaseTest {
         snapshotPage.rejectSnapshot(snapshotComment, fileToUpload);
         snapshotPage.checkNameAndStatus(snapshot.getName(), "Отклонён");
         snapshotPage.shouldHaveRecordInTable(user.getName(), "Слепок отклонён", snapshotComment, fileToUpload.getName());
+        snapshotPage.checkWorkflowButtonExist("Удалить");
+        snapshotPage.checkWorkflowButtonNotExist("Отозвать");
+        snapshotPage.checkWorkflowButtonNotExist("Согласовать");
+        snapshotPage.checkWorkflowButtonNotExist("Отклонить");
+        snapshotPage.checkWorkflowButtonNotExist("Отправить на согласование");
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
@@ -239,7 +266,7 @@ public class SnapshotTests extends BaseTest {
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
-        String snapshotComment = "Комментарий" + currentTime;
+        String snapshotComment = "Комментарий_" + currentTime;
         snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
         snapshotPage.deleteSnapshot(snapshotComment, fileToUpload);
         snapshotPage.checkNameAndStatus(snapshot.getName(), "Удалён");
@@ -270,7 +297,7 @@ public class SnapshotTests extends BaseTest {
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
-        String snapshotComment = "Комментарий" + currentTime;
+        String snapshotComment = "Комментарий_" + currentTime;
         snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
         snapshotPage.sendToApprove(snapshotComment, fileToUpload);
         snapshotPage.checkNameAndStatus(snapshot.getName(), "На согласовании");
@@ -335,7 +362,7 @@ public class SnapshotTests extends BaseTest {
         projectPage.openSnapshotCard(snapshot.getName());
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
-        String snapshotComment = "Комментарий" + currentTime;
+        String snapshotComment = "Комментарий_" + currentTime;
         snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
         snapshotPage.sendToApprove(snapshotComment, fileToUpload);
         snapshotPage.checkNameAndStatus(snapshot.getName(), "На согласовании");
@@ -360,7 +387,7 @@ public class SnapshotTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.createProjectViaAPI("Инициирование", "Ведомственный");
         ActionsViaAPI.openProjectCreatedFromAPI();
-        String snapshotName = "Авто-слепок "+ currentDate;
+        String snapshotName = "Авто-слепок_"+ currentDate;
         String snapshotDate = currentDate;
         projectPage.checkCurrentProjectStage("Инициирование");
         //Выполняем условия для перевода на стадию Подготовка

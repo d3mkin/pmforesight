@@ -60,6 +60,7 @@ public class ProjectRegistry implements Registry {
         //controlPanel.clickSearch();
     }
 
+    //TODO:Перенести в BaseRegistry
     @Step("Найти проект {projectName} в реестре и открыть его карточку")
     public void searchAndOpenProject(String projectName) {
         searchProject(projectName);

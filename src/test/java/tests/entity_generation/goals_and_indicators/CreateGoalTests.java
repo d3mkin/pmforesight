@@ -18,6 +18,9 @@ import pages.goals_and_indicators.goal.GoalPage;
 import tests.BaseTest;
 import helpers.ActionsViaAPI;
 
+import static helpers.ActionsViaAPI.*;
+import static helpers.ActionsViaAPI.deleteGoalCreatedFromAPI;
+import static helpers.ActionsViaAPI.getGoalId;
 import static io.qameta.allure.Allure.parameter;
 
 @Epic(TestSuiteName.ENTITY_CREATION)
@@ -117,8 +120,8 @@ public class CreateGoalTests extends BaseTest {
     public void createGoalFromAPITest(User user) {
         parameter("Пользователь", user.getName());
         singIn.asUser(user);
-        ActionsViaAPI.createGoalViaAPI("Ведомственный");
-        ActionsViaAPI.openGoalCreatedFromAPI();
-        ActionsViaAPI.deleteGoalCreatedFromAPI();
+        createGoalViaAPI("Ведомственный");
+        openGoalCreatedFromAPI();
+        deleteGoalCreatedFromAPI(getGoalId());
     }
 }
