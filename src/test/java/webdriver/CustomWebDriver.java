@@ -16,7 +16,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import static org.openqa.selenium.firefox.FirefoxDriver.PROFILE;
@@ -24,7 +23,7 @@ import static org.openqa.selenium.firefox.FirefoxDriver.PROFILE;
 
 public class CustomWebDriver implements WebDriverProvider {
 
-    String browserName = System.getProperty("browserName");
+    String browserName = System.getProperty("browser");
     String selenoid = System.getProperty("selenoid_url");
 
     @Override
@@ -32,41 +31,34 @@ public class CustomWebDriver implements WebDriverProvider {
         LoggingPreferences logPrefs = new LoggingPreferences();
         logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
 
-        capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", false);
-        capabilities.setCapability("timeZone", "Europe/Moscow");
-        capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
-        WebDriverManager.chromedriver().setup();
-
-//        switch (browserName) {
-//            case WebDriverRunner.FIREFOX:
-//                capabilities = DesiredCapabilities.firefox();
-//                FirefoxProfile firefoxProfile = new FirefoxProfile();
-//                firefoxProfile.setPreference("browser.fullscreen.autohide", true);
-//                firefoxProfile.setPreference("browser.fullscreen.animateUp", 0);
-//                capabilities.setCapability("marionette", true);
-//                capabilities.setCapability(PROFILE, firefoxProfile);
-//                break;
-//            case WebDriverRunner.CHROME:
-//                capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
-//                WebDriverManager.chromedriver().setup();
-//                break;
-//        }
-
-        if(System.getProperty("selenoid_url") != null) {
-//            return new RemoteWebDriver(getRemoteWebDriverUrl(), capabilities);
-          return getRemoteWebDriver(capabilities);
-        } else {
-//            return new ChromeDriver(capabilities);
-          return getLocalChromeDriver(capabilities);
+        switch (browserName) {
+            case WebDriverRunner.FIREFOX:
+                capabilities = DesiredCapabilities.firefox();
+                FirefoxProfile firefoxProfile = new FirefoxProfile();
+                firefoxProfile.setPreference("browser.fullscreen.autohide", true);
+                firefoxProfile.setPreference("browser.fullscreen.animateUp", 0);
+                capabilities.setCapability("marionette", true);
+                capabilities.setCapability(PROFILE, firefoxProfile);
+                break;
+            case WebDriverRunner.CHROME:
+                capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+                capabilities.setCapability("enableVNC", true);
+                capabilities.setCapability("enableVideo", false);
+                capabilities.setCapability("timeZone", "Europe/Moscow");
+                capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
+                WebDriverManager.chromedriver().setup();
+                break;
+            case WebDriverRunner.INTERNET_EXPLORER:
+                capabilities.setCapability("browserName", "internet explorer");
+                capabilities.setCapability("browserVersion", "11");
+                capabilities.setCapability("timeZone", "Europe/Moscow");
         }
 
-//        if(selenoid != null) {
-//            return getRemoteWebDriver(capabilities);
-//        } else {
-//            return getLocalChromeDriver(capabilities);
-//        }
+        if (System.getProperty("selenoid_url") != null) {
+          return getRemoteWebDriver(capabilities);
+        } else {
+          return getLocalChromeDriver(capabilities);
+        }
     }
 
     private WebDriver getLocalChromeDriver(DesiredCapabilities capabilities) {
