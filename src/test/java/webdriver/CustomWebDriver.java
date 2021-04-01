@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
@@ -54,6 +55,10 @@ public class CustomWebDriver implements WebDriverProvider {
                 capabilities.setCapability("browserVersion", "11");
                 capabilities.setCapability("timeZone", "Europe/Moscow");
                 capabilities.setAcceptInsecureCerts(false);
+                capabilities.setCapability("ie.usePerProcessProxy", true);
+                capabilities.setCapability("ie.browserCommandLineSwitches", "-private");
+                capabilities.setCapability("ie.ensureCleanSession", true);
+                capabilities.setCapability("requireWindowFocus", false);
                 WebDriverManager.iedriver().setup();
                 break;
         }
