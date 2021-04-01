@@ -39,6 +39,7 @@ public class CustomWebDriver implements WebDriverProvider {
                 firefoxProfile.setPreference("browser.fullscreen.animateUp", 0);
                 capabilities.setCapability("marionette", true);
                 capabilities.setCapability(PROFILE, firefoxProfile);
+                WebDriverManager.firefoxdriver().setup();
                 break;
             case WebDriverRunner.CHROME:
                 capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
@@ -52,6 +53,7 @@ public class CustomWebDriver implements WebDriverProvider {
                 capabilities.setCapability("browserName", "internet explorer");
                 capabilities.setCapability("browserVersion", "11");
                 capabilities.setCapability("timeZone", "Europe/Moscow");
+                WebDriverManager.iedriver().setup();
                 break;
         }
 
