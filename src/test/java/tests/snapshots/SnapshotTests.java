@@ -387,7 +387,7 @@ public class SnapshotTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.createProjectViaAPI("Инициирование", "Ведомственный");
         ActionsViaAPI.openProjectCreatedFromAPI();
-        String snapshotName = "Авто-слепок_"+ currentDate;
+        String snapshotName = "Авто-слепок "+ currentDate;
         String snapshotDate = currentDate;
         projectPage.checkCurrentProjectStage("Инициирование");
         //Выполняем условия для перевода на стадию Подготовка

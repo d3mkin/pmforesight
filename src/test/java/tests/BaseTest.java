@@ -18,16 +18,17 @@ import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 public class BaseTest {
 //    static protected ConfigManager configManager = new ConfigManager();
     @BeforeAll
+    @Step("Tests setup")
     public static void setup() {
         addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(false)
-                .includeSelenideSteps(false)
+                .includeSelenideSteps(true)
                 .enableLogs(LogType.BROWSER, Level.SEVERE));
         Configuration.timeout = 30000;
+        //        Configuration.headless = true;
         Configuration.startMaximized = true;
         Configuration.browserSize = "1920x1080";
-//        Configuration.headless = true;
         Configuration.baseUrl = System.getProperty("baseUrl","http://tgr.hera.test.local");
         String selenoid = System.getProperty("selenoid_url");
         String browser = System.getProperty("browser", "chrome");

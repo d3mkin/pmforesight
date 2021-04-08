@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.logging.Level;
 
 import static org.openqa.selenium.firefox.FirefoxDriver.PROFILE;
+import static org.openqa.selenium.remote.CapabilityType.ACCEPT_SSL_CERTS;
 
 
 public class CustomWebDriver implements WebDriverProvider {
@@ -48,6 +49,8 @@ public class CustomWebDriver implements WebDriverProvider {
                 capabilities.setCapability("enableVideo", false);
                 capabilities.setCapability("timeZone", "Europe/Moscow");
                 capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
+//                capabilities.setAcceptInsecureCerts(true);
+                capabilities.setCapability(ACCEPT_SSL_CERTS, true);
                 WebDriverManager.chromedriver().setup();
                 break;
             case WebDriverRunner.IE:

@@ -20,7 +20,6 @@ public class ActionsViaAPI {
     static private int portfolioId;
     static private int nationalProjectId;
     static private int nonProjectEventId;
-
     static private String projectName;
     static private String goalName;
     static private String userName;
@@ -28,6 +27,9 @@ public class ActionsViaAPI {
     static private String portfolioName;
     static private String nationalProjectName;
     static private String nonProjectEventName;
+    static private final String testEnv = "http://tgr.hera.test.local";
+    static private final String stageEnv = "https://npdemo.pmf2-gos.pmpractice.ru";
+    static private final String prodEnv = "http://releasetest.pmforesight.ru";
 
 
     static long currentTime = System.currentTimeMillis();
@@ -102,29 +104,6 @@ public class ActionsViaAPI {
         if (projectLevel.equals("Федеральный")) projectLevel = "1";
         if (projectLevel.equals("Региональный")) projectLevel = "2";
 
-/*        String testProjectBody = "{\n" +
-                "  classid: '46caa4ad-02b8-4d70-a1db-196bab860742', \n" +
-                "  classname: 'Project',\n" +
-                "  classtitle: 'Проект',\n" +
-                "  entityname: 'Project',\n" +
-                "  keyfield: 'ProjectId',\n" +
-                "  namefield: 'Name',\n" +
-                "  UserAccountId: 100070,\n" +
-                "  UserAccount: 'FA',\n" +
-                "  OwnerId: 100070,\n" +
-                "  LeaderId: 100070,\n" +
-                "  ProjectLevelId: "+projectLevel+",\n" +
-                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() + "',\n" +
-                "  EntityId: '46caa4ad-02b8-4d70-a1db-196bab860742',\n" +
-                "  ParentId: 2,\n" +
-                "  ActivityPhaseId: "+projectStage+",\n" +
-                "  ProjectTypeId: 2,\n" +
-                "  PriorityId: 2,\n" +
-                "  ControlSubjectId: 223,\n" +
-                "  IsEBSynced: false,\n" +
-                "  id: 'new'\n" +
-                "}";*/
-
         String testProjectBody = "{\n" +
                 "  classid: '46caa4ad-02b8-4d70-a1db-196bab860742', \n" +
                 "  classname: 'Project',\n" +
@@ -197,15 +176,9 @@ public class ActionsViaAPI {
         String body = null;
         getCookiesFromLogIn();
 
-        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testProjectBody;
-        if (Configuration.baseUrl.equals("https://npdemo.pmf2-gos.pmpractice.ru")) body = stageProjectBody;
-        if (Configuration.baseUrl.equals("http://releasetest.pmforesight.ru")) body = prodProjectBody;
-
-//        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
-//            body = testProjectBody;
-//        } else {
-//            body = stageProjectBody;
-//        }
+        if (Configuration.baseUrl.equals(testEnv)) body = testProjectBody;
+        if (Configuration.baseUrl.equals(stageEnv)) body = stageProjectBody;
+        if (Configuration.baseUrl.equals(prodEnv)) body = prodProjectBody;
 
         Response response =
                 given()
@@ -274,23 +247,6 @@ public class ActionsViaAPI {
         if (goalLevel.equals("Региональный")) goalLevel = "2";
         if (goalLevel.equals("Национальный")) goalLevel = "4";
 
-/*        String testGoalBody = "{\n" +
-                "  ControlLevelId: "+goalLevel+",\n" +
-                "  EditorsId: 100070,\n" +
-                "  IsComplete: false,\n" +
-                "  IsNationalProjectTask: false,\n" +
-                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() +"',\n" +
-                "  UserAccount: 'FA',\n" +
-                "  UserAccountId: '100070',\n" +
-                "  classid: 'a7db6e46-462a-4087-a7e3-d5623648cca0',\n" +
-                "  classname: 'Goal',\n" +
-                "  classtitle: 'Цель',\n" +
-                "  entityname: 'Goal',\n" +
-                "  id: 'new',\n" +
-                "  keyfield: 'GoalId',\n" +
-                "  namefield: 'Name',\n" +
-                "}";*/
-
         String testGoalBody = "{\n" +
                 "  ControlLevelId: "+goalLevel+",\n" +
                 "  EditorsId: 100070,\n" +
@@ -345,15 +301,9 @@ public class ActionsViaAPI {
         String body = null;
         getCookiesFromLogIn();
 
-        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testGoalBody;
-        if (Configuration.baseUrl.equals("https://npdemo.pmf2-gos.pmpractice.ru")) body = stageGoalBody;
-        if (Configuration.baseUrl.equals("http://releasetest.pmforesight.ru")) body = prodGoalBody;
-
-//        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
-//            body = testGoalBody;
-//        } else {
-//            body = stageGoalBody;
-//        }
+        if (Configuration.baseUrl.equals(testEnv)) body = testGoalBody;
+        if (Configuration.baseUrl.equals(stageEnv)) body = stageGoalBody;
+        if (Configuration.baseUrl.equals(prodEnv)) body = prodGoalBody;
 
         Response response =
                 given()
@@ -394,32 +344,6 @@ public class ActionsViaAPI {
     //Пользователь
     @Step ("Создать пользователя через API")
     public static void createUserViaAPI() {
-
-/*        String testUserBody = "{\n" +
-                "  Account: '',\n" +
-                "  Enabled: true,\n" +
-                "  EntityId: '66d6d76c-067c-4aa7-b334-4e2748be4fb9',\n" +
-                "  FirstName: 'UserFromAPI_"+ System.currentTimeMillis() +"',\n" +
-                "  IsAggregateMail: false,\n" +
-                "  IsAssignment: true,\n" +
-                "  IsBoss: false,\n" +
-                "  IsFunctionalAdministrator: false,\n" +
-                "  IsGroup: false,\n" +
-                "  IsReceiveMail: false,\n" +
-                "  IsShowSendMessage: false,\n" +
-                "  IsSoftDeleted: false,\n" +
-                "  Name: 'UserFromAPI_"+ System.currentTimeMillis() +"',\n" +
-                "  SurName: 'UserFromAPI_"+ System.currentTimeMillis() +"',\n" +
-                "  UserAccount: 'FA',\n" +
-                "  UserAccountId: '100070',\n" +
-                "  classid: '66d6d76c-067c-4aa7-b334-4e2748be4fb9',\n" +
-                "  classname: 'User',\n" +
-                "  classtitle: 'Пользователь',\n" +
-                "  entityname: 'User',\n" +
-                "  id: 'new',\n" +
-                "  keyfield: 'UserId',\n" +
-                "  namefield: 'FullName',\n" +
-                "}";*/
 
         String testUserBody = "{\n" +
                 "  Account: '',\n" +
@@ -476,7 +400,7 @@ public class ActionsViaAPI {
         String body;
         getCookiesFromLogIn();
 
-        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
+        if (Configuration.baseUrl.equals(testEnv)) {
             body = testUserBody;
         } else {
             body = stageUserBody;
@@ -501,26 +425,6 @@ public class ActionsViaAPI {
     //Программа
     @Step ("Создать Программу через API")
     public static void createProgramViaAPI() {
-
-/*        String testProgramBody = "{\n" +
-                "  ActivityPhaseId: 40047,\n" +
-                "  OwnerId: 100070,\n" +
-                "  LeaderId: 100070,\n" +
-                "  CustomerId: 100070,\n" +
-                "  EntityId: '396abf01-5bf3-46a3-b4a5-a7ef4cdb8859',\n" +
-                "  PriorityId: 2,\n" +
-                "  ParentId: 292214,\n" +
-                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() +"',\n" +
-                "  UserAccount: 'FA',\n" +
-                "  UserAccountId: '100070',\n" +
-                "  classid: '396abf01-5bf3-46a3-b4a5-a7ef4cdb8859',\n" +
-                "  classname: 'LProgram',\n" +
-                "  classtitle: 'Программа',\n" +
-                "  entityname: 'LProgram',\n" +
-                "  id: 'new',\n" +
-                "  keyfield: 'LProgramId',\n" +
-                "  namefield: 'Name',\n" +
-                "}";*/
 
         String testProgramBody = "{\n" +
                 "  ActivityPhaseId: 40047,\n" +
@@ -585,15 +489,9 @@ public class ActionsViaAPI {
         String body = null;
         getCookiesFromLogIn();
 
-        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testProgramBody;
-        if (Configuration.baseUrl.equals("https://npdemo.pmf2-gos.pmpractice.ru")) body = stageProgramBody;
-        if (Configuration.baseUrl.equals("http://releasetest.pmforesight.ru")) body = prodProgramBody;
-
-//        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
-//            body = testProgramBody;
-//        } else {
-//            body = stageProgramBody;
-//        }
+        if (Configuration.baseUrl.equals(testEnv)) body = testProgramBody;
+        if (Configuration.baseUrl.equals(stageEnv)) body = stageProgramBody;
+        if (Configuration.baseUrl.equals(prodEnv)) body = prodProgramBody;
 
         Response response =
                 given()
@@ -619,21 +517,6 @@ public class ActionsViaAPI {
     //Портфель
     @Step ("Создать Портфель через API")
     public static void createPortfolioViaAPI() {
-
-/*        String testPortfolioBody = "{\n" +
-                "  LeaderId: 100070,\n" +
-                "  EntityId: 'bfed1f68-33a7-4428-855f-799640070a53',\n" +
-                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() +"',\n" +
-                "  UserAccount: 'FA',\n" +
-                "  UserAccountId: '100070',\n" +
-                "  classid: 'bfed1f68-33a7-4428-855f-799640070a53',\n" +
-                "  classname: 'Portfolio',\n" +
-                "  classtitle: 'Портфель',\n" +
-                "  entityname: 'Portfolio',\n" +
-                "  id: 'new',\n" +
-                "  keyfield: 'PortfolioId',\n" +
-                "  namefield: 'Name',\n" +
-                "}";*/
 
         String testPortfolioBody = "{\n" +
                 "  LeaderId: 100070,\n" +
@@ -683,15 +566,9 @@ public class ActionsViaAPI {
         String body = null;
         getCookiesFromLogIn();
 
-        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testPortfolioBody;
-        if (Configuration.baseUrl.equals("https://npdemo.pmf2-gos.pmpractice.ru")) body = stagePortfolioBody;
-        if (Configuration.baseUrl.equals("http://releasetest.pmforesight.ru")) body = prodPortfolioBody;
-
-//        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
-//            body = testPortfolioBody;
-//        } else {
-//            body = stagePortfolioBody;
-//        }
+        if (Configuration.baseUrl.equals(testEnv)) body = testPortfolioBody;
+        if (Configuration.baseUrl.equals(stageEnv)) body = stagePortfolioBody;
+        if (Configuration.baseUrl.equals(prodEnv)) body = prodPortfolioBody;
 
         Response response =
                 given()
@@ -769,15 +646,9 @@ public class ActionsViaAPI {
         String body = null;
         getCookiesFromLogIn();
 
-        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testNationalProjectBody;
-        if (Configuration.baseUrl.equals("https://npdemo.pmf2-gos.pmpractice.ru")) body = stageNationalProjectBody;
-        if (Configuration.baseUrl.equals("http://releasetest.pmforesight.ru")) body = prodNationalProjectBody;
-
-//        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
-//            body = testNationalProjectBody;
-//        } else {
-//            body = stageNationalProjectBody;
-//        }
+        if (Configuration.baseUrl.equals(testEnv)) body = testNationalProjectBody;
+        if (Configuration.baseUrl.equals(stageEnv)) body = stageNationalProjectBody;
+        if (Configuration.baseUrl.equals(prodEnv)) body = prodNationalProjectBody;
 
         Response response =
                 given()
@@ -798,24 +669,6 @@ public class ActionsViaAPI {
     //Непроектное мероприятие
     @Step ("Создать Непроектное мероприятие через API")
     public static void createNonProjectEventViaAPI() {
-
-/*        String testNonProjectEventBody = "{\n" +
-                "  CustomerId: 100070,\n" +
-                "  LeaderId: 100070,\n" +
-                "  ParentId: 93092,\n" +
-                "  ActivityPhaseId : 40045,\n" +
-                "  EntityId: '327c5b7d-47d0-4b13-8ea5-82bef6255ed9',\n" +
-                "  Name: 'CreatedFromAPI_"+ System.currentTimeMillis() +"',\n" +
-                "  UserAccount: 'FA',\n" +
-                "  UserAccountId: '100070',\n" +
-                "  classid: '327c5b7d-47d0-4b13-8ea5-82bef6255ed9',\n" +
-                "  classname: 'Event',\n" +
-                "  classtitle: 'Непроектное мероприятие',\n" +
-                "  entityname: 'Event',\n" +
-                "  id: 'new',\n" +
-                "  keyfield: 'EventId',\n" +
-                "  namefield: 'Name',\n" +
-                "}";*/
 
         String testNonProjectEventBody = "{\n" +
                 "  CustomerId: 100070,\n" +
@@ -874,15 +727,9 @@ public class ActionsViaAPI {
         String body = null;
         getCookiesFromLogIn();
 
-        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) body = testNonProjectEventBody;
-        if (Configuration.baseUrl.equals("https://npdemo.pmf2-gos.pmpractice.ru")) body = stageNonProjectEventBody;
-        if (Configuration.baseUrl.equals("http://releasetest.pmforesight.ru")) body = prodNonProjectEventBody;
-
-//        if (Configuration.baseUrl.equals("http://tgr.hera.test.local")) {
-//            body = testNonProjectEventBody;
-//        } else {
-//            body = stageNonProjectEventBody;
-//        }
+        if (Configuration.baseUrl.equals(testEnv)) body = testNonProjectEventBody;
+        if (Configuration.baseUrl.equals(stageEnv)) body = stageNonProjectEventBody;
+        if (Configuration.baseUrl.equals(prodEnv)) body = prodNonProjectEventBody;
 
         Response response =
                 given()
