@@ -86,7 +86,7 @@ task run_tests_parallel(type: Test) {
 
 task auth (type: Test) {
     useJUnitPlatform {
-        includeTags 'Authorization'
+        includeTags 'authorization'
     }
 }
 
