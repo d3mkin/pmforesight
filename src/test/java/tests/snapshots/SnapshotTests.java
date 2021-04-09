@@ -29,7 +29,7 @@ import static io.qameta.allure.Allure.parameter;
 
 
 @Epic(TestSuiteName.SNAPSHOTS)
-@Tag("Snapshots")
+@Tag("snapshots")
 @Tag("Regression")
 public class SnapshotTests extends BaseTest {
     private SingInPage singIn;

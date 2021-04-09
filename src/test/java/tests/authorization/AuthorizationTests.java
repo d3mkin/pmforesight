@@ -15,7 +15,7 @@ import tests.BaseTest;
 import static io.qameta.allure.Allure.parameter;
 
 @Story(TestSuiteName.AUTH)
-@Tag("Authorization")
+@Tag("authorization")
 @Tag("Regression")
 public class AuthorizationTests extends BaseTest {
 

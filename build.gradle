@@ -13,7 +13,7 @@ targetCompatibility = 1.8
 
 ext {
     allureVersion = '2.13.5'
-    selenideVersion = '5.18.0'
+    selenideVersion = '5.20.1'
     junitVersion = '5.6.2'
     aspectjweaver = '1.9.5'
     logbackVersion = '1.2.3'
@@ -92,12 +92,24 @@ task auth (type: Test) {
 
 task stage_transition (type: Test) {
     useJUnitPlatform {
-        includeTags 'Stage_transition'
+        includeTags 'stageTransition'
     }
 }
 
 task cascade_deletion (type: Test) {
     useJUnitPlatform {
         includeTags 'cascadeDeletion'
+    }
+}
+
+task change_request (type: Test) {
+    useJUnitPlatform {
+        includeTags 'changeRequest'
+    }
+}
+
+task snapshots (type: Test) {
+    useJUnitPlatform {
+        includeTags 'snapshots'
     }
 }

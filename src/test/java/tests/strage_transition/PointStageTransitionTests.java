@@ -24,7 +24,7 @@ import java.util.Calendar;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Tag("Stage_transition")
+@Tag("stageTransition")
 @Epic(TestSuiteName.CHANGE_STATUS)
 @Story("Перевод КТ по стадиям")
 public class PointStageTransitionTests extends BaseTest {
