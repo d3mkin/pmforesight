@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
@@ -62,7 +63,8 @@ public class CustomWebDriver implements WebDriverProvider {
                 capabilities.setCapability("ie.usePerProcessProxy", true);
                 capabilities.setCapability("ie.browserCommandLineSwitches", "-private");
                 capabilities.setCapability("ie.ensureCleanSession", true);
-                capabilities.setCapability("ignoreZoomSetting", true);
+                capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
+//                capabilities.setCapability("ignoreZoomSetting", true);
                 capabilities.setCapability("requireWindowFocus", false);
                 WebDriverManager.iedriver().setup();
                 break;
