@@ -61,6 +61,7 @@ public class CustomWebDriver implements WebDriverProvider {
                 capabilities.setCapability("ie.usePerProcessProxy", true);
                 capabilities.setCapability("ie.browserCommandLineSwitches", "-private");
                 capabilities.setCapability("ie.ensureCleanSession", true);
+                capabilities.setCapability("ignoreZoomSetting", true);
                 capabilities.setCapability("requireWindowFocus", false);
                 WebDriverManager.iedriver().setup();
                 break;
