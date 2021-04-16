@@ -35,7 +35,8 @@ public class BaseTest {
             Configuration.startMaximized = true;
         } else {
             Configuration.browser = CustomWebDriver.class.getName();
-            Configuration.browserSize = "1920x1080";
+//            Configuration.browserSize = "1920x1080";
+            Configuration.startMaximized = true;
         }
     }
 
