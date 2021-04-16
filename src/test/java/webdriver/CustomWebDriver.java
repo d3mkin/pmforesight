@@ -55,7 +55,6 @@ public class CustomWebDriver implements WebDriverProvider {
                 WebDriverManager.chromedriver().setup();
                 break;
             case WebDriverRunner.IE:
-                capabilities = DesiredCapabilities.internetExplorer();
                 capabilities.setCapability("browserName", "internet explorer");
                 capabilities.setCapability("browserVersion", "11");
                 capabilities.setCapability("timeZone", "Europe/Moscow");
@@ -66,7 +65,6 @@ public class CustomWebDriver implements WebDriverProvider {
                 capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
 //                capabilities.setCapability("ignoreZoomSetting", true);
                 capabilities.setCapability("requireWindowFocus", false);
-                WebDriverManager.iedriver().setup();
                 break;
         }
 
