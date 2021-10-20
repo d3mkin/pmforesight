@@ -32,8 +32,7 @@ public class BaseTest {
         String browser = System.getProperty("browser", "chrome");
         if (selenoid == null) {
             Configuration.browser = browser;
-//            Configuration.startMaximized = true;
-            Configuration.browserSize = "1920x1080";
+            Configuration.startMaximized = true;
         } else {
             Configuration.browser = CustomWebDriver.class.getName();
             Configuration.browserSize = "3840x2160";
