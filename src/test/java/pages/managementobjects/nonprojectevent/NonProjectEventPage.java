@@ -268,6 +268,6 @@ public class NonProjectEventPage extends BasePage {
 
     @Step("Проверить наличие Открытого вопроса в таблице Открытых вопросов")
     public void checkOpenQuestionPresentInTable(String questionName){
-        $x("//div[@id='tab-lov']//td//a[contains(text(),'"+ questionName +"')]").shouldBe(visible);
+        $x("//td[@data-column-field='Name']//a[contains(text(),'"+ questionName +"')]").shouldBe(visible);
     }
 }

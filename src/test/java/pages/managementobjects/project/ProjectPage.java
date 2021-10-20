@@ -37,12 +37,13 @@ public class ProjectPage extends BasePage {
     private final SelenideElement currentProjectStageField = $(".f-card__info");
     private final SelenideElement projectViewName = $(".f-card__name");
     private final SelenideElement changeProjectStageButton = $x("//li[@id='MoveToNextPhase']");
-    private final SelenideElement nextStageButton = $x("//div[@class='f-popup__container']//li[@name='NextPhaseButton']");
-    private final SelenideElement prevStageButton = $x("//div[@class='f-popup__container']//li[@name='PrevPhaseButton']");
-    private final SelenideElement cancelStageButton = $x("//div[@class='f-popup__container']//li[@name='CancelListItem']");
+    private final SelenideElement stageWorkflowWidget = $x("//span[.='Переход по стадиям']");
+    private final SelenideElement nextStageButton = $(".EntityStateEdgeWorkflow .k-primary.k-button");
+    private final SelenideElement prevStageButton = $(".EntityStateEdgeWorkflow .k-primary.k-button.k-toolbar-first-visible");
+    private final SelenideElement cancelStageButton = $(".EntityStateEdgeWorkflow .btn-danger.k-button");
 
     //Модальное окно
-    private final SelenideElement reasonOfCancelingField = $x("//textarea[@id='ReasonOfCanceling']");
+    private final SelenideElement reasonOfCancelingField = $("#Comment");
     private final SelenideElement reasonOfCancelingIsRequired = $x("//span[@class='required-input']");
 
     //Основные вкладки
@@ -57,7 +58,7 @@ public class ProjectPage extends BasePage {
     private final SelenideElement tabLessons = $("a[href='#tab-gleaning']");
     private final SelenideElement tabOrders = $("a[href='#tab-order']");
     private final SelenideElement tabOpenQuestions = $("a[href='#tab-lov']");
-    private final SelenideElement tabSnapshot = $("a[href='#tab-snapshot']");
+    private final SelenideElement tabSnapshot = $(".f-popup__container [href='#tab-snapshot']");
     private final SelenideElement tabChangeRequestSnapshot = $("a[href='#tab-changerequest-snapshot']");
     private final SelenideElement tabGoals = $("a[href='#tab-goal']");
 
@@ -113,8 +114,8 @@ public class ProjectPage extends BasePage {
     //Таблицы показателей
     private final SelenideElement personalIndicatorsTable = $("div[name='KPIs'] .k-grid-content");
     private final SelenideElement getPersonalIndicatorsHeader = $("div[name='KPIs'] .f-widget__header-text");
-    private final SelenideElement indicatorTableSearchInput = $x("//div[@name='KPIs']//input[@placeholder='Поиск...']");
-    private final SelenideElement firstFoundIndicator = $x("//div[@name='KPIs']//tbody/tr[1]/td[2]");
+    public SelenideElement indicatorTableSearchInput = $x("//div[@name='KPIs']//input[@placeholder='Поиск...']");
+    private final SelenideElement firstFoundIndicator = $("[data-column-field='Code'] a");
 
     //Таблицы результатов
     private final SelenideElement projectResultsTab =$(By.xpath("//span[contains(text(),'Ведение результатов проекта')]"));
@@ -252,6 +253,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Открытие положительного урока")
     public void positiveLessonsLearned() {
+        $(".f-menu__list f-tab__list_toolbar_more").click();
         learnedLessons.click();
         positiveLesson.shouldBe(visible);
         positiveLesson.click();
@@ -331,6 +333,7 @@ public class ProjectPage extends BasePage {
 
     @Step ("Открыть вкладку Слепки")
     public void openSnapshotTab() {
+        $(".f-tab__list_toolbar_more").click();
         tabSnapshot.click();
         sleep(1000);
     }
@@ -637,29 +640,21 @@ public class ProjectPage extends BasePage {
 
     @Step ("Проверить возможность перевода проекта по стадиям")
     public void checkPossibilityProjectStaging(){
-        changeProjectStageButton.shouldBe(visible).click();
+        stageWorkflowWidget.shouldBe(visible).click();
         nextStageButton.shouldBe(visible);
-        prevStageButton.shouldBe(visible);
         cancelStageButton.shouldBe(visible);
-        changeProjectStageButton.click();
+    }
+
+    @Step ("Проверить невозможность перевода проекта по стадиям")
+    public void checkImpossibilityProjectStaging(){
+        stageWorkflowWidget.shouldBe(visible);
+        nextStageButton.shouldNotBe(visible);
+        cancelStageButton.shouldNotBe(visible);
     }
 
     @Step ("Перевести проект на стадию {stage}")
     public void moveStageTo(String stage) {
-        changeProjectStageButton.shouldBe(visible).click();
-        switch (stage) {
-            case ("На следующую стадию"):
-                nextStageButton.shouldBe(visible).click();
-                break;
-            case ("На предыдущую стадию"):
-                prevStageButton.shouldBe(visible).click();
-                break;
-            case ("Отменить"):
-                cancelStageButton.shouldBe(visible).click();
-                break;
-            default:
-                break;
-        }
+        $x("//a[text()='"+stage+"']").click();
     }
 
     @Step ("Проверить что поле 'Причина отмена проекта' отображается и является обязательным")
@@ -675,7 +670,7 @@ public class ProjectPage extends BasePage {
 
 
     @Step ("Развернуть виджет 'Создание обязательных контрольных точек проекта'")
-    public void expandRequiredPointsWidget(){
+    public void expandOrCollapseRequiredPointsWidget(){
         $x("//span[contains(text(),'Создание обязательных контрольных точек проекта')]").waitUntil(visible, 10000).click();
     }
 
@@ -1073,6 +1068,37 @@ public class ProjectPage extends BasePage {
             case ("Удалено"):
                 $(".prevsnapshot-td-indicator").shouldHave(
                         attribute("data-tooltip", ""+goalStatus+""),
+                        cssValue("background-color", "rgba(255, 89, 64, 1)"));
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Step("Нажать редактировать Показатель")
+    public void clickEditIndicator() {
+        $("div[name='KPIs'] .k-i-edit").click();
+    }
+
+    @Step("Нажать удалить Показатель")
+    public void clickDeleteIndicator() {
+        $("div[name='KPIs'] .k-i-trash").click();
+    }
+
+    @Step("Проверить индикацию Показателя")
+    public void checkIndicatorStatus(String status) {
+        checkPageIsLoaded();
+        switch (status) {
+            case ("Добавлено"):
+                $(".prevsnapshot-td-indicator").shouldHave(attribute("data-tooltip", "Добавлено"),
+                        cssValue("background-color", "rgba(95, 175, 97, 1)"));
+                break;
+            case ("Изменено"):
+                $(".prevsnapshot-td-indicator").shouldHave(attribute("data-tooltip", "Изменено"),
+                        cssValue("background-color", "rgba(255, 210, 70, 1)"));
+                break;
+            case ("Удалено"):
+                $(".prevsnapshot-td-indicator").shouldHave(attribute("data-tooltip", "Удалено"),
                         cssValue("background-color", "rgba(255, 89, 64, 1)"));
                 break;
             default:

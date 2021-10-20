@@ -123,7 +123,7 @@ public class CreateLessonTests extends BaseTest {
         parameter("Пользователь", user.getName());
         long currentTime = System.currentTimeMillis();
         lessonLearned
-                .setActivity("Популяризация предпринимательства")
+                .setActivity("Свобода народу")
                 .setName("Тест_C546_" + currentTime);
         parameter("Пользователь", user.getName());
         singIn.asUser(user);

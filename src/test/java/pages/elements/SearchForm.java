@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SearchForm {
@@ -36,6 +37,7 @@ public class SearchForm {
 
     @Step ("Проверка отсутствия сущности при глобальном поиске")
     public void checkEntityNotFoundInGlobalSearch(String entityName) {
+        sleep(300000);
         searchButton.shouldBe(visible).click();
         searchInput.setValue(entityName);
         notFoundEntityText.shouldBe(visible).shouldHave(text("Не найдено записей содержащих искомый текст"));

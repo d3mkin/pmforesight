@@ -57,8 +57,8 @@ public class SnapshotTests extends BaseTest {
 
     @AfterEach
     public void logout() {
-        ActionsViaAPI.deleteProjectCreatedFromAPI();
         new LogoutPage().open();
+        ActionsViaAPI.deleteProjectCreatedFromAPI();
     }
 
     @ParameterizedTest(name = "Создание слепка в проекте")
@@ -392,7 +392,7 @@ public class SnapshotTests extends BaseTest {
         projectPage.checkCurrentProjectStage("Инициирование");
         //Выполняем условия для перевода на стадию Подготовка
         projectPage.openActivityTab();
-        projectPage.expandRequiredPointsWidget();
+        projectPage.expandOrCollapseRequiredPointsWidget();
         projectPage.createRequiredStagePoint("Инициирование", currentDate);
         projectPage.checkEntityIsDisplayedInGantt("Проект запущен");
         projectPage.findInGanttAndOpenEntityPage("Проект запущен");

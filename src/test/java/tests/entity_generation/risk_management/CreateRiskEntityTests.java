@@ -81,7 +81,7 @@ public class CreateRiskEntityTests extends BaseTest {
         long currentTime = System.currentTimeMillis();
         risksAndOpportunities
                 .setRisksAndOpportunitiesName("Тест_C463_" + currentTime)
-                .setControlObject("Популяризация предпринимательства")
+                .setControlObject("Свобода народу")
                 .setTypeRisksOpportunities("Риск")
                 .setCategory("Финансовый риск")
                 .setState("Закрыто")

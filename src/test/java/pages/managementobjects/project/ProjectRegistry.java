@@ -211,8 +211,8 @@ public class ProjectRegistry implements Registry {
 
     @Step ("Проверить что реестр загрузился")
     public void checkRegistryIsLoaded () {
-        loadImage.shouldNotBe(visible, Duration.ofMinutes(10));
-        $(".k-loading-mask").shouldNotBe(exist, Duration.ofMinutes(10));
+        loadImage.shouldNotBe(visible, Duration.ofMinutes(5));
+        $(".k-loading-mask").shouldNotBe(exist, Duration.ofMinutes(5));
         tableWithEntities.shouldBe(visible);
     }
 

@@ -10,6 +10,7 @@ import pages.BasePage;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class IndicatorPage extends BasePage {
     private final SelenideElement nameInput_EditForm = $(By.xpath("//input[@name='Name']"));
@@ -158,12 +159,23 @@ public class IndicatorPage extends BasePage {
         $(By.xpath("//div[@name='CurrentFact']")).shouldBe(visible).shouldHave(text(newBasicValue));
     }
 
+    @Step ("Изменить базовое значение показателя")
+    public void changeBasicValue(String newBasicValue){
+        basicValueInput_EditForm.shouldBe(visible);
+        //Костыль для инпута базвого значения. Зачищает форму ввода и кливает по модальному окну
+        basicValueInput_EditForm.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+        $(By.xpath("//form[@id='KPIEditForm']")).click();
+
+        typeText(basicValueInput_EditForm, newBasicValue);
+        clickSaveAndClose();
+    }
+
     @Step("Изменить Фактическое значение")
     public void changeFactValue (Indicator indicator,String newFactValue){
         indicator.setFact(newFactValue);
         editIndicatorValueButton_ViewForm.click();
         factInput_EditForm.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-        $(By.xpath("//form[@id='KPIValueEditForm']")).click();
+        $x("//form[@id='KPIValueEditForm']").click();
         typeText(factInput_EditForm, indicator.getFact());
     }
 

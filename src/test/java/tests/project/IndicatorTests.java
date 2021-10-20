@@ -46,8 +46,8 @@ public class IndicatorTests extends BaseTest {
 
     @AfterEach
     public void logout() {
-        ActionsViaAPI.deleteProjectCreatedFromAPI();
         new LogoutPage().open();
+        ActionsViaAPI.deleteProjectCreatedFromAPI();
     }
 
     @Story("Расчёт общего индикатора Показателя")

@@ -79,8 +79,8 @@ public class SnapshotChangeRequestTests extends BaseTest {
 
     @AfterEach
     public void logout() {
-        deleteProjectCreatedFromAPI();
         new LogoutPage().open();
+        deleteProjectCreatedFromAPI();
     }
 
     @ParameterizedTest(name = "Создание ЗИ в проекте")
@@ -340,7 +340,7 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @ParameterizedTest(name = "ЗИ: внесение изменений в Цели Проекта")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-222")
-    @TmsLink("1611")
+    @TmsLink("1612")
     @Severity(SeverityLevel.CRITICAL)
     public void checkChangesInGoalsProjectTab(User user) {
         parameter("Пользователь", user.getName());
@@ -423,5 +423,119 @@ public class SnapshotChangeRequestTests extends BaseTest {
         projectPage.checkGoalStatusInTable(goalNameForDelete, "Удалено");
         deleteGoalCreatedFromAPI(goalForDeleteId);
         deleteGoalCreatedFromAPI(goalForAddId);
+    }
+
+    @ParameterizedTest(name = "ЗИ: внесение изменений в Показатели Проекта")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-223")
+    @TmsLink("1613")
+    @Severity(SeverityLevel.CRITICAL)
+    public void checkChangesInIndicatorProjectTab(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        Indicator indicatorToEdit = new Indicator();
+        indicatorToEdit
+                .setName("indicatorToEdit_" + currentTime)
+                .setEstimationType("Возрастающий")
+                .setUnit("Единица")
+                .setBasicValue("100")
+                .setPeriod("2020")
+                .setFact("100")
+                .setPlan("100");
+        Indicator indicatorToDelete = new Indicator();
+        indicatorToDelete
+                .setName("indicatorToDelete_" + currentTime)
+                .setEstimationType("Возрастающий")
+                .setUnit("Единица")
+                .setBasicValue("100")
+                .setPeriod("2020")
+                .setFact("100")
+                .setPlan("100");
+        Indicator indicatorToAdd = new Indicator();
+        indicatorToAdd
+                .setName("indicatorToAdd_" + currentTime)
+                .setEstimationType("Возрастающий")
+                .setUnit("Единица")
+                .setBasicValue("100")
+                .setPeriod("2020")
+                .setFact("100")
+                .setPlan("100");
+        projectPage.openIndicatorsTab();
+        projectPage.clickAddIndicator();
+        indicatorPage.fillRequiredFields(indicatorToEdit);
+        indicatorPage.clickSaveAndClose();
+        projectPage.shouldHaveIndicator(indicatorToEdit.getName());
+        projectPage.clickAddIndicator();
+        indicatorPage.fillRequiredFields(indicatorToDelete);
+        indicatorPage.clickSaveAndClose();
+        projectPage.shouldHaveIndicator(indicatorToDelete.getName());
+        projectPage.openSnapshotTab();
+        projectPage.clickAddSnapshot();
+        snapshot
+                .setName("ATEST-223_" + currentTime);
+        snapshotPage.fillFields(snapshot);
+        snapshotPage.clickSaveAndClose();
+        projectPage.searchSnapshotInTable(snapshot.getName());
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Новый");
+        projectPage.openSnapshotCard(snapshot.getName());
+        projectPage.getBrowserTabs();
+        projectPage.switchToNextBrowserTab();
+        String snapshotComment = "Комментарий" + currentTime;
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "Новый");
+        snapshotPage.sendToApprove(snapshotComment, fileToUpload);
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "На согласовании");
+        snapshotPage.shouldHaveRecordInTable(user.getName(), "Отправлен на согласование", snapshotComment, fileToUpload.getName());
+        snapshotPage.approveSnapshot(snapshotComment, fileToUpload);
+        snapshotPage.checkNameAndStatus(snapshot.getName(), "Согласован");
+        snapshotPage.shouldHaveRecordInTable(user.getName(), "Слепок согласован", snapshotComment, fileToUpload.getName());
+        projectPage.closeCurrentBrowserTab();
+        projectPage.switchToPreviousBrowserTab();
+        Selenide.refresh();
+        projectPage.openSnapshotTab();
+        projectPage.searchSnapshotInTable(snapshot.getName());
+        projectPage.checkSnapshotExistInTable(snapshot.getName(), "Согласован");
+        projectPage.openChangeRequestSnapshotTab();
+        projectPage.clickAddChangeRequest();
+        String changeRequestName = "ATEST-223_" + currentTime;
+        String changeRequestComment = "ATEST-223_" + currentTime;
+        String changeRequestProjectReasons = "ATEST-223_" + currentTime;
+        snapshotChangeRequests
+                .setName(changeRequestName)
+                .setComment(changeRequestComment)
+                .setProjectReasons(changeRequestProjectReasons);
+        snapshotChangeRequestsPage.fillRequiredFields(snapshotChangeRequests);
+        snapshotChangeRequestsPage.clickSaveAndClose();
+        projectPage.modalWindowShouldBeClosed();
+        projectPage.checkPageIsLoaded();
+        projectPage.shouldHaveChangeRequest(changeRequestName);
+        projectPage.checkChangeRequestData(changeRequestName, changeRequestComment, "Новый", snapshot.getName());
+        projectPage.findAndOpenChangeRequestViewForm(changeRequestName);
+        projectPage.getBrowserTabs();
+        projectPage.switchToNextBrowserTab();
+        snapshotChangeRequestsPage.checkSnapshotData(getProjectNameFromAPI(), changeRequestName, changeRequestComment);
+        snapshotChangeRequestsPage.clickAddChanges();
+        projectPage.checkPageIsOnSnapshotMode(changeRequestName);
+        projectPage.openIndicatorsTab();
+        projectPage.clickAddIndicator();
+        indicatorPage.fillRequiredFields(indicatorToAdd);
+        indicatorPage.clickSaveAndClose();
+        projectPage.shouldHaveIndicator(indicatorToAdd.getName());
+        projectPage.checkIndicatorStatus("Добавлено");
+        projectPage.indicatorTableSearchInput.clear();
+        projectPage.shouldHaveIndicator(indicatorToEdit.getName());
+        projectPage.clickEditIndicator();
+        indicatorPage.changeBasicValue("1");
+        projectPage.shouldHaveIndicator(indicatorToEdit.getName());
+        projectPage.checkIndicatorStatus("Изменено");
+        projectPage.indicatorTableSearchInput.clear();
+        projectPage.shouldHaveIndicator(indicatorToDelete.getName());
+        projectPage.clickDeleteIndicator();
+        projectPage.acceptDelete();
+        projectPage.checkPageIsLoaded();
+        projectPage.openIndicatorsTab();
+        projectPage.checkPageIsLoaded();
+        projectPage.indicatorTableSearchInput.sendKeys(indicatorToDelete.getName());
+        projectPage.checkIndicatorStatus("Удалено");
     }
 }

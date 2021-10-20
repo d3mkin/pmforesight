@@ -7,6 +7,7 @@ import io.qameta.allure.TmsLink;
 import model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -21,6 +22,7 @@ import static io.qameta.allure.Allure.parameter;
 @Epic(TestSuiteName.ELECTRONIC_BUDGET)
 @Tag("EBudget")
 @Tag("Regression")
+@Disabled
 public class EBudgetTests extends BaseTest {
     private SingInPage singIn;
     private ProjectPage projectPage;
@@ -34,7 +36,6 @@ public class EBudgetTests extends BaseTest {
         singIn.open();
         projectPage = new ProjectPage();
         projectRegistry = new ProjectRegistry();
-//        importProject = "Учитель будущего";
         importProject = "Акселерация";
         importProjectPortfolio = "Портфель национальных проектов";
     }

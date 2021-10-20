@@ -54,8 +54,8 @@ public class GoalCalculationTests extends BaseTest {
 
     @AfterEach
     public void logout() {
-        deleteGoalCreatedFromAPI(getGoalId());
         new LogoutPage().open();
+        deleteGoalCreatedFromAPI(getGoalId());
     }
 
     @ParameterizedTest(name = "Расчет индикатора цели по показателям: 'Нет показателей'")

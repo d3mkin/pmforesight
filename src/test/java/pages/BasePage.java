@@ -4,6 +4,7 @@ import com.codeborne.selenide.*;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import pages.elements.DeleteEntityDialog;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public abstract class BasePage {
     private String currentTab;
     protected SelenideElement window = $(".k-window");
     protected SelenideElement header = window.$(".k-window-titlebar");
-    protected SelenideElement windowName = header.$(".k-window-title");
+    protected SelenideElement windowName = $x("//div[@class='k-widget k-window']//span[@class='k-window-title']");
     protected SelenideElement actions = header.$(".k-window-actions");
     protected SelenideElement content = window.$(".k-window-content");
     protected SelenideElement loadImage = $(".k-loading-image");
@@ -99,7 +100,6 @@ public abstract class BasePage {
     public void modalWindowShouldBeOpened() {
         window.shouldBe(visible);
         header.shouldBe(visible);
-        windowName.shouldBe(visible);
         actions.shouldBe(visible);
         content.shouldBe(visible);
     }
@@ -112,7 +112,8 @@ public abstract class BasePage {
 
     @Step("Проверка названия модального окна")
     public void modalWindowShouldHaveTitle(String titleName) {
-        windowName.shouldHave(text(titleName));
+        checkPageIsLoaded();
+        $x("//*[contains(@class,'k-window-title') and text()="+titleName+"]");
     }
 
     @Step("Нажать развернуть на весь экран")
@@ -216,7 +217,7 @@ public abstract class BasePage {
             return;
         }
         el.clear();
-        el.setValue(value);
+        el.sendKeys(value);
         sleep(1000);
     }
 
@@ -256,9 +257,9 @@ public abstract class BasePage {
         }
         el.click();
         selectFilterInput.shouldBe(visible, ofMillis(timeout));
-        selectFilterInput.setValue(value);
+        selectFilterInput.sendKeys(value);
         sleep(2000);
-        selectAllItems. shouldHaveSize(1);
+        selectAllItems.shouldHaveSize(1);
         selectFirstItem.click();
         el.waitUntil(text(value), timeout);
     }
@@ -335,5 +336,12 @@ public abstract class BasePage {
         //loadImage.shouldNotBe(visible, Duration.ofMinutes(1));
         $$(".k-loading-image").shouldBe(size(0), ofMillis(timeout));
         $(".k-loading-mask").shouldNotBe(exist, ofMillis(timeout));
+    }
+
+    @Step("Подтвердить удаление")
+    public void acceptDelete() {
+        $(By.xpath("//div[@class='k-widget k-window k-dialog']")).waitUntil(visible,Configuration.timeout);
+        $(By.xpath("//label[@for='dialog-check-all']")).click();
+        new DeleteEntityDialog().clickDeleteYes();
     }
 }

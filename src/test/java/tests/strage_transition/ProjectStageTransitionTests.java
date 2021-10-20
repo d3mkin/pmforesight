@@ -47,8 +47,8 @@ public class ProjectStageTransitionTests extends BaseTest {
 
     @AfterEach
     public void logout() {
-        ActionsViaAPI.deleteProjectCreatedFromAPI();
         new LogoutPage().open();
+        ActionsViaAPI.deleteProjectCreatedFromAPI();
     }
 
     @ParameterizedTest(name = "Перевод Проекта на стадию 'Отменено' (positive)")
@@ -64,7 +64,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkPossibilityProjectStaging();
         projectPage.moveStageTo("Отменить");
         modalDialog.modalWindowShouldBeOpened();
-        modalDialog.modalWindowShouldHaveTitle("Отмена проекта");
+        modalDialog.modalWindowShouldHaveTitle("Отменить");
         modalDialog.shouldHaveReasonField();
         modalDialog.fillReasonField("Веская причина для отмены");
         modalDialog.clickSaveAndClose();
@@ -84,14 +84,14 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.checkPossibilityProjectStaging();
         projectPage.moveStageTo("Отменить");
         modalDialog.modalWindowShouldBeOpened();
-        modalDialog.modalWindowShouldHaveTitle("Отмена проекта");
+        modalDialog.modalWindowShouldHaveTitle("Отменить");
         modalDialog.shouldHaveReasonField();
         modalDialog.clickSaveAndClose();
         modalDialog.shouldHaveMessage("Необходимо заполнить поле \"Причина отмены проекта\"");
         modalDialog.closeDialog();
         modalDialog.clickClose();
     }
-
+    @Disabled("Тест не имеют смысла тк поменялся workflow виджета перехода по стадиям")
     @ParameterizedTest(name = "Перевод Проекта на стадию 'до' первой и 'после' крайней стадии")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-73")
@@ -125,6 +125,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         modalDialog.closeDialog();
     }
 
+    @Disabled("Тест не имеют смысла тк поменялся workflow виджета перехода по стадиям")
     @ParameterizedTest(name = "Перевод Проекта по стадиям, не требующим обязательных условий")
     @MethodSource("helpers.UserProvider#mainFA")
     @Tag("ATEST-74")
@@ -162,47 +163,57 @@ public class ProjectStageTransitionTests extends BaseTest {
         ActionsViaAPI.createProjectViaAPI("Инициирование", "Ведомственный");
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.checkCurrentProjectStage("Инициирование");
+        projectPage.checkPossibilityProjectStaging();
         //Переводим на стадию Подготовка в случае, когда условия НЕ выполены
-        projectPage.moveStageTo("На следующую стадию");
-        modalDialog.clickAcceptNextStageTransition();
+        projectPage.moveStageTo("Подготовка");
         modalDialog.shouldHaveMessageAboutRequiredFields(
-                "Должна быть создана типовая контрольная точка 'Проект запущен'",
-                "Должна быть создана и завершена типовая контрольная точка 'Проект запущен");
+                "Должна быть создана типовая контрольная точка \"Проект запущен\"",
+                "Должна быть завершена типовая контрольная точка \"Проект запущен\"",
+                "Прикрепите документ: \"Паспорт проекта\"");
         modalDialog.closeDialog();
         //Выплняем условия для перевода на стадию Подготовка
         projectPage.openActivityTab();
-        projectPage.expandRequiredPointsWidget();
+        projectPage.expandOrCollapseRequiredPointsWidget();
         projectPage.createRequiredStagePoint("Инициирование", currentDate);
+        projectPage.expandOrCollapseRequiredPointsWidget();
         projectPage.checkEntityIsDisplayedInGantt("Проект запущен");
         projectPage.findInGanttAndOpenEntityPage("Проект запущен");
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
+        pointPage.approvePointAndUploadFile(fileToUpload);
+        pointPage.finishApprovePointAndUploadFile(fileToUpload);
         //Закрываем вкладку браузера и переключаем фокус WebDriver на предыдущую вкладку
         pointPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
+        projectPage.openDocumentsTab();
+        projectPage.expandDocuments();
+        projectPage.clickToUploadProjectPassport(fileToUpload);
         //Переводим на стадию Подготовка, когда все условия выполнены
-        projectPage.moveStageTo("На следующую стадию");
-        modalDialog.clickAcceptNextStageTransition();
+        projectPage.openMainTab();
+        projectPage.moveStageTo("Подготовка");
         projectPage.checkCurrentProjectStage("Подготовка");
         projectPage.closeCreatedSnapshotNotification();
 
         //Переводим на стадию Реализация в случае, когда условия НЕ выполены
-        projectPage.moveStageTo("На следующую стадию");
-        modalDialog.clickAcceptNextStageTransition();
+        projectPage.moveStageTo("Реализация");
         modalDialog.shouldHaveMessageAboutRequiredFields(
-                "Должна быть создана типовая контрольная точка 'Выполнение работ разрешено'",
-                "Необходимо прикрепить документ 'Сводный план проекта'",
-                "Необходимо прикрепить документ 'Паспорт проекта'",
-                "Должна быть создана и завершена типовая контрольная точка 'Выполнение работ разрешено'");
+                "Должна быть создана типовая контрольная точка \"Выполнение работ разрешено\"",
+                "Должна быть завершена типовая контрольная точка \"Выполнение работ разрешено\"",
+                "Прикрепите документ: \"Сводный план проекта\"");
         modalDialog.closeDialog();
         //Выполняем условия для перевода на стадию Реализация
+        projectPage.openActivityTab();
+        projectPage.expandOrCollapseRequiredPointsWidget();
         projectPage.createRequiredStagePoint("Подготовка",currentDate);
+        projectPage.expandOrCollapseRequiredPointsWidget();
         projectPage.checkEntityIsDisplayedInGantt("Выполнение работ разрешено");
         projectPage.findInGanttAndOpenEntityPage("Выполнение работ разрешено");
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
+        pointPage.approvePointAndUploadFile(fileToUpload);
+        pointPage.finishApprovePointAndUploadFile(fileToUpload);
         pointPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         projectPage.openDocumentsTab();
@@ -210,80 +221,89 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.clickToUploadProjectPassport(fileToUpload);
         projectPage.clickToUploadProjectConsolidatePlan(fileToUpload);
         //Переводим на стадию Реализация, когда все условия выполнены
-        projectPage.moveStageTo("На следующую стадию");
-        modalDialog.clickAcceptNextStageTransition();
+        projectPage.openMainTab();
+        projectPage.moveStageTo("Реализация");
         projectPage.checkCurrentProjectStage("Реализация");
         projectPage.closeCreatedSnapshotNotification();
 
         //Переводим на стадию Завершение в случае, когда условия НЕ выполены
-        projectPage.moveStageTo("На следующую стадию");
-        modalDialog.clickAcceptNextStageTransition();
+        projectPage.moveStageTo("Завершение");
         modalDialog.shouldHaveMessageAboutRequiredFields(
                 "Должна быть создана типовая контрольная точка 'Результаты работ приняты'",
                 "Должна быть создана и завершена типовая контрольная точка 'Результаты работ приняты'");
         modalDialog.closeDialog();
         //Выплняем условия для перевода на стадию Завершение
         projectPage.openActivityTab();
+        projectPage.expandOrCollapseRequiredPointsWidget();
         projectPage.createRequiredStagePoint("Реализация", currentDate);
+        projectPage.expandOrCollapseRequiredPointsWidget();
         projectPage.checkEntityIsDisplayedInGantt("Результаты работ приняты");
         projectPage.findInGanttAndOpenEntityPage("Результаты работ приняты");
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
+        pointPage.approvePointAndUploadFile(fileToUpload);
+        pointPage.finishApprovePointAndUploadFile(fileToUpload);
         pointPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         //Переводим на стадию Завершение, когда все условия выполнены
-        projectPage.moveStageTo("На следующую стадию");
-        modalDialog.clickAcceptNextStageTransition();
+        projectPage.openMainTab();
+        projectPage.moveStageTo("Завершение");
         projectPage.checkCurrentProjectStage("Завершение");
         projectPage.closeCreatedSnapshotNotification();
 
 
         //Переводим на стадию Постпроектный мониторинг в случае, когда условия НЕ выполены
-        projectPage.moveStageTo("На следующую стадию");
-        modalDialog.clickAcceptNextStageTransition();
+        projectPage.moveStageTo("Постпроектный мониторинг");
         modalDialog.shouldHaveMessageAboutRequiredFields(
                 "Должна быть создана типовая контрольная точка 'Проект закрыт'",
                 "Необходимо прикрепить документ 'Итоговый отчет о реализации проекта'",
                 "Должна быть создана и завершена типовая контрольная точка 'Проект закрыт'");
         modalDialog.closeDialog();
         //Выплняем условия для перевода на стадию Постпроектный мониторинг
+        projectPage.expandOrCollapseRequiredPointsWidget();
         projectPage.createRequiredStagePoint("Завершение", currentDate);
+        projectPage.expandOrCollapseRequiredPointsWidget();
         projectPage.checkEntityIsDisplayedInGantt("Проект закрыт");
         projectPage.findInGanttAndOpenEntityPage("Проект закрыт");
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
+        pointPage.approvePointAndUploadFile(fileToUpload);
+        pointPage.finishApprovePointAndUploadFile(fileToUpload);
         pointPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         projectPage.openDocumentsTab();
         projectPage.clickToUploadFinalReport(fileToUpload);
         //Переводим на стадию Постпроектный мониторинг, когда все условия выполнены
-        projectPage.moveStageTo("На следующую стадию");
-        modalDialog.clickAcceptNextStageTransition();
+        projectPage.openMainTab();
+        projectPage.moveStageTo("Постпроектный мониторинг");
         projectPage.checkCurrentProjectStage("Постпроектный мониторинг");
         projectPage.closeCreatedSnapshotNotification();
 
         //Переводим на стадию Архив в случае, когда условия НЕ выполены
-        projectPage.moveStageTo("На следующую стадию");
-        modalDialog.clickAcceptNextStageTransition();
+        projectPage.moveStageTo("Архив");
         modalDialog.shouldHaveMessageAboutRequiredFields(
                 "Должна быть создана типовая контрольная точка 'Постпроектный мониторинг завершен'",
                 "Должна быть создана и завершена типовая контрольная точка 'Постпроектный мониторинг завершен'");
         modalDialog.closeDialog();
-        //Выплняем условия для перевода на стадию Архив
+        //Выполняем условия для перевода на стадию Архив
         projectPage.openActivityTab();
+        projectPage.expandOrCollapseRequiredPointsWidget();
         projectPage.createRequiredStagePoint("Постпроектный мониторинг", currentDate);
+        projectPage.expandOrCollapseRequiredPointsWidget();
         projectPage.checkEntityIsDisplayedInGantt("Постпроектный мониторинг завершен");
         projectPage.findInGanttAndOpenEntityPage("Постпроектный мониторинг завершен");
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
+        pointPage.approvePointAndUploadFile(fileToUpload);
+        pointPage.finishApprovePointAndUploadFile(fileToUpload);
         pointPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         //Переводим на стадию Архив, когда все условия выполнены
-        projectPage.moveStageTo("На следующую стадию");
-        modalDialog.clickAcceptNextStageTransition();
+        projectPage.openMainTab();
+        projectPage.moveStageTo("Архив");
         projectPage.checkCurrentProjectStage("Архив");
     }
 }

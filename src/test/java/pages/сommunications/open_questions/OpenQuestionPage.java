@@ -17,7 +17,7 @@ public class OpenQuestionPage extends BasePage {
     public void fillFields(OpenQuestion openQuestion) {
         typeText(nameInput, openQuestion.getName());
         searchAndSelectFirstFromSelect(executorInput, openQuestion.getExecutor());
-        typeDate(initDayInput, openQuestion.getInitDate());
+//        typeDate(initDayInput, openQuestion.getInitDate());
         afterMonthPlanPeriod.click();
     }
 }

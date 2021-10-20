@@ -49,8 +49,8 @@ public class PointStageTransitionTests extends BaseTest {
 
     @AfterEach
     public void logout() {
-        ActionsViaAPI.deleteProjectCreatedFromAPI();
         new LogoutPage().open();
+        ActionsViaAPI.deleteProjectCreatedFromAPI();
     }
 
     @ParameterizedTest(name = "Перевод КТ из состояния 'В работе' в состояние 'Выполнено'")

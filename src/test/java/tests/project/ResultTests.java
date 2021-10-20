@@ -52,8 +52,8 @@ public class ResultTests extends BaseTest {
 
     @AfterEach
     public void logout() {
-        ActionsViaAPI.deleteProjectCreatedFromAPI();
         new LogoutPage().open();
+        ActionsViaAPI.deleteProjectCreatedFromAPI();
     }
 
     @Story("Отображение таблиц Результатов в Проекте в соответствии с уровнем управления")

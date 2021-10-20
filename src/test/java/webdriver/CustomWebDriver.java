@@ -7,8 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
@@ -35,7 +33,7 @@ public class CustomWebDriver implements WebDriverProvider {
         logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
 
         switch (browserName) {
-            case WebDriverRunner.FIREFOX:
+            case "firefox":
                 capabilities = DesiredCapabilities.firefox();
                 FirefoxProfile firefoxProfile = new FirefoxProfile();
                 firefoxProfile.setPreference("browser.fullscreen.autohide", true);
@@ -44,7 +42,7 @@ public class CustomWebDriver implements WebDriverProvider {
                 capabilities.setCapability(PROFILE, firefoxProfile);
                 WebDriverManager.firefoxdriver().setup();
                 break;
-            case WebDriverRunner.CHROME:
+            case "chrome":
                 capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
                 capabilities.setCapability("enableVNC", true);
                 capabilities.setCapability("enableVideo", false);
@@ -54,7 +52,7 @@ public class CustomWebDriver implements WebDriverProvider {
                 capabilities.setCapability(ACCEPT_SSL_CERTS, true);
                 WebDriverManager.chromedriver().setup();
                 break;
-            case WebDriverRunner.IE:
+            case "ie":
                 capabilities = DesiredCapabilities.internetExplorer();
                 capabilities.setCapability("browserName", "internet explorer");
                 capabilities.setCapability("browserVersion", "11");

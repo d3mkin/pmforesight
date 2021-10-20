@@ -8,6 +8,7 @@ import pages.BasePage;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
@@ -121,9 +122,9 @@ public class SnapshotPage extends BasePage {
     public void shouldHaveRecordInTable(String userName, String status, String snapshotComment, String docName) {
         checkPageIsLoaded();
         $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+userName+"']").shouldBe(visible);
-        $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+status +"']").shouldBe(visible);
+        $x("//div[@id='StateEdgeWorkflowWidget_container']//span[text()='"+status +"']").shouldBe(visible);
         $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+snapshotComment+"']").shouldBe(visible);
-        $x("//div[@id='StateEdgeWorkflowWidget_container']//a[text()='"+docName+"']").shouldBe(visible);
+        $x("//div[@id='StateEdgeWorkflowWidget_container']//td//a").shouldHave(attribute("data-tooltip", ""+docName+""));
     }
 
     @Step("Проверить, что кнопка {workflowButton} отображается")

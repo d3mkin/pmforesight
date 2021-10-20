@@ -28,6 +28,7 @@ public class ActionsViaAPI {
     static private String nationalProjectName;
     static private String nonProjectEventName;
     static private final String testEnv = "http://tgr.hera.test.local";
+    static private final String devEnv = "http://tgr.hera.dev.local";
     static private final String stageEnv = "https://npdemo.pmf2-gos.pmpractice.ru";
     static private final String prodEnv = "http://releasetest.pmforesight.ru";
 
@@ -177,6 +178,7 @@ public class ActionsViaAPI {
         getCookiesFromLogIn();
 
         if (Configuration.baseUrl.equals(testEnv)) body = testProjectBody;
+        if (Configuration.baseUrl.equals(devEnv)) body = testProjectBody;
         if (Configuration.baseUrl.equals(stageEnv)) body = stageProjectBody;
         if (Configuration.baseUrl.equals(prodEnv)) body = prodProjectBody;
 

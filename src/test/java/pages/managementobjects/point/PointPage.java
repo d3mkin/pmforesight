@@ -21,6 +21,7 @@ public class PointPage extends BasePage {
     private final SelenideElement completeButton_ViewForm = $x("//a[text()='Выполнить']");
     private final SelenideElement backInProgressButton_ViewForm = $x("//a[text()='Вернуть в работу']");
     private final SelenideElement approveButton_ViewForm = $x("//a[text()='Согласовать']");
+    private final SelenideElement finishApproveButton_ViewForm = $x("//a[text()='Завершить согласование']");
     private final SelenideElement cancelButton_ViewForm = $x("//a[text()='Отменить']");
     private final SelenideElement actualCompletionDateInput_EditForm = $x("//input[@id='FactDate']");
     private final SelenideElement actualCompletionDate_ViewForm = $x("//div[@name='FactDate']");
@@ -54,10 +55,16 @@ public class PointPage extends BasePage {
 
     @Step ("Нажать кнопку Согласовать")
     public void clickApproveButton(){
-        approveButton_ViewForm.shouldBe(visible).click();
+        approveButton_ViewForm.click();
         commentInput_EditForm.shouldBe(visible);
 //        documentsWidget_EditForm.shouldBe(visible);
 //        documentsWidgetIsRequired_EditForm.shouldBe(visible);
+    }
+
+    @Step("Нажать 'Завершить согласование'")
+    public void clickFinishApprove() {
+        finishApproveButton_ViewForm.click();
+        commentInput_EditForm.shouldBe(visible);
     }
 
     @Step ("Нажать кнопку Отменить")
@@ -114,7 +121,8 @@ public class PointPage extends BasePage {
 //        uploadFile(file);
 //        checkFileIsUploaded(file);
 //        closeUploadWindow();
-        clickSaveAndClose(); //Сохраняем изменения в форме Выполнения
+        clickSaveAndClose();//Сохраняем изменения в форме Выполнения
+        checkPageIsLoaded();
         checkCompletionDateField(date);
         checkPointStatus("Выполнена");
     }
@@ -130,6 +138,7 @@ public class PointPage extends BasePage {
 //        closeUploadWindow();
         fillForecastCompletionDate(date);
         clickSaveAndClose(); //Сохраняем изменения
+        checkPageIsLoaded();
         checkForecastCompletionDateField(date);
         checkPointStatus("В работе");
     }
@@ -144,6 +153,7 @@ public class PointPage extends BasePage {
 //        checkFileIsUploaded(file);
 //        closeUploadWindow();
         clickSaveAndClose(); //Сохраняем изменения
+        checkPageIsLoaded();
         checkPointStatus("Отменено");
     }
 
@@ -156,6 +166,20 @@ public class PointPage extends BasePage {
 //        checkFileIsUploaded(file);
 //        closeUploadWindow();
         clickSaveAndClose(); //Сохраняем изменения
+        checkPageIsLoaded();
+        checkPointStatus("Выполнена");
+    }
+
+    @Step ("Согласовать КТ и загрузить документ")
+    public void finishApprovePointAndUploadFile (File file) {
+        clickFinishApprove(); //Согласовать КТ
+        clickExpand();
+//        clickUploadFileOnEditForm(); //Загружаем документ
+//        uploadFile(file);
+//        checkFileIsUploaded(file);
+//        closeUploadWindow();
+        clickSaveAndClose(); //Сохраняем изменения
+        checkPageIsLoaded();
         checkPointStatus("Подтверждена");
     }
 

@@ -57,7 +57,6 @@ public class IndexPage {
         if (WebDriverRunner.isFirefox()) {
             sleep(5000);
         }
-        $(".k-loading-image").waitUntil(Condition.disappear, 15000);
         assertEquals(WebDriverRunner.url(), url, "Урл не соответствует " + url);
     }
 }
