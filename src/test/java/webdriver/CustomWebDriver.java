@@ -47,6 +47,7 @@ public class CustomWebDriver implements WebDriverProvider {
                 capabilities.setCapability("enableVNC", true);
                 capabilities.setCapability("enableVideo", false);
                 capabilities.setCapability("timeZone", "Europe/Moscow");
+                capabilities.setCapability("screenResolution", "3840x2160x16");
                 capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
 //                capabilities.setAcceptInsecureCerts(true);
                 capabilities.setCapability(ACCEPT_SSL_CERTS, true);
