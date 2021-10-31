@@ -7,8 +7,9 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
 
 
-import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.visible;
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -34,10 +35,8 @@ public abstract class AbstractAdminPage {
 
     @Step("Проверка отображения корректности урла и заголовка страницы")
     public void shouldHaveRightUrlAndTitle() {
-//        Selenide.sleep(10000);
-        $("title").waitUntil(attribute("text", pageTitle), Configuration.timeout);
-//        assertEquals(pageTitle,WebDriverRunner.getWebDriver().getTitle() ,
-//                "Название страницы не соответствует " + pageTitle);
+        $(".k-loading-mask").shouldBe(disappear, Duration.ofMinutes(5));
+        $("title").shouldHave(attribute("text", pageTitle), Duration.ofMillis(Configuration.timeout));
         assertEquals(url, WebDriverRunner.url(),
                 "Урл страницы не соответствует " + url);
     }
