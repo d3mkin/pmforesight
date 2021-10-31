@@ -16,7 +16,6 @@ ext {
     selenideVersion = '5.25.0'
     junitVersion = '5.6.2'
     aspectjweaver = '1.9.5'
-    logbackVersion = '1.2.3'
     ownerVersion = '1.0.12'
     restassuredVersion = '4.2.0'
     slf4j = '1.7.30'
@@ -45,7 +44,6 @@ dependencies {
             "org.junit.jupiter:junit-jupiter-params:${junitVersion}",
             "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
             "io.rest-assured:rest-assured:${restassuredVersion}",
-            "ch.qos.logback:logback-classic:${logbackVersion}",
             "org.aeonbits.owner:owner:${ownerVersion}",
             "org.aspectj:aspectjweaver:${aspectjweaver}",
             "org.slf4j:slf4j-simple:${slf4j}"
