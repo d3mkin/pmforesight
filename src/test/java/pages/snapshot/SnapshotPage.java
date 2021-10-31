@@ -8,10 +8,8 @@ import pages.BasePage;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.*;
 
 public class SnapshotPage extends BasePage {
     private final SelenideElement nameInput = $("input#Name");
@@ -121,15 +119,24 @@ public class SnapshotPage extends BasePage {
     @Step("Проверить, что Слепок в таблице имеет наименование {userName}, статус{status}, комментарий{snapshotComment} и название документа{docName}")
     public void shouldHaveRecordInTable(String userName, String status, String snapshotComment, String docName) {
         checkPageIsLoaded();
-        $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+userName+"']").shouldBe(visible);
-        $x("//div[@id='StateEdgeWorkflowWidget_container']//span[text()='"+status +"']").shouldBe(visible);
-        $x("//div[@id='StateEdgeWorkflowWidget_container']//td[text()='"+snapshotComment+"']").shouldBe(visible);
-        $x("//div[@id='StateEdgeWorkflowWidget_container']//td//a").shouldHave(attribute("data-tooltip", ""+docName+""));
+        clickOnProgressStatus();
+        $("[data-column-field='UserName']").shouldHave(text(userName));
+        $("[data-column-field='ButtonName']").shouldHave(text(status));
+        $("[data-column-field='Comment']").shouldHave(text(snapshotComment));
+        $("[data-column-field='Files'] a").shouldHave(attribute("data-tooltip", ""+docName+""));
+        //click Close
+        $(".k-window-content.k-content").pressEscape();
     }
 
     @Step("Проверить, что кнопка {workflowButton} отображается")
     public void checkWorkflowButtonExist(String workflowButton) {
         $x("//*[@class='EntityStateEdgeWorkflow']//a[.='"+workflowButton+"']").shouldBe(visible);
+    }
+
+    @Step("Нажать на кнопку 'Ход выполнения'")
+    public void clickOnProgressStatus() {
+        $$(".k-button").findBy(text("Ход выполнения")).click();
+        $(".k-window-content.k-content").shouldBe(visible);
     }
 
     @Step("Проверить, что кнопка {workflowButton} НЕ отображается")

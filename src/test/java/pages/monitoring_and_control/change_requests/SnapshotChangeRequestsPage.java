@@ -30,8 +30,8 @@ public class SnapshotChangeRequestsPage extends BasePage {
     public void fillRequiredFields(SnapshotChangeRequests changeRequest) {
         typeText(editForm_NameInput, changeRequest.getName());
         typeText(editForm_CommentInput, changeRequest.getComment());
-        editForm_changeReasonsTab.click();
-        typeText(editForm_ProjectReasonsInput,changeRequest.getProjectReasons() );
+//        editForm_changeReasonsTab.click();
+//        typeText(editForm_ProjectReasonsInput,changeRequest.getProjectReasons() );
     }
 
     @Step("Проверить родительский объект, наименование и комментарий на форме просмотра Запроса на изменения")
@@ -50,13 +50,13 @@ public class SnapshotChangeRequestsPage extends BasePage {
     @Step("Проверить, что на вкадке 'Согласование изменений' присутствует Показатель {indicatorName}")
     public void checkApproveChangesKPI(String indicatorName){
         viewForm_ApproveTab.click();
-        viewForm_KPIApproveWidget.shouldBe(visible).click();
-        viewForm_KPIName.shouldBe(visible).shouldHave(text(indicatorName));
+        viewForm_KPIApproveWidget.click();
+        viewForm_KPIName.shouldHave(text(indicatorName));
     }
 
     @Step("Нажать кнопку 'Внести изменения'")
     public void clickAddChanges(){
-        viewForm_AddChangesButton.shouldBe(visible).click();
+        viewForm_AddChangesButton.click();
         getBrowserTabs();
         switchToNextBrowserTab();
     }
