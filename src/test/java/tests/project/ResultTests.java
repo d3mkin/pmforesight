@@ -86,7 +86,8 @@ public class ResultTests extends BaseTest {
                 .setName("Тест_C411_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(result);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -123,7 +124,8 @@ public class ResultTests extends BaseTest {
                 .setName("Тест_C411_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(result);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -147,7 +149,8 @@ public class ResultTests extends BaseTest {
                 .setName("Тест_C964_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(result);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -185,7 +188,8 @@ public class ResultTests extends BaseTest {
                 .setName("Тест_C963_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(result);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -209,7 +213,8 @@ public class ResultTests extends BaseTest {
                 .setName("Федеральный_C962_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(federalResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -220,7 +225,8 @@ public class ResultTests extends BaseTest {
                 .setUnit("Единица")
                 .setFederalResultLink(federalResult.getName())
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(regionalResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -246,7 +252,8 @@ public class ResultTests extends BaseTest {
                 .setName("Федеральный_С1040_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(federalResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -256,7 +263,8 @@ public class ResultTests extends BaseTest {
                 .setName("Региональный_С1040_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(regionalResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -288,7 +296,8 @@ public class ResultTests extends BaseTest {
                 .setUnit("Единица")
                 .setType("Утверждение документа")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(departmentalResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -306,7 +315,8 @@ public class ResultTests extends BaseTest {
                 .setUnit("Единица")
                 .setType("Утверждение документа")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(federalResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -324,7 +334,8 @@ public class ResultTests extends BaseTest {
                 .setUnit("Единица")
                 .setType("Утверждение документа")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(regionalResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -350,7 +361,8 @@ public class ResultTests extends BaseTest {
                 .setName("Ведомственный_С1046_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(departmentalResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -365,7 +377,8 @@ public class ResultTests extends BaseTest {
                 .setName("Федеральный_С1046_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(federalResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -380,7 +393,8 @@ public class ResultTests extends BaseTest {
                 .setName("Региональный_С1046_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(regionalResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -403,7 +417,8 @@ public class ResultTests extends BaseTest {
                 .setName("Ведомственный Родительский_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(departmentalParentResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -413,6 +428,7 @@ public class ResultTests extends BaseTest {
                 .setUnit("Единица")
                 .setValue("1")
                 .setResponsible(user.getName())
+                .setAcceptor(user.getName())
                 .setParentEntity(departmentalParentResult.getName());
         resultPage.fillFields(departmentalChildResult);
         resultPage.clickSaveAndClose();
@@ -428,7 +444,8 @@ public class ResultTests extends BaseTest {
                 .setName("Федеральный Родительский" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(federalParentResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -438,6 +455,7 @@ public class ResultTests extends BaseTest {
                 .setUnit("Единица")
                 .setValue("1")
                 .setResponsible(user.getName())
+                .setAcceptor(user.getName())
                 .setParentEntity(federalParentResult.getName());
         resultPage.fillFields(federalChildResult);
         resultPage.clickSaveAndClose();
@@ -462,7 +480,8 @@ public class ResultTests extends BaseTest {
                 .setName("Ведомственный Родительский_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(departmentalParentResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -471,7 +490,8 @@ public class ResultTests extends BaseTest {
                 .setName("Ведомственный Дочерний_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(departmentalChildResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -492,7 +512,8 @@ public class ResultTests extends BaseTest {
                 .setName("Федеральный Родительский_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(federalParentResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -501,7 +522,8 @@ public class ResultTests extends BaseTest {
                 .setName("Федеральный Дочерний_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(federalChildResult);
         resultPage.clickSaveAndClose();
         resultPage.checkPageIsLoaded();
@@ -530,7 +552,8 @@ public class ResultTests extends BaseTest {
                 .setName("Региональный проверка при создании_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.checkParentEntityResultIsNotVisible();
         resultPage.fillFields(regionalResult);
         resultPage.clickSaveAndClose();

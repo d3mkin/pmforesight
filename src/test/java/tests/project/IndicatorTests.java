@@ -499,7 +499,7 @@ public class IndicatorTests extends BaseTest {
         Selenide.refresh();
         projectPage.openIndicatorsTab();
         $(By.xpath("//div[@name='KPIs']//td/span")).shouldBe(visible).shouldHave(attribute("data-tooltip", "Не достигнут на 2020 г."),
-                cssValue("color", "rgba(255, 89, 64, 1)"));
+                cssValue("color", "rgba(215, 79, 85, 1)"));
     }
 
     @Story("Расчёт общего индикатора Показателя")
@@ -684,6 +684,6 @@ public class IndicatorTests extends BaseTest {
         Selenide.refresh();
         projectPage.openIndicatorsTab();
         $(By.xpath("//div[@name='KPIs']//td/span")).shouldBe(visible).shouldHave(attribute("data-tooltip", "Достигнут на Май 2020 г."),
-                cssValue("color", "rgba(95, 175, 97, 1)"));
+                cssValue("color", "rgba(34, 167, 127, 1)"));
     }
 }

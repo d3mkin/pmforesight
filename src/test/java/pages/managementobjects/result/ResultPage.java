@@ -18,6 +18,7 @@ public class ResultPage extends BasePage {
     private final SelenideElement resultValue = $x("//input[@class='k-formatted-value k-input']");
     private final SelenideElement tabRoles = $("#tab-roles > a");
     private final SelenideElement responsibleRole = $x("//div[@class='k-widget k-multiselect k-multiselect-clearable']");
+    private final SelenideElement acceptorRole = $("#control-group-Acceptor .k-input");
     private final SelenideElement valueTableTrashButton = $x("//tbody//tr//a[@class='itv-remove-button k-grid-trash']");
     private final SelenideElement closeResultButton = $x("//span[@class='f-icon m-i-cross']");
     private final SelenideElement parentEntityResult = $x("//div[@id='control-group-Parent']//span[@class='k-input']");
@@ -37,6 +38,7 @@ public class ResultPage extends BasePage {
         tabRoles.click();
         responsibleRole.waitUntil(Condition.visible, 1000);
         searchAndSelectFirstFromMultiSelect(responsibleRole, result.getResponsible());
+        searchAndSelectFirstFromSelect(acceptorRole, result.getAcceptor());
 
     }
 

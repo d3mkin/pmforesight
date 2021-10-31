@@ -9,8 +9,7 @@ import pages.BasePage;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.cssValue;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
 
 public class IndicatorPage extends BasePage {
     private final SelenideElement nameInput_EditForm = $(By.xpath("//input[@name='Name']"));
@@ -44,7 +43,9 @@ public class IndicatorPage extends BasePage {
         searchAndSelectFirstFromSelect(estimationTypeInput_EditForm, indicator.getEstimationType());
         searchAndSelectFirstFromSelect(kpiTypeInput_EditForm, indicator.getKPI());
         searchInAutocompleteAndClickToFirst(unitInput_EditForm, indicator.getUnit());
+        sleep(2000);
         typeText(basicValueInput_EditForm, indicator.getBasicValue());
+        sleep(2000);
         searchAndSelectFirstFromSelect(approvingDocInput_EditForm,indicator.getApprovingDoc());
         rolesTab_EditForm.click();
         responsibleInput_EditForm.shouldBe(visible);
@@ -84,7 +85,7 @@ public class IndicatorPage extends BasePage {
             case ("Возрастающий"):
                 if (Double.parseDouble(indicator.getPlan()) <= Double.parseDouble(indicator.getBasicValue())) {
                     checkValuesAreDisplayed(indicator);
-                    percentageOfAchievementInTable.shouldHave(text("–"));
+                    percentageOfAchievementInTable.shouldHave(text("-"));
                 } else {
                     checkValuesAreDisplayed(indicator);
                     percentageOfAchievementInTable.shouldHave(text(countIncreasingPercentage(indicator)));
@@ -93,7 +94,7 @@ public class IndicatorPage extends BasePage {
             case ("Убывающий"):
                 if (Double.parseDouble(indicator.getPlan()) >= Double.parseDouble(indicator.getBasicValue())) {
                     checkValuesAreDisplayed(indicator);
-                    percentageOfAchievementInTable.shouldHave(text("–"));
+                    percentageOfAchievementInTable.shouldHave(text("-"));
                 } else {
                     checkValuesAreDisplayed(indicator);
                     percentageOfAchievementInTable.shouldHave(text(countIncreasingPercentage(indicator)));
@@ -102,7 +103,7 @@ public class IndicatorPage extends BasePage {
             case ("Фиксированный"):
                 if (Double.parseDouble(indicator.getPlan()) == Double.parseDouble(indicator.getBasicValue())) {
                     checkValuesAreDisplayed(indicator);
-                    percentageOfAchievementInTable.shouldHave(text("–"));
+                    percentageOfAchievementInTable.shouldHave(text("-"));
                 } else {
                     checkValuesAreDisplayed(indicator);
                     percentageOfAchievementInTable.shouldHave(text(countIncreasingPercentage(indicator)));
@@ -151,10 +152,10 @@ public class IndicatorPage extends BasePage {
         editIndicatorButton_ViewForm.click();
         basicValueInput_EditForm.shouldBe(visible);
         //Костыль для инпута базвого значения. Зачищает форму ввода и кливает по модальному окну
-        basicValueInput_EditForm.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-        $(By.xpath("//form[@id='KPIEditForm']")).click();
-        
-        typeText(basicValueInput_EditForm, newBasicValue);
+//        basicValueInput_EditForm.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+//        $(By.xpath("//form[@id='KPIEditForm']")).click();
+        sleep(2000);
+        clearAndTypeText(basicValueInput_EditForm, newBasicValue);
         clickSaveAndClose();
         $(By.xpath("//div[@name='CurrentFact']")).shouldBe(visible).shouldHave(text(newBasicValue));
     }
@@ -163,9 +164,8 @@ public class IndicatorPage extends BasePage {
     public void changeBasicValue(String newBasicValue){
         basicValueInput_EditForm.shouldBe(visible);
         //Костыль для инпута базвого значения. Зачищает форму ввода и кливает по модальному окну
-        basicValueInput_EditForm.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-        $(By.xpath("//form[@id='KPIEditForm']")).click();
-
+//        basicValueInput_EditForm.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+//        $(By.xpath("//form[@id='KPIEditForm']")).click();
         typeText(basicValueInput_EditForm, newBasicValue);
         clickSaveAndClose();
     }
@@ -228,13 +228,13 @@ public class IndicatorPage extends BasePage {
                                                     cssValue("color", "rgba(102, 102, 102, 1)"));
                 if (incReached)
                     indicatorValueStatus.shouldHave(attribute("data-tooltip", "Достигнут"),
-                                                    cssValue("color", "rgba(95, 175, 97, 1)"));
+                                                    cssValue("color", "rgba(34, 167, 127, 1)"));
                 if (incCloseToFail)
                     indicatorValueStatus.shouldHave(attribute("data-tooltip", "Срыв достижения"),
                                                     cssValue("color", "rgba(255, 210, 70, 1)"));
                 if (incNotReached)
                     indicatorValueStatus.shouldHave(attribute("data-tooltip", "Не достигнут"),
-                                                    cssValue("color", "rgba(255, 89, 64, 1)"));
+                                                    cssValue("color", "rgba(215, 79, 85, 1)"));
                 break;
             case ("Убывающий"):
                 if (decNoData)
@@ -242,13 +242,13 @@ public class IndicatorPage extends BasePage {
                                                     cssValue("color", "rgba(102, 102, 102, 1)"));
                 if (decReached)
                     indicatorValueStatus.shouldHave(attribute("data-tooltip", "Достигнут"),
-                                                    cssValue("color", "rgba(95, 175, 97, 1)"));
+                                                    cssValue("color", "rgba(34, 167, 127, 1)"));
                 if (decCloseToFail)
                     indicatorValueStatus.shouldHave(attribute("data-tooltip", "Срыв достижения"),
                                                     cssValue("color", "rgba(255, 210, 70, 1)"));
                 if (decNotReached)
                     indicatorValueStatus.shouldHave(attribute("data-tooltip", "Не достигнут"),
-                                                    cssValue("color", "rgba(255, 89, 64, 1)"));
+                                                    cssValue("color", "rgba(215, 79, 85, 1)"));
                 break;
             case ("Фиксированный"):
                 if (fixNoData)
@@ -256,13 +256,13 @@ public class IndicatorPage extends BasePage {
                             cssValue("color", "rgba(102, 102, 102, 1)"));
                 if (fixReached)
                     indicatorValueStatus.shouldHave(attribute("data-tooltip", "Достигнут"),
-                            cssValue("color", "rgba(95, 175, 97, 1)"));
+                            cssValue("color", "rgba(34, 167, 127, 1)"));
                 if (fixCloseToFail)
                     indicatorValueStatus.shouldHave(attribute("data-tooltip", "Срыв достижения"),
                             cssValue("color", "rgba(255, 210, 70, 1)"));
                 if (fixNotReached)
                     indicatorValueStatus.shouldHave(attribute("data-tooltip", "Не достигнут"),
-                            cssValue("color", "rgba(255, 89, 64, 1)"));
+                            cssValue("color", "rgba(215, 79, 85, 1)"));
                 break;
             default:
                 break;

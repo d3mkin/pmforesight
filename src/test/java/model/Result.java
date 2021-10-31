@@ -11,6 +11,7 @@ public class Result {
     private String parentEntity;
     //Роли
     private String responsible;
+    private String acceptor;
 
     //Геттеры-Сеттеры
     public String getName() {
@@ -64,6 +65,15 @@ public class Result {
 
     public Result setResponsible(String responsible) {
         this.responsible = responsible;
+        return this;
+    }
+
+    public String getAcceptor() {
+        return acceptor;
+    }
+
+    public Result setAcceptor(String acceptor) {
+        this.acceptor = acceptor;
         return this;
     }
 

@@ -27,12 +27,12 @@ public class GoalRegistry implements Registry {
     private final String url = Configuration.baseUrl + "/page/register?view=goal";
     private final SelenideElement mainContainer = $("#mainBodyContainer");
     private final SelenideElement registryName = $("#f-grid-title span");
-    private final SelenideElement table = $(By.xpath("//div[contains(@class,'f-grid__grid')]"));
+    private final SelenideElement table = $x("//div[contains(@class,'f-grid__grid')]");
     private final SelenideElement firstFoundRow = table.$(".slick-row.odd");
     private final SelenideElement allRows = table.$(".grid-canvas .slick-row");
-    private final SelenideElement viewList = $ (By.xpath("//span[@class='k-input']"));
-    private final SelenideElement foundCheckBox = $(By.cssSelector("div[class='slick-cell l0 r0 slick-cell-checkboxsel']"));
-    private final SelenideElement indicatorByIndex = $(By.xpath("//div[@class='slick-cell l3 r3']//span"));
+    private final SelenideElement viewList = $x("//span[@class='k-input']");
+    private final SelenideElement foundCheckBox = $("div[class='slick-cell l0 r0 slick-cell-checkboxsel']");
+    private final SelenideElement indicatorByIndex = $x("//div[@class='slick-cell l3 r3']//span");
     private final SelenideElement loadingImage = $("div .k-loading-mask");
 
     public GoalRegistry() {
@@ -180,7 +180,7 @@ public class GoalRegistry implements Registry {
                 break;
             case ("Достигнута"):
                 indicatorByIndex.shouldHave(attribute("data-tooltip", "Достигнута"),
-                        cssValue("color", "rgba(95, 175, 97, 1)"));
+                        cssValue("color", "rgba(34, 167, 127, 1)"));
                 break;
             case ("Частично достигнута"):
                 indicatorByIndex.shouldHave(attribute("data-tooltip", "Частично достигнута"),
@@ -188,7 +188,7 @@ public class GoalRegistry implements Registry {
                 break;
             case ("Не достигнута"):
                 indicatorByIndex.shouldHave(attribute("data-tooltip", "Не достигнута"),
-                        cssValue("color", "rgba(255, 89, 64, 1)"));
+                        cssValue("color", "rgba(215, 79, 85, 1)"));
                 break;
             case ("Нет данных"):
                 indicatorByIndex.shouldHave(attribute("data-tooltip", "Нет данных"),
