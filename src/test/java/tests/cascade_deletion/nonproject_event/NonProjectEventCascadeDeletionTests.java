@@ -144,7 +144,8 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
                 .setName("Тест_ATEST_202_" + currentTime)
                 .setUnit("Единица")
                 .setDate(currentDate)
-                .setValue("1");
+                .setValue("1")
+                .setAcceptor(user.getName());
         resultPage.fillFields(result);
         resultPage.clickSaveAndClose();
         nonProjectEventPage.shouldHaveResultsTable();
@@ -203,7 +204,8 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openNonProjectEventFromAPI();
         nonProjectEventPage.checkCurrentStage("В работе");
-        nonProjectEventPage.openOrdersTab();
+//        nonProjectEventPage.openOrdersTab();
+        nonProjectEventPage.clickOnMenuItem("Поручения");
         nonProjectEventPage.clickAddOrder();
         order
                 .setName("ATEST-202_" + currentTime)
@@ -232,7 +234,8 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openNonProjectEventFromAPI();
         nonProjectEventPage.checkCurrentStage("В работе");
-        nonProjectEventPage.openMeetingTab();
+//        nonProjectEventPage.openMeetingTab();
+        nonProjectEventPage.clickOnMenuItem("Совещания");
         nonProjectEventPage.clickAddMeeting();
         meeting
                 .setName("ATEST-202_" + currentTime)
@@ -260,7 +263,8 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openNonProjectEventFromAPI();
         nonProjectEventPage.checkCurrentStage("В работе");
-        nonProjectEventPage.openOpenQuestionsTab();
+//        nonProjectEventPage.openOpenQuestionsTab();
+        nonProjectEventPage.clickOnMenuItem("Открытые вопросы");
         nonProjectEventPage.clickAddOpenQuestion();
         openQuestion
                 .setName("ATEST-202_" + currentTime)

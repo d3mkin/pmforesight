@@ -6,19 +6,17 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SearchForm {
 
-    //private final SelenideElement searchInput = $(By.cssSelector(".f-search__view .f-search__header-row .k-textbox"));
-    private final SelenideElement searchInput = $(By.xpath("//div[@class='f-search__header-row']//input[@placeholder='Поиск']"));
-    private final SelenideElement searchIcon = $(By.cssSelector(".f-search__view .f-search__header-row .f-button .m-i-search"));
-    private final SelenideElement clearButton = $(By.xpath("//button/span[contains(text(),'Очистить')]"));
-    private final SelenideElement closeButton = $(By.xpath("//button/span[contains(text(),'Закрыть')]"));
+    private final SelenideElement searchInput = $(".f-search__header input");
+    private final SelenideElement searchIcon = $(".f-search__view .f-search__header-row .f-button .m-i-search");
+    private final SelenideElement clearButton = $x("//button/span[contains(text(),'Очистить')]");
+    private final SelenideElement closeButton = $x("//button/span[contains(text(),'Закрыть')]");
     private final SelenideElement notFoundEntityText = $(".f-search__header-info");
-    private final SelenideElement searchButton = $(By.xpath("//button[@data-toggle = 'f-search']"));
+    private final SelenideElement searchButton = $x("//button[@data-toggle = 'f-search']");
 
 
     @Step("Проверка открытия формы поиска")
@@ -37,7 +35,7 @@ public class SearchForm {
 
     @Step ("Проверка отсутствия сущности при глобальном поиске")
     public void checkEntityNotFoundInGlobalSearch(String entityName) {
-        sleep(300000);
+        sleep(2000);
         searchButton.shouldBe(visible).click();
         searchInput.setValue(entityName);
         notFoundEntityText.shouldBe(visible).shouldHave(text("Не найдено записей содержащих искомый текст"));

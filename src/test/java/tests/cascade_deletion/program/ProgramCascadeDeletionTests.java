@@ -185,7 +185,8 @@ public class ProgramCascadeDeletionTests extends BaseTest {
                 .setName("Тест_C1247_" + currentTime)
                 .setUnit("Единица")
                 .setDate(currentDate)
-                .setValue("1");
+                .setValue("1")
+                .setAcceptor(user.getName());
         resultPage.fillFields(result);
         resultPage.clickSaveAndClose();
         programPage.shouldHaveResultsTable();
@@ -299,7 +300,8 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openProgramCreatedFromAPI();
         programPage.checkCurrentProgramStage("Инициирование");
-        programPage.openOpenQuestionsTab();
+//        programPage.openOpenQuestionsTab();
+        programPage.clickOnMenuItem("Открытые вопросы");
         programPage.clickAddOpenQuestion();
         openQuestion
                 .setName("ATEST-155_" + currentTime)
@@ -330,7 +332,8 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openProgramCreatedFromAPI();
         programPage.checkCurrentProgramStage("Инициирование");
-        programPage.openRisksOpportunitiesTab();
+        programPage.clickOnMenuItem("Риски и возможности");
+//        programPage.openRisksOpportunitiesTab();
         programPage.clickAddRisk();
         risk
                 .setRisksAndOpportunitiesName("ATEST-152_" + currentTime)
@@ -367,7 +370,8 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openProgramCreatedFromAPI();
         programPage.checkCurrentProgramStage("Инициирование");
-        programPage.openOrdersTab();
+//        programPage.openOrdersTab();
+        programPage.clickOnMenuItem("Поручения");
         programPage.clickAddOrder();
         order
                 .setName("ATEST-153_" + currentTime)
@@ -397,7 +401,8 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openProgramCreatedFromAPI();
         programPage.checkCurrentProgramStage("Инициирование");
-        programPage.openMeetingTab();
+//        programPage.openMeetingTab();
+        programPage.clickOnMenuItem("Совещания");
         programPage.clickAddMeeting();
         meeting
                 .setName("ATEST-154_" + currentTime)
@@ -426,7 +431,8 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openProgramCreatedFromAPI();
         programPage.checkCurrentProgramStage("Инициирование");
-        programPage.openLessonsTab();
+//        programPage.openLessonsTab();
+        programPage.clickOnMenuItem("Извлечённые уроки");
         programPage.clickAddNegativeLesson();
         negativeLesson
                 .setName("Негативный урок_ATEST-156_" + currentTime);
@@ -459,7 +465,8 @@ public class ProgramCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openProgramCreatedFromAPI();
         programPage.checkCurrentProgramStage("Инициирование");
-        programPage.openLessonsTab();
+//        programPage.openLessonsTab();
+        programPage.clickOnMenuItem("Извлечённые уроки");
         programPage.addSummaryConclusion("cascadeDeletionSummaryConclusionInProgram");
         String programName = ActionsViaAPI.getProgramNameFromAPI();
         programPage.checkSummaryConclusionPresent(programName);

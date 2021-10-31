@@ -177,7 +177,8 @@ public class ProjectCascadeDeletionTests extends BaseTest {
                 .setName("Тест_C1238_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(result);
         resultPage.clickSaveAndClose();
         projectPage.shouldHaveDefaultResultsTable();
@@ -262,7 +263,8 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.checkCurrentProjectStage("Инициирование");
-        projectPage.openRisksOpportunitiesTab();
+//        projectPage.openRisksOpportunitiesTab();
+        projectPage.clickOnMenuItem("Риски и возможности");
         projectPage.clickAddRisk();
         risk
                 .setRisksAndOpportunitiesName("ATEST-123_" + currentTime)
@@ -299,7 +301,8 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.checkCurrentProjectStage("Инициирование");
-        projectPage.openOrdersTab();
+//        projectPage.openOrdersTab();
+        projectPage.clickOnMenuItem("Поручения");
         projectPage.clickAddOrder();
         order
                 .setName("ATEST-124_" + currentTime)
@@ -329,7 +332,7 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.checkCurrentProjectStage("Инициирование");
-        projectPage.openMeetingTab();
+        projectPage.clickOnMenuItem("Совещания");
         projectPage.clickAddMeeting();
         meeting
                 .setName("ATEST-125_" + currentTime)
@@ -358,7 +361,8 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.checkCurrentProjectStage("Инициирование");
-        projectPage.openOpenQuestionsTab();
+//        projectPage.openOpenQuestionsTab();
+        projectPage.clickOnMenuItem("Открытые вопросы");
         projectPage.clickAddOpenQuestion();
         openQuestion
                 .setName("ATEST-126_" + currentTime)
@@ -388,7 +392,8 @@ public class ProjectCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.checkCurrentProjectStage("Инициирование");
-        projectPage.openLessonsTab();
+//        projectPage.openLessonsTab();
+        projectPage.clickOnMenuItem("Извлeчённые уроки");
         projectPage.clickAddNegativeLesson();
         negativeLesson
                 .setName("Негативный урок_ATEST-127_" + currentTime);

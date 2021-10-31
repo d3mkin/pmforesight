@@ -143,7 +143,8 @@ public class PortfolioCascadeDeletionTests extends BaseTest {
                 .setName("ATEST-146_" + currentTime)
                 .setUnit("Единица")
                 .setValue("1")
-                .setResponsible(user.getName());
+                .setResponsible(user.getName())
+                .setAcceptor(user.getName());
         resultPage.fillFields(result);
         resultPage.clickSaveAndClose();
         String resultName = result.getName();
@@ -204,7 +205,8 @@ public class PortfolioCascadeDeletionTests extends BaseTest {
                 .setName("ATEST-146_" + currentTime)
                 .setUnit("Единица")
                 .setDate(currentDate)
-                .setValue("1");
+                .setValue("1")
+                .setAcceptor(user.getName());
         resultPage.fillFields(result);
         resultPage.clickSaveAndClose();
         programPage.shouldHaveResultsTable();
