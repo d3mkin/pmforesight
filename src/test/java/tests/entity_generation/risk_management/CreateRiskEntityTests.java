@@ -54,6 +54,7 @@ public class CreateRiskEntityTests extends BaseTest {
         parameter("Пользователь", user.getName());
         singIn.asUser(user);
         riskRegistry.open();
+        riskRegistry.checkRegistryIsLoaded();
         riskRegistry.controlPanel().clickAddButton();
         riskPage.modalWindowShouldBeOpened();
         riskPage.modalWindowShouldHaveTitle("Риски и возможности");
@@ -87,7 +88,6 @@ public class CreateRiskEntityTests extends BaseTest {
                 .setState("Закрыто")
                 .setriskProbability("Средняя")
                 .setlevelOfInfluence("Среднее")
-                .setApprovingDocument("Паспорт")
                 .setInitiator(user.getName())
                 .setResponsible(user.getName());
         parameter("Пользователь", user.getName());
@@ -97,7 +97,7 @@ public class CreateRiskEntityTests extends BaseTest {
         riskPage.modalWindowShouldBeOpened();
         riskPage.fillFields(risksAndOpportunities);
         riskPage.clickSaveAndClose();
-        riskRegistry.chooseTypeOfSearchAllMy();
+        riskRegistry.changeView("Все");
         riskRegistry.searchRisksAndOpportunities(risksAndOpportunities.getRisksAndOpportunitiesName());
         riskRegistry.selectFirstRow();
         riskRegistry.clickDelete();

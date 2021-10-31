@@ -88,7 +88,7 @@ public class CreateLessonTests extends BaseTest {
         programRegistry.shouldHaveCreatedRecord(program.getName());
         programRegistry.clickFirstProgramRow();
         //createModal.openAndCheckProgramName(program.getName());
-        createModal.positiveLessonsLearned();
+        createModal.openPositiveLessonsLearnedEditForm();
         createModal.modalWindowShouldBeOpened();
 
         lessonPage.fillFields(lessonLearned);
