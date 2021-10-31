@@ -10,8 +10,10 @@ import pages.elements.DeleteEntityDialog;
 import pages.elements.Header;
 import pages.elements.MainMenu;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.timeout;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -32,6 +34,7 @@ public class NationalProjectRegistry implements Registry {
     private SelenideElement firstFoundRow = $(".slick-row.even");
     private SelenideElement firstFoundCheckBox = $(".slick-cell-checkboxsel input");
     private ElementsCollection allFoundRow = $$(".grid-canvas div.slick-row");
+    private final SelenideElement loadingImage = $("div .k-loading-mask");
 
     public NationalProjectRegistry() {
         this.mainMenu = new MainMenu();
@@ -64,11 +67,13 @@ public class NationalProjectRegistry implements Registry {
         $(By.xpath("//div[@class='k-widget k-window k-dialog']")).shouldBe(visible);
         $(By.xpath("//label[@for='dialog-check-all']")).click();
         new DeleteEntityDialog().clickDeleteYes();
+        loadingImage.shouldNotBe(visible, Duration.ofMillis(timeout));
+        $(".k-window").shouldNotBe(visible, Duration.ofMinutes(2));
     }
 
     @Step("Проверка отсутствия результатов поиска")
     public void shouldNotHaveResults() {
-        allFoundRow.shouldHaveSize(0);
+        allFoundRow.shouldHave(CollectionCondition.size(0));
     }
 
     @Override

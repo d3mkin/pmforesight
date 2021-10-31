@@ -6,6 +6,7 @@ import model.OpenQuestion;
 import pages.BasePage;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class OpenQuestionPage extends BasePage {
     private final SelenideElement nameInput = $(By.xpath("//input[@id='Name']"));

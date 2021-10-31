@@ -6,8 +6,7 @@ import model.RisksAndOpportunities;
 import pages.BasePage;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
 
 public class RisksAndOpportunitiesPage extends BasePage {
     //Вкладка общая информация
@@ -37,9 +36,8 @@ public class RisksAndOpportunitiesPage extends BasePage {
         approvingDocumentSelect.shouldBe(visible);
         searchAndSelectFirstFromSelect(approvingDocumentSelect, risksAndOpportunities.getApprovingDocument());
         tabRoles.click();
-        initiatorSelect.waitUntil(visible, 10000);
+        sleep(2000);
         searchAndSelectFirstFromSelect(initiatorSelect, risksAndOpportunities.getInitiator());
-        responsibleSelect.waitUntil(visible, 10000);
         searchAndSelectFirstFromSelect(responsibleSelect, risksAndOpportunities.getResponsible());
     }
 }

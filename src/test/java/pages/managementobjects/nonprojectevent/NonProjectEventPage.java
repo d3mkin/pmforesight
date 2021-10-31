@@ -247,6 +247,7 @@ public class NonProjectEventPage extends BasePage {
 
     @Step("Добавить новое Совещание из карточки Программы")
     public void clickAddMeeting() {
+        checkPageIsLoaded();
         addMeetingButton.click();
     }
 

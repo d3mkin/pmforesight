@@ -13,6 +13,8 @@ import pages.elements.DeleteEntityDialog;
 import pages.elements.Header;
 import pages.elements.MainMenu;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -148,8 +150,10 @@ public class NonProjectEventRegistry implements Registry {
         shouldHaveCreatedRecord(entityName);
         selectRow();
         clickDelete();
+        loadingImage.waitUntil(not(visible), 1200000);
         acceptDelete();
         loadingImage.waitUntil(not(visible), 1200000);
+        $(".k-window").shouldNotBe(visible, Duration.ofMinutes(2));
         searchEvent(entityName);
         shouldNotHaveResults();
     }
