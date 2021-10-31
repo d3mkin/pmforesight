@@ -27,7 +27,7 @@ public abstract class BasePage {
     protected SelenideElement loadImage = $(".k-loading-image");
 
     //Разворачивает окно на полный экран
-    protected SelenideElement expandButton = actions.$("a[aria-label='window-Maximize']");
+    protected SelenideElement expandButton = actions.$("[aria-label='window-Maximize']");
 
     //Форма редактирования
     private final SelenideElement editForm = $(".f-card__header .m-i-pencil2");
@@ -36,7 +36,7 @@ public abstract class BasePage {
     protected SelenideElement saveAndOpenCardButton = $("a[aria-label='hyperlink-open']");
     protected SelenideElement saveButton = $("a[aria-label='Save']");
     protected SelenideElement saveAndCloseButton = $("a[aria-label='kendo-save-and-close']");
-    protected SelenideElement closeButton = $("a[aria-label='Close']");
+    protected SelenideElement closeButton = $("[aria-label='Close']");
     protected SelenideElement anyDropDown = $x("//div[contains(@class,'k-list-container k-popup k-group k-reset k-state-border-up')]");
 
     //Виджет календаря
@@ -118,33 +118,33 @@ public abstract class BasePage {
 
     @Step("Нажать развернуть на весь экран")
     public void clickExpand() {
-        expandButton.shouldBe(visible).click();
-        $(By.xpath("//div[@class='k-widget k-window k-window-maximized']")).shouldBe(visible);
+        expandButton.click();
+        $(".k-widget.k-window.k-window-maximized").shouldBe(visible);
     }
 
     @Step("Нажать кнопку восстановить")
     public void clickRestore() {
-        restoreButton.shouldBe(visible).click();
+        restoreButton.click();
     }
 
     @Step("Нажать Сохранить и открыть карточку просмотра")
     public void clickSaveAndOpenCard() {
-        saveAndOpenCardButton.shouldBe(visible).click();
+        saveAndOpenCardButton.click();
     }
 
     @Step("Нажать сохранить")
     public void clickSave() {
-        saveButton.shouldBe(visible).click();
+        saveButton.click();
     }
 
     @Step("Нажать Сохранить и закрыть")
     public void clickSaveAndClose() {
-        saveAndCloseButton.shouldBe(visible).click();
+        saveAndCloseButton.click();
     }
 
     @Step ("Нажать закрать")
     public void clickClose() {
-        closeButton.shouldBe(visible).click();
+        closeButton.click();
     }
 
     @Step("Проверка закрытия окна")
@@ -216,9 +216,19 @@ public abstract class BasePage {
         if (value == null) {
             return;
         }
-        el.clear();
-        el.sendKeys(value);
-        sleep(1000);
+        el.setValue(value);
+        sleep(2000);
+    }
+
+    @Step ("Очистить текстовое поле u ввести новое значение {value}")
+    public void clearAndTypeText(SelenideElement el, String value) {
+        if (value == null) {
+            return;
+        }
+        el.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+        $(".k-window-title").click();
+        el.setValue(value);
+        sleep(2000);
     }
 
     public void typeNumeric(SelenideElement wrap, SelenideElement input, String value) {
@@ -238,20 +248,7 @@ public abstract class BasePage {
         selectFirstItem.click();
     }
 
-    public void searchInSelectAndClickToFirst(SelenideElement el, String value) {
-        if (value == null) {
-            return;
-        }
-        el.click();
-        sleep(2000);
-        selectFilterInput.shouldBe(visible).setValue(value);
-        sleep(2000);
-        selectAllItems.shouldHaveSize(1);
-        selectFirstItem.click();
-    }
-
-    @Step ("Выбрать в выпадающем списке значение {value}")
-    public void searchAndSelectFirstFromSelect(SelenideElement el, String value) {
+    /*public void searchInSelectAndClickToFirst(SelenideElement el, String value) {
         if (value == null) {
             return;
         }
@@ -259,9 +256,42 @@ public abstract class BasePage {
         selectFilterInput.shouldBe(visible, ofMillis(timeout));
         selectFilterInput.sendKeys(value);
         sleep(2000);
-        selectAllItems.shouldHaveSize(1);
+        selectAllItems.shouldHave(size(1));
         selectFirstItem.click();
-        el.waitUntil(text(value), timeout);
+        sleep(2000);
+        el.shouldHave(exactText(value), ofMillis(timeout));
+    }*/
+
+    @Step ("Выбрать в выпадающем списке значение {value}")
+    public void searchAndSelectFirstFromSelect(SelenideElement el, String value) {
+        if (value == null) {
+            return;
+        }
+        el.click();
+        sleep(2000);
+        selectFilterInput
+                .shouldBe(visible, ofMillis(timeout))
+                .sendKeys(value);
+        sleep(2000);
+        selectAllItems.shouldHave(size(1));
+        selectFirstItem.click();
+        el.shouldHave(text(value), ofMillis(timeout));
+    }
+
+    @Step ("Выбрать в выпадающем списке значение {value}")
+    public void searchAndSelectFirstFromMultiSelect (SelenideElement el, String value) {
+        if (value == null) {
+            return;
+        }
+        el.click();
+        sleep(2000);
+        selectMultiSelectInput
+                .shouldBe(visible, ofMillis(timeout))
+                .sendKeys(value);
+        sleep(2000);
+        selectAllItems.shouldHave(size(1));
+        selectFirstItem.click();
+        $(".k-window-title").click();
     }
 
     @Step ("Ввести дату {value}")
@@ -289,18 +319,6 @@ public abstract class BasePage {
     public void selectCalendarCurrentDay(){
         calendarCurrentDay.shouldBe(visible).click();
         calendarCurrentDay.shouldBe(visible).click();
-    }
-
-    @Step ("Выбрать в выпадающем списке значение {value}")
-    public void searchAndSelectFirstFromMultiSelect (SelenideElement el, String value) {
-        if (value == null) {
-            return;
-        }
-        el.click();
-        sleep(1000);
-        selectMultiSelectInput.shouldBe(visible).setValue(value);
-        sleep(1000);
-        selectFirstItem.click();
     }
 
     public void chooseValueFromDropDown(SelenideElement el, String value) {
@@ -343,5 +361,21 @@ public abstract class BasePage {
         $(By.xpath("//div[@class='k-widget k-window k-dialog']")).waitUntil(visible,Configuration.timeout);
         $(By.xpath("//label[@for='dialog-check-all']")).click();
         new DeleteEntityDialog().clickDeleteYes();
+    }
+
+    @Step("Нажать по пункту {menuName}")
+    public void clickOnMenuItem(String menuName) {
+        ElementsCollection menuItems = $$(".f-card__left.f-menu .f-menu__text");
+        ElementsCollection popupMenuItems = $$(".f-popup__container .f-menu__text");
+        SelenideElement additionalMenu = $(".f-card__left .k-i-more-vertical");
+        if (menuItems.findBy(text(menuName)).isDisplayed()) {
+            menuItems.findBy(text(menuName)).click();
+        }
+        else {
+            additionalMenu.click();
+            $(".f-popup__container").shouldBe(visible);
+            popupMenuItems.findBy(text(menuName)).click();
+        }
+        $$(".f-card__left.f-menu .f-menu__text").findBy(text(menuName)).click();
     }
 }
