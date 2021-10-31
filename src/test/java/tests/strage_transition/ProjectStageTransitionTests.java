@@ -87,7 +87,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         modalDialog.modalWindowShouldHaveTitle("Отменить");
         modalDialog.shouldHaveReasonField();
         modalDialog.clickSaveAndClose();
-        modalDialog.shouldHaveMessage("Необходимо заполнить поле \"Причина отмены проекта\"");
+        modalDialog.shouldHaveMessage("Необходимо заполнить поле \"Комментарий\"");
         modalDialog.closeDialog();
         modalDialog.clickClose();
     }
@@ -229,8 +229,8 @@ public class ProjectStageTransitionTests extends BaseTest {
         //Переводим на стадию Завершение в случае, когда условия НЕ выполены
         projectPage.moveStageTo("Завершение");
         modalDialog.shouldHaveMessageAboutRequiredFields(
-                "Должна быть создана типовая контрольная точка 'Результаты работ приняты'",
-                "Должна быть создана и завершена типовая контрольная точка 'Результаты работ приняты'");
+                "Должна быть создана типовая контрольная точка \"Результаты работ приняты\"",
+                "Должна быть завершена типовая контрольная точка \"Результаты работ приняты\"");
         modalDialog.closeDialog();
         //Выплняем условия для перевода на стадию Завершение
         projectPage.openActivityTab();
@@ -256,11 +256,12 @@ public class ProjectStageTransitionTests extends BaseTest {
         //Переводим на стадию Постпроектный мониторинг в случае, когда условия НЕ выполены
         projectPage.moveStageTo("Постпроектный мониторинг");
         modalDialog.shouldHaveMessageAboutRequiredFields(
-                "Должна быть создана типовая контрольная точка 'Проект закрыт'",
-                "Необходимо прикрепить документ 'Итоговый отчет о реализации проекта'",
-                "Должна быть создана и завершена типовая контрольная точка 'Проект закрыт'");
+                "Должна быть создана типовая контрольная точка \"Проект закрыт\"",
+                "Должна быть завершена типовая контрольная точка \"Проект закрыт\"",
+                "Прикрепите документ: \"Итоговый отчет о реализации проекта\"");
         modalDialog.closeDialog();
         //Выплняем условия для перевода на стадию Постпроектный мониторинг
+        projectPage.openActivityTab();
         projectPage.expandOrCollapseRequiredPointsWidget();
         projectPage.createRequiredStagePoint("Завершение", currentDate);
         projectPage.expandOrCollapseRequiredPointsWidget();
@@ -282,10 +283,10 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.closeCreatedSnapshotNotification();
 
         //Переводим на стадию Архив в случае, когда условия НЕ выполены
-        projectPage.moveStageTo("Архив");
+        projectPage.moveStageTo("В архив");
         modalDialog.shouldHaveMessageAboutRequiredFields(
-                "Должна быть создана типовая контрольная точка 'Постпроектный мониторинг завершен'",
-                "Должна быть создана и завершена типовая контрольная точка 'Постпроектный мониторинг завершен'");
+                "Должна быть создана типовая контрольная точка \"Постпроектный мониторинг завершен\"",
+                "Должна быть завершена типовая контрольная точка \"Постпроектный мониторинг завершен\"");
         modalDialog.closeDialog();
         //Выполняем условия для перевода на стадию Архив
         projectPage.openActivityTab();
@@ -303,7 +304,7 @@ public class ProjectStageTransitionTests extends BaseTest {
         projectPage.switchToPreviousBrowserTab();
         //Переводим на стадию Архив, когда все условия выполнены
         projectPage.openMainTab();
-        projectPage.moveStageTo("Архив");
+        projectPage.moveStageTo("В архив");
         projectPage.checkCurrentProjectStage("Архив");
     }
 }

@@ -1,5 +1,6 @@
 package pages.managementobjects.project;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -16,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.timeout;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -107,7 +109,7 @@ public class ProjectPage extends BasePage {
     //Создание "извлеченного урока" в карточке проекта
     private final SelenideElement nameProjectAfterOpen = $(".f-card__name");
     private final SelenideElement learnedLessons = $(By.xpath("//span[text()='Извлeчённые уроки']"));
-    private final SelenideElement positiveLesson = $(By.xpath("//a[contains(@class,'itv-custom-buttons btn btn-small btn-success k-button')]"));
+    private final SelenideElement positiveLesson = $x("//a[contains(@class,'itv-custom-buttons btn btn-small btn-success k-button')]");
     private final SelenideElement searchCreateLesson = $(By.xpath("//div[contains(@id,'LessonInlineTable')]/..//input[contains(@placeholder,'Поиск...')]"));
     private final SelenideElement nameLesson = $(By.xpath("//div[contains(@id,'LessonInlineTable')]/..//div[contains(@class,'k-grid-content k-auto-scrollable')]/..//a[contains(@target,\"_blank\")]"));
 
@@ -181,7 +183,7 @@ public class ProjectPage extends BasePage {
 
     //ЗИ
     private final SelenideElement createChangeRequestButton = $("[name='CreateCHLi']");
-    private final SelenideElement changeRequestTableSearchInput = $x("//div[@name='SnapshotCRInlineTableView']//input[@placeholder='Поиск...']");
+    private final SelenideElement changeRequestTableSearchInput = $("#SnapshotCRInlineTableView [placeholder='Поиск...']");
     private final SelenideElement foundChangeRequestName = $("#SnapshotCRInlineTableView [data-column-field='Name'] a");
     private final SelenideElement foundChangeRequestCreationDate = $("#SnapshotCRInlineTableView [data-column-field='CreationDate']");
     private final SelenideElement foundChangeRequestComment = $("#SnapshotCRInlineTableView [data-column-field='Comment']");
@@ -195,7 +197,7 @@ public class ProjectPage extends BasePage {
 
     @Step ("Проверить что наименование Проекта соответствует названию {projectName}")
     public void checkProjectName (String projectName) {
-        projectViewName.waitUntil(visible, Configuration.timeout).shouldHave(text(projectName));
+        projectViewName.waitUntil(visible, timeout).shouldHave(text(projectName));
     }
 
     @Step ("Проверить что наименование Портфеля соответствует названию {projectPortfolioName}")
@@ -214,7 +216,7 @@ public class ProjectPage extends BasePage {
         searchAndSelectFirstFromMultiSelect(projectGoal, project.getGoal());
 
         tabRoles.click();
-        curatorRole.shouldBe(visible, Duration.ofMillis(Configuration.timeout));
+        curatorRole.shouldBe(visible, Duration.ofMillis(timeout));
         searchAndSelectFirstFromSelect(curatorRole, project.getCurator());
         sleep(500);
         searchAndSelectFirstFromSelect(managerRole, project.getSupervisor());
@@ -253,9 +255,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Открытие положительного урока")
     public void positiveLessonsLearned() {
-        $(".f-menu__list f-tab__list_toolbar_more").click();
-        learnedLessons.click();
-        positiveLesson.shouldBe(visible);
+        clickOnMenuItem("Извлeчённые уроки");
         positiveLesson.click();
     }
 
@@ -325,7 +325,7 @@ public class ProjectPage extends BasePage {
         sleep(1000);
     }
 
-    @Step ("Открыть вкладку Извлеченный уроки")
+    @Step ("Открыть вкладку Извлеченные уроки")
     public void openLessonsTab(){
         tabLessons.click();
         sleep(1000);
@@ -635,7 +635,8 @@ public class ProjectPage extends BasePage {
 
     @Step ("Проверить текущую стадию проекта")
     public void checkCurrentProjectStage(String stage) {
-        currentProjectStageField.waitUntil(text(stage), 30000);
+        checkPageIsLoaded();
+        currentProjectStageField.shouldHave(text(stage), Duration.ofMillis(timeout));
     }
 
     @Step ("Проверить возможность перевода проекта по стадиям")
@@ -704,6 +705,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Проверить что сущность с названием {entityName} отображается в Ганте")
     public void checkEntityIsDisplayedInGantt(String entityName){
+        checkPageIsLoaded();
         switchTo().frame("ganttframe");
         $(By.xpath("//div[@id='ganttplace']//*[text() = '"+ entityName +"']")).shouldBe(visible);
         switchTo().defaultContent();
@@ -716,6 +718,7 @@ public class ProjectPage extends BasePage {
 
     @Step ("Найти в Ганте сущность с названием {entityName} и открыть её карточку просмотра")
     public void findInGanttAndOpenEntityPage(String entityName){
+        checkPageIsLoaded();
         switchTo().frame("ganttframe");
         typeText(searchInGanttTableInput, entityName);
         sleep(1000);
@@ -940,10 +943,11 @@ public class ProjectPage extends BasePage {
 
     @Step("Закрыть всплывающее уведомление 'Внимание, создан слепок!'")
     public void closeCreatedSnapshotNotification() {
-        $(".k-notification-success").waitUntil(visible, 15000);
+        checkPageIsLoaded();
+        $(".k-notification-success").shouldBe(visible, Duration.ofMillis(timeout));
         $(".f-notify__title").shouldHave(text("Внимание, создан слепок!"));
         $(".f-notify__close").click();
-        $(".k-notification-success").shouldNotBe(visible);
+        $(".k-notification-success").shouldNotBe(visible, Duration.ofMillis(timeout));
     }
 
     @Step("Нажать 'Создать новый слепок'")
@@ -965,7 +969,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Проверить имя слепка и его статус в таблице слепков")
     public void checkSnapshotExistInTable(String snapshotName, String snapshotDate, String snapshotComment, String snapshotStatus) {
-         firstFoundSnapshotName.shouldBe(visible).shouldHave(text(snapshotName));
+        firstFoundSnapshotName.shouldBe(visible).shouldHave(text(snapshotName));
         firstFoundCreationDate.shouldBe(visible).shouldHave(text(snapshotDate));
         firstFoundSnapshotComment.shouldBe(visible).shouldHave(text(snapshotComment));
         firstFoundSnapshotStatus.shouldBe(visible).shouldHave(text(snapshotStatus));
@@ -1032,11 +1036,11 @@ public class ProjectPage extends BasePage {
         $x("//span[contains(text(),'"+snapshotName+"')]").shouldBe(visible);
     }
 
-    @Step("Проверить что кол-во изменений соотвестует цифре {tabChangesCount} на вкладке Общая информация и цифре {containerChangesCount} на виджете Общая информация")
-    public void checkCountOfMainChanges(int tabChangesCount, int containerChangesCount) {
+    @Step("Проверить что кол-во изменений соотвестует цифре {containerChangesCount} на виджете Общая информация")
+    public void checkCountOfMainChanges(int containerChangesCount) {
         checkPageIsLoaded();
-        $("a[href='#tab-main'] > .f-tag").shouldHave(text(""+tabChangesCount+""));
-        $$("span[data-name='SnapshotPrev']").shouldHaveSize(containerChangesCount);
+//        $("a[href='#tab-main'] > .f-tag").shouldHave(text(""+tabChangesCount+""));
+        $$("[data-name='SnapshotPrev']").shouldHave(CollectionCondition.size(containerChangesCount));
     }
 
     @Step("Проверить что кол-во изменений соотвестует цифре {tabChangesCount} на вкладке Цели и статусу {status} в таблице Цели")
@@ -1049,7 +1053,7 @@ public class ProjectPage extends BasePage {
     public void addGoals(ArrayList<String> goalsNames){
         for (String goal:goalsNames) {
             checkPageIsLoaded();
-            searchAndSelectFirstFromMultiSelect($("#control-group-ActivityGoal .k-widget"), goal);
+            searchAndSelectFirstFromMultiSelect(projectGoal, goal);
             checkPageIsLoaded();
         }
     }

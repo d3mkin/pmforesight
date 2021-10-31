@@ -73,9 +73,12 @@ public class PointStageTransitionTests extends BaseTest {
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
+        projectPage.openMainTab();
         Selenide.refresh();
         projectPage.checkCurrentProjectStage("Инициирование");
+        projectPage.checkPageIsLoaded();
         projectPage.openActivityTab();
+        projectPage.checkPageIsLoaded();
         projectPage.checkPointStatus("Выполнено");
     }
 
@@ -89,6 +92,7 @@ public class PointStageTransitionTests extends BaseTest {
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.checkCurrentProjectStage("Инициирование");
         projectPage.openActivityTab();
+        projectPage.clickToMaximizeOrMinimizeGantt();
         projectPage.clickEditGantt();
         projectPage.addNewPointInGantt("Тестовая КТ", "Рабочий план");
         projectPage.clickToMaximizeOrMinimizeGantt();
@@ -99,8 +103,10 @@ public class PointStageTransitionTests extends BaseTest {
         pointPage.backInProgressPointAndUploadFile("31.12.2021", fileToUpload);
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
+        projectPage.openMainTab();
         Selenide.refresh();
         projectPage.checkCurrentProjectStage("Инициирование");
+        projectPage.checkPageIsLoaded();
         projectPage.openActivityTab();
         projectPage.checkPointStatus("Прогноз срыва сроков");
     }
@@ -115,6 +121,7 @@ public class PointStageTransitionTests extends BaseTest {
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.checkCurrentProjectStage("Инициирование");
         projectPage.openActivityTab();
+        projectPage.clickToMaximizeOrMinimizeGantt();
         projectPage.clickEditGantt();
         projectPage.addNewPointInGantt("Тестовая КТ", "Рабочий план");
         projectPage.clickToMaximizeOrMinimizeGantt();
@@ -124,8 +131,10 @@ public class PointStageTransitionTests extends BaseTest {
         pointPage.cancelPointAndUploadFile(currentDate, fileToUpload);
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
+        projectPage.openMainTab();
         Selenide.refresh();
         projectPage.checkCurrentProjectStage("Инициирование");
+        projectPage.checkPageIsLoaded();
         projectPage.openActivityTab();
         projectPage.checkPointStatus("Отменена");
     }
@@ -140,6 +149,7 @@ public class PointStageTransitionTests extends BaseTest {
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.checkCurrentProjectStage("Инициирование");
         projectPage.openActivityTab();
+        projectPage.clickToMaximizeOrMinimizeGantt();
         projectPage.clickEditGantt();
         projectPage.addNewPointInGantt("Тестовая КТ", "Рабочий план");
         projectPage.clickToMaximizeOrMinimizeGantt();
@@ -150,8 +160,11 @@ public class PointStageTransitionTests extends BaseTest {
         pointPage.backInProgressPointAndUploadFile("31.12.2021", fileToUpload);
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
+
+        projectPage.openMainTab();
         Selenide.refresh();
         projectPage.checkCurrentProjectStage("Инициирование");
+        projectPage.checkPageIsLoaded();
         projectPage.openActivityTab();
         projectPage.checkPointStatus("Прогноз срыва сроков");
     }
@@ -174,11 +187,13 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
-        pointPage.approvePointAndUploadFile(fileToUpload);
+//        pointPage.approvePointAndUploadFile(fileToUpload);
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
+        projectPage.openMainTab();
         Selenide.refresh();
         projectPage.checkCurrentProjectStage("Инициирование");
+        projectPage.checkPageIsLoaded();
         projectPage.openActivityTab();
         projectPage.checkPointStatus("Подтверждена");
     }

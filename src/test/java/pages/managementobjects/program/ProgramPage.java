@@ -40,7 +40,7 @@ public class ProgramPage extends BasePage {
     //создание "извлеченного урока" в карточке программы
     private final SelenideElement nameProjectAfterOpen = $("#card-Name");
     private final SelenideElement learnedLesson = $(By.xpath("//span[text()='Извлечённые уроки']"));
-    private final SelenideElement positiveLesson = $(By.xpath("//a[contains(@class,\"itv-custom-buttons btn btn-small btn-success k-button\") and contains(@data-tooltip,\"Положительный урок\")]"));
+    private final SelenideElement positiveLesson = $(".k-widget .btn-success.k-button");
     private final SelenideElement searchCreateLesson = $(By.xpath("//div[contains(@id,\"LessonInlineTable\")]/..//input[contains(@placeholder,\"Поиск...\")]"));
     private final SelenideElement nameLesson = $(By.xpath("//div[contains(@id,\"LessonInlineTable\")]/..//div[contains(@class,\"k-grid-content k-auto-scrollable\")]/..//a[contains(@target,\"_blank\")]"));
     //Показатели
@@ -94,10 +94,9 @@ public class ProgramPage extends BasePage {
         nameProjectAfterOpen.shouldHave(text(programName));
     }
 
-    @Step("Открытие положительного урока")
-    public void positiveLessonsLearned() {
-        learnedLesson.click();
-        positiveLesson.shouldBe(visible);
+    @Step("Открытие формы редактирования Положительного урока")
+    public void openPositiveLessonsLearnedEditForm() {
+        clickOnMenuItem("Извлечённые уроки");
         positiveLesson.click();
     }
 
@@ -283,7 +282,7 @@ public class ProgramPage extends BasePage {
         $x("//div[@id='tab-meeting']//td//a[contains(text(),'"+ meetingName +"')]").shouldBe(visible);
     }
 
-    @Step ("Открыть вкладку Извлеченный уроки")
+    @Step ("Открыть вкладку Извлечённые уроки")
     public void openLessonsTab(){
         tabLessons.click();
         sleep(1000);

@@ -39,7 +39,7 @@ public class PointPage extends BasePage {
     @Step ("Нажать кнопку Выполнить")
     public void clickCompleteButton(){
         completeButton_ViewForm.click();
-        actualCompletionDateInput_EditForm.shouldBe(visible);
+//        actualCompletionDateInput_EditForm.shouldBe(visible);
     }
 
     @Step ("Нажать кнопку Вернуть в работу")
@@ -100,11 +100,13 @@ public class PointPage extends BasePage {
 
     @Step ("Заполнить поле комментарий")
     public void fillComment(String comment) {
+        checkPageIsLoaded();
         commentInput_EditForm.setValue(comment);
     }
 
     @Step ("Нажать на кнопку Загрузить документ в форме редактирования")
     public void clickUploadFileOnEditForm(){
+        checkPageIsLoaded();
         uploadDocumentButton_EditForm.click();
     }
 
@@ -114,29 +116,51 @@ public class PointPage extends BasePage {
 
     @Step ("Выполнить КТ и загрузить документ")
     public void completePointAndUploadFile (String date, File file) {
+        checkPageIsLoaded();
         clickCompleteButton(); //Выполняем КТ
+        checkPageIsLoaded();
         clickExpand();
-        fillActualCompletionDate(date);
+//        fillActualCompletionDate(date);
 //        clickUploadFileOnEditForm(); //Загружаем документ
 //        uploadFile(file);
 //        checkFileIsUploaded(file);
 //        closeUploadWindow();
         clickSaveAndClose();//Сохраняем изменения в форме Выполнения
         checkPageIsLoaded();
+        completeApproval(date);
+        checkPageIsLoaded();
         checkCompletionDateField(date);
+        checkPageIsLoaded();
         checkPointStatus("Выполнена");
+        checkPageIsLoaded();
     }
 
+    @Step("Нажать на кнопку 'Завершить согласование'")
+    public void completeApproval(String date) {
+        checkPageIsLoaded();
+        $(".EntityStateEdgeWorkflow .btn-primary").click();
+        checkPageIsLoaded();
+        clickExpand();
+        sleep(2000);
+        fillActualCompletionDate(date);
+        checkPageIsLoaded();
+        clickSaveAndClose();
+        checkPageIsLoaded();
+    }
     @Step ("Вернуть в работу КТ и загрузить документ")
     public void backInProgressPointAndUploadFile (String date, File file) {
+        checkPageIsLoaded();
         clickBackInProgressButton(); //Возвращаем в работу
+        checkPageIsLoaded();
         clickExpand();
+        checkPageIsLoaded();
         fillComment("Какая-то причина для возврата");
 //        clickUploadFileOnEditForm(); //Загружаем документ
 //        uploadFile(file);
 //        checkFileIsUploaded(file);
 //        closeUploadWindow();
         fillForecastCompletionDate(date);
+        checkPageIsLoaded();
         clickSaveAndClose(); //Сохраняем изменения
         checkPageIsLoaded();
         checkForecastCompletionDateField(date);
@@ -159,8 +183,11 @@ public class PointPage extends BasePage {
 
     @Step ("Согласовать КТ и загрузить документ")
     public void approvePointAndUploadFile (File file) {
+        checkPageIsLoaded();
         clickApproveButton(); //Согласовать КТ
+        checkPageIsLoaded();
         clickExpand();
+        checkPageIsLoaded();
 //        clickUploadFileOnEditForm(); //Загружаем документ
 //        uploadFile(file);
 //        checkFileIsUploaded(file);
@@ -172,8 +199,11 @@ public class PointPage extends BasePage {
 
     @Step ("Согласовать КТ и загрузить документ")
     public void finishApprovePointAndUploadFile (File file) {
+        checkPageIsLoaded();
         clickFinishApprove(); //Согласовать КТ
+        checkPageIsLoaded();
         clickExpand();
+        checkPageIsLoaded();
 //        clickUploadFileOnEditForm(); //Загружаем документ
 //        uploadFile(file);
 //        checkFileIsUploaded(file);
@@ -184,6 +214,7 @@ public class PointPage extends BasePage {
     }
 
     public void fillFields(Point point) {
+        checkPageIsLoaded();
         typeText(pointName, point.getName());
         typeDate(pointPlanDate, point.getPlanDate());
         typeDate(pointForecastDate, point.getForecastDate());
