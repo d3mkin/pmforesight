@@ -25,17 +25,15 @@ public class BaseTest {
                 .savePageSource(false)
                 .includeSelenideSteps(true)
                 .enableLogs(LogType.BROWSER, Level.SEVERE));
-        Configuration.timeout = 15000;
-        //        Configuration.headless = true;
+        Configuration.timeout = 30000;
+        Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = System.getProperty("baseUrl","http://tgr.hera.test.local");
         String selenoid = System.getProperty("selenoid_url");
         String browser = System.getProperty("browser", "chrome");
         if (selenoid == null) {
             Configuration.browser = browser;
-            Configuration.startMaximized = true;
         } else {
             Configuration.browser = CustomWebDriver.class.getName();
-            Configuration.browserSize = "3840x2160";
         }
     }
 
