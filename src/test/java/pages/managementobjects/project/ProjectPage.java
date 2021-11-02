@@ -621,8 +621,11 @@ public class ProjectPage extends BasePage {
 
     @Step ("Проверить наличие показателя в таблице 'Персональные показатели проекта'")
     public void shouldHaveIndicator(String indicatorName) {
+        checkPageIsLoaded();
         indicatorTableSearchInput.click();
+        checkPageIsLoaded();
         indicatorTableSearchInput.sendKeys(indicatorName);
+        checkPageIsLoaded();
         firstFoundIndicator.shouldBe(visible);
         firstFoundIndicator.shouldHave(text(indicatorName));
     }

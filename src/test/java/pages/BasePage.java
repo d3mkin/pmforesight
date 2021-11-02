@@ -98,6 +98,7 @@ public abstract class BasePage {
 
     @Step("Проверка открытия модального окна")
     public void modalWindowShouldBeOpened() {
+        checkPageIsLoaded();
         window.shouldBe(visible);
         header.shouldBe(visible);
         actions.shouldBe(visible);
@@ -106,6 +107,7 @@ public abstract class BasePage {
 
     @Step("Проверка закрытия модального окна")
     public void modalWindowShouldBeClosed() {
+        checkPageIsLoaded();
         window.shouldNotBe(visible);
         header.shouldNotBe(visible);
     }
@@ -118,6 +120,7 @@ public abstract class BasePage {
 
     @Step("Нажать развернуть на весь экран")
     public void clickExpand() {
+        checkPageIsLoaded();
         expandButton.click();
         $(".k-widget.k-window.k-window-maximized").shouldBe(visible);
     }
@@ -129,26 +132,33 @@ public abstract class BasePage {
 
     @Step("Нажать Сохранить и открыть карточку просмотра")
     public void clickSaveAndOpenCard() {
+        checkPageIsLoaded();
         saveAndOpenCardButton.click();
+        checkPageIsLoaded();
     }
 
     @Step("Нажать сохранить")
     public void clickSave() {
+        checkPageIsLoaded();
         saveButton.click();
     }
 
     @Step("Нажать Сохранить и закрыть")
     public void clickSaveAndClose() {
+        checkPageIsLoaded();
         saveAndCloseButton.click();
+        checkPageIsLoaded();
     }
 
     @Step ("Нажать закрать")
     public void clickClose() {
+        checkPageIsLoaded();
         closeButton.click();
     }
 
     @Step("Проверка закрытия окна")
     public void shouldBeClosed() {
+        checkPageIsLoaded();
         window.shouldNot(visible);
     }
 
@@ -167,6 +177,7 @@ public abstract class BasePage {
 
     @Step("Закрыть диалоговое окно")
     public void closeDialog() {
+        checkPageIsLoaded();
         closeInDialog.click();
     }
 
@@ -175,6 +186,7 @@ public abstract class BasePage {
     }
 
     public void clickDialogCancel() {
+        checkPageIsLoaded();
         cancelDialog.click();
     }
 
@@ -183,6 +195,7 @@ public abstract class BasePage {
     }
 
     public void clickDialogSave () {
+        checkPageIsLoaded();
         closeDialogWithSave.click();
     }
 
