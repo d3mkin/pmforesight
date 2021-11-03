@@ -708,6 +708,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Проверить что сущность с названием {entityName} отображается в Ганте")
     public void checkEntityIsDisplayedInGantt(String entityName){
+        sleep(2000);
         checkPageIsLoaded();
         switchTo().frame("ganttframe");
         $(By.xpath("//div[@id='ganttplace']//*[text() = '"+ entityName +"']")).shouldBe(visible);

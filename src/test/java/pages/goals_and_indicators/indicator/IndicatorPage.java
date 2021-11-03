@@ -162,11 +162,11 @@ public class IndicatorPage extends BasePage {
 
     @Step ("Изменить базовое значение показателя")
     public void changeBasicValue(String newBasicValue){
-        basicValueInput_EditForm.shouldBe(visible);
         //Костыль для инпута базвого значения. Зачищает форму ввода и кливает по модальному окну
 //        basicValueInput_EditForm.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 //        $(By.xpath("//form[@id='KPIEditForm']")).click();
-        typeText(basicValueInput_EditForm, newBasicValue);
+        sleep(2000);
+        clearAndTypeText(basicValueInput_EditForm, newBasicValue);
         clickSaveAndClose();
     }
 

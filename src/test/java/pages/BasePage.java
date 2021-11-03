@@ -187,6 +187,7 @@ public abstract class BasePage {
 
     public void clickDialogCancel() {
         checkPageIsLoaded();
+        checkPageIsLoaded();
         cancelDialog.click();
     }
 
@@ -196,6 +197,7 @@ public abstract class BasePage {
 
     public void clickDialogSave () {
         checkPageIsLoaded();
+        checkPageIsLoaded();
         closeDialogWithSave.click();
     }
 
@@ -204,6 +206,7 @@ public abstract class BasePage {
 
     @Step ("Подтвердить переход на следующую стадию")
     public void clickAcceptNextStageTransition() {
+        checkPageIsLoaded();
         dialogTitle.shouldHave(text("Перевод на следующую стадию"));
         dialogMessage.shouldHave(text("Вы действительно хотите завершить текущую стадию и перейти к следующей?"));
         closeDialog();
@@ -211,6 +214,7 @@ public abstract class BasePage {
 
     @Step ("Подтвердить переход на предыдушую стадию")
     public void clickAcceptPrevStageTransition() {
+        checkPageIsLoaded();
         dialogTitle.shouldHave(text("Возврат к предыдущей стадии"));
         dialogMessage.shouldHave(text("Вы действительно хотите вернуться к предыдущей стадии?"));
         closeDialog();
@@ -218,6 +222,7 @@ public abstract class BasePage {
 
     @Step("Открыть форму редактирования")
     public void clickEditForm() {
+        checkPageIsLoaded();
         editForm.click();
         modalWindowShouldBeOpened();
     }
@@ -226,6 +231,7 @@ public abstract class BasePage {
 
     @Step ("Ввести в текстовое поле значение {value}")
     public void typeText(SelenideElement el, String value) {
+        checkPageIsLoaded();
         if (value == null) {
             return;
         }
@@ -235,6 +241,7 @@ public abstract class BasePage {
 
     @Step ("Очистить текстовое поле u ввести новое значение {value}")
     public void clearAndTypeText(SelenideElement el, String value) {
+        checkPageIsLoaded();
         if (value == null) {
             return;
         }
@@ -245,6 +252,7 @@ public abstract class BasePage {
     }
 
     public void typeNumeric(SelenideElement wrap, SelenideElement input, String value) {
+        checkPageIsLoaded();
         if (value == null) {
             return;
         }
@@ -255,6 +263,7 @@ public abstract class BasePage {
     }
 
     public  void searchInAutocompleteAndClickToFirst(SelenideElement el, String value) {
+        checkPageIsLoaded();
         el.click();
         el.sendKeys(value);
         sleep(1000);
@@ -277,6 +286,7 @@ public abstract class BasePage {
 
     @Step ("Выбрать в выпадающем списке значение {value}")
     public void searchAndSelectFirstFromSelect(SelenideElement el, String value) {
+        checkPageIsLoaded();
         if (value == null) {
             return;
         }
@@ -293,6 +303,7 @@ public abstract class BasePage {
 
     @Step ("Выбрать в выпадающем списке значение {value}")
     public void searchAndSelectFirstFromMultiSelect (SelenideElement el, String value) {
+        checkPageIsLoaded();
         if (value == null) {
             return;
         }
@@ -309,6 +320,7 @@ public abstract class BasePage {
 
     @Step ("Ввести дату {value}")
     public void typeDate(SelenideElement dateInput, String value) {
+        checkPageIsLoaded();
         if (value == null) {
             return;
         }
@@ -324,6 +336,7 @@ public abstract class BasePage {
 
     @Step("Дата достижения Результата - выбрать текущий день")
     public void selectResultCalendarCurrentDay(){
+        checkPageIsLoaded();
         resultCalendarSelect.click();
         calendarCurrentDay.shouldBe(visible).click();
     }
@@ -347,17 +360,20 @@ public abstract class BasePage {
 
     @Step ("Загрузить документ")
     public void uploadFile(File fileToUpload){
+        checkPageIsLoaded();
         uploadInput.uploadFile(fileToUpload);
     }
 
     @Step ("Проверить что документ успешно загружен")
     public void checkFileIsUploaded(File fileToUpload) {
+        checkPageIsLoaded();
         uploadedFileName.shouldHave(text(fileToUpload.getName()));
         uploadedFileStatus.shouldHave(text("Готово"));
     }
 
     @Step ("Закрыть форму загрузки документа")
     public void closeUploadWindow() {
+        checkPageIsLoaded();
         $x("//span[contains(text(),'Файлы')]").click();
         $x("//div[@class='k-widget k-window']//a[@role='button']").click();
     }
@@ -371,6 +387,7 @@ public abstract class BasePage {
 
     @Step("Подтвердить удаление")
     public void acceptDelete() {
+        checkPageIsLoaded();
         $(By.xpath("//div[@class='k-widget k-window k-dialog']")).waitUntil(visible,Configuration.timeout);
         $(By.xpath("//label[@for='dialog-check-all']")).click();
         new DeleteEntityDialog().clickDeleteYes();
@@ -378,6 +395,7 @@ public abstract class BasePage {
 
     @Step("Нажать по пункту {menuName}")
     public void clickOnMenuItem(String menuName) {
+        checkPageIsLoaded();
         ElementsCollection menuItems = $$(".f-card__left.f-menu .f-menu__text");
         ElementsCollection popupMenuItems = $$(".f-popup__container .f-menu__text");
         SelenideElement additionalMenu = $(".f-card__left .k-i-more-vertical");

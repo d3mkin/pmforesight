@@ -38,12 +38,14 @@ public class PointPage extends BasePage {
 
     @Step ("Нажать кнопку Выполнить")
     public void clickCompleteButton(){
+        checkPageIsLoaded();
         completeButton_ViewForm.click();
 //        actualCompletionDateInput_EditForm.shouldBe(visible);
     }
 
     @Step ("Нажать кнопку Вернуть в работу")
     public void clickBackInProgressButton(){
+        checkPageIsLoaded();
         backInProgressButton_ViewForm.shouldBe(visible).click();
         commentInput_EditForm.shouldBe(visible);
         commentInputIsRequired_EditForm.shouldBe(visible);
@@ -55,6 +57,7 @@ public class PointPage extends BasePage {
 
     @Step ("Нажать кнопку Согласовать")
     public void clickApproveButton(){
+        checkPageIsLoaded();
         approveButton_ViewForm.click();
         commentInput_EditForm.shouldBe(visible);
 //        documentsWidget_EditForm.shouldBe(visible);
@@ -63,12 +66,14 @@ public class PointPage extends BasePage {
 
     @Step("Нажать 'Завершить согласование'")
     public void clickFinishApprove() {
+        checkPageIsLoaded();
         finishApproveButton_ViewForm.click();
         commentInput_EditForm.shouldBe(visible);
     }
 
     @Step ("Нажать кнопку Отменить")
     public void clickCancelButton(){
+        checkPageIsLoaded();
         cancelButton_ViewForm.shouldBe(visible).click();
         commentInput_EditForm.shouldBe(visible);
         commentInputIsRequired_EditForm.shouldBe(visible);
@@ -78,13 +83,15 @@ public class PointPage extends BasePage {
 
     @Step ("Заполнить Фактическую дату окончания выполнения")
     public void fillActualCompletionDate (String completionDate){
-        sleep(1000);
+        sleep(2000);
+        checkPageIsLoaded();
         typeDate(actualCompletionDateInput_EditForm, completionDate);
     }
 
     @Step ("Заполнить Прогнозную дату окончания выполнения")
     public void fillForecastCompletionDate(String forecastDate){
-        sleep(1000);
+        sleep(2000);
+        checkPageIsLoaded();
         typeDate(forecastCompletionDateInput_EditForm, forecastDate);
     }
 
@@ -125,6 +132,7 @@ public class PointPage extends BasePage {
 //        uploadFile(file);
 //        checkFileIsUploaded(file);
 //        closeUploadWindow();
+        checkPageIsLoaded();
         clickSaveAndClose();//Сохраняем изменения в форме Выполнения
         checkPageIsLoaded();
         completeApproval(date);
@@ -141,6 +149,7 @@ public class PointPage extends BasePage {
         $(".EntityStateEdgeWorkflow .btn-primary").click();
         checkPageIsLoaded();
         clickExpand();
+        checkPageIsLoaded();
         sleep(2000);
         fillActualCompletionDate(date);
         checkPageIsLoaded();
