@@ -122,7 +122,7 @@ public abstract class BasePage {
     public void clickExpand() {
         checkPageIsLoaded();
         expandButton.click();
-        $(".k-widget.k-window.k-window-maximized").shouldBe(visible);
+//        $(".k-widget.k-window.k-window-maximized").shouldBe(visible);
     }
 
     @Step("Нажать кнопку восстановить")
