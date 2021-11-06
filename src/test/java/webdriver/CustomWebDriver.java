@@ -3,6 +3,7 @@ package webdriver;
 import com.codeborne.selenide.WebDriverProvider;
 import com.codeborne.selenide.WebDriverRunner;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.runner.Description;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -46,6 +47,7 @@ public class CustomWebDriver implements WebDriverProvider {
                 capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
                 capabilities.setCapability("enableVNC", true);
                 capabilities.setCapability("enableVideo", false);
+                capabilities.setCapability("name", Description.EMPTY.getDisplayName());
                 capabilities.setCapability("timeZone", "Europe/Moscow");
                 capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
 //                capabilities.setAcceptInsecureCerts(true);
