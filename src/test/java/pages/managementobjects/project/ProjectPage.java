@@ -273,66 +273,77 @@ public class ProjectPage extends BasePage {
 
     @Step("Открыть вкладку Результаты")
     public void openResultsTab() {
+        checkPageIsLoaded();
         tabResults.click();
         sleep(1000);
     }
 
     @Step ("Открыть вкладку Показатели")
     public void openIndicatorsTab(){
+       checkPageIsLoaded();
        tabIndicators.click();
        sleep(1000);
     }
 
     @Step ("Открыть вкладку Календарный план")
     public void openActivityTab(){
+       checkPageIsLoaded();
        tabActivity.click();
        sleep(1000);
     }
 
     @Step ("Открыть вкладку Цели")
     public void openGoalsTab(){
+       checkPageIsLoaded();
        tabGoals.click();
        sleep(1000);
     }
 
     @Step ("Открыть вкладку Документы")
     public void openDocumentsTab(){
+        checkPageIsLoaded();
         tabDocuments.click();
         sleep(1000);
     }
 
     @Step ("Открыть вкладку Контракты")
     public void openContractsTab(){
+        checkPageIsLoaded();
         tabContracts.click();
         sleep(1000);
     }
 
     @Step ("Открыть вкладку Риски и возможности")
-    public void openRisksOpportunitiesTab(){
+    public void openRisksOpportunitiesTab() {
+        checkPageIsLoaded();
         tabRisksOpportunities.click();
         sleep(1000);
     }
 
     @Step ("Открыть вкладку Поручения")
-    public void openOrdersTab(){
+    public void openOrdersTab() {
+        checkPageIsLoaded();
         tabOrders.click();
         sleep(1000);
     }
 
     @Step ("Открыть вкладку Открытые вопросы")
     public void openOpenQuestionsTab(){
+        checkPageIsLoaded();
         tabOpenQuestions.click();
         sleep(1000);
     }
 
     @Step ("Открыть вкладку Извлеченные уроки")
     public void openLessonsTab(){
+        checkPageIsLoaded();
         tabLessons.click();
         sleep(1000);
     }
 
     @Step ("Открыть вкладку Слепки")
     public void openSnapshotTab() {
+        checkPageIsLoaded();
         $(".f-tab__list_toolbar_more").click();
         tabSnapshot.click();
         sleep(1000);
@@ -340,24 +351,28 @@ public class ProjectPage extends BasePage {
 
     @Step ("Открыть вкладку Запросы на изменения(Слепки)")
     public void openChangeRequestSnapshotTab() {
+        checkPageIsLoaded();
         tabChangeRequestSnapshot.click();
         sleep(1000);
     }
 
     @Step ("Проверка таблиц результатов ведомственного проекта(по умолчанию)")
     public void shouldHaveDefaultResultsTable() {
+        checkPageIsLoaded();
         departmentalResultsTable.shouldBe(visible);
         departmentalResultsHeader.shouldHave(text("Результаты проекта"));
     }
 
     @Step ("Проверка таблиц результатов федерального проекта")
     public void shouldHaveFederalResultsTable() {
+        checkPageIsLoaded();
         federalResultsTable.shouldBe(visible);
         federalResultsHeader.shouldHave(text("Результаты федерального проекта"));
     }
 
     @Step ("Проверка таблиц результатов регионального проекта")
     public void shouldHaveRegionalResultsTable() {
+        checkPageIsLoaded();
         federalResultsTable.shouldBe(visible);
         federalResultsHeader.shouldHave(text("Результаты федерального проекта"));
         regionalResultsTable.shouldBe(visible);
@@ -368,11 +383,13 @@ public class ProjectPage extends BasePage {
 
     @Step ("Нажать кнопку Добавить показатель проекта")
     public void clickAddIndicator(){
+        checkPageIsLoaded();
         indicatorAddButton.click();
     }
 
     @Step ("Нажать кнопку Добавить результат")
     public void clickAddResult(String resultType) {
+        checkPageIsLoaded();
         switch (resultType){
             case ("Ведомственный"):
                 departmentalResultAddButton.click();
@@ -644,6 +661,7 @@ public class ProjectPage extends BasePage {
 
     @Step ("Проверить возможность перевода проекта по стадиям")
     public void checkPossibilityProjectStaging(){
+        checkPageIsLoaded();
         stageWorkflowWidget.shouldBe(visible).click();
         nextStageButton.shouldBe(visible);
         cancelStageButton.shouldBe(visible);
@@ -651,6 +669,7 @@ public class ProjectPage extends BasePage {
 
     @Step ("Проверить невозможность перевода проекта по стадиям")
     public void checkImpossibilityProjectStaging(){
+        checkPageIsLoaded();
         stageWorkflowWidget.shouldBe(visible);
         nextStageButton.shouldNotBe(visible);
         cancelStageButton.shouldNotBe(visible);
@@ -658,11 +677,13 @@ public class ProjectPage extends BasePage {
 
     @Step ("Перевести проект на стадию {stage}")
     public void moveStageTo(String stage) {
+        checkPageIsLoaded();
         $x("//a[text()='"+stage+"']").click();
     }
 
     @Step ("Проверить что поле 'Причина отмена проекта' отображается и является обязательным")
     public void shouldHaveReasonField() {
+        checkPageIsLoaded();
         reasonOfCancelingField.shouldBe(visible);
         reasonOfCancelingIsRequired.shouldBe(visible);
     }
@@ -680,6 +701,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Заполнить плановую дату обязательной КТ на стадии {stage}")
     public void createRequiredStagePoint(String stage, String date){
+        checkPageIsLoaded();
         switch (stage) {
             case ("Инициирование"):
                 typeDate(initiationDateInput, date );
@@ -733,6 +755,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Перевести Гант в режим редактирования")
     public void clickEditGantt(){
+        checkPageIsLoaded();
         switchTo().frame("ganttframe");
         editGanttButton.shouldBe(visible).click();
         switchTo().defaultContent();
@@ -740,6 +763,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Перевести Гант в полноэкранный или оконный режим просмотра")
     public void clickToMaximizeOrMinimizeGantt(){
+        checkPageIsLoaded();
         switchTo().frame("ganttframe");
         maximizeOrMinimizeGanttButton.shouldBe(visible).click();
         switchTo().defaultContent();
@@ -747,6 +771,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Добавить на Гант КТ с назаванием {pointName} и утверждающим документом {approvingDoc}")
     public void addNewPointInGantt(String pointName, String approvingDoc){
+        checkPageIsLoaded();
         switchTo().frame("ganttframe");
         newPointAddButton.shouldBe(visible).click();
         newGanttActivityNameTR.shouldBe(visible).click();
@@ -767,6 +792,7 @@ public class ProjectPage extends BasePage {
 
     @Step ("Добавить на Гант Работу с названием {workName} и утверждающим документом {approvingDoc}")
     public void addNewWorkInGantt (String workName, String approvingDoc) {
+        checkPageIsLoaded();
         switchTo().frame("ganttframe");
         newWorkOrStageAddButton.shouldBe(visible).click();
         newGanttActivityNameTR.shouldBe(visible).click();
@@ -787,6 +813,7 @@ public class ProjectPage extends BasePage {
 
     @Step ("Добавить на Гант Этап с названием {stageName} и утверждающим документом {approvingDoc}")
     public void addNewStageInGantt(String stageName, String approvingDoc) {
+        checkPageIsLoaded();
         switchTo().frame("ganttframe");
         newWorkOrStageAddButton.shouldBe(visible).click();
         newGanttActivityNameTR.shouldBe(visible).click();
@@ -821,6 +848,7 @@ public class ProjectPage extends BasePage {
 
     @Step ("Проверить статус КТ")
     public void checkPointStatus (String status) {
+        checkPageIsLoaded();
         switchTo().frame("ganttframe");
         if (status.equals("В работе")) {
             newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "В работе по плану"));
@@ -845,6 +873,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Нажать кнопку загрузить Паспорт проекта")
     public void clickToUploadProjectPassport (File file){
+        checkPageIsLoaded();
         projectPassportUploadButton.click();
         uploadFile(file);
         checkFileIsUploaded(file);
@@ -852,6 +881,7 @@ public class ProjectPage extends BasePage {
     }
     @Step("Нажать кнопку загрузить Сводный план проекта")
     public void clickToUploadProjectConsolidatePlan (File file){
+        checkPageIsLoaded();
         projectConsolidatePlanUploadButton.click();
         uploadFile(file);
         checkFileIsUploaded(file);
@@ -859,6 +889,7 @@ public class ProjectPage extends BasePage {
     }
     @Step("Нажать кнопку загрузить Сводный план проекта")
     public void clickToUploadFinalReport (File file){
+        checkPageIsLoaded();
         projectFinalReportUploadButton.click();
         uploadFile(file);
         checkFileIsUploaded(file);
