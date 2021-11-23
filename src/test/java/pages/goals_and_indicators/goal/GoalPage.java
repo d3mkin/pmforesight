@@ -30,12 +30,14 @@ public class GoalPage extends BasePage {
 
     @Step ("Нажать добавить индикатор индикатор")
     public void addIndicator() {
+        checkPageIsLoaded();
         addIndicatorButton.click();
     }
 
     @Step ("Найти индикатор в таблице 'Показатели цели' и отрыть его")
     public void searchAndOpenIndicator(Indicator indicator) {
         searchIndicatorInput.shouldBe(visible).setValue(indicator.getName());
+        checkPageIsLoaded();
         firstFoundIndicator.shouldHave(text(indicator.getName())).click();
     }
 
@@ -43,6 +45,7 @@ public class GoalPage extends BasePage {
     public void checkIndicatorIsDisplayed (Indicator indicator) {
         sleep(2000);
         searchIndicatorInput.shouldBe(visible).setValue(indicator.getName());
+        checkPageIsLoaded();
         firstFoundIndicator.shouldHave(text(indicator.getName()));
     }
 }

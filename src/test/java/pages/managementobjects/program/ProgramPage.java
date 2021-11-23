@@ -115,11 +115,13 @@ public class ProgramPage extends BasePage {
     @Step ("Открыть вкладку Показатели")
     public void openIndicatorsTab(){
         tabIndicators.click();
+        checkPageIsLoaded();
         sleep(1000);
     }
 
     @Step ("Нажать кнопку Добавить показатель программы")
     public void clickAddIndicator(){
+        checkPageIsLoaded();
         indicatorAddButton.click();
     }
 
@@ -140,18 +142,21 @@ public class ProgramPage extends BasePage {
     @Step("Открыть вкладку Результаты")
     public void openResultsTab() {
         tabResults.click();
+        checkPageIsLoaded();
         sleep(1000);
     }
 
     @Step("Открыть вкладку Календарный план")
     public void openGanttTab() {
         tabGantt.click();
+        checkPageIsLoaded();
         sleep(1000);
     }
 
     @Step("Открыть вкладку Компоненты программы")
     public void openComponentsTab() {
         tabComponents.click();
+        checkPageIsLoaded();
         sleep(1000);
     }
 

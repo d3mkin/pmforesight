@@ -107,7 +107,9 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openNonProjectEventFromAPI();
         nonProjectEventPage.checkCurrentStage("В работе");
+        nonProjectEventPage.checkPageIsLoaded();
         nonProjectEventPage.openIndicatorsTab();
+        nonProjectEventPage.checkPageIsLoaded();
         nonProjectEventPage.clickAddIndicator();
         indicator
                 .setName("Тест_ATEST_202_" + currentTime)
@@ -138,7 +140,9 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openNonProjectEventFromAPI();
         nonProjectEventPage.checkCurrentStage("В работе");
+        nonProjectEventPage.checkPageIsLoaded();
         nonProjectEventPage.openResultsTab();
+        nonProjectEventPage.checkPageIsLoaded();
         nonProjectEventPage.clickAddResult();
         result
                 .setName("Тест_ATEST_202_" + currentTime)
@@ -169,6 +173,7 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openNonProjectEventFromAPI();
         nonProjectEventPage.checkCurrentStage("В работе");
+        nonProjectEventPage.checkPageIsLoaded();
         nonProjectEventPage.openActivityTab();
         nonProjectEventPage.clickToMaximizeOrMinimizeGantt();
         nonProjectEventPage.clickEditGantt();
@@ -204,6 +209,7 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openNonProjectEventFromAPI();
         nonProjectEventPage.checkCurrentStage("В работе");
+        nonProjectEventPage.checkPageIsLoaded();
 //        nonProjectEventPage.openOrdersTab();
         nonProjectEventPage.clickOnMenuItem("Поручения");
         nonProjectEventPage.clickAddOrder();
@@ -234,6 +240,7 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openNonProjectEventFromAPI();
         nonProjectEventPage.checkCurrentStage("В работе");
+        nonProjectEventPage.checkPageIsLoaded();
 //        nonProjectEventPage.openMeetingTab();
         nonProjectEventPage.clickOnMenuItem("Совещания");
         nonProjectEventPage.clickAddMeeting();
@@ -263,6 +270,7 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         singIn.asUser(user);
         ActionsViaAPI.openNonProjectEventFromAPI();
         nonProjectEventPage.checkCurrentStage("В работе");
+        nonProjectEventPage.checkPageIsLoaded();
 //        nonProjectEventPage.openOpenQuestionsTab();
         nonProjectEventPage.clickOnMenuItem("Открытые вопросы");
         nonProjectEventPage.clickAddOpenQuestion();

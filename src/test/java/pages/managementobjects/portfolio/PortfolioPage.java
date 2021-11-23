@@ -71,11 +71,13 @@ public class PortfolioPage extends BasePage {
     @Step ("Открыть вкладку Показатели")
     public void openIndicatorsTab(){
         tabIndicators.click();
+        checkPageIsLoaded();
         sleep(1000);
     }
 
     @Step ("Нажать кнопку Добавить показатель")
     public void clickAddIndicator(){
+        checkPageIsLoaded();
         indicatorAddButton.click();
     }
 
@@ -95,6 +97,7 @@ public class PortfolioPage extends BasePage {
 
     @Step ("Открыть вкладку Поручения")
     public void openOrdersTab(){
+        checkPageIsLoaded();
         tabOrders.click();
         sleep(1000);
     }
@@ -111,6 +114,7 @@ public class PortfolioPage extends BasePage {
 
     @Step("Открыть вкладку Совещания")
     public void openMeetingTab() {
+        checkPageIsLoaded();
         tabMeetings.click();
     }
 
@@ -126,6 +130,7 @@ public class PortfolioPage extends BasePage {
 
     @Step ("Открыть вкладку Открытые вопросы")
     public void openOpenQuestionsTab(){
+        checkPageIsLoaded();
         tabOpenQuestions.click();
         sleep(1000);
     }

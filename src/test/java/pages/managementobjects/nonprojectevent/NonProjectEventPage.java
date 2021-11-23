@@ -78,6 +78,7 @@ public class NonProjectEventPage extends BasePage {
 
     @Step ("Открыть вкладку Показатели")
     public void openIndicatorsTab(){
+        checkPageIsLoaded();
         tabIndicators.click();
         sleep(1000);
     }
@@ -89,6 +90,7 @@ public class NonProjectEventPage extends BasePage {
 
     @Step ("Нажать кнопку Добавить результат")
     public void clickAddResult() {
+        checkPageIsLoaded();
         addResultButton.click();
     }
 
@@ -108,6 +110,7 @@ public class NonProjectEventPage extends BasePage {
 
     @Step("Открыть вкладку Результаты")
     public void openResultsTab() {
+        checkPageIsLoaded();
         tabResults.click();
         sleep(1000);
     }
@@ -127,6 +130,7 @@ public class NonProjectEventPage extends BasePage {
 
     @Step ("Открыть вкладку Календарный план")
     public void openActivityTab(){
+        checkPageIsLoaded();
         tabActivity.click();
         sleep(1000);
     }
@@ -226,6 +230,7 @@ public class NonProjectEventPage extends BasePage {
 
     @Step ("Открыть вкладку Поручения")
     public void openOrdersTab(){
+        checkPageIsLoaded();
         tabOrders.click();
         sleep(1000);
     }

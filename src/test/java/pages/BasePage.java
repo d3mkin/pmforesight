@@ -401,12 +401,15 @@ public abstract class BasePage {
         SelenideElement additionalMenu = $(".f-card__left .k-i-more-vertical");
         if (menuItems.findBy(text(menuName)).isDisplayed()) {
             menuItems.findBy(text(menuName)).click();
+            checkPageIsLoaded();
         }
         else {
             additionalMenu.click();
             $(".f-popup__container").shouldBe(visible);
             popupMenuItems.findBy(text(menuName)).click();
+            checkPageIsLoaded();
         }
         $$(".f-card__left.f-menu .f-menu__text").findBy(text(menuName)).click();
+        checkPageIsLoaded();
     }
 }
