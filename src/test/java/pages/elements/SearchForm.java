@@ -33,13 +33,13 @@ public class SearchForm {
         $(closeButton).click();
     }
 
-    @Step ("Проверка отсутствия сущности при глобальном поиске")
-    public void checkEntityNotFoundInGlobalSearch(String entityName) {
-        sleep(2000);
-        searchButton.shouldBe(visible).click();
-        searchInput.setValue(entityName);
-        notFoundEntityText.shouldBe(visible).shouldHave(text("Не найдено записей содержащих искомый текст"));
-        clearButton.shouldBe(visible).click();
-        closeButton.shouldBe(visible).click();
-    }
+//    @Step ("Проверка отсутствия сущности при глобальном поиске")
+//    public void checkEntityNotFoundInGlobalSearch(String entityName) {
+//        sleep(2000);
+//        searchButton.shouldBe(visible).click();
+//        searchInput.setValue(entityName);
+//        notFoundEntityText.shouldBe(visible).shouldHave(text("Не найдено записей содержащих искомый текст"));
+//        clearButton.shouldBe(visible).click();
+//        closeButton.shouldBe(visible).click();
+//    }
 }

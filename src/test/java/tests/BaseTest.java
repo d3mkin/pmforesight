@@ -32,7 +32,7 @@ public class BaseTest {
         String browser = System.getProperty("browser", "chrome");
         if (selenoid == null) {
             Configuration.browser = browser;
-            Configuration.headless = true;
+//            Configuration.headless = true;
         } else {
             Configuration.browser = CustomWebDriver.class.getName();
         }

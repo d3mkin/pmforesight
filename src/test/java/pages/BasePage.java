@@ -381,8 +381,10 @@ public abstract class BasePage {
     @Step ("Проверить что страница загрузилась")
     public void checkPageIsLoaded () {
         //loadImage.shouldNotBe(visible, Duration.ofMinutes(1));
+        sleep(1000);
         $$(".k-loading-image").shouldBe(size(0), ofMillis(timeout));
         $(".k-loading-mask").shouldNotBe(exist, ofMillis(timeout));
+        sleep(2000);
     }
 
     @Step("Подтвердить удаление")

@@ -128,8 +128,8 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         indicatorsRegistry.open();
         indicatorsRegistry.changeView("Все показатели");
         indicatorsRegistry.checkIndicatorNotExist(indicator.getName());
-        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEventName);
-        searchForm.checkEntityNotFoundInGlobalSearch(indicator.getName());
+//        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEventName);
+//        searchForm.checkEntityNotFoundInGlobalSearch(indicator.getName());
     }
 
     @ParameterizedTest(name = "Каскадное удаление: Результаты Непроектного мероприятия")
@@ -161,8 +161,8 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         resultsRegistry.open();
         resultsRegistry.changeView("Все результаты");
         resultsRegistry.checkEntityNotExist(result.getName());
-        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEventName);
-        searchForm.checkEntityNotFoundInGlobalSearch(result.getName());
+//        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEventName);
+//        searchForm.checkEntityNotFoundInGlobalSearch(result.getName());
     }
 
     @ParameterizedTest(name = "Каскадное удаление: КТ/Этап/Работа в Непроектном мероприятии")
@@ -195,10 +195,10 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         swpRegistry.checkEntityNotExist(newPointName);
         swpRegistry.checkEntityNotExist(newWorkName);
         swpRegistry.checkEntityNotExist(newStageName);
-        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEventName);
-        searchForm.checkEntityNotFoundInGlobalSearch(newPointName);
-        searchForm.checkEntityNotFoundInGlobalSearch(newWorkName);
-        searchForm.checkEntityNotFoundInGlobalSearch(newStageName);
+//        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEventName);
+//        searchForm.checkEntityNotFoundInGlobalSearch(newPointName);
+//        searchForm.checkEntityNotFoundInGlobalSearch(newWorkName);
+//        searchForm.checkEntityNotFoundInGlobalSearch(newStageName);
     }
 
     @ParameterizedTest(name = "Каскадное удаление: Поручение в Непроектном мероприятии")
@@ -228,8 +228,8 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         orderRegistry.open();
         orderRegistry.changeView("Все поручения");
         orderRegistry.checkOrderNotExist(order.getName());
-        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEventName);
-        searchForm.checkEntityNotFoundInGlobalSearch(order.getName());
+//        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEventName);
+//        searchForm.checkEntityNotFoundInGlobalSearch(order.getName());
     }
 
     @ParameterizedTest(name = "Каскадное удаление: Совещание в Непроектном мероприятии")
@@ -258,8 +258,8 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         meetingsRegistry.open();
         meetingsRegistry.changeView("Все совещания");
         meetingsRegistry.checkOrderNotExist(meeting.getName());
-        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEventName);
-        searchForm.checkEntityNotFoundInGlobalSearch(meeting.getName());
+//        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEventName);
+//        searchForm.checkEntityNotFoundInGlobalSearch(meeting.getName());
     }
 
     @ParameterizedTest(name = "Каскадное удаление: Открытые вопросы в Непроектном мероприятии")
@@ -289,7 +289,7 @@ public class NonProjectEventCascadeDeletionTests extends BaseTest {
         openQuestionsRegistry.open();
         openQuestionsRegistry.changeView("Все открытые вопросы");
         openQuestionsRegistry.checkOpenQuestionNotExist(openQuestion.getName());
-        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEventName);
-        searchForm.checkEntityNotFoundInGlobalSearch(openQuestion.getName());
+//        searchForm.checkEntityNotFoundInGlobalSearch(nonProjectEventName);
+//        searchForm.checkEntityNotFoundInGlobalSearch(openQuestion.getName());
     }
 }
