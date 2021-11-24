@@ -1,13 +1,17 @@
 package pages.managementobjects.nonprojectevent;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import model.NonProjectEvent;
 import org.openqa.selenium.By;
 import pages.BasePage;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.cssValue;
+import static com.codeborne.selenide.Configuration.timeout;
 import static com.codeborne.selenide.Selenide.*;
 
 public class NonProjectEventPage extends BasePage {
@@ -73,25 +77,24 @@ public class NonProjectEventPage extends BasePage {
     //TODO: Перенести в BasePage и сделать рефактор кода
     @Step("Проверить текущую стадию Непроектного мероприятия")
     public void checkCurrentStage(String stage) {
-        currentNonProjectEventStage.waitUntil(text(stage), 30000);
+        checkPageIsLoaded();
+        currentNonProjectEventStage.shouldHave(text(stage), Duration.ofMillis(timeout));
     }
 
     @Step ("Открыть вкладку Показатели")
     public void openIndicatorsTab(){
-        checkPageIsLoaded();
         tabIndicators.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Нажать кнопку Добавить показатель")
     public void clickAddIndicator(){
-        indicatorAddButton.click();
+        checkElementIsVisibleAndClick(indicatorAddButton);
     }
 
     @Step ("Нажать кнопку Добавить результат")
     public void clickAddResult() {
-        checkPageIsLoaded();
-        addResultButton.click();
+        checkElementIsVisibleAndClick(addResultButton);
     }
 
     @Step ("Проверить наличие таблицы 'Показатели объекта'")
@@ -102,7 +105,7 @@ public class NonProjectEventPage extends BasePage {
 
     @Step ("Проверить наличие показателя в таблице 'Персональные показатели проекта'")
     public void shouldHaveIndicator(String indicatorName) {
-        indicatorTableSearchInput.click();
+        checkElementIsVisibleAndClick(indicatorTableSearchInput);
         indicatorTableSearchInput.sendKeys(indicatorName);
         firstFoundIndicator.shouldBe(visible);
         firstFoundIndicator.shouldHave(text(indicatorName));
@@ -110,9 +113,8 @@ public class NonProjectEventPage extends BasePage {
 
     @Step("Открыть вкладку Результаты")
     public void openResultsTab() {
-        checkPageIsLoaded();
         tabResults.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Проверка наличия таблицы подчиненных результатов")
@@ -123,22 +125,22 @@ public class NonProjectEventPage extends BasePage {
 
     @Step ("Проверить наличие результата в таблице")
     public void shouldHaveResult(String resultName){
-        resultsSearch.click();
+        checkElementIsVisibleAndClick(resultsSearch);
         resultsSearch.sendKeys(resultName);
         firstFoundResult.shouldBe(visible).shouldHave(text(resultName));
     }
 
     @Step ("Открыть вкладку Календарный план")
     public void openActivityTab(){
-        checkPageIsLoaded();
         tabActivity.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step("Перевести Гант в полноэкранный или оконный режим просмотра")
     public void clickToMaximizeOrMinimizeGantt(){
+        checkPageIsLoaded();
         switchTo().frame("ganttframe");
-        maximizeOrMinimizeGanttButton.shouldBe(visible).click();
+        maximizeOrMinimizeGanttButton.click();
         switchTo().defaultContent();
     }
 
@@ -237,7 +239,7 @@ public class NonProjectEventPage extends BasePage {
 
     @Step ("Нажать кнопку 'Добавить Поручение'")
     public void clickAddOrder () {
-        addOrderButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addOrderButton);
     }
 
     @Step("Проверить наличие Поручения в таблице Поручений")
@@ -252,8 +254,7 @@ public class NonProjectEventPage extends BasePage {
 
     @Step("Добавить новое Совещание из карточки Программы")
     public void clickAddMeeting() {
-        checkPageIsLoaded();
-        addMeetingButton.click();
+        checkElementIsVisibleAndClick(addMeetingButton);
     }
 
     @Step("Проверить наличие Совещания в таблице Совещаний")
@@ -269,7 +270,7 @@ public class NonProjectEventPage extends BasePage {
 
     @Step ("Нажать кнопку 'Добавить Открытый вопрос'")
     public void clickAddOpenQuestion () {
-        addOpenQuestionButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addOpenQuestionButton);
     }
 
     @Step("Проверить наличие Открытого вопроса в таблице Открытых вопросов")

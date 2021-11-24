@@ -273,72 +273,62 @@ public class ProjectPage extends BasePage {
 
     @Step("Открыть вкладку Результаты")
     public void openResultsTab() {
-        checkPageIsLoaded();
         tabResults.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Открыть вкладку Показатели")
     public void openIndicatorsTab(){
-       checkPageIsLoaded();
        tabIndicators.click();
-       sleep(1000);
+       checkPageIsLoaded();
     }
 
     @Step ("Открыть вкладку Календарный план")
     public void openActivityTab(){
-       checkPageIsLoaded();
        tabActivity.click();
-       sleep(1000);
+       checkPageIsLoaded();
     }
 
     @Step ("Открыть вкладку Цели")
     public void openGoalsTab(){
-       checkPageIsLoaded();
        tabGoals.click();
-       sleep(1000);
+       checkPageIsLoaded();
     }
 
     @Step ("Открыть вкладку Документы")
     public void openDocumentsTab(){
-        checkPageIsLoaded();
         tabDocuments.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Открыть вкладку Контракты")
     public void openContractsTab(){
-        checkPageIsLoaded();
         tabContracts.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Открыть вкладку Риски и возможности")
     public void openRisksOpportunitiesTab() {
-        checkPageIsLoaded();
         tabRisksOpportunities.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Открыть вкладку Поручения")
     public void openOrdersTab() {
-        checkPageIsLoaded();
         tabOrders.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Открыть вкладку Открытые вопросы")
     public void openOpenQuestionsTab(){
-        checkPageIsLoaded();
         tabOpenQuestions.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Открыть вкладку Извлеченные уроки")
     public void openLessonsTab(){
         checkPageIsLoaded();
         tabLessons.click();
-        sleep(1000);
     }
 
     @Step ("Открыть вкладку Слепки")
@@ -346,14 +336,13 @@ public class ProjectPage extends BasePage {
         checkPageIsLoaded();
         $(".f-tab__list_toolbar_more").click();
         tabSnapshot.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Открыть вкладку Запросы на изменения(Слепки)")
     public void openChangeRequestSnapshotTab() {
-        checkPageIsLoaded();
         tabChangeRequestSnapshot.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Проверка таблиц результатов ведомственного проекта(по умолчанию)")
@@ -1089,7 +1078,6 @@ public class ProjectPage extends BasePage {
         for (String goal:goalsNames) {
             checkPageIsLoaded();
             searchAndSelectFirstFromMultiSelect(projectGoal, goal);
-            checkPageIsLoaded();
         }
     }
 

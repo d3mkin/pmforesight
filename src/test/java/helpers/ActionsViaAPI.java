@@ -201,6 +201,7 @@ public class ActionsViaAPI {
     @Step ("Открыть созданный через API проект")
     public  static void openProjectCreatedFromAPI() {
         Selenide.open(Configuration.baseUrl + "/Project/Form/auto/" + getProjectId());
+        Selenide.sleep(3000);
     }
 
     @Step ("Изменить стадию проекта через API")
@@ -326,6 +327,7 @@ public class ActionsViaAPI {
     @Step ("Открыть созданную через API цель")
     public  static void openGoalCreatedFromAPI() {
         Selenide.open(Configuration.baseUrl + "/Goal/Form/auto/" + getGoalId());
+        Selenide.sleep(3000);
     }
 
     @Step ("Удалить цель через API")
@@ -514,6 +516,7 @@ public class ActionsViaAPI {
     @Step ("Открыть созданную через API Программу")
     public  static void openProgramCreatedFromAPI() {
         Selenide.open(Configuration.baseUrl + "/LProgram/Form/auto/" + getProgramId());
+        Selenide.sleep(3000);
     }
 
     //Портфель
@@ -591,6 +594,7 @@ public class ActionsViaAPI {
     @Step ("Открыть созданный через API Портфель")
     public  static void openPortfolioCreatedFromAPI() {
         Selenide.open(Configuration.baseUrl + "/Portfolio/Form/auto/" + getPortfolioId());
+        Selenide.sleep(3000);
     }
 
     //Нац. проект
@@ -752,5 +756,6 @@ public class ActionsViaAPI {
     @Step ("Открыть созданное через API Непроектное мероприятие")
     public  static void openNonProjectEventFromAPI() {
         Selenide.open(Configuration.baseUrl + "/Event/Form/auto/" + getNonProjectEventId());
+        Selenide.sleep(3000);
     }
 }

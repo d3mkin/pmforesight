@@ -132,7 +132,6 @@ public abstract class BasePage {
 
     @Step("Нажать Сохранить и открыть карточку просмотра")
     public void clickSaveAndOpenCard() {
-        checkPageIsLoaded();
         saveAndOpenCardButton.click();
         checkPageIsLoaded();
     }
@@ -145,7 +144,6 @@ public abstract class BasePage {
 
     @Step("Нажать Сохранить и закрыть")
     public void clickSaveAndClose() {
-        checkPageIsLoaded();
         saveAndCloseButton.click();
         checkPageIsLoaded();
     }
@@ -187,7 +185,6 @@ public abstract class BasePage {
 
     public void clickDialogCancel() {
         checkPageIsLoaded();
-        checkPageIsLoaded();
         cancelDialog.click();
     }
 
@@ -196,7 +193,6 @@ public abstract class BasePage {
     }
 
     public void clickDialogSave () {
-        checkPageIsLoaded();
         checkPageIsLoaded();
         closeDialogWithSave.click();
     }
@@ -231,28 +227,25 @@ public abstract class BasePage {
 
     @Step ("Ввести в текстовое поле значение {value}")
     public void typeText(SelenideElement el, String value) {
-        checkPageIsLoaded();
         if (value == null) {
             return;
         }
         el.setValue(value);
-        sleep(2000);
+        checkPageIsLoaded();
     }
 
     @Step ("Очистить текстовое поле u ввести новое значение {value}")
     public void clearAndTypeText(SelenideElement el, String value) {
-        checkPageIsLoaded();
         if (value == null) {
             return;
         }
         el.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
         $(".k-window-title").click();
         el.setValue(value);
-        sleep(2000);
+        checkPageIsLoaded();
     }
 
     public void typeNumeric(SelenideElement wrap, SelenideElement input, String value) {
-        checkPageIsLoaded();
         if (value == null) {
             return;
         }
@@ -263,10 +256,9 @@ public abstract class BasePage {
     }
 
     public  void searchInAutocompleteAndClickToFirst(SelenideElement el, String value) {
-        checkPageIsLoaded();
         el.click();
         el.sendKeys(value);
-        sleep(1000);
+        checkPageIsLoaded();
         selectFirstItem.click();
     }
 
@@ -286,16 +278,15 @@ public abstract class BasePage {
 
     @Step ("Выбрать в выпадающем списке значение {value}")
     public void searchAndSelectFirstFromSelect(SelenideElement el, String value) {
-        checkPageIsLoaded();
         if (value == null) {
             return;
         }
         el.click();
-        sleep(2000);
+        checkPageIsLoaded();
         selectFilterInput
                 .shouldBe(visible, ofMillis(timeout))
                 .sendKeys(value);
-        sleep(2000);
+        checkPageIsLoaded();
         selectAllItems.shouldHave(size(1));
         selectFirstItem.click();
         el.shouldHave(text(value), ofMillis(timeout));
@@ -303,16 +294,15 @@ public abstract class BasePage {
 
     @Step ("Выбрать в выпадающем списке значение {value}")
     public void searchAndSelectFirstFromMultiSelect (SelenideElement el, String value) {
-        checkPageIsLoaded();
         if (value == null) {
             return;
         }
         el.click();
-        sleep(2000);
+        checkPageIsLoaded();
         selectMultiSelectInput
                 .shouldBe(visible, ofMillis(timeout))
                 .sendKeys(value);
-        sleep(2000);
+        checkPageIsLoaded();
         selectAllItems.shouldHave(size(1));
         selectFirstItem.click();
         $(".k-window-title").click();
@@ -320,7 +310,6 @@ public abstract class BasePage {
 
     @Step ("Ввести дату {value}")
     public void typeDate(SelenideElement dateInput, String value) {
-        checkPageIsLoaded();
         if (value == null) {
             return;
         }
@@ -336,7 +325,6 @@ public abstract class BasePage {
 
     @Step("Дата достижения Результата - выбрать текущий день")
     public void selectResultCalendarCurrentDay(){
-        checkPageIsLoaded();
         resultCalendarSelect.click();
         calendarCurrentDay.shouldBe(visible).click();
     }
@@ -360,20 +348,17 @@ public abstract class BasePage {
 
     @Step ("Загрузить документ")
     public void uploadFile(File fileToUpload){
-        checkPageIsLoaded();
         uploadInput.uploadFile(fileToUpload);
     }
 
     @Step ("Проверить что документ успешно загружен")
     public void checkFileIsUploaded(File fileToUpload) {
-        checkPageIsLoaded();
         uploadedFileName.shouldHave(text(fileToUpload.getName()));
         uploadedFileStatus.shouldHave(text("Готово"));
     }
 
     @Step ("Закрыть форму загрузки документа")
     public void closeUploadWindow() {
-        checkPageIsLoaded();
         $x("//span[contains(text(),'Файлы')]").click();
         $x("//div[@class='k-widget k-window']//a[@role='button']").click();
     }
@@ -384,7 +369,6 @@ public abstract class BasePage {
         sleep(1000);
         $$(".k-loading-image").shouldBe(size(0), ofMillis(timeout));
         $(".k-loading-mask").shouldNotBe(exist, ofMillis(timeout));
-        sleep(2000);
     }
 
     @Step("Подтвердить удаление")
@@ -403,15 +387,22 @@ public abstract class BasePage {
         SelenideElement additionalMenu = $(".f-card__left .k-i-more-vertical");
         if (menuItems.findBy(text(menuName)).isDisplayed()) {
             menuItems.findBy(text(menuName)).click();
-            checkPageIsLoaded();
         }
         else {
             additionalMenu.click();
             $(".f-popup__container").shouldBe(visible);
             popupMenuItems.findBy(text(menuName)).click();
-            checkPageIsLoaded();
         }
         $$(".f-card__left.f-menu .f-menu__text").findBy(text(menuName)).click();
+    }
+
+    @Step("Проверить что элемент отображается и кликнуть по нему")
+    public void checkElementIsVisibleAndClick (SelenideElement element) {
         checkPageIsLoaded();
+        if (!element.isDisplayed()) {
+            Selenide.refresh();
+            checkPageIsLoaded();
+        }
+        element.click();
     }
 }

@@ -72,13 +72,11 @@ public class PortfolioPage extends BasePage {
     public void openIndicatorsTab(){
         tabIndicators.click();
         checkPageIsLoaded();
-        sleep(1000);
     }
 
     @Step ("Нажать кнопку Добавить показатель")
     public void clickAddIndicator(){
-        checkPageIsLoaded();
-        indicatorAddButton.click();
+        checkElementIsVisibleAndClick(indicatorAddButton);
     }
 
     @Step ("Проверить наличие таблицы 'Показатели объекта'")
@@ -97,14 +95,13 @@ public class PortfolioPage extends BasePage {
 
     @Step ("Открыть вкладку Поручения")
     public void openOrdersTab(){
-        checkPageIsLoaded();
         tabOrders.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Нажать кнопку 'Добавить Поручение'")
     public void clickAddOrder () {
-        addOrderButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addOrderButton);
     }
 
     @Step("Проверить наличие Поручения в таблице Поручений")
@@ -114,13 +111,13 @@ public class PortfolioPage extends BasePage {
 
     @Step("Открыть вкладку Совещания")
     public void openMeetingTab() {
-        checkPageIsLoaded();
         tabMeetings.click();
+        checkPageIsLoaded();
     }
 
     @Step("Добавить новое Совещание из карточки Программы")
     public void clickAddMeeting() {
-        addMeetingButton.click();
+        checkElementIsVisibleAndClick(addMeetingButton);
     }
 
     @Step("Проверить наличие Совещания в таблице Совещаний")
@@ -130,19 +127,18 @@ public class PortfolioPage extends BasePage {
 
     @Step ("Открыть вкладку Открытые вопросы")
     public void openOpenQuestionsTab(){
-        checkPageIsLoaded();
         tabOpenQuestions.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Нажать кнопку 'Добавить Открытый вопрос'")
     public void clickAddOpenQuestion () {
-        addOpenQuestionButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addOpenQuestionButton);
     }
 
     @Step("Проверить наличие Открытого вопроса в таблице Открытых вопросов")
     public void checkOpenQuestionPresentInTable(String questionName){
-        $(By.xpath("//div[@id='tab-lov']//td//a[contains(text(),'"+ questionName +"')]")).shouldBe(visible);
+        $x("//div[@id='tab-lov']//td//a[contains(text(),'"+ questionName +"')]").shouldBe(visible);
     }
 
     @Step("Добавить в Портфель Цели {goalsNames}")

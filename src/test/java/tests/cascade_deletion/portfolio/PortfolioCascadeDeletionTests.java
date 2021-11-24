@@ -184,6 +184,7 @@ public class PortfolioCascadeDeletionTests extends BaseTest {
         ActionsViaAPI.createProgramViaAPI();
         singIn.asUser(user);
         ActionsViaAPI.openProgramCreatedFromAPI();
+        portfolioPage.checkPageIsLoaded();
         String programName = ActionsViaAPI.getProgramNameFromAPI();
         programPage.checkCurrentProgramStage("Инициирование");
         programPage.openIndicatorsTab();

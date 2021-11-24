@@ -1,5 +1,6 @@
 package pages.managementobjects.program;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -8,8 +9,11 @@ import org.openqa.selenium.By;
 import model.Program;
 import pages.BasePage;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Configuration.timeout;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -97,7 +101,7 @@ public class ProgramPage extends BasePage {
     @Step("Открытие формы редактирования Положительного урока")
     public void openPositiveLessonsLearnedEditForm() {
         clickOnMenuItem("Извлечённые уроки");
-        positiveLesson.click();
+        checkElementIsVisibleAndClick(positiveLesson);
     }
 
     @Step("Проверка создания урока")
@@ -109,20 +113,19 @@ public class ProgramPage extends BasePage {
 
     @Step ("Проверить текущую стадию программы")
     public void checkCurrentProgramStage(String stage) {
-        currentProgramStageField.waitUntil(text(stage), 30000);
+        checkPageIsLoaded();
+        currentProgramStageField.shouldHave(text(stage), Duration.ofMillis(timeout));
     }
 
     @Step ("Открыть вкладку Показатели")
     public void openIndicatorsTab(){
         tabIndicators.click();
         checkPageIsLoaded();
-        sleep(1000);
     }
 
     @Step ("Нажать кнопку Добавить показатель программы")
     public void clickAddIndicator(){
-        checkPageIsLoaded();
-        indicatorAddButton.click();
+        checkElementIsVisibleAndClick(indicatorAddButton);
     }
 
     @Step ("Проверить наличие таблицы 'Показатели объекта'")
@@ -133,7 +136,7 @@ public class ProgramPage extends BasePage {
 
     @Step ("Проверить наличие показателя в таблице 'Показатели объекта'")
     public void shouldHaveIndicator(String indicatorName) {
-        indicatorTableSearchInput.click();
+        checkElementIsVisibleAndClick(indicatorTableSearchInput);
         indicatorTableSearchInput.sendKeys(indicatorName);
         firstFoundIndicator.shouldBe(visible);
         firstFoundIndicator.shouldHave(text(indicatorName));
@@ -143,26 +146,23 @@ public class ProgramPage extends BasePage {
     public void openResultsTab() {
         tabResults.click();
         checkPageIsLoaded();
-        sleep(1000);
     }
 
     @Step("Открыть вкладку Календарный план")
     public void openGanttTab() {
         tabGantt.click();
         checkPageIsLoaded();
-        sleep(1000);
     }
 
     @Step("Открыть вкладку Компоненты программы")
     public void openComponentsTab() {
         tabComponents.click();
         checkPageIsLoaded();
-        sleep(1000);
     }
 
     @Step ("Нажать кнопку Добавить результат")
     public void clickAddResult() {
-        addResultButton.click();
+        checkElementIsVisibleAndClick(addResultButton);
     }
 
     @Step ("Проверка наличия таблицы подчиненных результатов")
@@ -173,19 +173,19 @@ public class ProgramPage extends BasePage {
 
     @Step ("Проверить наличие результата в таблице")
     public void shouldHaveResult(String resultName){
-        resultsSearch.click();
+        checkElementIsVisibleAndClick(resultsSearch);
         resultsSearch.sendKeys(resultName);
         firstFoundResult.shouldBe(visible).shouldHave(text(resultName));
     }
 
     @Step("Нажать 'Добавить проект'")
     public void clickAddProject() {
-        addProjectButton.click();
+        checkElementIsVisibleAndClick(addProjectButton);
     }
 
     @Step("Нажать 'Добавить непроектное мероприятие'")
     public void clickAddEvent() {
-        addEventButton.click();
+        checkElementIsVisibleAndClick(addEventButton);
     }
 
     @Step("Проверка наличия таблицы 'Компоненты программы'")
@@ -196,75 +196,76 @@ public class ProgramPage extends BasePage {
 
     @Step("Проверка наличия компонента в таблице")
     public void shouldHaveComponent(String componentName) {
-        componentsSearch.click();
+        checkElementIsVisibleAndClick(componentsSearch);
         componentsSearch.sendKeys(componentName);
         firstFoundComponent.shouldBe(visible).shouldHave(text(componentName));
     }
 
     @Step ("Нажать 'Создать нетиповую контрольную точку'")
     public void clickAddNonTypicalPoint() {
-        addPointButton.click();
+        checkElementIsVisibleAndClick(addPointButton);
     }
 
     public void shouldHaveNonTypicalPoint(Point point) {
-        $x("//span[contains(text(),'"+point.getName()+"')]").waitUntil(visible, Configuration.timeout).shouldBe(visible);
+        $x("//span[contains(text(),'"+point.getName()+"')]").shouldBe(visible, Duration.ofMillis(timeout));
     }
 
     @Step ("Открыть вкладку Открытые вопросы")
     public void openOpenQuestionsTab(){
         tabOpenQuestions.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step("Открыть вкладку 'Общая информация'")
     public void openMainTab() {
         tabMain.click();
+        checkPageIsLoaded();
     }
 
     @Step ("Нажать кнопку 'Добавить Открытый вопрос'")
     public void clickAddOpenQuestion () {
-        addOpenQuestionButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addOpenQuestionButton);
     }
 
     @Step("Проверить наличие Открытого вопроса в таблице Открытых вопросов")
     public void checkOpenQuestionPresentInTable(String questionName){
-        $(By.xpath("//div[@id='tab-lov']//td//a[contains(text(),'"+ questionName +"')]")).shouldBe(visible);
+        $x("//div[@id='tab-lov']//td//a[contains(text(),'"+ questionName +"')]").shouldBe(visible);
     }
 
     @Step ("Открыть вкладку Риски и возможности")
     public void openRisksOpportunitiesTab(){
         tabRisksOpportunities.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Нажать кнопку 'Добавить Риск'")
     public void clickAddRisk () {
-        addRiskButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addRiskButton);
     }
 
     @Step("Проверить наличие Риска в таблице Рисков")
     public void checkRiskPresentInTable(String riskName){
-        $(By.xpath("//div[@id='RiskDivContent']//td//a[contains(text(),'"+ riskName +"')]")).shouldBe(visible);
+        $x("//div[@id='RiskDivContent']//td//a[contains(text(),'"+ riskName +"')]").shouldBe(visible);
     }
 
     @Step ("Нажать кнопку 'Добавить Возможность'")
     public void clickAddOpportunity () {
-        addOpportunityButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addOpportunityButton);
     }
 
     public void checkOpportunityPresentInTable(String opportunityName) {
-        $(By.xpath("//div[@id='ChanceDivContent']//td//a[contains(text(),'"+ opportunityName +"')]")).shouldBe(visible);
+        $x("//div[@id='ChanceDivContent']//td//a[contains(text(),'"+ opportunityName +"')]").shouldBe(visible);
     }
 
     @Step ("Открыть вкладку Поручения")
     public void openOrdersTab(){
         tabOrders.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Нажать кнопку 'Добавить Поручение'")
     public void clickAddOrder () {
-        addOrderButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addOrderButton);
     }
 
     @Step("Проверить наличие Поручения в таблице Поручений")
@@ -279,7 +280,7 @@ public class ProgramPage extends BasePage {
 
     @Step("Добавить новое Совещание из карточки Программы")
     public void clickAddMeeting() {
-        addMeetingButton.click();
+        checkElementIsVisibleAndClick(addMeetingButton);
     }
 
     @Step("Проверить наличие Совещания в таблице Совещаний")
@@ -290,22 +291,22 @@ public class ProgramPage extends BasePage {
     @Step ("Открыть вкладку Извлечённые уроки")
     public void openLessonsTab(){
         tabLessons.click();
-        sleep(1000);
+        checkPageIsLoaded();
     }
 
     @Step ("Нажать кнопку 'Добавить Отрицательный урок'")
     public void clickAddNegativeLesson() {
-        addNegativeLessonButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addNegativeLessonButton);
     }
 
     @Step ("Нажать кнопку 'Добавить Положительный урок'")
     public void clickAddPositiveLesson() {
-        addPositiveLessonButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addPositiveLessonButton);
     }
 
     @Step("Проверить наличие Урока в таблице Извлеченных уроков")
     public void checkLessonPresentInTable(String lessonName){
-        $(By.xpath("//div[@name='LessonTable']//td//a[contains(text(),'"+ lessonName +"')]")).shouldBe(visible);
+        $x("//div[@name='LessonTable']//td//a[contains(text(),'"+ lessonName +"')]").shouldBe(visible);
     }
 
     @Step("Добавить Итоговый вывод с описанием {description}")
