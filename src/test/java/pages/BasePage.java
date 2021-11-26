@@ -412,7 +412,7 @@ public abstract class BasePage {
     @Step("Перевести Гант в полноэкранный или оконный режим просмотра")
     public void clickToMaximizeOrMinimizeGantt(){
         checkPageIsLoaded();
-        if ($("#Activity2_container #ganttframe").isDisplayed()) {
+        if (!$("#Activity2_container #ganttframe").isDisplayed()) {
             Selenide.refresh();
             checkPageIsLoaded();
         }
