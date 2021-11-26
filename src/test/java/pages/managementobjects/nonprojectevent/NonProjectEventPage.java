@@ -136,14 +136,6 @@ public class NonProjectEventPage extends BasePage {
         checkPageIsLoaded();
     }
 
-    @Step("Перевести Гант в полноэкранный или оконный режим просмотра")
-    public void clickToMaximizeOrMinimizeGantt(){
-        checkPageIsLoaded();
-        switchTo().frame("ganttframe");
-        maximizeOrMinimizeGanttButton.click();
-        switchTo().defaultContent();
-    }
-
     @Step("Перевести Гант в режим редактирования")
     public void clickEditGantt(){
         switchTo().frame("ganttframe");

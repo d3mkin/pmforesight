@@ -124,7 +124,6 @@ public class PortfolioCascadeDeletionTests extends BaseTest {
         ActionsViaAPI.openProjectCreatedFromAPI();
         projectPage.checkCurrentProjectStage("Инициирование");
         projectPage.openActivityTab();
-        projectPage.clickToMaximizeOrMinimizeGantt();
         projectPage.clickEditGantt();
         String newPointName = "КТ_ATEST-146_" + currentTime;
         String newWorkName = "Работа_ATEST-146_" + currentTime;
@@ -136,7 +135,6 @@ public class PortfolioCascadeDeletionTests extends BaseTest {
         projectPage.addNewWorkInGantt(newWorkName , "Рабочий план");
         projectPage.clickEditGantt();
         projectPage.addNewStageInGantt(newStageName, "Рабочий план");
-        projectPage.clickToMaximizeOrMinimizeGantt();
         projectPage.openResultsTab();
         projectPage.clickAddResult("Ведомственный");
         result

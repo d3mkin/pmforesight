@@ -2,6 +2,7 @@ package pages.managementobjects.project;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -19,6 +20,7 @@ import java.util.List;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Configuration.timeout;
 import static com.codeborne.selenide.Selenide.*;
+import static java.time.Duration.ofMillis;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProjectPage extends BasePage {
@@ -197,7 +199,7 @@ public class ProjectPage extends BasePage {
 
     @Step ("Проверить что наименование Проекта соответствует названию {projectName}")
     public void checkProjectName (String projectName) {
-        projectViewName.waitUntil(visible, timeout).shouldHave(text(projectName));
+        projectViewName.shouldHave(text(projectName), ofMillis(timeout));
     }
 
     @Step ("Проверить что наименование Портфеля соответствует названию {projectPortfolioName}")
@@ -216,7 +218,7 @@ public class ProjectPage extends BasePage {
         searchAndSelectFirstFromMultiSelect(projectGoal, project.getGoal());
 
         tabRoles.click();
-        curatorRole.shouldBe(visible, Duration.ofMillis(timeout));
+        curatorRole.shouldBe(visible, ofMillis(timeout));
         searchAndSelectFirstFromSelect(curatorRole, project.getCurator());
         sleep(500);
         searchAndSelectFirstFromSelect(managerRole, project.getSupervisor());
@@ -229,7 +231,7 @@ public class ProjectPage extends BasePage {
 
     @Step("Добавить новое Совещание из карточки Проекта")
     public void clickAddMeeting() {
-        addMeetingButton.click();
+        checkElementIsVisibleAndClick(addMeetingButton);
     }
 
     @Step("Проверить отображение кнопки 'Добавить совещание'  карточке проекта")
@@ -246,6 +248,7 @@ public class ProjectPage extends BasePage {
     @Step("Открыть вкладку 'Общая информация'")
     public void openMainTab() {
         tabMain.click();
+        checkPageIsLoaded();
     }
 
     @Step("Проверка открытия проекта")
@@ -256,7 +259,7 @@ public class ProjectPage extends BasePage {
     @Step("Открытие положительного урока")
     public void positiveLessonsLearned() {
         clickOnMenuItem("Извлeчённые уроки");
-        positiveLesson.click();
+        checkElementIsVisibleAndClick(positiveLesson);
     }
 
     @Step("Проверка создания урока")
@@ -373,7 +376,7 @@ public class ProjectPage extends BasePage {
     @Step ("Нажать кнопку Добавить показатель проекта")
     public void clickAddIndicator(){
         checkPageIsLoaded();
-        indicatorAddButton.click();
+        checkElementIsVisibleAndClick(indicatorAddButton);
     }
 
     @Step ("Нажать кнопку Добавить результат")
@@ -381,13 +384,13 @@ public class ProjectPage extends BasePage {
         checkPageIsLoaded();
         switch (resultType){
             case ("Ведомственный"):
-                departmentalResultAddButton.click();
+                checkElementIsVisibleAndClick(departmentalResultAddButton);
                 break;
             case ("Федеральный"):
-                federalResultAddButton.click();
+                checkElementIsVisibleAndClick(federalResultAddButton);
                 break;
             case ("Региональный"):
-                regionalResultAddButton.click();
+                checkElementIsVisibleAndClick(regionalResultAddButton);
                 break;
             default:
                 break;
@@ -427,6 +430,7 @@ public class ProjectPage extends BasePage {
     public void shouldHaveFederalResult(String result){
         federalResultsSearch.click();
         federalResultsSearch.sendKeys(result);
+        checkPageIsLoaded();
         federalFirstFoundResult.shouldBe(visible);
         federalFirstFoundResult.shouldHave(text(result));
     }
@@ -435,6 +439,7 @@ public class ProjectPage extends BasePage {
     public void shouldHaveRegionalResult(String result){
         regionalResultsSearch.click();
         regionalResultsSearch.sendKeys(result);
+        checkPageIsLoaded();
         regionalFirstFoundResult.shouldBe(visible);
         regionalFirstFoundResult.shouldHave(text(result));
     }
@@ -489,13 +494,14 @@ public class ProjectPage extends BasePage {
     public void openResultEditForm(String resultType){
         switch (resultType) {
             case ("Ведомственный"):
-                departmentalResultEdit.click();
+                checkElementIsVisibleAndClick(departmentalResultEdit);
+
                 break;
             case ("Федеральный"):
-                federalResultEdit.click();
+                checkElementIsVisibleAndClick(federalResultEdit);
                 break;
             case ("Региональный"):
-                regionalResultEdit.click();
+                checkElementIsVisibleAndClick(regionalResultEdit);
                 break;
             default:
                 break;
@@ -645,7 +651,7 @@ public class ProjectPage extends BasePage {
     @Step ("Проверить текущую стадию проекта")
     public void checkCurrentProjectStage(String stage) {
         checkPageIsLoaded();
-        currentProjectStageField.shouldHave(text(stage), Duration.ofMillis(timeout));
+        currentProjectStageField.shouldHave(text(stage), ofMillis(timeout));
     }
 
     @Step ("Проверить возможность перевода проекта по стадиям")
@@ -667,6 +673,9 @@ public class ProjectPage extends BasePage {
     @Step ("Перевести проект на стадию {stage}")
     public void moveStageTo(String stage) {
         checkPageIsLoaded();
+        if (!$(".EntityStateEdgeWorkflow").isDisplayed()) {
+            checkPossibilityProjectStaging();
+        }
         $x("//a[text()='"+stage+"']").click();
     }
 
@@ -719,8 +728,11 @@ public class ProjectPage extends BasePage {
 
     @Step("Проверить что сущность с названием {entityName} отображается в Ганте")
     public void checkEntityIsDisplayedInGantt(String entityName){
-        sleep(2000);
         checkPageIsLoaded();
+        if (!$("#Activity2_container #ganttframe").isDisplayed()) {
+            Selenide.refresh();
+            checkPageIsLoaded();
+        }
         switchTo().frame("ganttframe");
         $(By.xpath("//div[@id='ganttplace']//*[text() = '"+ entityName +"']")).shouldBe(visible);
         switchTo().defaultContent();
@@ -734,6 +746,10 @@ public class ProjectPage extends BasePage {
     @Step ("Найти в Ганте сущность с названием {entityName} и открыть её карточку просмотра")
     public void findInGanttAndOpenEntityPage(String entityName){
         checkPageIsLoaded();
+        if (!$("#Activity2_container #ganttframe").isDisplayed()) {
+            Selenide.refresh();
+            checkPageIsLoaded();
+        }
         switchTo().frame("ganttframe");
         typeText(searchInGanttTableInput, entityName);
         sleep(1000);
@@ -745,22 +761,22 @@ public class ProjectPage extends BasePage {
     @Step("Перевести Гант в режим редактирования")
     public void clickEditGantt(){
         checkPageIsLoaded();
+        if (!$("#Activity2_container #ganttframe").isDisplayed()) {
+            Selenide.refresh();
+            checkPageIsLoaded();
+        }
         switchTo().frame("ganttframe");
         editGanttButton.shouldBe(visible).click();
-        switchTo().defaultContent();
-    }
-
-    @Step("Перевести Гант в полноэкранный или оконный режим просмотра")
-    public void clickToMaximizeOrMinimizeGantt(){
-        checkPageIsLoaded();
-        switchTo().frame("ganttframe");
-        maximizeOrMinimizeGanttButton.shouldBe(visible).click();
         switchTo().defaultContent();
     }
 
     @Step("Добавить на Гант КТ с назаванием {pointName} и утверждающим документом {approvingDoc}")
     public void addNewPointInGantt(String pointName, String approvingDoc){
         checkPageIsLoaded();
+        if (!$("#Activity2_container #ganttframe").isDisplayed()) {
+            Selenide.refresh();
+            checkPageIsLoaded();
+        }
         switchTo().frame("ganttframe");
         newPointAddButton.shouldBe(visible).click();
         newGanttActivityNameTR.shouldBe(visible).click();
@@ -782,6 +798,10 @@ public class ProjectPage extends BasePage {
     @Step ("Добавить на Гант Работу с названием {workName} и утверждающим документом {approvingDoc}")
     public void addNewWorkInGantt (String workName, String approvingDoc) {
         checkPageIsLoaded();
+        if (!$("#Activity2_container #ganttframe").isDisplayed()) {
+            Selenide.refresh();
+            checkPageIsLoaded();
+        }
         switchTo().frame("ganttframe");
         newWorkOrStageAddButton.shouldBe(visible).click();
         newGanttActivityNameTR.shouldBe(visible).click();
@@ -803,6 +823,10 @@ public class ProjectPage extends BasePage {
     @Step ("Добавить на Гант Этап с названием {stageName} и утверждающим документом {approvingDoc}")
     public void addNewStageInGantt(String stageName, String approvingDoc) {
         checkPageIsLoaded();
+        if (!$("#Activity2_container #ganttframe").isDisplayed()) {
+            Selenide.refresh();
+            checkPageIsLoaded();
+        }
         switchTo().frame("ganttframe");
         newWorkOrStageAddButton.shouldBe(visible).click();
         newGanttActivityNameTR.shouldBe(visible).click();
@@ -838,6 +862,10 @@ public class ProjectPage extends BasePage {
     @Step ("Проверить статус КТ")
     public void checkPointStatus (String status) {
         checkPageIsLoaded();
+        if (!$("#Activity2_container #ganttframe").isDisplayed()) {
+            Selenide.refresh();
+            checkPageIsLoaded();
+        }
         switchTo().frame("ganttframe");
         if (status.equals("В работе")) {
             newGanttActivityStatusTitle.shouldHave(attribute("data-tooltip", "В работе по плану"));
@@ -863,7 +891,7 @@ public class ProjectPage extends BasePage {
     @Step("Нажать кнопку загрузить Паспорт проекта")
     public void clickToUploadProjectPassport (File file){
         checkPageIsLoaded();
-        projectPassportUploadButton.click();
+        checkElementIsVisibleAndClick(projectPassportUploadButton);
         uploadFile(file);
         checkFileIsUploaded(file);
         closeUploadWindow();
@@ -871,7 +899,7 @@ public class ProjectPage extends BasePage {
     @Step("Нажать кнопку загрузить Сводный план проекта")
     public void clickToUploadProjectConsolidatePlan (File file){
         checkPageIsLoaded();
-        projectConsolidatePlanUploadButton.click();
+        checkElementIsVisibleAndClick(projectConsolidatePlanUploadButton);
         uploadFile(file);
         checkFileIsUploaded(file);
         closeUploadWindow();
@@ -879,7 +907,7 @@ public class ProjectPage extends BasePage {
     @Step("Нажать кнопку загрузить Сводный план проекта")
     public void clickToUploadFinalReport (File file){
         checkPageIsLoaded();
-        projectFinalReportUploadButton.click();
+        checkElementIsVisibleAndClick(projectFinalReportUploadButton);
         uploadFile(file);
         checkFileIsUploaded(file);
         closeUploadWindow();
@@ -897,7 +925,7 @@ public class ProjectPage extends BasePage {
 
     @Step ("Нажать кнопку 'Добавить контракт'")
     public void clickAddContact() {
-        addContractButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addContractButton);
     }
 
     @Step ("Проверить наличие Контракта в таблице Контрактов")
@@ -937,45 +965,46 @@ public class ProjectPage extends BasePage {
 
     @Step ("Нажать кнопку 'Добавить Риск'")
     public void clickAddRisk () {
-        addRiskButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addRiskButton);
     }
 
     @Step ("Нажать кнопку 'Добавить Отрицательный урок'")
     public void clickAddNegativeLesson() {
-        addNegativeLessonButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addNegativeLessonButton);
     }
 
     @Step ("Нажать кнопку 'Добавить Положительный урок'")
     public void clickAddPositiveLesson() {
-        addPositiveLessonButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addPositiveLessonButton);
     }
 
     @Step ("Нажать кнопку 'Добавить Возможность'")
     public void clickAddOpportunity () {
-        addOpportunityButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addOpportunityButton);
     }
 
     @Step ("Нажать кнопку 'Добавить Поручение'")
     public void clickAddOrder () {
-        addOrderButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addOrderButton);
     }
 
     @Step ("Нажать кнопку 'Добавить Открытый вопрос'")
     public void clickAddOpenQuestion () {
-        addOpenQuestionButton.shouldBe(visible).click();
+        checkElementIsVisibleAndClick(addOpenQuestionButton);
     }
 
     @Step("Закрыть всплывающее уведомление 'Внимание, создан слепок!'")
     public void closeCreatedSnapshotNotification() {
         checkPageIsLoaded();
-        $(".k-notification-success").shouldBe(visible, Duration.ofMillis(timeout));
+        $(".k-notification-success").shouldBe(visible, ofMillis(timeout));
         $(".f-notify__title").shouldHave(text("Внимание, создан слепок!"));
         $(".f-notify__close").click();
-        $(".k-notification-success").shouldNotBe(visible, Duration.ofMillis(timeout));
+        $(".k-notification-success").shouldNotBe(visible, ofMillis(timeout));
     }
 
     @Step("Нажать 'Создать новый слепок'")
     public void clickAddSnapshot() {
+        checkPageIsLoaded();
         addSnapshotButton.click();
     }
 

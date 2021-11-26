@@ -404,6 +404,7 @@ public class SnapshotTests extends BaseTest {
         pointPage.approvePointAndUploadFile(fileToUpload);
         pointPage.finishApprovePointAndUploadFile(fileToUpload);
         //Закрываем вкладку браузера и переключаем фокус WebDriver на предыдущую вкладку
+        pointPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         projectPage.openDocumentsTab();
         projectPage.expandDocuments();

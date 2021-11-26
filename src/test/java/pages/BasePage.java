@@ -66,6 +66,8 @@ public abstract class BasePage {
     private final SelenideElement uploadedFileName = $x("//span[@class='k-file-name']");
     private final SelenideElement uploadedFileStatus = $x("//strong[@class='k-upload-status k-upload-status-total']");
 
+    private final SelenideElement maximizeOrMinimizeGanttButton = $(By.xpath("//a[@id='tbBtnFullScreen']"));
+
     //Методы по работе с вкладками браузера
     //Получаем и записываем id вкладок браузера в список
     @Step ("Получить список открытых вкладок браузера")
@@ -394,6 +396,7 @@ public abstract class BasePage {
             popupMenuItems.findBy(text(menuName)).click();
         }
         $$(".f-card__left.f-menu .f-menu__text").findBy(text(menuName)).click();
+        checkPageIsLoaded();
     }
 
     @Step("Проверить что элемент отображается и кликнуть по нему")
@@ -404,5 +407,17 @@ public abstract class BasePage {
             checkPageIsLoaded();
         }
         element.click();
+    }
+
+    @Step("Перевести Гант в полноэкранный или оконный режим просмотра")
+    public void clickToMaximizeOrMinimizeGantt(){
+        checkPageIsLoaded();
+        if ($("#Activity2_container #ganttframe").isDisplayed()) {
+            Selenide.refresh();
+            checkPageIsLoaded();
+        }
+        switchTo().frame("ganttframe");
+        maximizeOrMinimizeGanttButton.shouldBe(visible).click();
+        switchTo().defaultContent();
     }
 }

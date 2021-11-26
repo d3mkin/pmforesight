@@ -1,5 +1,6 @@
 package pages.monitoring_and_control.change_requests;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import model.SnapshotChangeRequests;
@@ -44,13 +45,22 @@ public class SnapshotChangeRequestsPage extends BasePage {
     @Step("Проверить, что на вкадке 'Обоснование изменений' присутствует причина {reasonName}")
     public void checkChangeReasons(String reasonName){
         viewForm_ChangeReasonsTab.click();
+        checkPageIsLoaded();
         $x("//div[@id='tab-changes']//div[contains(@class,\"f-control__text\") and text()='"+ reasonName +"']").shouldBe(exist);
     }
 
     @Step("Проверить, что на вкадке 'Согласование изменений' присутствует Показатель {indicatorName}")
     public void checkApproveChangesKPI(String indicatorName){
         viewForm_ApproveTab.click();
+        checkPageIsLoaded();
         viewForm_KPIApproveWidget.click();
+        checkPageIsLoaded();
+        if (!viewForm_KPIName.isDisplayed()) {
+            Selenide.refresh();
+            checkPageIsLoaded();
+            viewForm_KPIApproveWidget.click();
+            checkPageIsLoaded();
+        }
         viewForm_KPIName.shouldHave(text(indicatorName));
     }
 
