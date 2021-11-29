@@ -44,7 +44,6 @@ public class WidgetTests  extends BaseTest {
     public void createAndDeleteWidgetTest(User user) {
         parameter("Пользователь", user.getName());
         singIn.asUser(user);
-        int i = 1;
         indexPage.widgetPanel().waitUntilLoadHide();
         Boolean beforeIsMyProjectExpand = indexPage.widgetPanel().isMyProjectExpand();
         Boolean beforeIsMyContractExpand = indexPage.widgetPanel().isMyContractExpand();
@@ -79,6 +78,8 @@ public class WidgetTests  extends BaseTest {
     @Tag("ATEST-186")
     @MethodSource("helpers.UserProvider#mainFA")
     public void checkBudgetStateProgramWidgetTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
 
     }
 
@@ -86,14 +87,16 @@ public class WidgetTests  extends BaseTest {
     @Tag("ATEST-187")
     @MethodSource("helpers.UserProvider#mainFA")
     public void checkCanceledStatusWidgetTest(User user) {
-
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
     }
 
     @ParameterizedTest (name = "Ошибка консоли в редактировании виджетов при нажатии на кнопку \"Не сохранять\"")
     @Tag("ATEST-188")
     @MethodSource("helpers.UserProvider#mainFA")
     public void checkConsoleErrorNonSaveWidgetTest(User user) {
-
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
     }
 
     @Disabled
@@ -101,41 +104,47 @@ public class WidgetTests  extends BaseTest {
     @Tag("ATEST-189")
     @MethodSource("helpers.UserProvider#mainFA")
     public void projectProposalsCollapseWidgetTest(User user) {
-
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
     }
 
     @ParameterizedTest (name = "Ошибка при переходе в виджет \"Панель руководителя\"")
     @Tag("ATEST-190")
     @MethodSource("helpers.UserProvider#mainFA")
     public void checkManagerPanelWidgetTest(User user) {
-
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
     }
 
     @ParameterizedTest (name = "Сектор Подтверждено на круговой диаграмме \"Мои КТ\"")
     @Tag("ATEST-191")
     @MethodSource("helpers.UserProvider#mainFA")
     public void checkMyPointsWidgetTest(User user) {
-
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
     }
 
     @ParameterizedTest (name = "Виджет \"Мои сообщения\": отображение сообщений из сущностей пользователя и личных сообщений")
     @Tag("ATEST-192")
     @MethodSource("helpers.UserProvider#mainFA")
     public void checkMyMessagesWidgetTest(User user) {
-
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
     }
 
     @ParameterizedTest (name = "При создании Портфеля (из реестра) его статус - \"Отменен\" в виджете в карточке просмотра")
     @Tag("ATEST-194")
     @MethodSource("helpers.UserProvider#mainFA")
     public void checkPortfolioStatusWidgetTest(User user) {
-
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
     }
 
     @ParameterizedTest (name = "Отмена компонентов портфеля (программы, проекты) не влияет на его индикатор в виджете")
     @Tag("ATEST-195")
     @MethodSource("helpers.UserProvider#mainFA")
     public void checkGantIndicatorsAfterCancelPortfolioTest(User user) {
-
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
     }
 }

@@ -546,7 +546,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1614")
     @Severity(SeverityLevel.CRITICAL)
     public void checkChangesInResultsProjectTab(User user) {
-
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
     }
 
     @ParameterizedTest(name = "ЗИ: внесение изменений в Роли Проекта")
@@ -555,6 +558,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1615")
     @Severity(SeverityLevel.CRITICAL)
     public void checkChangesInRolesProjectTab(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
     }
 
     @ParameterizedTest(name = "ЗИ: внесение изменений в Ресурсы Проекта")
@@ -563,6 +570,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1616")
     @Severity(SeverityLevel.CRITICAL)
     public void checkChangesInResourcesProjectTab(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
     }
 
     @ParameterizedTest(name = "ЗИ: согласование внесенных изменений по одному функционалу")
@@ -571,6 +582,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1627")
     @Severity(SeverityLevel.CRITICAL)
     public void approvalChangesInProjectTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
     }
 
     @ParameterizedTest(name = "ЗИ: внесение изменений в Бюджет паспорта Проекта")
@@ -579,6 +594,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1628")
     @Severity(SeverityLevel.CRITICAL)
     public void checkChangesInBudgetProjectTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
     }
 
     @ParameterizedTest(name = "ЗИ: внесение изменений в Детализированный бюджет проекта")
@@ -587,6 +606,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1630")
     @Severity(SeverityLevel.CRITICAL)
     public void checkChangesInDetailBudgetProjectTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
     }
 
     @Disabled
@@ -596,6 +619,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1629")
     @Severity(SeverityLevel.CRITICAL)
     public void approveRandomChangesInProjectTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
     }
 
     @ParameterizedTest(name = "Удаление ЗИ (из таблицы ЗИ)")
@@ -604,6 +631,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1631")
     @Severity(SeverityLevel.CRITICAL)
     public void deleteChangeRequestTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
     }
 
     @ParameterizedTest(name = "ЗИ: перевод ЗИ в статус \"На согласовании\"")
@@ -612,6 +643,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1636")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestStageTransitionToApprovingTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
 
     }
 
@@ -621,6 +656,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1637")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestStageTransitionToApproveSecondCRSTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
 
     }
 
@@ -630,6 +669,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1639")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestRecallFromApprovingTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
 
     }
 
@@ -639,6 +682,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1614")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestInConnectionsProjectTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
 
     }
 
@@ -648,6 +695,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1656")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestReturnToRevisionFromApprovingTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
 
     }
 
@@ -657,6 +708,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1657")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestRejectionChangesOneFunctionalTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
 
     }
 
@@ -667,6 +722,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1658")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestRejectionRandomChangesTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
 
     }
 
@@ -676,6 +735,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1669")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestCheckChangesOnMainParamTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
 
     }
 
@@ -685,6 +748,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1670")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestCheckChangesOnKPITest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
 
     }
 
@@ -694,7 +761,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1671")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestCheckChangesOnResultsTest(User user) {
-
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
     }
 
     @ParameterizedTest(name = "ЗИ: соответствие изменений вкладке \"Согласование изменений\", блок \"Календарный план\"")
@@ -703,6 +773,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1673")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestCheckChangesOnCalendarPlanTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
 
     }
 
@@ -712,6 +786,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1674")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestCheckChangesOnBudgetTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
 
     }
 
@@ -721,6 +799,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @TmsLink("1675")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestCheckChangesOnRolesTest(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
 
     }
 
@@ -729,6 +811,10 @@ public class SnapshotChangeRequestTests extends BaseTest {
     @Tag("ATEST-248")
     @Severity(SeverityLevel.CRITICAL)
     public void changeRequestCheckChangesAfterApprove(User user) {
+        parameter("Пользователь", user.getName());
+        singIn.asUser(user);
+        openProjectCreatedFromAPI();
+        projectPage.openSnapshotTab();
 
     }
 }
