@@ -9,6 +9,7 @@ import io.qameta.allure.TmsLink;
 import model.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -140,7 +141,7 @@ public class SnapshotChangeRequestTests extends BaseTest {
         projectPage.modalWindowShouldBeClosed();
         projectPage.checkPageIsLoaded();
         projectPage.shouldHaveChangeRequest(changeRequestName);
-        projectPage.checkChangeRequestData(changeRequestName,changeRequestComment, "Новый", snapshot.getName());
+        projectPage.checkChangeRequestData(changeRequestName, changeRequestComment, "Новый", snapshot.getName());
         snapshotChangeRequestsRegistry.open();
         snapshotChangeRequestsRegistry.changeView("Все запросы на изменение");
         snapshotChangeRequestsRegistry.searchChangeRequests(changeRequestName);
@@ -206,7 +207,7 @@ public class SnapshotChangeRequestTests extends BaseTest {
         projectPage.modalWindowShouldBeClosed();
         projectPage.checkPageIsLoaded();
         projectPage.shouldHaveChangeRequest(changeRequestName);
-        projectPage.checkChangeRequestData(changeRequestName,changeRequestComment, "Новый", snapshot.getName());
+        projectPage.checkChangeRequestData(changeRequestName, changeRequestComment, "Новый", snapshot.getName());
         projectPage.findAndOpenChangeRequestViewForm(changeRequestName);
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
@@ -262,7 +263,7 @@ public class SnapshotChangeRequestTests extends BaseTest {
         projectPage.modalWindowShouldBeClosed();
         projectPage.checkPageIsLoaded();
         projectPage.shouldHaveChangeRequest(changeRequestName);
-        projectPage.checkChangeRequestData(changeRequestName,changeRequestComment, "Новый", snapshot.getName());
+        projectPage.checkChangeRequestData(changeRequestName, changeRequestComment, "Новый", snapshot.getName());
         projectPage.findAndOpenChangeRequestViewForm(changeRequestName);
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
@@ -318,7 +319,7 @@ public class SnapshotChangeRequestTests extends BaseTest {
         projectPage.modalWindowShouldBeClosed();
         projectPage.checkPageIsLoaded();
         projectPage.shouldHaveChangeRequest(changeRequestName);
-        projectPage.checkChangeRequestData(changeRequestName,changeRequestComment, "Новый", snapshot.getName());
+        projectPage.checkChangeRequestData(changeRequestName, changeRequestComment, "Новый", snapshot.getName());
         projectPage.findAndOpenChangeRequestViewForm(changeRequestName);
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
@@ -334,7 +335,7 @@ public class SnapshotChangeRequestTests extends BaseTest {
         projectPage.fillFields(project);
         projectPage.clickSaveAndClose();
         projectPage.checkPageIsLoaded();
-        projectPage.checkCountOfMainChanges( 4);
+        projectPage.checkCountOfMainChanges(4);
     }
 
     @ParameterizedTest(name = "ЗИ: внесение изменений в Цели Проекта")
@@ -406,7 +407,7 @@ public class SnapshotChangeRequestTests extends BaseTest {
         projectPage.modalWindowShouldBeClosed();
         projectPage.checkPageIsLoaded();
         projectPage.shouldHaveChangeRequest(changeRequestName);
-        projectPage.checkChangeRequestData(changeRequestName,changeRequestComment, "Новый", snapshot.getName());
+        projectPage.checkChangeRequestData(changeRequestName, changeRequestComment, "Новый", snapshot.getName());
         projectPage.findAndOpenChangeRequestViewForm(changeRequestName);
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
@@ -537,5 +538,197 @@ public class SnapshotChangeRequestTests extends BaseTest {
         projectPage.checkPageIsLoaded();
         projectPage.indicatorTableSearchInput.sendKeys(indicatorToDelete.getName());
         projectPage.checkIndicatorStatus("Удалено");
+    }
+
+    @ParameterizedTest(name = "ЗИ: внесение изменений в Результаты Проекта")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-224")
+    @TmsLink("1614")
+    @Severity(SeverityLevel.CRITICAL)
+    public void checkChangesInResultsProjectTab(User user) {
+
+    }
+
+    @ParameterizedTest(name = "ЗИ: внесение изменений в Роли Проекта")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-225")
+    @TmsLink("1615")
+    @Severity(SeverityLevel.CRITICAL)
+    public void checkChangesInRolesProjectTab(User user) {
+    }
+
+    @ParameterizedTest(name = "ЗИ: внесение изменений в Ресурсы Проекта")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-226")
+    @TmsLink("1616")
+    @Severity(SeverityLevel.CRITICAL)
+    public void checkChangesInResourcesProjectTab(User user) {
+    }
+
+    @ParameterizedTest(name = "ЗИ: согласование внесенных изменений по одному функционалу")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-228")
+    @TmsLink("1627")
+    @Severity(SeverityLevel.CRITICAL)
+    public void approvalChangesInProjectTest(User user) {
+    }
+
+    @ParameterizedTest(name = "ЗИ: внесение изменений в Бюджет паспорта Проекта")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-229")
+    @TmsLink("1628")
+    @Severity(SeverityLevel.CRITICAL)
+    public void checkChangesInBudgetProjectTest(User user) {
+    }
+
+    @ParameterizedTest(name = "ЗИ: внесение изменений в Детализированный бюджет проекта")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-230")
+    @TmsLink("1630")
+    @Severity(SeverityLevel.CRITICAL)
+    public void checkChangesInDetailBudgetProjectTest(User user) {
+    }
+
+    @Disabled
+    @ParameterizedTest(name = "ЗИ: согласование внесенных изменений по комбинациям функционала (рандом)")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-231")
+    @TmsLink("1629")
+    @Severity(SeverityLevel.CRITICAL)
+    public void approveRandomChangesInProjectTest(User user) {
+    }
+
+    @ParameterizedTest(name = "Удаление ЗИ (из таблицы ЗИ)")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-232")
+    @TmsLink("1631")
+    @Severity(SeverityLevel.CRITICAL)
+    public void deleteChangeRequestTest(User user) {
+    }
+
+    @ParameterizedTest(name = "ЗИ: перевод ЗИ в статус \"На согласовании\"")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-235")
+    @TmsLink("1636")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestStageTransitionToApprovingTest(User user) {
+
+    }
+
+    @ParameterizedTest(name = "ЗИ: попытка перевода второго ЗИ в статус \"На согласовании\"")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-236")
+    @TmsLink("1637")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestStageTransitionToApproveSecondCRSTest(User user) {
+
+    }
+
+    @ParameterizedTest(name = "ЗИ: Отзыв ЗИ, находящегося на согласовании")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-237")
+    @TmsLink("1639")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestRecallFromApprovingTest(User user) {
+
+    }
+
+    @ParameterizedTest(name = "ЗИ: внесение изменений во взаимосвязи Проекта")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-238")
+    @TmsLink("1614")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestInConnectionsProjectTest(User user) {
+
+    }
+
+    @ParameterizedTest(name = "ЗИ: возврат на доработку ЗИ из статуса \"На согласовании\"")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-239")
+    @TmsLink("1656")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestReturnToRevisionFromApprovingTest(User user) {
+
+    }
+
+    @ParameterizedTest(name = "ЗИ: отклонение внесенных изменений по одному функционалу")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-240")
+    @TmsLink("1657")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestRejectionChangesOneFunctionalTest(User user) {
+
+    }
+
+    @Disabled
+    @ParameterizedTest(name = "ЗИ: отклонение внесенных изменений по комбинациям функционала (рандом)")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-241")
+    @TmsLink("1658")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestRejectionRandomChangesTest(User user) {
+
+    }
+
+    @ParameterizedTest(name = "ЗИ: соответствие изменений вкладке \"Согласование изменений\", блок \"Основные параметры\"")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-242")
+    @TmsLink("1669")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestCheckChangesOnMainParamTest(User user) {
+
+    }
+
+    @ParameterizedTest(name = "ЗИ: соответствие изменений вкладке \"Согласование изменений\", блок \"Показатели\"")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-243")
+    @TmsLink("1670")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestCheckChangesOnKPITest(User user) {
+
+    }
+
+    @ParameterizedTest(name = "ЗИ: соответствие изменений вкладке \"Согласование изменений\", блок \"Результаты\"")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-244")
+    @TmsLink("1671")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestCheckChangesOnResultsTest(User user) {
+
+    }
+
+    @ParameterizedTest(name = "ЗИ: соответствие изменений вкладке \"Согласование изменений\", блок \"Календарный план\"")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-245")
+    @TmsLink("1673")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestCheckChangesOnCalendarPlanTest(User user) {
+
+    }
+
+    @ParameterizedTest(name = "ЗИ: соответствие изменений вкладке \"Согласование изменений\", блок \"Бюджет\"")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-246")
+    @TmsLink("1674")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestCheckChangesOnBudgetTest(User user) {
+
+    }
+
+    @ParameterizedTest(name = "ЗИ: соответствие изменений вкладке \"Согласование изменений\", блок \"Участники\"")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-247")
+    @TmsLink("1675")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestCheckChangesOnRolesTest(User user) {
+
+    }
+
+    @ParameterizedTest(name = "ЗИ: В Проекте не применяются изменения из ЗИ его после согласования")
+    @MethodSource("helpers.UserProvider#mainFA")
+    @Tag("ATEST-248")
+    @Severity(SeverityLevel.CRITICAL)
+    public void changeRequestCheckChangesAfterApprove(User user) {
+
     }
 }

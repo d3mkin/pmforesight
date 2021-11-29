@@ -22,6 +22,7 @@ import tests.BaseTest;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 import static io.qameta.allure.Allure.parameter;
 
 //TODO: сделать параметризованные тесты
@@ -498,7 +499,8 @@ public class IndicatorTests extends BaseTest {
         projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
         projectPage.openIndicatorsTab();
-        $(By.xpath("//div[@name='KPIs']//td/span")).shouldBe(visible).shouldHave(attribute("data-tooltip", "Не достигнут на 2020 г."),
+        checkKPITableIsVisible();
+        $x("//div[@name='KPIs']//td/span").shouldHave(attribute("data-tooltip", "Не достигнут на 2020 г."),
                 cssValue("color", "rgba(215, 79, 85, 1)"));
     }
 
@@ -559,7 +561,8 @@ public class IndicatorTests extends BaseTest {
         projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
         projectPage.openIndicatorsTab();
-        $(By.xpath("//div[@name='KPIs']//td/span")).shouldBe(visible).shouldHave(attribute("data-tooltip", "Нет данных на П 1 2020 г."),
+        checkKPITableIsVisible();
+        $x("//div[@name='KPIs']//td/span").shouldHave(attribute("data-tooltip", "Нет данных на П 1 2020 г."),
                 cssValue("color", "rgba(102, 102, 102, 1)"));
     }
 
@@ -622,7 +625,8 @@ public class IndicatorTests extends BaseTest {
 
         Selenide.refresh();
         projectPage.openIndicatorsTab();
-        $(By.xpath("//div[@name='KPIs']//td/span")).shouldBe(visible).shouldHave(attribute("data-tooltip", "Срыв достижения на Кв 2 2020 г."),
+        checkKPITableIsVisible();
+        $x("//div[@name='KPIs']//td/span").shouldHave(attribute("data-tooltip", "Срыв достижения на Кв 2 2020 г."),
                 cssValue("color", "rgba(255, 210, 70, 1)"));
     }
 
@@ -683,7 +687,16 @@ public class IndicatorTests extends BaseTest {
         projectPage.switchToPreviousBrowserTab();
         Selenide.refresh();
         projectPage.openIndicatorsTab();
-        $(By.xpath("//div[@name='KPIs']//td/span")).shouldBe(visible).shouldHave(attribute("data-tooltip", "Достигнут на Май 2020 г."),
+        checkKPITableIsVisible();
+        $x("//div[@name='KPIs']//td/span").shouldHave(attribute("data-tooltip", "Достигнут на Май 2020 г."),
                 cssValue("color", "rgba(34, 167, 127, 1)"));
+    }
+
+    private void checkKPITableIsVisible() {
+        if(!$x("//div[@name='KPIs']//td/span").isDisplayed()) {
+            Selenide.refresh();
+            projectPage.checkPageIsLoaded();
+            $x("//div[@name='KPIs']//td/span").shouldBe(visible);
+        }
     }
 }
