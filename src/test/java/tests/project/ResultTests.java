@@ -484,7 +484,6 @@ public class ResultTests extends BaseTest {
                 .setAcceptor(user.getName());
         resultPage.fillFields(departmentalParentResult);
         resultPage.clickSaveAndClose();
-        resultPage.checkPageIsLoaded();
         projectPage.clickAddResult("Ведомственный");
         departmentalChildResult
                 .setName("Ведомственный Дочерний_" + currentTime)
@@ -494,19 +493,16 @@ public class ResultTests extends BaseTest {
                 .setAcceptor(user.getName());
         resultPage.fillFields(departmentalChildResult);
         resultPage.clickSaveAndClose();
-        resultPage.checkPageIsLoaded();
         projectPage.shouldHaveDepartmentalResult(departmentalChildResult.getName());
         projectPage.openResultEditForm("Ведомственный");
         resultPage.fillParentEntityResult(departmentalParentResult);
         resultPage.clickSaveAndClose();
-        resultPage.checkPageIsLoaded();
         projectPage.checkIsTheResultChild("Ведомственный", departmentalChildResult.getName());
 
 
         projectPage.clickEditForm();
         projectPage.changeProjectLevel("Федеральный");
         projectPage.clickSaveAndClose();
-        resultPage.checkPageIsLoaded();
         projectPage.clickAddResult("Федеральный");
         federalParentResult
                 .setName("Федеральный Родительский_" + currentTime)

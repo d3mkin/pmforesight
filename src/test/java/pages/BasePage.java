@@ -140,8 +140,8 @@ public abstract class BasePage {
 
     @Step("Нажать сохранить")
     public void clickSave() {
-        checkPageIsLoaded();
         saveButton.click();
+        checkPageIsLoaded();
     }
 
     @Step("Нажать Сохранить и закрыть")
@@ -152,8 +152,8 @@ public abstract class BasePage {
 
     @Step ("Нажать закрать")
     public void clickClose() {
-        checkPageIsLoaded();
         closeButton.click();
+        checkPageIsLoaded();
     }
 
     @Step("Проверка закрытия окна")
@@ -368,7 +368,7 @@ public abstract class BasePage {
     @Step ("Проверить что страница загрузилась")
     public void checkPageIsLoaded () {
         //loadImage.shouldNotBe(visible, Duration.ofMinutes(1));
-        sleep(2000);
+        sleep(1000);
         $$(".k-loading-image").shouldBe(size(0), ofMillis(timeout));
         $(".k-loading-mask").shouldNotBe(exist, ofMillis(timeout));
     }
@@ -401,7 +401,6 @@ public abstract class BasePage {
 
     @Step("Проверить что элемент отображается и кликнуть по нему")
     public void checkElementIsVisibleAndClick (SelenideElement element) {
-        checkPageIsLoaded();
         if (!element.isDisplayed()) {
             Selenide.refresh();
             checkPageIsLoaded();

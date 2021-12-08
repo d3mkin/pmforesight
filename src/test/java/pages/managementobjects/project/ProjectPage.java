@@ -381,7 +381,6 @@ public class ProjectPage extends BasePage {
 
     @Step ("Нажать кнопку Добавить результат")
     public void clickAddResult(String resultType) {
-        checkPageIsLoaded();
         switch (resultType){
             case ("Ведомственный"):
                 checkElementIsVisibleAndClick(departmentalResultAddButton);

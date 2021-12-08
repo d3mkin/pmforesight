@@ -80,7 +80,6 @@ public class CreateProjectTests extends BaseTest {
         singIn.asUser(user);
         projectRegistry.addProject();
         projectPage.fillFields(project);
-        long L = Configuration.timeout;
         projectPage.clickClose();
         projectPage.dialogWindowShouldHaveTitle();
         projectPage.shouldHaveMessageAboutUnsaved();
