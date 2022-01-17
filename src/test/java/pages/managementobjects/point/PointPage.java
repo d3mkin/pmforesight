@@ -127,7 +127,7 @@ public class PointPage extends BasePage {
         clickCompleteButton(); //Выполняем КТ
         checkPageIsLoaded();
         clickExpand();
-//        fillActualCompletionDate(date);
+        fillActualCompletionDate(date);
 //        clickUploadFileOnEditForm(); //Загружаем документ
 //        uploadFile(file);
 //        checkFileIsUploaded(file);
@@ -135,8 +135,8 @@ public class PointPage extends BasePage {
         checkPageIsLoaded();
         clickSaveAndClose();//Сохраняем изменения в форме Выполнения
         checkPageIsLoaded();
-        completeApproval(date);
-        checkPageIsLoaded();
+//        completeApproval(date);
+//        checkPageIsLoaded();
         checkCompletionDateField(date);
         checkPageIsLoaded();
         checkPointStatus("Выполнена");
@@ -146,6 +146,7 @@ public class PointPage extends BasePage {
     @Step("Нажать на кнопку 'Завершить согласование'")
     public void completeApproval(String date) {
         checkPageIsLoaded();
+//        $x("//a[contains(text(), 'Согласовать')]").click();
         $(".EntityStateEdgeWorkflow .btn-primary").click();
         checkPageIsLoaded();
         clickExpand();
@@ -203,7 +204,7 @@ public class PointPage extends BasePage {
 //        closeUploadWindow();
         clickSaveAndClose(); //Сохраняем изменения
         checkPageIsLoaded();
-        checkPointStatus("Выполнена");
+        checkPointStatus("Подтверждена");
     }
 
     @Step ("Согласовать КТ и загрузить документ")

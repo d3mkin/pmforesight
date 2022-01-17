@@ -402,7 +402,7 @@ public class SnapshotTests extends BaseTest {
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         pointPage.approvePointAndUploadFile(fileToUpload);
-        pointPage.finishApprovePointAndUploadFile(fileToUpload);
+//        pointPage.finishApprovePointAndUploadFile(fileToUpload);
         //Закрываем вкладку браузера и переключаем фокус WebDriver на предыдущую вкладку
         pointPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
@@ -430,7 +430,7 @@ public class SnapshotTests extends BaseTest {
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         pointPage.approvePointAndUploadFile(fileToUpload);
-        pointPage.finishApprovePointAndUploadFile(fileToUpload);
+//        pointPage.finishApprovePointAndUploadFile(fileToUpload);
         pointPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         projectPage.openDocumentsTab();
@@ -458,7 +458,7 @@ public class SnapshotTests extends BaseTest {
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         pointPage.approvePointAndUploadFile(fileToUpload);
-        pointPage.finishApprovePointAndUploadFile(fileToUpload);
+//        pointPage.finishApprovePointAndUploadFile(fileToUpload);
         pointPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         //Переводим на стадию Завершение, когда все условия выполнены
@@ -482,7 +482,7 @@ public class SnapshotTests extends BaseTest {
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         pointPage.approvePointAndUploadFile(fileToUpload);
-        pointPage.finishApprovePointAndUploadFile(fileToUpload);
+//        pointPage.finishApprovePointAndUploadFile(fileToUpload);
         pointPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         projectPage.openDocumentsTab();
@@ -508,7 +508,7 @@ public class SnapshotTests extends BaseTest {
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
         pointPage.approvePointAndUploadFile(fileToUpload);
-        pointPage.finishApprovePointAndUploadFile(fileToUpload);
+//        pointPage.finishApprovePointAndUploadFile(fileToUpload);
         pointPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         //Переводим на стадию Архив, когда все условия выполнены

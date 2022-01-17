@@ -100,7 +100,7 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
-        pointPage.backInProgressPointAndUploadFile("31.12.2021", fileToUpload);
+        pointPage.backInProgressPointAndUploadFile("31.12.2022", fileToUpload);
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         projectPage.openMainTab();
@@ -157,7 +157,7 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         pointPage.cancelPointAndUploadFile(currentDate, fileToUpload);
-        pointPage.backInProgressPointAndUploadFile("31.12.2021", fileToUpload);
+        pointPage.backInProgressPointAndUploadFile("31.12.2022", fileToUpload);
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
 
@@ -187,7 +187,7 @@ public class PointStageTransitionTests extends BaseTest {
         projectPage.getBrowserTabs();
         projectPage.switchToNextBrowserTab();
         pointPage.completePointAndUploadFile(currentDate, fileToUpload);
-//        pointPage.approvePointAndUploadFile(fileToUpload);
+        pointPage.approvePointAndUploadFile(fileToUpload);
         projectPage.closeCurrentBrowserTab();
         projectPage.switchToPreviousBrowserTab();
         projectPage.openMainTab();
