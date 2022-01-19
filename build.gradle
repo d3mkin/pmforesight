@@ -111,3 +111,9 @@ task snapshots (type: Test) {
         includeTags 'snapshots'
     }
 }
+
+task regulatory (type: Test) {
+    useJUnitPlatform {
+        includeTags 'regulatory'
+    }
+}
