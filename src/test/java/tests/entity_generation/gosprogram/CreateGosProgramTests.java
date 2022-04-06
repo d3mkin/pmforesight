@@ -24,6 +24,7 @@ import static io.qameta.allure.Allure.parameter;
 @Story("Госпрограмма")
 @Tag("entityGeneration")
 @Tag("Regression")
+@Disabled
 public class CreateGosProgramTests extends BaseTest {
     private SingInPage singIn;
     private GProgramRegistry gProgramRegistry;

@@ -24,6 +24,7 @@ import static io.qameta.allure.Allure.parameter;
 @Story("Национальный проект")
 @Tag("entityGeneration")
 @Tag("Regression")
+@Disabled
 public class CreateNationalProjectTests extends BaseTest {
     private NationalProjectRegistry nProjectRegistry;
     private NationalProjectPage nProjectPage;
