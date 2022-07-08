@@ -4,7 +4,7 @@ import helpers.TestSuiteName;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import model.User;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -78,7 +78,7 @@ public class RegulatoryDocumentsTests extends BaseTest {
     @Step ("Проверить кол-во документов в заголовке и в реестре")
     public void checkDocumentsSize(int expectedCount) {
         String titleCount = $(".slick-group-title span").getText().replaceAll("\\(|\\)", "");
-        Assert.assertTrue("Не совпадает количество документов", Integer.parseInt(titleCount) == expectedCount);
+        Assertions.assertTrue(Integer.parseInt(titleCount) == expectedCount, "Не совпадает количество документов");
         $(".slick-group-toggle").click();
         $$(".ui-widget-content.slick-row").shouldHave(size(expectedCount + 1));
     }

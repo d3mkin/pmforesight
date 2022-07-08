@@ -2,9 +2,8 @@ package tests.widget;
 
 import helpers.TestSuiteName;
 import io.qameta.allure.Epic;
-import io.qameta.allure.Story;
 import model.User;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -57,10 +56,10 @@ public class WidgetTests  extends BaseTest {
         indexPage.widgetPanel().shouldNotHaveButtonForEdit();
         Boolean afterIsMyProjectExpand = indexPage.widgetPanel().isMyProjectExpand();
         Boolean afterIsMyContractExpand = indexPage.widgetPanel().isMyContractExpand();
-        Assert.assertSame("Блок Мои контракты не свернут после сохранения", beforeIsMyContractExpand,
-                afterIsMyContractExpand);
-        Assert.assertSame("Блок Мои проекты не свернут после сохранения", beforeIsMyProjectExpand,
-                afterIsMyProjectExpand);
+        Assertions.assertSame(beforeIsMyContractExpand,
+                afterIsMyContractExpand, "Блок Мои контракты не свернут после сохранения");
+        Assertions.assertSame(beforeIsMyProjectExpand,
+                afterIsMyProjectExpand, "Блок Мои проекты не свернут после сохранения");
         indexPage.widgetPanel().shouldHaveControlButtonsWhenAddEnd();
         indexPage.widgetPanel().clickEdit();
         indexPage.widgetPanel().shouldHaveControlButtonsWhenEdit();

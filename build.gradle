@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'java-library'
     id 'application'
-    id 'io.qameta.allure' version '2.8.1'
+    id 'io.qameta.allure' version '2.9.2'
 }
 
 group 'ru.pmpractice'
@@ -37,17 +37,19 @@ allure {
 }
 
 dependencies {
-    testCompile (
+    testImplementation (
             "com.codeborne:selenide:${selenideVersion}",
             "io.qameta.allure:allure-selenide:${allureVersion}",
             "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
             "org.junit.jupiter:junit-jupiter-params:${junitVersion}",
-            "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
             "io.rest-assured:rest-assured:${restassuredVersion}",
             "org.aeonbits.owner:owner:${ownerVersion}",
             "org.aspectj:aspectjweaver:${aspectjweaver}",
-            "org.slf4j:slf4j-simple:${slf4j}"
+
     )
+    testRuntimeOnly(
+            "org.slf4j:slf4j-simple:${slf4j}",
+            "org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
 
 compileJava.options.encoding = 'UTF-8'
